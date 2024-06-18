@@ -29,7 +29,11 @@ from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel, Field, Json, ValidationError
 import pandas as pd
 
+import asyncio
+from llm import LLM
+
 app = FastAPI()
+llm = LLM()
 logging.basicConfig(level=logging.INFO)
 
 class Query(BaseModel):
@@ -126,12 +130,26 @@ def query_assessment(query: str):
 
 # Simulated chatbot response function
 def get_chatbot_response(question: str) -> str:
-    # For the sake of example, let's return a fixed response
-    return f"Chatbot response to: {question}"
+    task = "Write a poem about crying in the rain"
+    
+    prompt = f"""You are chatbot for solving hard problems.
+    There is the task: {task}.
+    There is the user prompt for this problem: {question}
+    Your response is:"""
+    
+    res = await llm.get_response({"prompt": prompt})
+    return res
 
 def get_chatbot_comment(question: str) -> str:
-    # For the sake of example, let's return a fixed response
-    return f"Chatbot comment to: {question}"
+    task = "Write a poem about crying in the rain"
+    
+    prompt = f"""You are chatbot for reviewing solutions for hard problems.
+    There is the task: {task}.
+    There is the solution that user obtained for this problem: {question}
+    Give a comments about this:"""
+    
+    res = await llm.get_response({"prompt": prompt})
+    return res
 
 def generate_title(conversation: Conversation):
     return f"Title example for conversation: {conversation.conversation_id}"
@@ -221,6 +239,7 @@ async def get_criterion_1_by_query_id(query_id: uuid.UUID):
     if response_id not in fake_metrics_database:
         raise HTTPException(status_code=404, detail="Response not found")
     return fake_metrics_database[response_id]["criterion_1"]
+    
 @app.get("/feedback/{query_id}/criterion_2", response_model=float, status_code=200)
 async def get_criterion_2_by_query_id(query_id: uuid.UUID):
     if query_id not in fake_messages_database:
