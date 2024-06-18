@@ -90,11 +90,12 @@ fake_conversation_database = {
     }
 }
 fake_messages_database = {
+    # indexing by query_id
     uuid.UUID("11111111-1111-1111-1111-111111111111"): {
         "user_id": uuid.UUID("00000000-0000-0000-0000-000000000000"),
         "query_id": uuid.UUID("11111111-1111-1111-1111-111111111111"),
         "query_text": "Example query",
-        "response_id": uuid.UUID("00000000-0000-0000-0000-000000000000"),
+        "response_id": uuid.UUID("11111111-1111-1111-1111-111111111111"),
         "response_text": "Example response",
         "query_score": [0.0, 1.0, 2.4, 10.0],
         "comment": "Example comment",
@@ -102,12 +103,12 @@ fake_messages_database = {
     }
 }
 fake_metrics_database = {
-    uuid.UUID("11111111-1111-1111-1111-111111111111"): {
-        "response_id": uuid.UUID("00000000-0000-0000-0000-000000000000"),
-        "criterion_1": 0.0,
-        "criterion_2": 0.0,
-        "criterion_3": 0.0,
-        "criterion_4": 0.0
+    # indexing by response_id
+    uuid.UUID("11111111-1111-1111-1111-111111111111"): { 
+        "criterion_1": 0.5,
+        "criterion_2": 0.1,
+        "criterion_3": 2.7,
+        "criterion_4": 0.8
     }
 }
 fake_tasks_database = {
@@ -145,6 +146,10 @@ def get_current_user() -> uuid.UUID:
     # Fetch the user from the request's authentication context:
     # validate the token and extract the user information
     return uuid.uuid4()
+
+#TODO: implement calculating metrics
+def calculate_metrics():
+    return [1.5, 2.2]
 
 #TODO: Complete creating
 @app.post("/conversations", response_model=Conversation, status_code=201)
@@ -208,5 +213,39 @@ async def get_query_response_pair_by_query_id(conversation_id: uuid.UUID, query_
     pair = QueryResponsePair(**fake_messages_database[query_id])
     return pair
 
+@app.get("/feedback/{query_id}/criterion_1", response_model=float, status_code=200)
+async def get_criterion_1_by_query_id(query_id: uuid.UUID):
+    if query_id not in fake_messages_database:
+        raise HTTPException(status_code=404, detail="Message not found")
+    response_id = fake_messages_database[query_id]["response_id"]
+    if response_id not in fake_metrics_database:
+        raise HTTPException(status_code=404, detail="Response not found")
+    return fake_metrics_database[response_id]["criterion_1"]
+@app.get("/feedback/{query_id}/criterion_2", response_model=float, status_code=200)
+async def get_criterion_2_by_query_id(query_id: uuid.UUID):
+    if query_id not in fake_messages_database:
+        raise HTTPException(status_code=404, detail="Message not found")
+    response_id = fake_messages_database[query_id]["response_id"]
+    if response_id not in fake_metrics_database:
+        raise HTTPException(status_code=404, detail="Response not found")
+    return fake_metrics_database[response_id]["criterion_2"]
 
+@app.get("/feedback/{query_id}/criterion_3", response_model=float, status_code=200)
+async def get_criterion_3_by_query_id(query_id: uuid.UUID):
+    if query_id not in fake_messages_database:
+        raise HTTPException(status_code=404, detail="Message not found")
+    response_id = fake_messages_database[query_id]["response_id"]
+    if response_id not in fake_metrics_database:
+        raise HTTPException(status_code=404, detail="Response not found")
+    return fake_metrics_database[response_id]["criterion_3"]
 
+@app.get("/feedback/{query_id}/calculate_metrics", response_model=List[float], status_code=200)
+async def get_all_metrics_by_query_id(query_id: uuid.UUID):
+    if query_id not in fake_messages_database:
+        raise HTTPException(status_code=404, detail="Message not found")
+    response_id = fake_messages_database[query_id]["response_id"]
+    if response_id not in fake_metrics_database:
+        raise HTTPException(status_code=404, detail="Response not found")
+    criteria_list = [fake_metrics_database[response_id][criterion] for criterion in fake_metrics_database[response_id]]
+    metrics_list = calculate_metrics() 
+    return metrics_list
