@@ -62,22 +62,6 @@ class QueryResponsePair(BaseModel):
     response_text: str = Field(default="", 
                                examples=["Example response"], 
                                max_length=2048)
-    # query_score: dict = Field(default={"criterion_1":0.0, 
-    #                                    "criterion_2":0.0,
-    #                                    "criterion_3":0.0,
-    #                                    "criterion_4":0.0}, 
-    #                           examples=[{"criterion_1":0.5, 
-    #                                    "criterion_2":2.7,
-    #                                    "criterion_3":9.5,
-    #                                    "criterion_4":7.5}])
-    # query_metrics: dict = Field(default={"metric_1":0.0, 
-    #                                    "metric_2":0.0,
-    #                                    "metric_3":0.0,
-    #                                    "metric_4":0.0}, 
-    #                           examples=[{"metric_1":0.5, 
-    #                                    "metric_2":2.7,
-    #                                    "metric_3":9.5,
-    #                                    "metric_4":7.5}])
     comment: str = Field(default="", 
                          examples=["Example comment"], 
                          max_length=2048)
@@ -119,10 +103,17 @@ class Metrics(BaseModel):
                               examples=[0.5, 2.9])
     
 class Task(BaseModel):
-    task_id: int
-    task_name: str
-    topic: str
-    description: str
+    task_id: int = Field(default=0, 
+                         examples=[0])
+    task_name: str = Field(default="", 
+                           examples=["Example name"], 
+                           max_length=255)
+    category: str = Field(default="", 
+                           examples=["Example category"], 
+                           max_length=255)
+    description: str = Field(default="", 
+                             examples=["Example description"], 
+                             max_length=2048)
 
 # TODO: get score over criteria
 def get_score(query: str) -> dict:
@@ -311,6 +302,27 @@ async def get_all_conversations():
     data = [{"conversation_id": conv[0], "created_at": conv[1]} for conv in conversations]
     return data
 
+@app.get("/tasks/{task_id}", response_model=Task, status_code=200)
+async def get_task_by_id(task_id: int):
+    try:
+        conn = sqlite3.connect(db_file)
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM Task WHERE task_id = ?", (task_id,))
+        row = cursor.fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail=f"Task with ID {task_id} not found.")
+        return Task(task_id=row[0], 
+                    task_name=row[1], 
+                    category=row[2], 
+                    description=row[3])
+    
+    except sqlite3.Error as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
+    finally:
+        if conn:
+            conn.close()
+
 @app.get("/conversations/{conversation_id}", response_model=List[QueryResponsePair], status_code=200)
 async def get_all_messages_by_conversation_id(conversation_id: int):
     try:
@@ -342,7 +354,6 @@ async def get_all_messages_by_conversation_id(conversation_id: int):
                         '''
         cursor.execute(sql_join_query, (conversation_id,))
         rows = cursor.fetchall()
-        conn.close()
         messages: List[QueryResponsePair] = [
             QueryResponsePair(
                 user_id=row[0],
@@ -399,7 +410,7 @@ async def get_query_response_pair_by_query_id(conversation_id: int, query_id: in
                         '''
         cursor.execute(sql_join_query, (conversation_id, query_id))
         row = cursor.fetchone()
-        conn.close()
+    
         query_response_pair = QueryResponsePair(
                                                 user_id=row[0],
                                                 query_id=row[1],
