@@ -12,9 +12,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 click-default-group==1.2.4
 comm==0.2.2
-contourpy @ file:///home/conda/feedstock_root/build_artifacts/contourpy_1712429891065/work
 cramjam==2.8.3
-cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1696677705766/work
 DAWG-Python==0.7.2
 debugpy==1.8.1
 decorator==5.1.1
@@ -29,7 +27,6 @@ fastapi==0.111.0
 fastapi-cli==0.0.4
 fastparquet==2024.5.0
 Flask==3.0.3
-fonttools @ file:///home/conda/feedstock_root/build_artifacts/fonttools_1717209186714/work
 frozenlist==1.4.1
 fsspec==2024.6.0
 gevent==24.2.1
@@ -41,38 +38,28 @@ httptools==0.6.1
 httpx==0.27.0
 idna==3.7
 importlib_metadata==7.1.0
-importlib_resources @ file:///home/conda/feedstock_root/build_artifacts/importlib_resources_1711040877059/work
 ipykernel==6.29.4
 ipython==8.18.1
 ipywidgets==8.1.3
 itsdangerous==2.2.0
 jedi==0.19.1
 Jinja2==3.1.4
-joblib @ file:///home/conda/feedstock_root/build_artifacts/joblib_1714665484399/work
 jupyter_client==8.6.2
 jupyter_core==5.7.2
 jupyterlab_widgets==3.0.11
-kiwisolver @ file:///home/conda/feedstock_root/build_artifacts/kiwisolver_1695379916629/work
 llm==0.14
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
-matplotlib @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-suite_1715976210960/work
 matplotlib-inline==0.1.7
 mdurl==0.1.2
 multidict==6.0.5
 munkres==1.1.4
 nest-asyncio==1.6.0
-numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1707225342954/work/dist/numpy-1.26.4-cp39-cp39-linux_x86_64.whl#sha256=c799942b5898f6e6c60264d1663a6469a475290e758c654aeeb78e2596463abd
-olefile @ file:///home/conda/feedstock_root/build_artifacts/olefile_1701735466804/work
 openai==1.34.0
 openpyxl==3.1.3
 orjson==3.10.4
-packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1718189413536/work
-pandas @ file:///home/conda/feedstock_root/build_artifacts/pandas_1715897627815/work
 parso==0.8.4
-patsy @ file:///home/conda/feedstock_root/build_artifacts/patsy_1704469236901/work
 pexpect==4.9.0
-Pillow @ file:///home/conda/feedstock_root/build_artifacts/pillow_1630696601414/work
 platformdirs==4.2.2
 pluggy==1.5.0
 prompt_toolkit==3.0.47
@@ -85,27 +72,19 @@ pydantic_core==2.18.4
 Pygments==2.18.0
 pymorphy2==0.9.1
 pymorphy2-dicts-ru==2.4.417127.4579844
-pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1709721012883/work
 PyQt5==5.15.4
 PyQt5-sip==12.9.0
-python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
 python-dotenv==1.0.1
 python-gitlab==4.6.0
 python-json-logger==2.0.7
 python-multipart==0.0.9
 python-ulid==2.7.0
-pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1706886791323/work
 PyYAML==6.0.1
 pyzmq==26.0.3
 requests==2.32.3
 requests-toolbelt==1.0.0
 rich==13.7.1
-scikit-learn @ file:///home/conda/feedstock_root/build_artifacts/scikit-learn_1716489733202/work/dist/scikit_learn-1.5.0-cp39-cp39-linux_x86_64.whl#sha256=af7ba0aef8f83435caf467e8ccbe6f8532d3b9698db4d7302737407da2a70a04
-scipy @ file:///home/conda/feedstock_root/build_artifacts/scipy-split_1716470218293/work/dist/scipy-1.13.1-cp39-cp39-linux_x86_64.whl#sha256=e6696cb8683d94467891b7648e068a3970f6bc0a1b3c1aa7f9bc89458eafd2f0
-seaborn @ file:///home/conda/feedstock_root/build_artifacts/seaborn-split_1714494649443/work
 shellingham==1.5.4
-sip @ file:///home/conda/feedstock_root/build_artifacts/sip_1646101340685/work
-six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
 sniffio==1.3.1
 soupsieve==2.5
 sqlite-fts4==1.0.3
@@ -113,18 +92,12 @@ sqlite-migrate==0.1b0
 sqlite-utils==3.36
 stack-data==0.6.3
 starlette==0.37.2
-statsmodels @ file:///home/conda/feedstock_root/build_artifacts/statsmodels_1715941226684/work
 tabulate==0.9.0
-threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_1714400101435/work
-toml @ file:///home/conda/feedstock_root/build_artifacts/toml_1604308577558/work
-tornado @ file:///home/conda/feedstock_root/build_artifacts/tornado_1717722887379/work
 tqdm==4.66.4
 traitlets==5.14.3
 typer==0.12.3
 typing_extensions==4.12.2
-tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1707747584337/work
 ujson==5.10.0
-unicodedata2 @ file:///home/conda/feedstock_root/build_artifacts/unicodedata2_1695847984941/work
 urllib3==2.2.2
 uvicorn==0.30.1
 uvloop==0.19.0
@@ -134,6 +107,5 @@ websockets==12.0
 Werkzeug==3.0.3
 widgetsnbextension==4.0.11
 yarl==1.9.4
-zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1718013267051/work
 zope.event==5.0
 zope.interface==6.4.post2
