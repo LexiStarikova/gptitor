@@ -3,6 +3,7 @@ import Header from './header';
 import Sidebar from './sidebar';
 import { ConversationPanel } from './conversationPanel';
 import { FeedbackPanel } from './feedbackPanel';
+import DataFetchingComponent from './DataFetchingComponent';
 
 function App() {
   return(
@@ -18,6 +19,9 @@ function App() {
     </div>
     <div id="feedback-panel">
       <FeedbackPanel/>
+    </div>
+    <div id="data-fetching-panel">
+        <DataFetchingComponent/> {/* Insert the DataFetchingComponent */}
     </div>
     </div>
   )
