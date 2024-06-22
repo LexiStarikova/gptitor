@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom"
 import "./header.css"
-import React from "react";
 // import  Book from "node_modules/UI-kit UNIONE/vuesax/bulk/book.svg";
 
 const Header = () => {
