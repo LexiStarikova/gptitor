@@ -1,0 +1,156 @@
+#feedPanel{
+    /* Rectangle 4153 */
+
+position: absolute;
+width: 800px;
+height: 826px;
+left: 1084px;
+top: 189px;
+
+background: #F5F6F8;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 0px 15px 15px 15px;
+
+}
+
+#sections{
+    /* Rectangle 4158 */
+
+position: absolute;
+left: 0;
+top: -30px;
+width: 100px;
+height: 30px;
+
+background: #ffffff;
+border-radius: 10px 10px 0px 0px;
+
+}
+#task1{
+/* Task 1 */
+
+position: absolute;
+left: 15px;
+top: 3px;
+
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #0F316C;
+list-style-type:none;
+
+
+}
+
+
+#taskDescription{
+/* Rectangle 4159 */
+
+position: absolute;
+width: 677px;
+height: 110px;
+left: 50px;
+top: 90px;
+
+background: #D3EBFF;
+border-radius: 0px 20px 20px 20px;
+}
+
+#description{
+    /* Rectangle 4160 */
+
+position: absolute;
+padding-left: 20px;
+padding-right: 30px;
+padding-top: 10px;
+padding-bottom: 10px;
+
+background: #6F7C98;
+border-radius: 10px 10px 0px 0px;
+
+/* Description */
+
+position: absolute;
+top: -42px;
+left: 0px;
+
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #ffffff;
+
+}
+
+#descriptionText{
+
+position: absolute;
+width: 631.87px;
+height: 72px;
+left: 10px;
+top: 10px;
+
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #59657D;
+
+
+}
+
+#feedback{
+    /* Rectangle 4160 */
+
+position: absolute;
+padding-right: 20px;
+padding-left: 10px;
+padding-top: 5px;
+padding-bottom: 5px;
+left:70px;
+top: 570px;
+
+background: #6F7C98;
+border-radius: 10px 10px 0px 0px;
+
+/* Feedback */
+
+
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+   
+}
+
+#feedbackText{
+/* Rectangle 4159 */
+
+position: absolute;
+padding-left: 20px;
+padding-top: 10px;
+width: 600px;
+height: 110px;
+left: 70px;
+top: 600px;
+color: white;
+background: linear-gradient(90.4deg, #3B4168 0.27%, rgba(59, 65, 104, 0.7) 99.72%);
+border-radius: 0px 20px 20px 20px;
+
+}
