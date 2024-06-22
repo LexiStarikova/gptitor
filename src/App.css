@@ -1,0 +1,42 @@
+#page-header{
+    /* 1920px
+
+signin
+*/
+
+box-sizing: border-box;
+
+position: absolute;
+width: 1920px;
+height: 64px;
+left: 0px;
+top: 0px;
+
+/* White 10 */
+background: #FFFFFF;
+/* Grey/30 */
+border-bottom: 1px solid #E4E7F2;
+
+}
+
+#page-side-bar{ 
+
+position: absolute;
+width: 53px;
+height: 1017px;
+left: 0px;
+top: 64px;
+
+background: #3B4168;
+box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+z-index: 2;
+}
+#conversation-panel{
+    z-index: 0;
+    left: 0;
+    top: 0;
+}
+
+#feedback-panel {
+    
+}
