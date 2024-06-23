@@ -94,7 +94,7 @@ color: #ffffff;
 position: absolute;
 width: 631.87px;
 height: 72px;
-left: 10px;
+left: 20px;
 top: 10px;
 
 font-family: 'IBM Plex Sans';
@@ -128,7 +128,7 @@ border-radius: 10px 10px 0px 0px;
 
 font-family: 'IBM Plex Sans';
 font-style: normal;
-font-weight: 400;
+font-weight: 400;   
 font-size: 16px;
 line-height: 24px;
 /* identical to box height, or 150% */
@@ -143,6 +143,7 @@ color: #FFFFFF;
 /* Rectangle 4159 */
 
 position: absolute;
+font-family: 'IBM Plex Sans';
 padding-left: 20px;
 padding-top: 10px;
 width: 600px;
