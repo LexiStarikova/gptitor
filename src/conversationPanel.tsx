@@ -12,7 +12,6 @@ export const ConversationPanel: React.FC = () => {
     const handleSend = async () => {
         if(text.trim() === "") return;
         const url = 'https://gptitor.onrender.com/conversations/8/messages';
-t
         try {
             const response = await fetch(url, {
                 method: 'PUT',
