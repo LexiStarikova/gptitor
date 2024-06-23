@@ -11,15 +11,14 @@ function App() {
     <div id="page-header">
       <Header/>
     </div>
+    <NavBar></NavBar>
+      <div>
+        <SideBar></SideBar>
+      </div>
     <div className='chatpage'>
         <ConversationPanel></ConversationPanel>
         <FeedbackPanel></FeedbackPanel>
-      </div>
-    <div>
-      <NavBar></NavBar>
-      <div></div>
-      <SideBar></SideBar>
-    </div>
+      </div>    
     </div>
   )
 }
