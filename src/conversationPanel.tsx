@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './conversationPanel.css';
 
 export const ConversationPanel: React.FC = () => {
     
-    const [text, setText] = useState<string>('');
+    // const [text, setText] = useState<string>('');
 
     // const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     setText(e.target.value);
