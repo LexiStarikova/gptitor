@@ -9,9 +9,10 @@ export const ConversationPanel: React.FC = () => {
         setText(e.target.value);
     };
     // conversation_id = 1
+    // Connect to local Transformer 
     const handleSend = async () => {
         if(text.trim() === "") return;
-        const url = 'https://10.100.30.244:8000/conversations/1/messages';
+        const url = 'https://gptitor.onrender.com/conversations/1/messages';
         try {
             const response = await fetch(url, {
                 method: 'PUT',
