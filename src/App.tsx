@@ -1,24 +1,21 @@
 import './App.css';
-import Header from './header';
-import { ConversationPanel } from './conversationPanel';
-import { FeedbackPanel } from './feedbackPanel';
-import SideBar from './sidebar';
-import NavBar from './header';
+import SideBar from './sidebar.tsx';
+import NavBar from './header.tsx';
+import {ConversationPanel} from './conversationPanel.tsx';
+import FeedbackPanel from './feedbackPanel.tsx';
 
 function App() {
-  return(
+  return (
     <div>
-    <div id="page-header">
-      <Header/>
-    </div>
-    <NavBar></NavBar>
+      <NavBar></NavBar>
       <div>
         <SideBar></SideBar>
       </div>
-    <div className='chatpage'>
+      <div className='chatpage'>
         <ConversationPanel></ConversationPanel>
         <FeedbackPanel></FeedbackPanel>
-      </div>    
+      </div>
+
     </div>
   )
 }
