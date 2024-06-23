@@ -11,12 +11,10 @@ function App() {
     <div id="page-header">
       <Header/>
     </div>
-    <div id="conversation-panel">
-      <ConversationPanel/>
-    </div>
-    <div id="feedback-panel">
-      <FeedbackPanel/>
-    </div>
+    <div className='chatpage'>
+        <ConversationPanel></ConversationPanel>
+        <FeedbackPanel></FeedbackPanel>
+      </div>
     <div>
       <NavBar></NavBar>
       <div></div>
