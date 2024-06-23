@@ -2,13 +2,11 @@ import os
 import gc
 import time
 import json
-import logging
 import traceback
 from typing import List, Dict, Any, Union, Optional
 from typing_extensions import Annotated
 import uuid
 from datetime import datetime
-import logging
 
 from fastapi import (
     Body,
@@ -38,7 +36,7 @@ import sqlite3
 app = FastAPI()
 llm = LLM()
 db_file = "db_project.db"
-logging.basicConfig(level=logging.INFO)
+
 
 origins = [
     "https://lexistarikova.github.io/gptitor",
@@ -53,13 +51,17 @@ app.add_middleware(
     allow_headers=["*"],  # or specify headers like ["Content-Type", "Authorization"]
 )
 
+
 class Query(BaseModel):
     query_text: str = Field(default="", 
                             examples=["Example query"], 
                             max_length=2048)
-class Criterion(BaseModel):
-    score: float = Field(default=0.0,
-                         examples=[0.0])
+
+#TODO: implement renaming
+class Name(BaseModel):
+    new_name: str = Field(default="Untitled", 
+                            examples=["Example name"], 
+                            max_length=2048)
 
 class QueryResponsePair(BaseModel):
     user_id: int = Field(default=0, 
@@ -96,26 +98,20 @@ class Conversation(BaseModel):
     task_id: Optional[int] = None
 
 
-# class Score(BaseModel):
-#     criterion_1: float = Field(default=0.0, 
-#                              examples=[0.5, 2.9])
-#     criterion_2: float = Field(default=0.0, 
-#                              examples=[0.5, 2.9])
-#     criterion_3: float = Field(default=0.0, 
-#                              examples=[0.5, 2.9])
-#     criterion_4: float = Field(default=0.0, 
-#                               examples=[0.5, 2.9])
-
-class Metrics(BaseModel):
-    metric_1: float = Field(default=0.0, 
+class Score(BaseModel):
+    criterion_1: float = Field(default=0.0, 
                              examples=[0.5, 2.9])
-    metric_2: float = Field(default=0.0, 
+    criterion_2: float = Field(default=0.0, 
                              examples=[0.5, 2.9])
-    metric_3: float = Field(default=0.0, 
+    criterion_3: float = Field(default=0.0, 
                              examples=[0.5, 2.9])
-    metric_4: float = Field(default=0.0, 
+    criterion_4: float = Field(default=0.0, 
                               examples=[0.5, 2.9])
-    
+
+class Criterion(BaseModel):
+    score: float = Field(default=0.0,
+                         examples=[0.0])
+
 class Task(BaseModel):
     task_id: int = Field(default=0, 
                          examples=[0])
@@ -129,60 +125,91 @@ class Task(BaseModel):
                              examples=["Example description"], 
                              max_length=2048)
 
-# TODO: get score over criteria
-def get_score(query: str) -> dict:
-    criterion_1 = 0.5
-    criterion_2 = 0.5
-    criterion_3 = 0.5
-    criterion_4 = 0.5
+# TODO: calculate score over criteria
+async def calculate_score(query: str, task: str) -> dict:
     score = {
-        "criterion_1":criterion_1,
-        "criterion_2":criterion_2,
-        "criterion_3":criterion_3,
-        "criterion_4":criterion_4
+        "criterion_1": await calculate_criterion_style(query, task),
+        "criterion_2": await calculate_criterion_accuracy(query, task),
+        "criterion_3": await calculate_criterion_number_of_vowels(query, task),
+        "criterion_4": await calculate_criterion_weather(query, task)
     }
     return score
 
-# TODO: implement calculations
-def calculate_metrics(query: str) -> dict:
-    metric_1 = 0.5
-    metric_2 = 0.5
-    metric_3 = 0.5
-    metric_4 = 0.5
-    metrics = {
-        "metric_1":metric_1,
-        "metric_2":metric_2,
-        "metric_3":metric_3,
-        "metric_4":metric_4
-    }
-    return metrics
-
-# Simulated chatbot response function
-async def get_chatbot_response(question: str) -> str:
-    task = "Write a poem about crying in the rain"
-    
-    prompt = f"""You are chatbot for solving hard problems.
-    There is the task: {task}.
-    There is the user prompt for this problem: {question}
-    Your response is:"""
-    
-    res = await llm.get_response({"prompt": prompt})
-    return res
-
-async def get_chatbot_comment(question: str) -> str:
-    task = "Write a poem about crying in the rain"
+async def calculate_criterion_style(query: str, task: str) -> float:
+    #task = "Write a poem about crying in the rain"
     
     prompt = f"""You are chatbot for reviewing solutions for hard problems.
     There is the task: {task}.
-    There is the solution that user obtained for this problem: {question}
-    Give a comments about this:"""
+    There is the solution that user obtained for this problem: {query}
+    Rate this answer in terms of writing style, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt})
+    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    return float(res)
+
+async def calculate_criterion_accuracy(query: str, task: str) -> float:    
+    #task = "Write a poem about crying in the rain"
+    
+    prompt = f"""You are chatbot for reviewing solutions for hard problems.
+    There is the task: {task}.
+    There is the solution that user obtained for this problem: {query}
+    Rate this answer in terms of accuracy of the answer, give a rating from 0 to 5. Put only one number:"""
+    
+    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    return float(res)
+
+async def calculate_criterion_number_of_vowels(query: str, task: str) -> float:
+    #task = "Write a poem about crying in the rain"
+    
+    prompt = f"""You are chatbot for reviewing solutions for hard problems.
+    There is the task: {task}.
+    There is the solution that user obtained for this problem: {query}
+    Rate this answer in terms of number_of_vowels, give a rating from 0 to 5. Put only one number:"""
+    
+    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    return float(res)
+
+async def calculate_criterion_weather(query: str, task: str) -> float:
+    #task = "Write a poem about crying in the rain"
+    
+    prompt = f"""You are chatbot for reviewing solutions for hard problems.
+    There is the task: {task}.
+    There is the solution that user obtained for this problem: {query}
+    Rate this answer in terms of weather on the street, give a rating from 0 to 5. Put only one number:"""
+    
+    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    return float(res)
+
+# Simulated chatbot response function
+async def get_chatbot_response(query: str, task: str) -> str:
+    #task = "Write a poem about crying in the rain"
+    
+    # prompt = f"""You are chatbot for solving hard problems.
+    # There is the task: {task}.
+    # There is the user prompt for this problem: {query}
+    # Your response is:"""
+
+    prompt = query
+    
+    res = await llm.get_response({"prompt": prompt, 'temperature': 0.1, 'max_tokens': 300})
     return res
 
+async def get_chatbot_comment(query: str, task: str) -> str:
+    #task = "Write a poem about crying in the rain"
+    
+    prompt = f"""You are chatbot for reviewing solutions for hard problems.
+    There is the task: {task}.
+    There is the prompt that the user formulated to solve this problem: {query}
+    Give a polite comment about this:"""
+    
+    res = await llm.get_response({"prompt": prompt, 'temperature': 0.1, 'max_tokens': 300})
+    return res
+
+
+#TODO: implement generating title when the first query in a chat is sent
 def generate_title(conversation: Conversation):
     return f"Title example for conversation: {conversation.conversation_id}"
 
+#TODO: implement extracting keywords when the first query in a chat is sent
 def extract_keywords(conversation: Conversation):
     return f"Keywords example for conversation: {conversation.conversation_id}"
 
@@ -194,7 +221,6 @@ def get_current_user() -> int:
     # validate the token and extract the user information
     return 0
 
-#TODO: Complete creating
 @app.post("/conversations", response_model=Conversation, status_code=201)
 async def create_new_conversation(user_id: int = Depends(get_current_user)):
     try:
@@ -215,7 +241,7 @@ async def create_new_conversation(user_id: int = Depends(get_current_user)):
         if conn:
             conn.close()
 
-@app.delete("/conversations", response_model=str, status_code=200)
+@app.delete("/conversations/{conversation_id}", response_model=str, status_code=200)
 async def delete_conversation(conversation_id: int, user_id: int = Depends(get_current_user)):
     try:
         conn = sqlite3.connect(db_file)
@@ -237,9 +263,9 @@ async def delete_conversation(conversation_id: int, user_id: int = Depends(get_c
         if conn:
             conn.close()
   
-@app.put("/conversations/{conversation_id}/messages", response_model=QueryResponsePair, status_code=201) # 201 Created: Resource created.
+@app.put("/conversations/{conversation_id}/messages", response_model=QueryResponsePair, status_code=201)
 # TODO: check whether user has a real access to the conversation
-async def send_query(conversation_id: int, query: Query, user_id: int = Depends(get_current_user), llm_id=0):
+async def send_query(conversation_id: int, query: Query, user_id: int = Depends(get_current_user), llm_id=0, task_id=2):
     if not query.query_text.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
     try:
@@ -251,6 +277,13 @@ async def send_query(conversation_id: int, query: Query, user_id: int = Depends(
         
         if not conversation:
             raise HTTPException(status_code=404, detail=f"Conversation with ID {conversation_id} not found.")
+
+        cursor.execute("SELECT task_description FROM Task WHERE task_id = ?", (task_id,))
+        task = cursor.fetchone()
+        
+        if not task:
+            raise HTTPException(status_code=404, detail=f"Task with ID {task_id} not found.")
+            
         sql_insert = '''INSERT INTO Request (conversation_id, user_id, content, created_at)
                          VALUES (?, ?, ?, ?)'''
         created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -258,8 +291,8 @@ async def send_query(conversation_id: int, query: Query, user_id: int = Depends(
         query_id=cursor.lastrowid
         conn.commit() # Save changes
 
-        content = str(await get_chatbot_response(query.query_text))
-        comment = str(await get_chatbot_comment(query.query_text))
+        content = str(await get_chatbot_response(query=query.query_text, task=task))
+        comment = str(await get_chatbot_comment(query=query.query_text, task=task))
 
         sql_insert = '''INSERT INTO Response (request_id, conversation_id, API_id, content, comment, created_at)
                 VALUES (?, ?, ?, ?, ?, ?)'''
@@ -268,25 +301,15 @@ async def send_query(conversation_id: int, query: Query, user_id: int = Depends(
         response_id=cursor.lastrowid
         conn.commit() # Save changes
         
-        score=get_score(query.query_text)
-        metrics=calculate_metrics(query.query_text)
+        score= await calculate_score(query=query.query_text, task=task)
 
-        sql_insert = '''INSERT INTO Criteria (request_id, criterion_1, criterion_2, criterion_3, criterion_4)
+        sql_insert = '''INSERT INTO Score (request_id, criterion_1, criterion_2, criterion_3, criterion_4)
                 VALUES (?, ?, ?, ?, ?)'''
-        cursor.execute(sql_insert, (response_id, 
+        cursor.execute(sql_insert, (query_id, 
                                     score["criterion_1"], 
                                     score["criterion_2"], 
                                     score["criterion_3"], 
                                     score["criterion_4"]))
-        conn.commit() # Save changes
-
-        sql_insert = '''INSERT INTO Metrics (request_id, metric_1, metric_2, metric_3, metric_4)
-                VALUES (?, ?, ?, ?, ?)'''
-        cursor.execute(sql_insert, (query_id, 
-                                    metrics["metric_1"], 
-                                    metrics["metric_2"], 
-                                    metrics["metric_3"], 
-                                    metrics["metric_4"]))
         conn.commit() # Save changes
         
         response = QueryResponsePair(user_id=user_id,
@@ -453,7 +476,7 @@ def get_criterion(query_id: int, criterion_id: int):
         if not request:
             raise HTTPException(status_code=404, detail=f"Request with ID {query_id} not found.")
 
-        cursor.execute(f"SELECT criterion_{criterion_id} FROM Criteria WHERE request_id = ?", (query_id,))
+        cursor.execute(f"SELECT criterion_{criterion_id} FROM Score WHERE request_id = ?", (query_id,))
         criterion = cursor.fetchone()
         
         if not criterion:
@@ -476,9 +499,13 @@ async def get_criterion_2_by_query_id(query_id: int):
 @app.get("/feedback/{query_id}/criterion_3", response_model=Criterion, status_code=200)
 async def get_criterion_3_by_query_id(query_id: int):
     return get_criterion(query_id, 3)
+
+@app.get("/feedback/{query_id}/criterion_4", response_model=Criterion, status_code=200)
+async def get_criterion_4_by_query_id(query_id: int):
+    return get_criterion(query_id, 4)
     
-@app.get("/feedback/{query_id}/calculate_metrics", response_model=Metrics, status_code=200)
-async def get_all_metrics_by_query_id(query_id: int):
+@app.get("/feedback/{query_id}/score", response_model=Score, status_code=200)
+async def get_total_score_by_query_id(query_id: int):
     try:
         conn = sqlite3.connect(db_file)
         cursor = conn.cursor()
@@ -489,15 +516,15 @@ async def get_all_metrics_by_query_id(query_id: int):
         if not request:
             raise HTTPException(status_code=404, detail=f"Request with ID {query_id} not found.")
 
-        cursor.execute("SELECT metric_1, metric_2, metric_3, metric_4 FROM Metrics WHERE request_id = ?", (query_id,))
-        metrics = cursor.fetchone()
+        cursor.execute("SELECT criterion_1, criterion_2, criterion_3, criterion_4 FROM Score WHERE request_id = ?", (query_id,))
+        score = cursor.fetchone()
         
-        if not metrics:
-            raise HTTPException(status_code=404, detail=f"Metrics with ID {query_id} not found.")
-        return Metrics(metric_1=metrics[0], 
-                       metric_2=metrics[1], 
-                       metric_3=metrics[2], 
-                       metric_4=metrics[3])
+        if not score:
+            raise HTTPException(status_code=404, detail=f"Score with ID {query_id} not found.")
+        return Score(criterion_1=score[0], 
+                       criterion_2=score[1], 
+                       criterion_3=score[2], 
+                       criterion_4=score[3])
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
     finally:
