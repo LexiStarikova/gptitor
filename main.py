@@ -1,3 +1,4 @@
+import re
 import os
 import gc
 import time
@@ -30,21 +31,22 @@ import pandas as pd
 
 import nest_asyncio
 import asyncio
-from llm import LLM
+#from llm import LLM
 import sqlite3
 
+from transformers import pipeline
+
 app = FastAPI()
-llm = LLM()
+#llm = LLM()
 db_file = "db_project.db"
+generator = pipeline("text-generation", model="EleutherAI/gpt-neo-1.3B")
 
-
-# Allow all origins, methods, and headers
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=["*"],
+    allow_methods=["*"],  
+    allow_headers=["*"], 
 )
 
 
@@ -139,7 +141,13 @@ async def calculate_criterion_style(query: str, task: str) -> float:
     There is the solution that user obtained for this problem: {query}
     Rate this answer in terms of writing style, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    output = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
+    pattern = r'\b([1-5](?:\.\d)?)\b'
+    matches = re.findall(pattern, output)
+    if len(matches) == 0:
+        res = 0
+    else:
+        res = matches[0]
     return float(res)
 
 async def calculate_criterion_accuracy(query: str, task: str) -> float:    
@@ -150,7 +158,13 @@ async def calculate_criterion_accuracy(query: str, task: str) -> float:
     There is the solution that user obtained for this problem: {query}
     Rate this answer in terms of accuracy of the answer, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    output = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
+    pattern = r'\b([1-5](?:\.\d)?)\b'
+    matches = re.findall(pattern, output)
+    if len(matches) == 0:
+        res = 0
+    else:
+        res = matches[0]
     return float(res)
 
 async def calculate_criterion_number_of_vowels(query: str, task: str) -> float:
@@ -161,7 +175,13 @@ async def calculate_criterion_number_of_vowels(query: str, task: str) -> float:
     There is the solution that user obtained for this problem: {query}
     Rate this answer in terms of number_of_vowels, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    output = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
+    pattern = r'\b([1-5](?:\.\d)?)\b'
+    matches = re.findall(pattern, output)
+    if len(matches) == 0:
+        res = 0
+    else:
+        res = matches[0]
     return float(res)
 
 async def calculate_criterion_weather(query: str, task: str) -> float:
@@ -172,7 +192,13 @@ async def calculate_criterion_weather(query: str, task: str) -> float:
     There is the solution that user obtained for this problem: {query}
     Rate this answer in terms of weather on the street, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    output = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
+    pattern = r'\b([1-5](?:\.\d)?)\b'
+    matches = re.findall(pattern, output)
+    if len(matches) == 0:
+        res = 0
+    else:
+        res = matches[0]
     return float(res)
 
 # Simulated chatbot response function
@@ -186,7 +212,7 @@ async def get_chatbot_response(query: str, task: str) -> str:
 
     prompt = query
     
-    res = await llm.get_response({"prompt": prompt, 'temperature': 0.1, 'max_tokens': 300})
+    res = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
     return res
 
 async def get_chatbot_comment(query: str, task: str) -> str:
@@ -197,7 +223,7 @@ async def get_chatbot_comment(query: str, task: str) -> str:
     There is the prompt that the user formulated to solve this problem: {query}
     Give a polite comment about this:"""
     
-    res = await llm.get_response({"prompt": prompt, 'temperature': 0.1, 'max_tokens': 300})
+    res = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
     return res
 
 
