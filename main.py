@@ -175,7 +175,7 @@ async def calculate_criterion_number_of_vowels(query: str, task: str) -> float:
     There is the solution that user obtained for this problem: {query}
     Rate this answer in terms of number_of_vowels, give a rating from 0 to 5. Put only one number:"""
     
-    output = generator(prompt, max_length=1000, num_return_sequences=1)[0]['generated_text']
+    output = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
     pattern = r'\b([1-5](?:\.\d)?)\b'
     matches = re.findall(pattern, output)
     if len(matches) == 0:
@@ -192,7 +192,7 @@ async def calculate_criterion_weather(query: str, task: str) -> float:
     There is the solution that user obtained for this problem: {query}
     Rate this answer in terms of weather on the street, give a rating from 0 to 5. Put only one number:"""
     
-    output = generator(prompt, max_length=1000, num_return_sequences=1)[0]['generated_text']
+    output = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
     pattern = r'\b([1-5](?:\.\d)?)\b'
     matches = re.findall(pattern, output)
     if len(matches) == 0:
@@ -212,7 +212,7 @@ async def get_chatbot_response(query: str, task: str) -> str:
 
     prompt = query
     
-    res = generator(prompt, max_length=1000, num_return_sequences=1)[0]['generated_text']
+    res = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
     return res
 
 async def get_chatbot_comment(query: str, task: str) -> str:
@@ -223,7 +223,7 @@ async def get_chatbot_comment(query: str, task: str) -> str:
     There is the prompt that the user formulated to solve this problem: {query}
     Give a polite comment about this:"""
     
-    res = generator(prompt, max_length=1000, num_return_sequences=1)[0]['generated_text']
+    res = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
     return res
 
 
