@@ -9,14 +9,14 @@
 .menuiconhidden{
     position: absolute;
     left: 14px;
-    top: 20px;
+    top: 78px;
     cursor: pointer;
 }
 
 .chaticonhidden{
     position: absolute;
     left: 14px;
-    top: 78px;
+    top: 136px;
     cursor: pointer;
 }
 
@@ -35,20 +35,17 @@
 }
 
 .sidebar {
-    position: fixed;
-    /* top: 64px; */
+    position: absolute;
     left: -300px; 
     width: 300px;
     height: 100%;
     background-color: #3B4168;
-    transition: left 0.8s ease; 
+    transition: left 0.8s ease;
+    z-index: 999999;
 }
 
 .sidebar.sidebar-visible {
     left: 0;
-
-/* top: 64px; */
-
 }
 
 
@@ -153,7 +150,7 @@
     background: linear-gradient(90deg, rgba(59,65,104,1) 0%, rgba(117,129,206,0.5) 100%);
     border-radius: 10px;
     height: 25px;
-    width: 220px;
+    width: 200px;
 }
 
 .actions{
@@ -197,18 +194,8 @@
     top: 875px;
 }
 
-.likeicon path {
-    fill: none;
-    stroke: white;
-    transition: fill 0.8s ease, stroke 0.8s ease;
-}
-
-.likeicon:hover path {
+.likeicon:hover path{ 
     fill: #FF4033;
     stroke: #FF4033;
-}
-
-.likeicon.liked path {
-    fill: #FF4033;
-    stroke: #FF4033;
+    transition: stroke 0.8s ease;
 }
