@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './sidebar.css';
-import LikeIcon from './likeicon';
+//import LikeIcon from './likeicon';
 import QueryComponent from './queryComponent';
 
 
@@ -10,10 +10,10 @@ const Sidebar = () => {
         setSidebarVisible(prev => !prev); // Toggle sidebar visibility
     };
 
-    const [liked, setLiked] = useState(false);
-    const toggleLike = () => {
-        setLiked(!liked);
-    };
+    // const [liked, setLiked] = useState(false);
+    // const toggleLike = () => {
+    //     setLiked(!liked);
+    // };
 
     const [queries, setQueries] = useState<{ id: number; text: string }[]>([]);
     const [nextId, setNextId] = useState(1);
