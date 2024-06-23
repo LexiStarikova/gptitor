@@ -11,7 +11,7 @@ export const ConversationPanel: React.FC = () => {
     // conversation_id = 1
     const handleSend = async () => {
         if(text.trim() === "") return;
-        const url = 'http://10.100.30.244:8000/conversations/1/messages';
+        const url = 'https://10.100.30.244:8000/conversations/1/messages';
         try {
             const response = await fetch(url, {
                 method: 'PUT',
