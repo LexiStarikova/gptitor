@@ -11,8 +11,11 @@ export const ConversationPanel: React.FC = () => {
 
     const handleSend = async () => {
         if(text.trim() === "") return;
+        const url = 'https://gptitor.onrender.com/conversations/8/messages';
+
+        console.log("Sending message:", text); // Debugging statement
         try {
-            const response = await fetch('https://gptitor.onrender.com/conversations/8/messages', {
+            const response = await fetch(url, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -22,7 +25,7 @@ export const ConversationPanel: React.FC = () => {
 
             console.log("Response status:", response.status); // Debugging statement
 
-            if (response.ok) {
+            if (response.ok) {  
                 console.log('Message sent successfully');
                 setText(''); 
             } else {
