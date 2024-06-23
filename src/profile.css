@@ -1,4 +1,4 @@
-.profilepage{
+.profilepage {
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -35,26 +35,26 @@
     margin-top: -50px;
 }
 
-.surname{
+.surname {
     margin-top: -30px;
 }
 
-.profilecontainer{
+.profilecontainer {
     position: absolute;
 }
 
-.id{
+.id {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.infocontent{
+.infocontent {
     display: flex;
     flex-direction: row;
 }
 
-.email{
+.email {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -62,19 +62,19 @@
     gap: 5px;
 }
 
-.contact{
+.contact {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: -15px;
 }
 
-.role{
+.role {
     color: #FFFFFF;
     margin-top: 0px;
 }
 
-.idicon{
+.idicon {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -122,7 +122,7 @@
     opacity: 1;
 }
 
-.Part1{
+.Part1 {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -131,7 +131,7 @@
     top: 25px;
 }
 
-.progress{
+.progress {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -139,33 +139,33 @@
     row-gap: 20px;
 }
 
-.Ptitle{
+.Ptitle {
     color: #3B4168;
     margin-bottom: -30px;
 }
 
-.activity{
+.activity {
     width: 430px;
     height: 130px;
     border-radius: 16px;
     background-color: #FFFFFF;
 }
 
-.avgrade{
+.avgrade {
     width: 230px;
     height: 230px;
     border-radius: 50%;
     background-color: #FFFFFF;
 }
 
-.avgactivity{
+.avgactivity {
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 30px;
 }
 
-.box{
+.box {
     width: 180px;
     height: 180px;
     border-radius: 16px;
@@ -173,13 +173,13 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-.stats{
+.stats {
     display: flex;
     flex-direction: row;
     column-gap: 60px;
 }
 
-.staticon{
+.staticon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -192,13 +192,13 @@
     top: 20px;
 }
 
-.statnumber{
+.statnumber {
     color: #FFFFFF;
     position: relative;
     left: 20px;
 }
 
-.stattype{
+.stattype {
     color: #FFFFFF;
     position: relative;
     left: 20px;
@@ -206,7 +206,7 @@
     font-weight: 500;
 }
 
-.stattoday{
+.stattoday {
     color: #FFFFFF;
     position: relative;
     left: 25px;
@@ -216,7 +216,7 @@
     line-height: 16px;
 }
 
-.btn{
+.btn {
     align-self: flex-end;
     margin-right: 30px;
 }
@@ -234,7 +234,7 @@
     border: none;
     cursor: pointer;
     text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.6s ease, color 0.6s ease;
 }
 
@@ -282,7 +282,7 @@
 
 .Part2 {
     position: relative;
-    left:1222px ;
+    left: 1222px;
     top: 200px;
     display: flex;
     flex-direction: column;
@@ -341,4 +341,9 @@
 .crittooltip-container:hover .crittooltip {
     visibility: visible;
     opacity: 1;
+}
+
+.scoreBoxes {
+    display: flex;
+    flex-direction: row;
 }
