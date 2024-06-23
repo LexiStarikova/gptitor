@@ -1,4 +1,5 @@
-.sidebarhidden{
+.sidebarhidden {
+    position: absolute;
     margin: 0;
     background-color: #3B4168;
     width: 53px;
@@ -6,28 +7,28 @@
     box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
 }
 
-.menuiconhidden{
+.menuiconhidden {
+    position: absolute;
+    left: 14px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.chaticonhidden {
     position: absolute;
     left: 14px;
     top: 78px;
     cursor: pointer;
 }
 
-.chaticonhidden{
-    position: absolute;
-    left: 14px;
-    top: 136px;
-    cursor: pointer;
-}
-
-.profileiconhidden{
+.profileiconhidden {
     position: absolute;
     left: 12px;
     top: 828px;
     cursor: pointer;
 }
 
-.infoiconhidden{
+.infoiconhidden {
     position: absolute;
     left: 12px;
     top: 863px;
@@ -36,7 +37,7 @@
 
 .sidebar {
     position: absolute;
-    left: -300px; 
+    left: -300px;
     width: 300px;
     height: 100%;
     background-color: #3B4168;
@@ -49,7 +50,7 @@
 }
 
 
-.sidetitle{
+.sidetitle {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -57,21 +58,21 @@
     cursor: pointer;
 }
 
-.menuiconout{
+.menuiconout {
     position: relative;
     left: 10px;
     cursor: pointer;
 }
 
-.chaticonout{
+.chaticonout {
     position: relative;
     left: 10px;
     cursor: pointer;
 }
 
-.gpttitle{
+.gpttitle {
     position: relative;
-    color:#FFFFFF ;
+    color: #FFFFFF;
     left: 10px;
 }
 
@@ -111,7 +112,7 @@
     pointer-events: none;
 }
 
-.fav{
+.fav {
     color: #FFFFFF;
     display: flex;
     flex-direction: row;
@@ -121,15 +122,15 @@
     left: 20px;
 }
 
-.favicon{
+.favicon {
     position: relative;
     left: 125px;
     transition: 0.4s;
 
 }
 
-.favicon:hover{
-    background-color:  #273B4A;
+.favicon:hover {
+    background-color: #273B4A;
     border-radius: 50px;
     height: 40px;
     width: 40px;
@@ -147,32 +148,32 @@
     gap: 25px;
     justify-content: center;
     color: #FFFFFF;
-    background: linear-gradient(90deg, rgba(59,65,104,1) 0%, rgba(117,129,206,0.5) 100%);
+    background: linear-gradient(90deg, rgba(59, 65, 104, 1) 0%, rgba(117, 129, 206, 0.5) 100%);
     border-radius: 10px;
     height: 25px;
     width: 200px;
 }
 
-.actions{
+.actions {
     display: flex;
     gap: 10px;
     cursor: pointer;
 }
 
-.history{
+.history {
     position: absolute;
     color: #FFFFFF;
     top: 170px;
     left: 35px;
 }
 
-.queries{
+.queries {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-.profile{
+.profile {
     position: absolute;
     display: flex;
     flex-direction: row;
@@ -183,7 +184,7 @@
     top: 828px;
 }
 
-.info{
+.info {
     position: absolute;
     display: flex;
     flex-direction: row;
@@ -194,7 +195,7 @@
     top: 875px;
 }
 
-.likeicon:hover path{ 
+.likeicon:hover path {
     fill: #FF4033;
     stroke: #FF4033;
     transition: stroke 0.8s ease;
