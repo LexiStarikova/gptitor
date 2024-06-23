@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './sidebar.css';
 
 const Sidebar = () => {
-    const [sidebarVisible, setSidebarVisible] = useState(true);
+    const [sidebarVisible, setSidebarVisible] = useState(false);
     const toggleSidebar = () => {
         setSidebarVisible(prev => !prev);
     };
