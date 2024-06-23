@@ -1,9 +1,9 @@
 {
+  "homepage": "http://Lexandriinnn_t.github.io/gptitor",
   "name": "gptitor",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://Lexandriinnn_t.github.io/gptitor",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
