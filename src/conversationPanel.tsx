@@ -21,6 +21,8 @@ export const ConversationPanel: React.FC = () => {
                 },
                 body: JSON.stringify({ query_text: text })
             });
+            // Simulation of Sending the Query
+            setText(''); 
 
             if (!response.ok) {
                 // Check if response is not okay (status is not in the range 200-299)
