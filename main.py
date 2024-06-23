@@ -25,6 +25,7 @@ from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.exception_handlers import request_validation_exception_handler
 from fastapi.exceptions import RequestValidationError
 from fastapi.security import OAuth2PasswordBearer
+from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel, Field, Json, ValidationError
 import pandas as pd
@@ -38,6 +39,19 @@ app = FastAPI()
 llm = LLM()
 db_file = "db_project.db"
 logging.basicConfig(level=logging.INFO)
+
+origins = [
+    "https://lexistarikova.github.io/gptitor",
+    # Add other origins if needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # or specify methods like ["GET", "POST"]
+    allow_headers=["*"],  # or specify headers like ["Content-Type", "Authorization"]
+)
 
 class Query(BaseModel):
     query_text: str = Field(default="", 
