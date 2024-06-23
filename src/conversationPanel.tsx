@@ -20,6 +20,13 @@ export const ConversationPanel: React.FC = () => {
                 },
                 body: JSON.stringify({ query_text: text })
             });
+
+            if (!response.ok) {
+                // Check if response is not okay (status is not in the range 200-299)
+                const errorMessage = await response.text();
+                console.error('Failed to send message:', errorMessage);
+                return;
+            }
     
             if (response.ok) {  
                 console.log('Message sent successfully');
