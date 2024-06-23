@@ -1,200 +1,192 @@
-#panel {
-   /* Rectangle 4150 */
-   box-sizing: border-box;
-   position: absolute;
-   width: 996px;
-   height: 1016px;
-   left: 53px;
-   top: 64px;
-   background: #EFEFEF;
-   box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.25);
+.conversationcontainer {
+    position: relative;
+    width: 800px;
+    height: 750px;
+    border-radius: 0 25px 25px 25px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#model-menu {
-   /* Rectangle 4156 */
-   position: absolute;
-   left: 5.05%;
-   right: 49.62%;
-   top: 40px;
-   bottom: 0%;
-   background: #F5F6F8;
-   border-radius: 10px 10px 0px 0px;
-   width: 83.89px;
-   height: 36px;
+.optionContainer {
+    display: flex;
+    flex-direction: row;
 }
 
-#model-name {
-   /* GPT-4 */
-   position: absolute;
-   left: 6.11%;
-   right: 61.41%;
-   top: 10%;
-   bottom: 23.33%;
-   font-family: 'IBM Plex Sans';
-   font-style: normal;
-   font-weight: 400;
-   font-size: 18px;
-   line-height: 24px;
-   color: #0F316C;
-   z-index: 2;
+.option {
+    width: 100px;
+    height: 30px;
+    background-color: #6F7C98;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    border-radius: 10px 10px 0px 0px;
+    transition: background-color 0.6s ease;
+    cursor: pointer;
 }
 
-#conversation {
-   /* Rectangle 4152 */
-   position: absolute;
-   width: 838px;
-   height: 798px;
-   left: 50px;
-   top: 77px;
-   background: #F5F6F8;
-   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-   border-radius: 0px 15px 15px 15px;
-   z-index: 1;
+.option1 {
+    width: 100px;
+    height: 30px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #6F7C98;
+    border-radius: 10px 10px 0px 0px;
+    cursor: pointer;
 }
 
-#input-field {
-   position: absolute;
-   top: 900px;
-   left: 80px;
-   background: #ffffff;
-   border: 3.5px solid #FFFFFF;
-   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-   border-radius: 20px;
-   width: 740px;
-   height: 45px;
-   display: flex;
-   align-items: center;
-   box-sizing: border-box;
+.chatbigcontainter {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0px;
+    margin-left: 30px;
 }
 
-#placeHolder {
-   flex: 1;
-   height: 100%;
-   padding: 10px;
-   border: none;
-   border-radius: 20px;
-   font-family: 'IBM Plex Sans';
-   font-style: normal;
-   font-weight: 400;
-   font-size: 20px;
-   color: #6F6F6F;
-   box-sizing: border-box;
+.option:hover {
+    background-color: #FFFFFF;
+
 }
 
-#button {
-   width: 40px;
-   height: 40px;
-   border: none;
-   background: transparent;
-   cursor: pointer;
-   margin-right: 10px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+.option:hover {
+    color: #6F7C98;
 }
 
-#LLM-Response {
-   /* Rectangle 13 */
-   position: absolute;
-   width: 631px;
-   height: 152px;
-   left: 120px;
-   top: 680px;
-   background: #D3EBFF;
-   border-radius: 20px;
-   z-index: 1;
+.req {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30px;
 }
 
-#LLM-avatar {
-   /* Ellipse 2 */
-   position: absolute;
-   width: 42px;
-   height: 42px;
-   left: -50px;
-   top: 110px;
-   border-radius: 20px;
-   background: #D9D9D9;
+.reqbub {
+    width: 600px;
+    height: auto;
+    background-color: #D3EBFF;
+    color: #3B4168;
+    border-radius: 20px;
+    padding: 0px 25px 5px 25px;
 }
 
-.likeButton {
-   /* Icon */
-   position: absolute;
-   width: 21px;
-   height: 21px;
-   left: 10px;
-   top: 155px;
+.pdpchat {
+    width: 42px;
+    height: 42px;
+    background-color: gray;
+    border-radius: 50%;
 }
 
-.dislikeButton {
-   /* arrow-down-contained-02 */
-   position: absolute;
-   width: 21px;
-   height: 21px;
-   left: 35px;
-   top: 155px;
+.resp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30px;
 }
 
-.pinButton {
-   /* marker-04 */
-   position: absolute;
-   width: 21px;
-   height: 21px;
-   left: 60px;
-   top: 155px;
+.Convo {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    position: relative;
+    top: 425px;
 }
 
-#userPrompt {
-   /* Rectangle 12 */
-   position: absolute;
-   width: 631px;
-   height: 111px;
-   left: 180px;
-   top: 540px;
-   background: #D3EBFF;
-   border-radius: 20px;
-   z-index: 1;
+.reactions {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1px;
+    position: relative;
+    left: 75px;
+    top: 5px;
 }
 
-#user-avatar {
-   /* Frame 772 (1) 1 */
-   position: absolute;
-   width: 43px;
-   height: 44px;
-   left: 640px;
-   top: 63px;
-   border-radius: 300px;
+.like,
+.dislike,
+.pin {
+    cursor: pointer;
 }
 
-#promptText {
-   /* Prompt text */
-   position: absolute;
-   width: 584px;
-   height: 78px;
-   left: 20px;
-   top: 0px;
-   font-family: 'IBM Plex Sans';
-   font-style: normal;
-   font-weight: 400;
-   font-size: 12px;
-   line-height: 16px;
-   display: flex;
-   align-items: center;
-   color: #3B4168;
+.like :hover {
+    stroke: #40BA21;
 }
 
-#responseText {
-   /* Response text */
-   position: absolute;
-   width: 571px;
-   height: 117px;
-   left: 20px;
-   top: 0px;
-   font-family: 'IBM Plex Sans';
-   font-style: normal;
-   font-weight: 400;
-   font-size: 12px;
-   line-height: 16px;
-   display: flex;
-   align-items: center;
-   color: #3B4168;
+.dislike :hover {
+    stroke: #C41717;
+}
+
+.pin :hover {
+    stroke: #FF7139;
+}
+
+.chatinput {
+    margin: 15px 15px 15px 0px;
+    width: 750px;
+    height: 45px;
+    border-radius: 25px;
+    background-color: #FFFFFF;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    border: none;
+    padding-left: 35px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+::placeholder {
+    color: #6F6F6F;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+}
+
+.sendBtn {
+    width: 48px;
+    height: 48px;
+    background-color: #12152A;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.8s ease-in-out;
+    cursor: pointer;
+}
+
+.sendBtn:hover {
+    background-color: #1C203F;
+}
+
+.sendsvg1 {
+    position: relative;
+    right: 1px;
+    top: 2px;
+}
+
+.sendsvg2 {
+    display: none;
+}
+
+.sendBtn:hover .sendsvg1 {
+    display: none;
+}
+
+.sendBtn:hover .sendsvg2 {
+    display: inline-block;
 }
