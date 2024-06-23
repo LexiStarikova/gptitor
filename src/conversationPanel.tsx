@@ -11,16 +11,16 @@ export const ConversationPanel: React.FC = () => {
 
     const handleSend = async () => {
         if(text.trim() === "") return;
-        const url = 'https://gptitor.onrender.com/conversations';
+        const url = 'https://gptitor.onrender.com/conversations/8/messages';
+t
         try {
             const response = await fetch(url, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({})
+                body: JSON.stringify({ query_text: text })
             });
-
     
             if (response.ok) {  
                 console.log('Message sent successfully');
