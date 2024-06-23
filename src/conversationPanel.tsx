@@ -8,7 +8,7 @@ export const ConversationPanel: React.FC = () => {
     const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
     };
-
+    // conversation_id = 1
     const handleSend = async () => {
         if(text.trim() === "") return;
         const url = 'https://gptitor.onrender.com/conversations/1/messages';
