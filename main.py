@@ -38,17 +38,13 @@ llm = LLM()
 db_file = "db_project.db"
 
 
-origins = [
-    "https://lexistarikova.github.io/gptitor",
-    # Add other origins if needed
-]
-
+# Allow all origins, methods, and headers
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"], 
     allow_credentials=True,
-    allow_methods=["*"],  # or specify methods like ["GET", "POST"]
-    allow_headers=["*"],  # or specify headers like ["Content-Type", "Authorization"]
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
