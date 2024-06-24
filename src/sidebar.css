@@ -200,3 +200,6 @@
     stroke: #FF4033;
     transition: stroke 0.8s ease;
 }
+a {
+    text-decoration: none;
+}
