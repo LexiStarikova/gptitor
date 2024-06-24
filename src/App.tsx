@@ -7,19 +7,18 @@ import Profile from './profile.tsx';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <NavBar />
-      <SideBar />
+    <Router basename='/GPTitor'>
+      <NavBar></NavBar>
+      <SideBar></SideBar>
       <main>
         <Routes>
-          {/* Use 'element' to render components */}
-          <Route path="/" element={<Navigate to="/chatpage" replace/>} />
-          <Route path='/chatpage' element={<StudyMode />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path="/" element={<Navigate to="/chatpage" />} />
+          <Route path='/chatpage' element={<StudyMode />}></Route>
+          <Route path='/profile' element={<Profile />}></Route>
         </Routes>
       </main>
     </Router>
-  );
-};
+  )
+}
 
 export default App;
