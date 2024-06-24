@@ -1,6 +1,6 @@
 import './profile.css';
 
-const profile = () => {
+const Profile: React.FC = () => {
     return (
         <div>
             <div className='profilepage'>
@@ -193,4 +193,4 @@ const profile = () => {
     );
 };
 
-export default profile;
+export default Profile;
