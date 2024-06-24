@@ -36,8 +36,6 @@ signin
     top: 0;
 }
 
-#feedback-panel {}
-
 .chatpage {
     display: flex;
     flex-direction: row;
