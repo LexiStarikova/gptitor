@@ -11,10 +11,15 @@ export const ConversationPanel: React.FC = () => {
     
     const handleSend = async () => {
         if(text.trim() === "") return;
-        //Link to intermediate (local) API
-        const url = 'https://195d-188-130-155-169.ngrok.io/proxy';
+        
         try {
-            const response = await fetch(url);
+            //Link to intermediate (local) API
+            const response = await fetch('https://c2c6-188-130-155-169.ngrok-free.app/proxy', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
             //const data = await response.json();
         
             if (!response.ok) {
