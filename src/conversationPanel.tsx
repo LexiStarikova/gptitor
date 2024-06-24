@@ -1,46 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './conversationPanel.css';
 
 export const ConversationPanel: React.FC = () => {
     
-    // const [text, setText] = useState<string>('');
+    const [text, setText] = useState<string>('');
 
-    // const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setText(e.target.value);
-    // };
-    // conversation_id = 1
-    // Connect to local Transformer 
-    // const handleSend = async () => {
-    //     if(text.trim() === "") return;
-    //     const url = 'https://gptitor.onrender.com/conversations/1/messages';
-    //     try {
-    //         const response = await fetch(url, {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({ query_text: text })
-    //         });
-    //         // Simulation of Sending the Query
-    //         setText(''); 
-
-    //         if (!response.ok) {
-    //             // Check if response is not okay (status is not in the range 200-299)
-    //             const errorMessage = await response.text();
-    //             console.error('Failed to send message:', errorMessage);
-    //             return;
-    //         }
+    const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setText(e.target.value);
+    };
     
-    //         if (response.ok) {  
-    //             console.log('Message sent successfully');
-    //             setText(''); 
-    //         } else {
-    //             console.error('Failed to send message');
-    //         }
-    //     } catch (error) {
-    //         console.error('There was a problem sending the message:', error);
-    //     }
-    // };
+    const handleSend = async () => {
+        if(text.trim() === "") return;
+        //Link to intermediate (local) API
+        const url = 'https://195d-188-130-155-169.ngrok.io/proxy';
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                //body: JSON.stringify({ query_text: text })
+            });
+        
+
+            if (!response.ok) {
+                // Check if response is not okay (status is not in the range 200-299)
+                const errorMessage = await response.text();
+                console.error('Failed to send message:', errorMessage);
+                return;
+            }
+    
+            if (response.ok) {  
+                console.log('Message sent successfully');
+                setText(''); 
+            } else {
+                console.error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('There was a problem sending the message:', error);
+        }
+    };
 
      return (
         <div>
@@ -86,8 +85,11 @@ export const ConversationPanel: React.FC = () => {
                     </div>
                 </div>
                 <div className='inputField'>
-                    <input className='chatinput' placeholder='Write here, to get your feedback.'></input>
-                    <div className='sendBtn'>
+                    <input className='chatinput' 
+                    placeholder='Write here, to get your feedback.' 
+                    value={text}
+                    onChange={handleTextChange}></input>
+                    <div className='sendBtn' onClick={handleSend}>
                         <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg1'>
                             <path d="M23.3154 3.64397L11.7983 15.1611M4.09215 9.37411L22.0265 3.15198C23.131 2.76881 24.1906 3.82842 23.8074 4.93287L17.5853 22.8672C17.159 24.0959 15.4337 24.1295 14.9598 22.9185L12.112 15.6407C11.9698 15.2772 11.6822 14.9896 11.3187 14.8474L4.04089 11.9995C2.82984 11.5257 2.86353 9.80037 4.09215 9.37411Z" stroke="white" stroke-width="2" stroke-linecap="round" />
                         </svg>
