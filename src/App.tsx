@@ -5,23 +5,19 @@ import NavBar from './header.tsx';
 import StudyMode from './studymode.tsx';
 import Profile from './profile.tsx';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div>
-      <Router basename="/GPTitor">
+    <Router>
       <NavBar></NavBar>
-      <div>
-        <SideBar></SideBar>
-      </div>
+      <SideBar></SideBar>
       <main>
         <Routes>
-          <Route path=" / " element={<Navigate to="/chatpage" />} />
+          <Route path="/" element={<Navigate to="/chatpage" />} />
           <Route path='/chatpage' element={<StudyMode />}></Route>
           <Route path='/profile' element={<Profile />}></Route>
         </Routes>
       </main>
     </Router>
-    </div>
   )
 }
 
