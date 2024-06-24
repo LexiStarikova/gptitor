@@ -1,5 +1,5 @@
 import './studymode.css';
-import ConversationPanel from './conversationPanel.tsx';
+import { ConversationPanel } from './conversationPanel.tsx';
 import FeedbackPanel from './feedbackPanel.tsx';
 const StudyMode: React.FC = () => {
     return (
