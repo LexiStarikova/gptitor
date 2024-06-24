@@ -63,7 +63,7 @@
     flex-direction: column;
 }
 
-.criteriaBox {
+.criteriaBoxF {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -77,12 +77,12 @@
     margin-bottom: 10px;
 }
 
-.bar {
+.barF {
     display: flex;
     flex-direction: column;
 }
 
-.critdesc {
+.critdescF {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -90,7 +90,7 @@
     column-gap: 8px;
 }
 
-.progbar {
+.progbarF {
     width: 180px;
     height: 8px;
     border-radius: 64px;
@@ -106,7 +106,7 @@
     cursor: pointer;
 }
 
-.details {
+.detailsF {
     color: #3B4168;
     position: absolute;
     top: 50px;
@@ -115,12 +115,12 @@
 }
 
 
-.crittooltip-container {
+.crittooltip-containerF {
     display: inline-block;
     gap: 1px;
 }
 
-.crittooltip-container .crittooltip {
+.crittooltip-containerF .crittooltipF {
     visibility: hidden;
     width: 222px;
     background-color: #12152A;
@@ -137,7 +137,7 @@
     transition: opacity 0.5s ease-in-out;
 }
 
-.crittooltip-container .crittooltip::after {
+.crittooltip-containerF .crittooltipF::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -149,7 +149,7 @@
 
 }
 
-.crittooltip-container:hover .crittooltip {
+.crittooltip-containerF:hover .crittooltipF {
     visibility: visible;
     opacity: 1;
 }
