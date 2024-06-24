@@ -12,9 +12,9 @@ const App: React.FC = () => {
       <SideBar></SideBar>
       <main>
         <Routes>
-          <Route path="/" element={<Navigate to="/chatpage" />} />
-          <Route path='/chatpage' element={<StudyMode />}></Route>
-          <Route path='/profile' element={<Profile />}></Route>
+          <Route path="/" element={<StudyMode />} />
+          <Route path='/chatpage' element={<StudyMode />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </main>
     </Router>
