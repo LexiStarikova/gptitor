@@ -1,6 +1,6 @@
 import "./header.css"
 
-const Header = () => {
+const Header: React.FC = () => {
     return (
         <div>
             <div className="NavContanaire">
