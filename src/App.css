@@ -37,3 +37,12 @@ signin
 }
 
 #feedback-panel {}
+
+.chatpage {
+    display: flex;
+    flex-direction: row;
+    column-gap: 60px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
