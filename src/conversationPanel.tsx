@@ -14,15 +14,9 @@ export const ConversationPanel: React.FC = () => {
         //Link to intermediate (local) API
         const url = 'https://195d-188-130-155-169.ngrok.io/proxy';
         try {
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-                //body: JSON.stringify({ query_text: text })
-            });
+            const response = await fetch(url);
+            //const data = await response.json();
         
-
             if (!response.ok) {
                 // Check if response is not okay (status is not in the range 200-299)
                 const errorMessage = await response.text();
