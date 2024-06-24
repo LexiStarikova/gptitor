@@ -14,13 +14,17 @@ export const ConversationPanel: React.FC = () => {
         
         try {
             //Link to intermediate (local) API
-            const response = await fetch('https://c2c6-188-130-155-169.ngrok-free.app/proxy', {
+            const response = await fetch('https://cd55-188-130-155-169.ngrok-free.app/proxy', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({
+                    query_text: text,
+                })
             });
-            //const data = await response.json();
+            
+            const data = await response.json();
         
             if (!response.ok) {
                 // Check if response is not okay (status is not in the range 200-299)
@@ -29,12 +33,31 @@ export const ConversationPanel: React.FC = () => {
                 return;
             }
     
-            if (response.ok) {  
-                console.log('Message sent successfully');
-                setText(''); 
-            } else {
-                console.error('Failed to send message');
-            }
+            
+            console.log('Message sent successfully');
+            setText(''); 
+
+            // Parse the response into variables
+            const userId = data.user_id;
+            const queryId = data.query_id;
+            const queryText = data.query_text;
+            const llmId = data.llm_id;
+            const responseId = data.response_id;
+            const responseText = data.response_text;
+            const comment = data.comment;
+            const convId = data.conversation_id;
+
+            console.log({
+                userId,
+                queryId,
+                queryText,
+                llmId,
+                responseId,
+                responseText,
+                comment,
+                convId
+            });
+            
         } catch (error) {
             console.error('There was a problem sending the message:', error);
         }
