@@ -98,7 +98,7 @@
     padding-left: 35px;
 }
 
-::placeholder {
+.historyinpt::placeholder {
     color: #909EBB;
     font-family: "IBM Plex Sans", sans-serif;
     font-weight: 500;
