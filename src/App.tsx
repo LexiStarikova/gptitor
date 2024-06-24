@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <main>
         <Routes>
           {/* Use 'element' to render components */}
-          <Route path="/" element={<Navigate to="/chatpage" />} />
+          <Route path="/" element={<Navigate to="/chatpage" replace/>} />
           <Route path='/chatpage' element={<StudyMode />} />
           <Route path='/profile' element={<Profile />} />
         </Routes>
