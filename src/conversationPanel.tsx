@@ -13,9 +13,9 @@ export const ConversationPanel: React.FC = () => {
         if(text.trim() === "") return;
         
         try {
-            //Link to intermediate (local) API
-            const response = await fetch('https://cd55-188-130-155-169.ngrok-free.app/proxy', {
-                method: 'GET',
+            //Link to intermediate (local) API: should be changes frequently!
+            const response = await fetch('https://8662-188-130-155-169.ngrok-free.app/proxy', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
