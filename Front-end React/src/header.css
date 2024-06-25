@@ -1,0 +1,616 @@
+
+#header {
+    /* 1920px / Header */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 1920px;
+height: 64px;
+
+/* White 10 */
+background: #FFFFFF;
+/* Grey/30 */
+border-bottom: 1px solid #E4E7F2;
+
+
+}
+  
+  
+  
+#header_nav ul {
+    /* Menu */
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 44px;
+
+    position: absolute;
+    width: 1107px;
+    height: 20px;
+    left: 406px;
+    top: 10px;
+    /* bottom: auto; */
+  }
+
+/* #header_nav ul {
+list-style-type: none;} */
+
+#logo {
+    /* ЕМОП_лого 1 */
+
+position: absolute;
+width: 140px;
+height: 36px;
+left: 28px;
+top: 14px;
+
+
+}
+  
+#Портал {
+/* Frame 155 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 83px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+}
+/* Styles for 'book' SVG and 'Портал' anchor */
+#book {
+  /* book */
+
+position: absolute;
+width: 20px;
+height: 20px;
+left: -30px;
+top: 0px;
+
+
+}
+
+#Портал-text {
+    /* Портал */
+
+width: 55px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Blue/65 */
+color: #0060AE;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+}
+
+#Ассесмент {
+/* Frame 2 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 108px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+/* Styles for 'Checked-box' SVG and 'Ассесмент' anchor */
+#Checked-box {
+    /* Styles for 'Checked-box' SVG */
+    /* Solid/Status/Checked-box */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+
+#Ассесмент-text {
+    /* Styles for 'Ассесмент' anchor */
+    /* Ассесмент */
+
+width: 80px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Grey/70 */
+color: #3B4168;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+}
+
+#Курсы {
+/* Frame 157 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 76px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+}
+#Work {
+    /* Styles for 'Work' SVG */
+    /* Work */
+
+/* Iconly/Bulk/Work */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+}
+
+#Курсы-text {
+    /* Styles for 'Курсы' anchor */
+    /* Курсы */
+
+width: 48px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Grey/70 */
+color: #3B4168;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+
+#программы {
+/* Frame 161 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 152px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+}
+#note-2 {
+    /* Styles for 'note-2' SVG */
+    /* vuesax/bulk/note-2 */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+#программы-text {
+    /* Styles for 'программы' anchor */
+    /* Обр. программы */
+
+width: 124px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Grey/70 */
+color: #3B4168;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+
+#Каталог {
+/* Frame 158 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 114px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+}
+#box {
+    /* Styles for 'box' SVG */
+    /* vuesax/bulk/box */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+#Каталог-text {
+    /* Styles for 'Каталог' anchor */
+    /* Каталог ПО */
+
+width: 86px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Grey/70 */
+color: #3B4168;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+
+#Аналитика {
+/* Frame 160 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 109px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+}
+#chart {
+    /* Styles for 'chart' SVG */
+    /* vuesax/bulk/chart */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+#Аналитика-text {
+    /* Styles for 'Аналитика' anchor */
+    /* Аналитика */
+
+width: 81px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Grey/70 */
+color: #3B4168;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+
+
+#Робокод {
+/* Frame 162 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 92px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+flex-grow: 0;
+
+}
+/* Styles for 'teacher' SVG and 'Робокод' anchor */
+#teacher {
+    /* Styles for 'teacher' SVG */
+    /* vuesax/bulk/teacher */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+#Робокод-text {
+    /* Styles for 'Робокод' anchor */
+    /* Робокод */
+
+width: 64px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Grey/70 */
+color: #3B4168;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+}
+
+#Клуб {
+/* Frame 163 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 65px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 7;
+flex-grow: 0;
+
+}
+ /* Styles for 'people' SVG and 'Клуб' anchor */
+ #people {
+    /* Styles for 'people' SVG */
+    /* vuesax/bulk/people */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+#Клуб-text {
+    /* Styles for 'Клуб' anchor */
+    /* Клуб */
+
+width: 37px;
+height: 20px;
+
+/* Main Text */
+font-family: 'IBM Plex Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height, or 125% */
+text-align: right;
+
+/* Grey/70 */
+color: #3B4168;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+}
+
+/* Frame 8370 */
+#icon-messages{
+position: absolute;
+width: 20px;
+height: 20px;
+left: 1682px;
+top: 25px;
+
+/* White 10 */
+background: #FFFFFF;
+/* Shadow */
+box-shadow: 0px 4px 15px rgba(33, 36, 55, 0.12);
+border-radius: 100px;
+}
+
+#profile-button{
+    /* Frame 8369 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 6px 8px;
+gap: 10px;
+
+position: absolute;
+width: 146px;
+height: 44px;
+left: 1746px;
+top: 0px;
+
+/* White 10 */
+background: #FFFFFF;
+/* Shadow */
+box-shadow: 0px 4px 15px rgba(33, 36, 55, 0.12);
+border-radius: 12px;
+
+}
+
+#picture{
+/* Frame 4431 */
+
+width: 32px;
+height: 32px;
+
+/* White 10 */
+background: #FFFFFF;
+/* Shadow */
+box-shadow: 0px 4px 15px rgba(33, 36, 55, 0.12);
+border-radius: 62px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+
+  
+  
+
+
