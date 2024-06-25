@@ -15,7 +15,7 @@ export const ConversationPanel: React.FC = () => {
         try {
             //Link to intermediate (local) API: should be changes frequently!
             //conversation_id = 1; To be modified
-            const response = await fetch('https://8662-188-130-155-169.ngrok-free.app/proxy/conversations/1/messages', {
+            const response = await fetch('https://202f-188-130-155-169.ngrok-free.app/proxy/conversations/1/messages', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
