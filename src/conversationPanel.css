@@ -1,0 +1,192 @@
+.conversationcontainer {
+    position: relative;
+    width: 800px;
+    height: 750px;
+    border-radius: 0 25px 25px 25px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.optionContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.option {
+    width: 100px;
+    height: 30px;
+    background-color: #6F7C98;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    border-radius: 10px 10px 0px 0px;
+    transition: background-color 0.6s ease;
+    cursor: pointer;
+}
+
+.option1 {
+    width: 100px;
+    height: 30px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #6F7C98;
+    border-radius: 10px 10px 0px 0px;
+    cursor: pointer;
+}
+
+.chatbigcontainter {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0px;
+    margin-left: 30px;
+}
+
+.option:hover {
+    background-color: #FFFFFF;
+
+}
+
+.option:hover {
+    color: #6F7C98;
+}
+
+.req {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30px;
+}
+
+.reqbub {
+    width: 600px;
+    height: auto;
+    background-color: #D3EBFF;
+    color: #3B4168;
+    border-radius: 20px;
+    padding: 0px 25px 5px 25px;
+}
+
+.pdpchat {
+    width: 42px;
+    height: 42px;
+    background-color: gray;
+    border-radius: 50%;
+}
+
+.resp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30px;
+}
+
+.Convo {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    position: relative;
+    top: 425px;
+}
+
+.reactions {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1px;
+    position: relative;
+    left: 75px;
+    top: 5px;
+}
+
+.like,
+.dislike,
+.pin {
+    cursor: pointer;
+}
+
+.like :hover {
+    stroke: #40BA21;
+}
+
+.dislike :hover {
+    stroke: #C41717;
+}
+
+.pin :hover {
+    stroke: #FF7139;
+}
+
+.chatinput {
+    margin: 15px 15px 15px 0px;
+    width: 750px;
+    height: 45px;
+    border-radius: 25px;
+    background-color: #FFFFFF;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    border: none;
+    padding-left: 35px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+::placeholder {
+    color: #6F6F6F;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+}
+
+.sendBtn {
+    width: 48px;
+    height: 48px;
+    background-color: #12152A;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.8s ease-in-out;
+    cursor: pointer;
+}
+
+.sendBtn:hover {
+    background-color: #1C203F;
+}
+
+.sendsvg1 {
+    position: relative;
+    right: 1px;
+    top: 2px;
+}
+
+.sendsvg2 {
+    display: none;
+}
+
+.sendBtn:hover .sendsvg1 {
+    display: none;
+}
+
+.sendBtn:hover .sendsvg2 {
+    display: inline-block;
+}

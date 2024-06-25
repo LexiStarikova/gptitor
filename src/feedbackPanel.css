@@ -1,0 +1,237 @@
+.feedbackcontainer {
+    position: relative;
+    width: 800px;
+    height: 825px;
+    border-radius: 0 25px 25px 25px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Desccontainer {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0px;
+    margin-top: 40px;
+}
+
+.TaskDesc {
+    width: 675px;
+    height: 90px;
+    background-color: #D3EBFF;
+    border-radius: 0 20px 20px 20px;
+    color: #59657D;
+    padding: 5px 20px 20px 20px;
+}
+
+.DescTitle {
+    width: 130px;
+    height: 35px;
+    background-color: #6F7C98;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.res {
+    position: relative;
+    color: #3B4168;
+    right: 250px;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+}
+
+.score {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: #3B4168;
+}
+
+.criterias {
+    display: flex;
+    flex-direction: column;
+}
+
+.criteriaBoxF {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 70px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    column-gap: 8px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.barF {
+    display: flex;
+    flex-direction: column;
+}
+
+.critdescF {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #3B4168;
+    column-gap: 8px;
+}
+
+.progbarF {
+    width: 180px;
+    height: 8px;
+    border-radius: 64px;
+    background-color: #3B4168;
+    position: relative;
+    bottom: 38px;
+}
+
+.infoiconcrit {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.detailsF {
+    color: #3B4168;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    cursor: pointer;
+}
+
+
+.crittooltip-containerF {
+    display: inline-block;
+    gap: 1px;
+}
+
+.crittooltip-containerF .crittooltipF {
+    visibility: hidden;
+    width: 222px;
+    background-color: #12152A;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 60%;
+    right: 0;
+    margin-left: -46px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.crittooltip-containerF .crittooltipF::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #12152A transparent transparent transparent;
+
+
+}
+
+.crittooltip-containerF:hover .crittooltipF {
+    visibility: visible;
+    opacity: 1;
+}
+
+.scoreBoxes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 70px;
+}
+
+.FeedContainer {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0px;
+}
+
+.FeedDesc {
+    width: 600px;
+    height: 90px;
+    background-color: #3B4168;
+    border-radius: 0 20px 20px 20px;
+    color: #FFFFFF;
+    padding: 5px 20px 20px 20px;
+}
+
+.FeedTitle {
+    width: 130px;
+    height: 35px;
+    background-color: #6F7C98;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.optionContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.option {
+    width: 100px;
+    height: 30px;
+    background-color: #6F7C98;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    border-radius: 10px 10px 0px 0px;
+    transition: background-color 0.6s ease;
+    cursor: pointer;
+}
+
+.option1 {
+    width: 100px;
+    height: 30px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #6F7C98;
+    border-radius: 10px 10px 0px 0px;
+    cursor: pointer;
+}
+
+.feedbackbigcontainter {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0px;
+}
+
+.option:hover {
+    background-color: #FFFFFF;
+
+}
+
+.option:hover .searchsicon path {
+    stroke: #6F7C98;
+
+}

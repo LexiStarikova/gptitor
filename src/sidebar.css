@@ -1,0 +1,205 @@
+.sidebarhidden {
+    position: absolute;
+    margin: 0;
+    background-color: #3B4168;
+    width: 53px;
+    height: 100vh;
+    box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.menuiconhidden {
+    position: absolute;
+    left: 14px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.chaticonhidden {
+    position: absolute;
+    left: 14px;
+    top: 78px;
+    cursor: pointer;
+}
+
+.profileiconhidden {
+    position: absolute;
+    left: 12px;
+    top: 828px;
+    cursor: pointer;
+}
+
+.infoiconhidden {
+    position: absolute;
+    left: 12px;
+    top: 863px;
+    cursor: pointer;
+}
+
+.sidebar {
+    position: absolute;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #3B4168;
+    transition: left 0.8s ease;
+    z-index: 999999;
+}
+
+.sidebar.sidebar-visible {
+    left: 0;
+}
+
+
+.sidetitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    cursor: pointer;
+}
+
+.menuiconout {
+    position: relative;
+    left: 10px;
+    cursor: pointer;
+}
+
+.chaticonout {
+    position: relative;
+    left: 10px;
+    cursor: pointer;
+}
+
+.gpttitle {
+    position: relative;
+    color: #FFFFFF;
+    left: 10px;
+}
+
+.historysearch {
+    position: relative;
+    width: 220px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    left: 15px;
+}
+
+.historyinpt {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: #FAFAFF;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    border: none;
+    padding-left: 35px;
+}
+
+.historyinpt::placeholder {
+    color: #909EBB;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.searchicon {
+    position: absolute;
+    left: 10px;
+    pointer-events: none;
+}
+
+.fav {
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    left: 20px;
+}
+
+.favicon {
+    position: relative;
+    left: 125px;
+    transition: 0.4s;
+
+}
+
+.favicon:hover {
+    background-color: #273B4A;
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
+    transition: 0.8s;
+    cursor: pointer;
+}
+
+.query {
+    position: relative;
+    top: 10px;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+    justify-content: center;
+    color: #FFFFFF;
+    background: linear-gradient(90deg, rgba(59, 65, 104, 1) 0%, rgba(117, 129, 206, 0.5) 100%);
+    border-radius: 10px;
+    height: 25px;
+    width: 200px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.history {
+    position: absolute;
+    color: #FFFFFF;
+    top: 170px;
+    left: 35px;
+}
+
+.queries {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profile {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #FFFFFF;
+    left: 20px;
+    gap: 10px;
+    top: 828px;
+}
+
+.info {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #FFFFFF;
+    left: 20px;
+    gap: 10px;
+    top: 875px;
+}
+
+.likeicon:hover path {
+    fill: #FF4033;
+    stroke: #FF4033;
+    transition: stroke 0.8s ease;
+}
+a {
+    text-decoration: none;
+}
