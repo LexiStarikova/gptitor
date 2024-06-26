@@ -7,7 +7,7 @@ import Profile from './profile.tsx';
 
 const App: React.FC = () => {
   return (
-    <Router basename='/GPTitor'>
+    <Router basename='/gptitor'>
       <NavBar></NavBar>
       <SideBar></SideBar>
       <main>
