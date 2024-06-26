@@ -1,19 +1,29 @@
-import './feedbackPanel.css'
+import './feedbackPanel.css';
+import { useState } from 'react';
+import TaskPanel from './taskpanel';
 
-export const FeedbackPanel = () => {
+const FeedbackPanel = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        console.log('Toggling sidebar');
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+
     return (
         <div>
             <div className='feedbackbigcontainter'>
                 <div className='optionContainer'>
-                    <div className='option'>
+                    <div className='option' onClick={toggleSidebar}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='searchsicon'>
-                            <path d="M16.9265 17.0401L20.3996 20.4001M11.3996 7.2001C13.3878 7.2001 14.9996 8.81187 14.9996 10.8001M19.2796 11.4401C19.2796 15.77 15.7695 19.2801 11.4396 19.2801C7.1097 19.2801 3.59961 15.77 3.59961 11.4401C3.59961 7.11018 7.1097 3.6001 11.4396 3.6001C15.7695 3.6001 19.2796 7.11018 19.2796 11.4401Z" stroke="white" stroke-width="2" stroke-linecap="round" />
+                            <path d="M16.9265 17.0401L20.3996 20.4001M11.3996 7.2001C13.3878 7.2001 14.9996 8.81187 14.9996 10.8001M19.2796 11.4401C19.2796 15.77 15.7695 19.2801 11.4396 19.2801C7.1097 19.2801 3.59961 15.77 3.59961 11.4401C3.59961 7.11018 7.1097 3.6001 11.4396 3.6001C15.7695 3.6001 19.2796 7.11018 19.2796 11.4401Z" stroke="white" strokeWidth="2" strokeLinecap="round" />
                         </svg>
+                        <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
                     </div>
                     <div className='option1'>
                         <p>Task 1</p>
                     </div>
-
                 </div>
                 <div className='feedbackcontainer'>
                     <div className='Desccontainer'>
@@ -49,7 +59,7 @@ export const FeedbackPanel = () => {
                                     <div className='progbarF'></div>
                                 </div>
                                 <div className='detailsF'>
-                                    <p className='p5'>More Detais &lt;</p>
+                                    <p className='p5'>More Details &lt;</p>
                                 </div>
                             </div>
                             <div>
@@ -58,6 +68,7 @@ export const FeedbackPanel = () => {
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.2927 11.2412L11.2927 15.3791M11.2927 8.17411V8.13775M3.00977 11.2412C3.00977 6.67056 6.71816 2.96533 11.2927 2.96533C15.8672 2.96533 19.5756 6.67056 19.5756 11.2412C19.5756 15.8118 15.8672 19.5171 11.2927 19.5171C6.71816 19.5171 3.00977 15.8118 3.00977 11.2412Z" stroke="#3B4168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
+
 
                                         <p className='crittooltipF'>Ah Yes, Criteria Description.</p>
                                     </div>
@@ -75,7 +86,7 @@ export const FeedbackPanel = () => {
                                         <div className='progbarF'></div>
                                     </div>
                                     <div className='detailsF'>
-                                        <p className='p5'>More Detais &lt;</p>
+                                        <p className='p5'>More Details &lt;</p>
                                     </div>
                                 </div>
                             </div>
@@ -94,6 +105,7 @@ export const FeedbackPanel = () => {
                                         <path d="M24.245 26.175C23.96 26.175 23.675 26.07 23.45 25.845L14.96 17.355C14.525 16.92 14.525 16.2 14.96 15.765C15.395 15.33 16.115 15.33 16.55 15.765L25.04 24.255C25.475 24.69 25.475 25.41 25.04 25.845C24.815 26.07 24.53 26.175 24.245 26.175Z" fill="white" />
                                     </svg>
 
+
                                     <div className='barF'>
                                         <div className='critdescF'>
                                             <h6>6.9/10</h6>
@@ -102,7 +114,7 @@ export const FeedbackPanel = () => {
                                         <div className='progbarF'></div>
                                     </div>
                                     <div className='detailsF'>
-                                        <p className='p5'>More Detais &lt;</p>
+                                        <p className='p5'>More Details &lt;</p>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +140,7 @@ export const FeedbackPanel = () => {
                                         <div className='progbarF'></div>
                                     </div>
                                     <div className='detailsF'>
-                                        <p className='p5'>More Detais &lt;</p>
+                                        <p className='p5'>More Details &lt;</p>
                                     </div>
                                 </div>
                             </div>
@@ -144,9 +156,8 @@ export const FeedbackPanel = () => {
                     </div>
                 </div>
             </div>
-
-        </div>
-    )
-}
+        </div >
+    );
+};
 
 export default FeedbackPanel;
