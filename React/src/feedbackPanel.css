@@ -176,7 +176,7 @@
     padding: 5px 20px 20px 20px;
 }
 
-.FeedDesc > p {
+.FeedDesc>p {
     overflow-y: scroll;
     height: 80%;
 }
@@ -239,4 +239,18 @@
 .option:hover .searchsicon path {
     stroke: #6F7C98;
 
+}
+
+
+.FeedDesc>p::-webkit-scrollbar {
+    width: 10px;
+}
+
+.FeedDesc>p::-webkit-scrollbar-track {
+    background: #3B4168;
+}
+
+.FeedDesc>p::-webkit-scrollbar-thumb {
+    background: #efefef;
+    border-radius: 100px;
 }

@@ -12,90 +12,95 @@ const FeedbackPanel = () => {
     };
 
     const [criterionOneValue, setcriterionOneValue] = useState<number | null>(null);
-  const [criterionTwoValue, setcriterionTwoValue] = useState<number | null>(null);
-  const [criterionThreeValue, setcriterionThreeValue] = useState<number | null>(null);
-  const [criterionFourValue, setcriterionFourValue] = useState<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
+    const [criterionTwoValue, setcriterionTwoValue] = useState<number | null>(null);
+    const [criterionThreeValue, setcriterionThreeValue] = useState<number | null>(null);
+    const [criterionFourValue, setcriterionFourValue] = useState<number | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-
-    const fetchcriterionOneValue = async () => {
-      try {
-        const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_1`);
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        
-        const data = await response.json();
-        
-        const value = parseFloat(data.score);
-        
-        setcriterionOneValue(value);
-      } catch (Error) {
-        setError('Error: failed to GET criteria 1 !');
-      } 
+    const resetFeedback = () => {
+        setFeedback('');
     };
 
-    const fetchcriterionTwoValue = async () => {
-        try {
-          const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_2`);
-          
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          
-          const data = await response.json();
-          
-          const value = parseFloat(data.score);
-          
-          setcriterionTwoValue(value);
-        } catch (Error) {
-          setError('Error: failed to GET criteria 2 !');
-        } 
-      };
 
-    const fetchcriterionThreeValue = async () => {
-    try {
-        const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_3`);
-        
-        if (!response.ok) {
-        throw new Error('Network response was not ok');
-        }
-        
-        const data = await response.json();
-        
-        const value = parseFloat(data.score);
-        
-        setcriterionThreeValue(value);
-    } catch (Error) {
-        setError('Error: failed to GET criteria 3 !');
-    } 
-    };
-    const fetchcriterionFourValue = async () => {
-        try {
-            const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_4`);
-            
-            if (!response.ok) {
-            throw new Error('Network response was not ok');
+    useEffect(() => {
+
+        const fetchcriterionOneValue = async () => {
+            try {
+                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_1`);
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                const value = parseFloat(data.score);
+
+                setcriterionOneValue(value);
+            } catch (Error) {
+                setError('Error: failed to GET criteria 1 !');
             }
-            
-            const data = await response.json();
-            
-            const value = parseFloat(data.score);
-            
-            setcriterionFourValue(value);
-        } catch (Error) {
-            setError('Error: failed to GET criteria 4 !');
-        } 
         };
 
-    fetchcriterionOneValue();
-    fetchcriterionTwoValue();
-    fetchcriterionThreeValue();
-    fetchcriterionFourValue();
+        const fetchcriterionTwoValue = async () => {
+            try {
+                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_2`);
 
-  });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                const value = parseFloat(data.score);
+
+                setcriterionTwoValue(value);
+            } catch (Error) {
+                setError('Error: failed to GET criteria 2 !');
+            }
+        };
+
+        const fetchcriterionThreeValue = async () => {
+            try {
+                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_3`);
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                const value = parseFloat(data.score);
+
+                setcriterionThreeValue(value);
+            } catch (Error) {
+                setError('Error: failed to GET criteria 3 !');
+            }
+        };
+        const fetchcriterionFourValue = async () => {
+            try {
+                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_4`);
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                const value = parseFloat(data.score);
+
+                setcriterionFourValue(value);
+            } catch (Error) {
+                setError('Error: failed to GET criteria 4 !');
+            }
+        };
+
+        fetchcriterionOneValue();
+        fetchcriterionTwoValue();
+        fetchcriterionThreeValue();
+        fetchcriterionFourValue();
+        resetFeedback();
+    }, [setFeedback]);
 
     return (
         <div>
