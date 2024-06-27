@@ -4,8 +4,8 @@ import './conversationPanel.css';
 export const ConversationPanel: React.FC = () => {
     
     const [text, setText] = useState<string>('');
-    const [responseText, setResponseText] = useState<string>('');
-    const [queryText, setQueryText] = useState<string>('');
+    const [responseText, setResponseText] = useState<string | null>(null);
+    const [queryText, setQueryText] = useState<string | null>(null);;
 
     const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
@@ -13,9 +13,8 @@ export const ConversationPanel: React.FC = () => {
     
     const handleSend = async () => {
         if(text.trim() === "") return;
-        
+        setQueryText(text);
         try {
-            //Link to intermediate (local) API: should be changes frequently!
             //conversation_id = 1; To be modified
             const response = await fetch('http://10.100.30.244:8000/conversations/1/messages', {
                 method: 'POST',
@@ -28,7 +27,6 @@ export const ConversationPanel: React.FC = () => {
             });
             
             const data = await response.json();
-        
             if (!response.ok) {
                 // Check if response is not okay (status is not in the range 200-299)
                 const errorMessage = await response.text();
@@ -36,30 +34,18 @@ export const ConversationPanel: React.FC = () => {
                 return;
             }
     
-            
             console.log('Message sent successfully');
             setText(''); 
 
             // Parse the response into variables
-            const userId = data.user_id;
-            const queryId = data.query_id;
-            setQueryText(data.query_text);
-            const llmId = data.llm_id;
-            const responseId = data.response_id;
+            // const userId = data.user_id;
+            // const queryId = data.query_id;
+            // const llmId = data.llm_id;
+            // const responseId = data.response_id;
             setResponseText(data.response_text);
-            const comment = data.comment;
-            const convId = data.conversation_id;
+            // const comment = data.comment;
+            // const convId = data.conversation_id;
 
-            console.log({
-                userId,
-                queryId,
-                queryText,
-                llmId,
-                responseId,
-                responseText,
-                comment,
-                convId
-            });
             
         } catch (error) {
             console.error('There was a problem sending the message:', error);
@@ -80,22 +66,27 @@ export const ConversationPanel: React.FC = () => {
                 </div>
                 <div className='conversationcontainer'>
                     <div className='Convo'>
-                        <div className='req'>
-                            <div className='reqbub'>
-                                {/* <p className='p4'>I have a cat named Garfield, and I want to ensure I provide the best possible care for him. Can you provide detailed information on how to take care of Garfield, including tips on his diet, exercise, grooming, health check-ups, and any special considerations specific to his breed or personality traits? Additionally, please include any signs of common health issues I should watch out for and suggestions for keeping him mentally stimulated and happy.</p> */}
-                                <p className='p4'>{queryText}</p>
+                        {queryText !== null && (
+                            <div className='req'>
+                                <div className='reqbub'>
+                                    {/* <p className='p4'>I have a cat named Garfield, and I want to ensure I provide the best possible care for him. Can you provide detailed information on how to take care of Garfield, including tips on his diet, exercise, grooming, health check-ups, and any special considerations specific to his breed or personality traits? Additionally, please include any signs of common health issues I should watch out for and suggestions for keeping him mentally stimulated and happy.</p> */}
+                                    <p className='p4'>{queryText}</p>
+                                </div>
+                                <div className='pdpchat'></div>
                             </div>
-                            <div className='pdpchat'></div>
-                        </div>
+                        )}
+                        
+                        {responseText !== null && (
                         <div className='rescomplete'>
+                        
                             <div className='resp'>
                                 <div className='pdpchat'></div>
                                 <div className='reqbub'>
                                     {/* <p className='p4'>To take the best care of your cat Garfield, ensure he has a balanced diet with high-quality cat food and fresh water, controlling portions to prevent obesity. Engage him in daily play for exercise, provide grooming with regular brushing and nail trimming, and maintain dental hygiene. Schedule annual vet check-ups, keep his vaccinations up-to-date, and use parasite preventatives. Provide mental stimulation with interactive toys and training, and ensure he has a cozy, safe space with consistent routines and affection to keep him happy and healthy. Watch for signs of common health issues like obesity, dental disease, kidney problems, and urinary tract issues, seeking veterinary care when needed.</p> */}
                                     <p className='p4'>{responseText}</p>
                                 </div>
-
                             </div>
+                        
                             <div className='reactions'>
                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" className='like'>
                                     <path d="M6.46715 9.49724C6.25502 9.67402 6.22635 9.9893 6.40314 10.2014C6.57992 10.4136 6.8952 10.4422 7.10734 10.2655L6.46715 9.49724ZM10.4996 6.78773L10.8197 6.40362C10.6343 6.2491 10.3649 6.2491 10.1795 6.40362L10.4996 6.78773ZM13.8918 10.2655C14.104 10.4422 14.4192 10.4136 14.596 10.2014C14.7728 9.9893 14.7441 9.67402 14.532 9.49724L13.8918 10.2655ZM9.99958 14.2124C9.99958 14.4885 10.2234 14.7124 10.4996 14.7124C10.7757 14.7124 10.9996 14.4885 10.9996 14.2124H9.99958ZM7.10734 10.2655L10.8197 7.17184L10.1795 6.40362L6.46715 9.49724L7.10734 10.2655ZM10.1795 7.17184L13.8918 10.2655L14.532 9.49724L10.8197 6.40362L10.1795 7.17184ZM9.99958 6.78773V14.2124H10.9996V6.78773H9.99958ZM16.0857 4.91395C19.1709 7.9991 19.1709 13.0011 16.0857 16.0862L16.7929 16.7933C20.2685 13.3177 20.2685 7.68251 16.7929 4.20685L16.0857 4.91395ZM16.0857 16.0862C13.0006 19.1714 7.99861 19.1714 4.91347 16.0862L4.20636 16.7933C7.68202 20.269 13.3172 20.269 16.7929 16.7933L16.0857 16.0862ZM4.91347 16.0862C1.82832 13.0011 1.82832 7.9991 4.91347 4.91395L4.20636 4.20685C0.730693 7.68251 0.730693 13.3177 4.20636 16.7933L4.91347 16.0862ZM4.91347 4.91395C7.99861 1.82881 13.0006 1.82881 16.0857 4.91395L16.7929 4.20685C13.3172 0.731181 7.68202 0.731181 4.20636 4.20685L4.91347 4.91395Z" fill="#3B4168" />
@@ -108,7 +99,7 @@ export const ConversationPanel: React.FC = () => {
                                 </svg>
                             </div>
                         </div>
-
+                        )}
                     </div>
                 </div>
                 <div className='inputField'>
