@@ -4,6 +4,8 @@ import './conversationPanel.css';
 export const ConversationPanel: React.FC = () => {
     
     const [text, setText] = useState<string>('');
+    const [responseText, setResponseText] = useState<string>('');
+    const [queryText, setQueryText] = useState<string>('');
 
     const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
@@ -41,10 +43,10 @@ export const ConversationPanel: React.FC = () => {
             // Parse the response into variables
             const userId = data.user_id;
             const queryId = data.query_id;
-            const queryText = data.query_text;
+            setQueryText(data.query_text);
             const llmId = data.llm_id;
             const responseId = data.response_id;
-            const responseText = data.response_text;
+            setResponseText(data.response_text);
             const comment = data.comment;
             const convId = data.conversation_id;
 
@@ -80,7 +82,8 @@ export const ConversationPanel: React.FC = () => {
                     <div className='Convo'>
                         <div className='req'>
                             <div className='reqbub'>
-                                <p className='p4'>I have a cat named Garfield, and I want to ensure I provide the best possible care for him. Can you provide detailed information on how to take care of Garfield, including tips on his diet, exercise, grooming, health check-ups, and any special considerations specific to his breed or personality traits? Additionally, please include any signs of common health issues I should watch out for and suggestions for keeping him mentally stimulated and happy.</p>
+                                {/* <p className='p4'>I have a cat named Garfield, and I want to ensure I provide the best possible care for him. Can you provide detailed information on how to take care of Garfield, including tips on his diet, exercise, grooming, health check-ups, and any special considerations specific to his breed or personality traits? Additionally, please include any signs of common health issues I should watch out for and suggestions for keeping him mentally stimulated and happy.</p> */}
+                                <p className='p4'>{queryText}</p>
                             </div>
                             <div className='pdpchat'></div>
                         </div>
@@ -88,7 +91,8 @@ export const ConversationPanel: React.FC = () => {
                             <div className='resp'>
                                 <div className='pdpchat'></div>
                                 <div className='reqbub'>
-                                    <p className='p4'>To take the best care of your cat Garfield, ensure he has a balanced diet with high-quality cat food and fresh water, controlling portions to prevent obesity. Engage him in daily play for exercise, provide grooming with regular brushing and nail trimming, and maintain dental hygiene. Schedule annual vet check-ups, keep his vaccinations up-to-date, and use parasite preventatives. Provide mental stimulation with interactive toys and training, and ensure he has a cozy, safe space with consistent routines and affection to keep him happy and healthy. Watch for signs of common health issues like obesity, dental disease, kidney problems, and urinary tract issues, seeking veterinary care when needed.</p>
+                                    {/* <p className='p4'>To take the best care of your cat Garfield, ensure he has a balanced diet with high-quality cat food and fresh water, controlling portions to prevent obesity. Engage him in daily play for exercise, provide grooming with regular brushing and nail trimming, and maintain dental hygiene. Schedule annual vet check-ups, keep his vaccinations up-to-date, and use parasite preventatives. Provide mental stimulation with interactive toys and training, and ensure he has a cozy, safe space with consistent routines and affection to keep him happy and healthy. Watch for signs of common health issues like obesity, dental disease, kidney problems, and urinary tract issues, seeking veterinary care when needed.</p> */}
+                                    <p className='p4'>{responseText}</p>
                                 </div>
 
                             </div>
