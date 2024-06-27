@@ -57,8 +57,8 @@ li {
 
 .panel.open {
     position: absolute;
-    top: 115px;
-    left: 1002px;
+    top: 126px;
+    left: 1009px;
     z-index: 2;
     display: block;
     animation: fadeIn 0.5s ease-in-out;
