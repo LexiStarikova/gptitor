@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
+import { FeedbackContext } from './feedbackContext';
 
 export const ConversationPanel: React.FC = () => {
     const [text, setText] = useState<string>('');
     const [queries, setQueries] = useState<string[]>([]);
     const [responses, setResponses] = useState<string[]>([]);
+    const { feedback, setFeedback } = useContext(FeedbackContext);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         adjustTextareaHeight();
@@ -57,7 +59,7 @@ export const ConversationPanel: React.FC = () => {
             const data = await response.json();
             const newResponse = data.response_text;
             setResponses(prevResponses => [...prevResponses, newResponse]);
-
+            setFeedback(data.comment);
         } catch (error) {
             console.error('There was a problem sending the message:', error);
         }

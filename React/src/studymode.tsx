@@ -1,13 +1,17 @@
 import './studymode.css';
 import { ConversationPanel } from './conversationPanel.tsx';
 import FeedbackPanel from './feedbackPanel.tsx';
+import FeedbackContextProvider from './feedbackContextProvider.tsx';
+
 const StudyMode: React.FC = () => {
     return (
         <div>
-            <div className='chatpage'>
-                <ConversationPanel></ConversationPanel>
-                <FeedbackPanel></FeedbackPanel>
-            </div>
+            <FeedbackContextProvider>
+                <div className='chatpage'>
+                    <ConversationPanel></ConversationPanel>
+                    <FeedbackPanel></FeedbackPanel>
+                </div>
+            </FeedbackContextProvider>
         </div>
     );
 };

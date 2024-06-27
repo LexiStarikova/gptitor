@@ -5,6 +5,8 @@ import NavBar from './header.tsx';
 import StudyMode from './studymode.tsx';
 import Profile from './profile.tsx';
 
+
+
 const App: React.FC = () => {
   return (
     <Router basename='/gptitor'>
