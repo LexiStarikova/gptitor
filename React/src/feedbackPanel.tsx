@@ -28,6 +28,8 @@ const FeedbackPanel = () => {
         resetScore();
     }, [setFeedback, setCriteria, setTask]);
 
+    // const id: string | number = task.task_id === 0 ? "No task" : task.task_id;
+
     return (
         <div>
             <div className='feedbackbigcontainter'>
@@ -39,7 +41,7 @@ const FeedbackPanel = () => {
                         <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
                     </div>
                     <div className='option1'>
-                        <p>Task {task.task_id}</p>
+                        <p>{task.task_id === 0 ? "No task" : `Task ${task.task_id}`}</p>
                     </div>
                 </div>
                 <div className='feedbackcontainer'>
