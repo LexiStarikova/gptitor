@@ -9,14 +9,36 @@ const Sidebar: React.FC = () => {
     const toggleSidebar = () => {
         setSidebarVisible(prev => !prev);
     };
-
+    const [condId, setConvId] = useState(1);
     const [queries, setQueries] = useState<{ id: number; text: string }[]>([]);
     const [nextId, setNextId] = useState(1);
 
-    const addQuery = () => {
+    const addQuery = async () => {
         const newQuery = { id: nextId, text: `Query ${nextId}` };
         setQueries([...queries, newQuery]);
         setNextId(nextId + 1);
+
+        const response = await fetch('http://10.100.30.244:8000/conversations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const data = await response.json();
+        setConvId(data.conversation_id);
+        console.log(`New conversation_id: ${data.conversation_id}`); // ID in DB
+    };
+
+    const openConversation = async () => {
+        const response = await fetch(`http://10.100.30.244:8000/conversations/${condId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const data = await response.json();
+        console.log(`Number of messages: ${data.length}`); 
+        // Implement logic here
     };
 
     const deleteQuery = (id: number) => {
@@ -63,7 +85,7 @@ const Sidebar: React.FC = () => {
                 </div>
                 <div className='queries'>
                 {queries.map(query => (
-                        <QueryComponent key={query.id} id={query.id} queryText={query.text} onDelete={deleteQuery} />
+                        <QueryComponent key={query.id} id={query.id} queryText={query.text} onDelete={deleteQuery}/>
                     ))}
                 </div>
                 <Link to="/profile"><div className='profile'>
