@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './taskpanel.css';
+import { FeedbackContext } from './feedbackContext';
+import { Task } from './models/task';
 
 interface TaskPanelProps {
     isOpen: boolean;
@@ -7,6 +9,21 @@ interface TaskPanelProps {
 }
 
 const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
+
+    const { task, setTask } = useContext(FeedbackContext);
+
+    const handleTaskClick = (taskId: number) => {
+        fetch(`http://10.100.30.244:8000/tasks/${taskId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setTask(new Task(data.task_id, data.task_name, data.category, data.description));
+            })
+            .catch(error => {
+                console.error('Error fetching task:', error);
+            });
+    };
+
     return (
         <div className={`panel ${isOpen ? 'open' : ''}`}>
             <div className='panelcontainer'>
@@ -21,9 +38,9 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
                             <h6>Suggested</h6>
                         </div>
                         <ul>
-                            <li><p className='listbox'>Task 1</p></li>
-                            <li><p className='listbox'>Task 1</p></li>
-                            <li><p className='listbox'>Task 1</p></li>
+                            <li onClick={() => handleTaskClick(1)}><p className='listbox'>Task 1</p></li>
+                            <li onClick={() => handleTaskClick(2)}><p className='listbox'>Task 2</p></li>
+                            <li onClick={() => handleTaskClick(3)}><p className='listbox'>Task 3</p></li>
                         </ul>
                     </div>
                 </div>

@@ -50,12 +50,25 @@ class Query(BaseModel):
     query_text: str = Field(default="", 
                             examples=["Example query"], 
                             max_length=2048)
+    task_id: int = Field(default=0, 
+                         examples=[0])
+    llm_id: int = Field(default=2, 
+                        examples=[0])
 
 #TODO: implement renaming
 class Name(BaseModel):
     new_name: str = Field(default="Untitled", 
                             examples=["Example name"], 
                             max_length=2048)
+class Score(BaseModel):
+    criterion_1: float = Field(default=0.0, 
+                             examples=[0.5, 2.9])
+    criterion_2: float = Field(default=0.0, 
+                             examples=[0.5, 2.9])
+    criterion_3: float = Field(default=0.0, 
+                             examples=[0.5, 2.9])
+    criterion_4: float = Field(default=0.0, 
+                              examples=[0.5, 2.9])
 
 class QueryResponsePair(BaseModel):
     user_id: int = Field(default=0, 
@@ -75,6 +88,7 @@ class QueryResponsePair(BaseModel):
     comment: str = Field(default="", 
                          examples=["Example comment"], 
                          max_length=2048)
+    score: Optional[Score] 
     conversation_id: int = Field(default=0, 
                                  examples=[0])
     
@@ -91,16 +105,6 @@ class Conversation(BaseModel):
                                     max_length=255)
     task_id: Optional[int] = None
 
-
-class Score(BaseModel):
-    criterion_1: float = Field(default=0.0, 
-                             examples=[0.5, 2.9])
-    criterion_2: float = Field(default=0.0, 
-                             examples=[0.5, 2.9])
-    criterion_3: float = Field(default=0.0, 
-                             examples=[0.5, 2.9])
-    criterion_4: float = Field(default=0.0, 
-                              examples=[0.5, 2.9])
 
 class Criterion(BaseModel):
     score: float = Field(default=0.0,
@@ -259,7 +263,7 @@ async def delete_conversation(conversation_id: int, user_id: int = Depends(get_c
   
 @app.post("/conversations/{conversation_id}/messages", response_model=QueryResponsePair, status_code=201)
 # TODO: check whether user has a real access to the conversation
-async def send_query(conversation_id: int, query: Query, user_id: int = Depends(get_current_user), llm_id=0, task_id=2):
+async def send_query(conversation_id: int, query: Query, user_id: int = Depends(get_current_user)):
     if not query.query_text.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
     try:
@@ -272,11 +276,11 @@ async def send_query(conversation_id: int, query: Query, user_id: int = Depends(
         if not conversation:
             raise HTTPException(status_code=404, detail=f"Conversation with ID {conversation_id} not found.")
 
-        cursor.execute("SELECT task_description FROM Task WHERE task_id = ?", (task_id,))
+        cursor.execute("SELECT task_description FROM Task WHERE task_id = ?", (query.task_id,))
         task = cursor.fetchone()
         
         if not task:
-            raise HTTPException(status_code=404, detail=f"Task with ID {task_id} not found.")
+            raise HTTPException(status_code=404, detail=f"Task with ID {query.task_id} not found.")
             
         sql_insert = '''INSERT INTO Request (conversation_id, user_id, content, created_at)
                          VALUES (?, ?, ?, ?)'''
@@ -291,7 +295,7 @@ async def send_query(conversation_id: int, query: Query, user_id: int = Depends(
         sql_insert = '''INSERT INTO Response (request_id, conversation_id, API_id, content, comment, created_at)
                 VALUES (?, ?, ?, ?, ?, ?)'''
         created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        cursor.execute(sql_insert, (query_id, conversation_id, llm_id, content, comment, created_at))
+        cursor.execute(sql_insert, (query_id, conversation_id, query.llm_id, content, comment, created_at))
         response_id=cursor.lastrowid
         conn.commit() # Save changes
         
@@ -309,10 +313,10 @@ async def send_query(conversation_id: int, query: Query, user_id: int = Depends(
         response = QueryResponsePair(user_id=user_id,
                                     query_id=query_id,
                                     query_text=query.query_text,
-                                    llm_id=llm_id,
+                                    llm_id=query.llm_id,
                                     response_id=response_id,
                                     response_text=content,
-                                    # query_score=score,
+                                    score=score,
                                     # query_metrics=metrics,
                                     comment=comment,
                                     conversation_id=conversation_id)

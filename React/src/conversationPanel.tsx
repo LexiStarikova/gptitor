@@ -1,12 +1,16 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
+import { Score } from './models/score';
 
 export const ConversationPanel: React.FC = () => {
     const [text, setText] = useState<string>('');
     const [queries, setQueries] = useState<string[]>([]);
     const [responses, setResponses] = useState<string[]>([]);
     const { feedback, setFeedback } = useContext(FeedbackContext);
+    const { criteria, setCriteria } = useContext(FeedbackContext);
+    const { task, setTask } = useContext(FeedbackContext);
+
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         adjustTextareaHeight();
@@ -32,14 +36,15 @@ export const ConversationPanel: React.FC = () => {
 
     const handleSend = async () => {
         if (text.trim() === "") return;
-
         const newQuery = text;
         setQueries(prevQueries => [...prevQueries, newQuery]);
         setText('');
+    
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
         }
         try {
+            console.log(`task_id = ${task.task_id}`);
             const response = await fetch('http://10.100.30.244:8000/conversations/1/messages', {
                 method: 'POST',
                 headers: {
@@ -47,6 +52,8 @@ export const ConversationPanel: React.FC = () => {
                 },
                 body: JSON.stringify({
                     query_text: text,
+                    task_id: task.task_id,
+                    llm_id: 0
                 })
             });
 
@@ -55,17 +62,23 @@ export const ConversationPanel: React.FC = () => {
                 console.error('Failed to send message:', errorMessage);
                 return;
             }
-
+            console.log('Message sent successfully');
             const data = await response.json();
-            const newResponse = data.response_text;
-            setResponses(prevResponses => [...prevResponses, newResponse]);
+            setResponses(prevResponses => [...prevResponses, data.response_text]);
             setFeedback(data.comment);
+            console.log(`query_id = ${data.query_id}`, 
+                `criterion_1 = ${data.score.criterion_1} \n`, 
+                `criterion_2 = ${data.score.criterion_2} \n`, 
+                `criterion_3 = ${data.score.criterion_3} \n`,
+                `criterion_4 = ${data.score.criterion_4} \n`,);
+            setCriteria(new Score(data.score.criterion_1, data.score.criterion_2, data.score.criterion_3, data.score.criterion_4));
+        
+            console.log(`response_text: ${responses.slice(-1)[0]}`);
+            
         } catch (error) {
             console.error('There was a problem sending the message:', error);
         }
     };
-
-
 
     return (
         <div>

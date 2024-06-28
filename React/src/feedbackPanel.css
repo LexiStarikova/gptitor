@@ -21,11 +21,16 @@
 
 .TaskDesc {
     width: 675px;
-    height: 90px;
+    height: 120px;
     background-color: #D3EBFF;
     border-radius: 0 20px 20px 20px;
     color: #59657D;
-    padding: 5px 20px 20px 20px;
+    padding: 0px 20px 5px 20px;
+}
+
+.TaskDesc>p {
+    overflow-y: scroll;
+    height: 80%;
 }
 
 .DescTitle {
@@ -69,7 +74,7 @@
     align-items: center;
     justify-content: center;
     width: 250px;
-    height: 70px;
+    height: 65px;
     background-color: #FFFFFF;
     border-radius: 8px;
     column-gap: 8px;
@@ -169,7 +174,7 @@
 
 .FeedDesc {
     width: 600px;
-    height: 90px;
+    height: 110px;
     background-color: #3B4168;
     border-radius: 0 20px 20px 20px;
     color: #FFFFFF;
@@ -251,6 +256,19 @@
 }
 
 .FeedDesc>p::-webkit-scrollbar-thumb {
+    background: #efefef;
+    border-radius: 100px;
+}
+
+.TaskDesc>p::-webkit-scrollbar {
+    width: 10px;
+}
+
+.TaskDesc>p::-webkit-scrollbar-track {
+    background: #D3EBFF;
+}
+
+.TaskDesc>p::-webkit-scrollbar-thumb {
     background: #efefef;
     border-radius: 100px;
 }
