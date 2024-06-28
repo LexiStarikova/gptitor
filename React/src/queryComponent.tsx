@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
 type QueryComponentProps = {
-  id: number;
+  display_id: number;
+  stored_id: number;
   queryText: string;
-  onDelete: (id: number) => void;
+  onDelete: (display_id: number, stored_id: number) => void;
+  onOpen: (stored_id: number) => void;
 };
 
-const QueryComponent: React.FC<QueryComponentProps> = ({ id, queryText, onDelete }) => {
+const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, queryText, onDelete, onOpen }) => {
   const [liked, setLiked] = useState(false);
 
   const toggleLike = () => {
@@ -21,6 +23,7 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ id, queryText, onDelete
         viewBox="0 0 16 17" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
+        onClick={() => onOpen(stored_id)}
       >
         <path 
           fillRule="evenodd" 
@@ -38,7 +41,7 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ id, queryText, onDelete
           fill="none" 
           xmlns="http://www.w3.org/2000/svg" 
           className='deleteicon' 
-          onClick={() => onDelete(id)}
+          onClick={() => onDelete(display_id, stored_id)}
         >
           <ellipse cx="8" cy="8.00786" rx="6" ry="6.00591" stroke="white" strokeWidth="2" />
           <path d="M12 12.0117L4 4.00384" stroke="white" strokeWidth="2" />

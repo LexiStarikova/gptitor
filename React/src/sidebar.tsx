@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent  } from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar.css';
 import QueryComponent from './queryComponent';
@@ -10,13 +10,11 @@ const Sidebar: React.FC = () => {
         setSidebarVisible(prev => !prev);
     };
     const [condId, setConvId] = useState(1);
-    const [queries, setQueries] = useState<{ id: number; text: string }[]>([]);
+    const [queries, setQueries] = useState<{ display_id: number; stored_id: number; text: string }[]>([]);
     const [nextId, setNextId] = useState(1);
 
     const addQuery = async () => {
-        const newQuery = { id: nextId, text: `Query ${nextId}` };
-        setQueries([...queries, newQuery]);
-        setNextId(nextId + 1);
+        
 
         const response = await fetch('http://10.100.30.244:8000/conversations', {
             method: 'POST',
@@ -27,10 +25,15 @@ const Sidebar: React.FC = () => {
         const data = await response.json();
         setConvId(data.conversation_id);
         console.log(`New conversation_id: ${data.conversation_id}`); // ID in DB
+
+        const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}` };
+        setQueries([...queries, newQuery]);
+        setNextId(nextId + 1);
     };
 
-    const openConversation = async () => {
-        const response = await fetch(`http://10.100.30.244:8000/conversations/${condId}`, {
+    const openConversation = async (stored_id: number) => {
+        console.log('Conversation is opening...');
+        const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,11 +41,17 @@ const Sidebar: React.FC = () => {
         });
         const data = await response.json();
         console.log(`Number of messages: ${data.length}`); 
-        // Implement logic here
     };
 
-    const deleteQuery = (id: number) => {
-        setQueries(queries.filter(query => query.id !== id));
+    const deleteQuery = async (display_id: number, stored_id: number) => {
+        setQueries(queries.filter(query => query.display_id !== display_id));
+        const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log(response.json()); 
     };
 
     return (
@@ -85,7 +94,7 @@ const Sidebar: React.FC = () => {
                 </div>
                 <div className='queries'>
                 {queries.map(query => (
-                        <QueryComponent key={query.id} id={query.id} queryText={query.text} onDelete={deleteQuery}/>
+                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteQuery} onOpen={openConversation}/>
                     ))}
                 </div>
                 <Link to="/profile"><div className='profile'>
