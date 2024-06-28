@@ -56,6 +56,15 @@ class Name(BaseModel):
     new_name: str = Field(default="Untitled", 
                             examples=["Example name"], 
                             max_length=2048)
+class Score(BaseModel):
+    criterion_1: float = Field(default=0.0, 
+                             examples=[0.5, 2.9])
+    criterion_2: float = Field(default=0.0, 
+                             examples=[0.5, 2.9])
+    criterion_3: float = Field(default=0.0, 
+                             examples=[0.5, 2.9])
+    criterion_4: float = Field(default=0.0, 
+                              examples=[0.5, 2.9])
 
 class QueryResponsePair(BaseModel):
     user_id: int = Field(default=0, 
@@ -75,6 +84,7 @@ class QueryResponsePair(BaseModel):
     comment: str = Field(default="", 
                          examples=["Example comment"], 
                          max_length=2048)
+    score: Optional[Score] 
     conversation_id: int = Field(default=0, 
                                  examples=[0])
     
@@ -91,16 +101,6 @@ class Conversation(BaseModel):
                                     max_length=255)
     task_id: Optional[int] = None
 
-
-class Score(BaseModel):
-    criterion_1: float = Field(default=0.0, 
-                             examples=[0.5, 2.9])
-    criterion_2: float = Field(default=0.0, 
-                             examples=[0.5, 2.9])
-    criterion_3: float = Field(default=0.0, 
-                             examples=[0.5, 2.9])
-    criterion_4: float = Field(default=0.0, 
-                              examples=[0.5, 2.9])
 
 class Criterion(BaseModel):
     score: float = Field(default=0.0,
@@ -312,7 +312,7 @@ async def send_query(conversation_id: int, query: Query, user_id: int = Depends(
                                     llm_id=llm_id,
                                     response_id=response_id,
                                     response_text=content,
-                                    # query_score=score,
+                                    score=score,
                                     # query_metrics=metrics,
                                     comment=comment,
                                     conversation_id=conversation_id)
