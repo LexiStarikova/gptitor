@@ -88,7 +88,7 @@ class QueryResponsePair(BaseModel):
     comment: str = Field(default="", 
                          examples=["Example comment"], 
                          max_length=2048)
-    score: Optional[Score] 
+    #score: Optional[Score] 
     conversation_id: int = Field(default=0, 
                                  examples=[0])
     
@@ -389,6 +389,7 @@ async def get_all_messages_by_conversation_id(conversation_id: int):
                         '''
         cursor.execute(sql_join_query, (conversation_id,))
         rows = cursor.fetchall()
+        
         messages: List[QueryResponsePair] = [
             QueryResponsePair(
                 user_id=row[0],
