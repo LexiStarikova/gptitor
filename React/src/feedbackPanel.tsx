@@ -39,7 +39,7 @@ const FeedbackPanel = () => {
                         <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
                     </div>
                     <div className='option1'>
-                        <p>Task 1</p>
+                        <p>Task {task.task_id}</p>
                     </div>
                 </div>
                 <div className='feedbackcontainer'>

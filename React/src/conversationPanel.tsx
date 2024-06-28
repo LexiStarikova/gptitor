@@ -36,50 +36,52 @@ export const ConversationPanel: React.FC = () => {
 
     const handleSend = async () => {
         if (text.trim() === "") return;
-
         const newQuery = text;
         setQueries(prevQueries => [...prevQueries, newQuery]);
         setText('');
+    
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
         }
         try {
-            const response = await fetch('http://10.100.30.244:8000/conversations/1/messages', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    query_text: text,
-                    task_id: task.task_id,
-                    llm_id: 0
-                })
-            });
+            console.log(`task_id = ${task.task_id}`);
+            if (task.task_id === 0) {
+                setResponses(prevResponses => [...prevResponses, "Please, select a task."]);
+            } else {
+                const response = await fetch('http://10.100.30.244:8000/conversations/1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query_text: text,
+                        task_id: task.task_id,
+                        llm_id: 0
+                    })
+                });
 
-            if (!response.ok) {
-                const errorMessage = await response.text();
-                console.error('Failed to send message:', errorMessage);
-                return;
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    console.error('Failed to send message:', errorMessage);
+                    return;
+                }
+                console.log('Message sent successfully');
+                const data = await response.json();
+                setResponses(prevResponses => [...prevResponses, data.response_text]);
+                setFeedback(data.comment);
+                console.log(`query_id = ${data.query_id}`, 
+                    `criterion_1 = ${data.score.criterion_1} \n`, 
+                    `criterion_2 = ${data.score.criterion_2} \n`, 
+                    `criterion_3 = ${data.score.criterion_3} \n`,
+                    `criterion_4 = ${data.score.criterion_4} \n`,);
+                setCriteria(new Score(data.score.criterion_1, data.score.criterion_2, data.score.criterion_3, data.score.criterion_4));
             }
-            console.log('Message sent successfully');
-            const data = await response.json();
+                console.log(`response_text: ${responses.slice(-1)[0]}`);
             
-            const newResponse = data.response_text;
-            setResponses(prevResponses => [...prevResponses, newResponse]);
-            setFeedback(data.comment);
-            console.log(`query_id = ${data.query_id}`, 
-                `criterion_1 = ${data.score.criterion_1}`, 
-                `criterion_2 = ${data.score.criterion_2}`, 
-                `criterion_3 = ${data.score.criterion_3}`,
-                `criterion_4 = ${data.score.criterion_4}`,);
-            
-            setCriteria(new Score(data.score.criterion_1, data.score.criterion_2, data.score.criterion_3, data.score.criterion_4));
         } catch (error) {
             console.error('There was a problem sending the message:', error);
         }
     };
-
-
 
     return (
         <div>
