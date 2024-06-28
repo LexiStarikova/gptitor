@@ -9,7 +9,7 @@ const FeedbackContextProvider = ({ children }) => {
   
   const [feedback, setFeedback] = useState('');
   const [criteria, setCriteria ] = useState(new Score(0.0, 0.0, 0.0, 0.0))
-  const [task, setTask] = useState(new Task(0, "", "", ""));
+  const [task, setTask] = useState(new Task(2, "", "", ""));
   return (
     <FeedbackContext.Provider value={{ feedback, setFeedback, 
                                        criteria, setCriteria, 

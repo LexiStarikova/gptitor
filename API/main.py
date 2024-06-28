@@ -50,9 +50,9 @@ class Query(BaseModel):
     query_text: str = Field(default="", 
                             examples=["Example query"], 
                             max_length=2048)
-    task_id: int = Field(default=0, 
+    task_id: int = Field(default=2, 
                          examples=[0])
-    llm_id: int = Field(default=2, 
+    llm_id: int = Field(default=0, 
                          examples=[0])
 
 #TODO: implement renaming

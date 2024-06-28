@@ -9,6 +9,7 @@ export const ConversationPanel: React.FC = () => {
     const [responses, setResponses] = useState<string[]>([]);
     const { feedback, setFeedback } = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
+    const { task, setTask } = useContext(FeedbackContext);
 
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -50,6 +51,8 @@ export const ConversationPanel: React.FC = () => {
                 },
                 body: JSON.stringify({
                     query_text: text,
+                    task_id: task.task_id,
+                    llm_id: 0
                 })
             });
 
