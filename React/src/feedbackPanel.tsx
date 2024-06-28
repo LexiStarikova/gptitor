@@ -71,7 +71,7 @@ const FeedbackPanel = () => {
                                 </svg>
                                 <div className='barF'>
                                     <div className='critdescF'>
-                                        <h6>{criteria.criterion_1}/10</h6>
+                                        <h6>{criteria.criterion_1}/5</h6>
                                         <p className='p5'>Averaga Criteria</p>
                                     </div>
                                     <div className='progbarF'></div>
@@ -98,7 +98,7 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criteria.criterion_2}/10</h6>
+                                            <h6>{criteria.criterion_2}/5</h6>
                                             <p className='p5'>Averaga Criteria</p>
                                         </div>
                                         <div className='progbarF'></div>
@@ -126,7 +126,7 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criteria.criterion_3}/10</h6>
+                                            <h6>{criteria.criterion_3}/5</h6>
                                             <p className='p5'>Averaga Criteria</p>
                                         </div>
                                         <div className='progbarF'></div>
@@ -152,7 +152,7 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criteria.criterion_4}/10</h6>
+                                            <h6>{criteria.criterion_4}/5</h6>
                                             <p className='p5'>Averaga Criteria</p>
                                         </div>
                                         <div className='progbarF'></div>
