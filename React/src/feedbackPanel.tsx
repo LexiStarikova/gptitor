@@ -3,12 +3,33 @@ import { useState, useEffect, useContext } from 'react';
 import TaskPanel from './taskpanel';
 import { FeedbackContext } from './feedbackContext';
 import { Score } from './models/score';
+import { Task } from './models/task';
 
 const FeedbackPanel = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { feedback, setFeedback} = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
     const { task, setTask } = useContext(FeedbackContext);
+    const [initialFetch, setInitialFetch] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!initialFetch) {
+        fetch(`http://10.100.30.244:8000/tasks/1`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setTask({
+                    task_id: data.task_id,
+                    task_name: data.task_name,
+                    category: data.category,
+                    description: data.description,
+                });
+                setInitialFetch(true);
+            })
+            .catch(error => {
+                console.error('Error fetching task:', error);
+            });
+    }}, [initialFetch, task.task_id]);
     
     const toggleSidebar = () => {
         console.log('Toggling sidebar');
@@ -28,8 +49,6 @@ const FeedbackPanel = () => {
         resetScore();
     }, [setFeedback, setCriteria, setTask]);
 
-    // const id: string | number = task.task_id === 0 ? "No task" : task.task_id;
-
     return (
         <div>
             <div className='feedbackbigcontainter'>
@@ -41,7 +60,7 @@ const FeedbackPanel = () => {
                         <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
                     </div>
                     <div className='option1'>
-                        <p>{task.task_id === 0 ? "No task" : `Task ${task.task_id}`}</p>
+                        <p>Task {task.task_id}</p>
                     </div>
                 </div>
                 <div className='feedbackcontainer'>
