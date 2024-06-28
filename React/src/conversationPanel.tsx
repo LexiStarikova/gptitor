@@ -84,7 +84,7 @@ export const ConversationPanel: React.FC = () => {
                             <div key={`conversation-${index}`} className='conversation-item'>
                                 <div className='req'>
                                     <div className='reqbub'>
-                                        <p className='p4'>{query}</p>
+                                        <p>{query}</p>
                                     </div>
                                     <div className='pdpchat'></div>
                                 </div>
@@ -93,7 +93,7 @@ export const ConversationPanel: React.FC = () => {
                                         <div className='resp'>
                                             <div className='pdpchat'></div>
                                             <div className='reqbub'>
-                                                <p className='p4'>{responses[index]}</p>
+                                                <p>{responses[index]}</p>
                                             </div>
                                         </div>
                                         <div className='reactions'>
@@ -116,7 +116,7 @@ export const ConversationPanel: React.FC = () => {
                 <div className='inputField'>
                     <textarea className='chatinput'
                         ref={inputRef}
-                        placeholder='Write here, to get your feedback.'
+                        placeholder='Write Your Prompt Here.'
                         value={text}
                         onChange={handleTextChange}
                         onKeyPress={handleKeyPress}
