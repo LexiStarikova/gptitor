@@ -28,6 +28,11 @@
     padding: 5px 20px 20px 20px;
 }
 
+.TaskDesc>p {
+    overflow-y: scroll;
+    height: 80%;
+}
+
 .DescTitle {
     width: 130px;
     height: 35px;
@@ -251,6 +256,19 @@
 }
 
 .FeedDesc>p::-webkit-scrollbar-thumb {
+    background: #efefef;
+    border-radius: 100px;
+}
+
+.TaskDesc>p::-webkit-scrollbar {
+    width: 10px;
+}
+
+.TaskDesc>p::-webkit-scrollbar-track {
+    background: #6F7C98;
+}
+
+.TaskDesc>p::-webkit-scrollbar-thumb {
     background: #efefef;
     border-radius: 100px;
 }

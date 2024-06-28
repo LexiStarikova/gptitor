@@ -2,19 +2,18 @@ import './feedbackPanel.css';
 import { useState, useEffect, useContext } from 'react';
 import TaskPanel from './taskpanel';
 import { FeedbackContext } from './feedbackContext';
-import { Score } from './score';
+import { Score } from './models/score';
 
 const FeedbackPanel = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { feedback, setFeedback} = useContext(FeedbackContext);
-    const {criteria, setCriteria} = useContext(FeedbackContext);
-
+    const { criteria, setCriteria } = useContext(FeedbackContext);
+    const { task, setTask } = useContext(FeedbackContext);
     
     const toggleSidebar = () => {
         console.log('Toggling sidebar');
         setIsSidebarOpen(!isSidebarOpen);
     };
-
 
     const resetFeedback = () => {
         setFeedback('');
@@ -24,13 +23,10 @@ const FeedbackPanel = () => {
         setCriteria(new Score(0.0, 0.0, 0.0, 0.0));
     };
 
-
     useEffect(() => {
-
         resetFeedback();
         resetScore();
-    
-    }, [setFeedback, setCriteria]);
+    }, [setFeedback, setCriteria, setTask]);
 
     return (
         <div>
@@ -52,7 +48,8 @@ const FeedbackPanel = () => {
                             <p>Description</p>
                         </div>
                         <div className='TaskDesc'>
-                            <p>Let Garfield be your favorite cat, in order to please your cat you’ll try to give it the best care. You should write the right prompt to get relevant details of how to take care of Garfield. If you fail Garfield will get mad</p>
+                            {/* <p>Let Garfield be your favorite cat, in order to please your cat you’ll try to give it the best care. You should write the right prompt to get relevant details of how to take care of Garfield. If you fail Garfield will get mad</p> */}
+                            <p>{task.description}</p>
                         </div>
                     </div>
                     <h4 className='res'>Results:</h4>

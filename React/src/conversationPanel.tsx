@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
-import { Score } from './score';
+import { Score } from './models/score';
 
 export const ConversationPanel: React.FC = () => {
     const [text, setText] = useState<string>('');
