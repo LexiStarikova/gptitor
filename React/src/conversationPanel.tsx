@@ -1,12 +1,15 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
+import { Score } from './score';
 
 export const ConversationPanel: React.FC = () => {
     const [text, setText] = useState<string>('');
     const [queries, setQueries] = useState<string[]>([]);
     const [responses, setResponses] = useState<string[]>([]);
     const { feedback, setFeedback } = useContext(FeedbackContext);
+    const { criteria, setCriteria } = useContext(FeedbackContext);
+
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         adjustTextareaHeight();
@@ -55,11 +58,19 @@ export const ConversationPanel: React.FC = () => {
                 console.error('Failed to send message:', errorMessage);
                 return;
             }
-
+            console.log('Message sent successfully');
             const data = await response.json();
+            
             const newResponse = data.response_text;
             setResponses(prevResponses => [...prevResponses, newResponse]);
             setFeedback(data.comment);
+            console.log(`query_id = ${data.query_id}`, 
+                `criterion_1 = ${data.score.criterion_1}`, 
+                `criterion_2 = ${data.score.criterion_2}`, 
+                `criterion_3 = ${data.score.criterion_3}`,
+                `criterion_4 = ${data.score.criterion_4}`,);
+            
+            setCriteria(new Score(data.score.criterion_1, data.score.criterion_2, data.score.criterion_3, data.score.criterion_4));
         } catch (error) {
             console.error('There was a problem sending the message:', error);
         }

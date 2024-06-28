@@ -2,105 +2,35 @@ import './feedbackPanel.css';
 import { useState, useEffect, useContext } from 'react';
 import TaskPanel from './taskpanel';
 import { FeedbackContext } from './feedbackContext';
+import { Score } from './score';
 
 const FeedbackPanel = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { feedback, setFeedback } = useContext(FeedbackContext);
+    const { feedback, setFeedback} = useContext(FeedbackContext);
+    const {criteria, setCriteria} = useContext(FeedbackContext);
+
+    
     const toggleSidebar = () => {
         console.log('Toggling sidebar');
         setIsSidebarOpen(!isSidebarOpen);
     };
 
-    const [criterionOneValue, setcriterionOneValue] = useState<number | null>(null);
-    const [criterionTwoValue, setcriterionTwoValue] = useState<number | null>(null);
-    const [criterionThreeValue, setcriterionThreeValue] = useState<number | null>(null);
-    const [criterionFourValue, setcriterionFourValue] = useState<number | null>(null);
-    const [error, setError] = useState<string | null>(null);
 
     const resetFeedback = () => {
         setFeedback('');
     };
 
+    const resetScore = () => {
+        setCriteria(new Score(0.0, 0.0, 0.0, 0.0));
+    };
+
 
     useEffect(() => {
 
-        const fetchcriterionOneValue = async () => {
-            try {
-                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_1`);
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-
-                const value = parseFloat(data.score);
-
-                setcriterionOneValue(value);
-            } catch (Error) {
-                setError('Error: failed to GET criteria 1 !');
-            }
-        };
-
-        const fetchcriterionTwoValue = async () => {
-            try {
-                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_2`);
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-
-                const value = parseFloat(data.score);
-
-                setcriterionTwoValue(value);
-            } catch (Error) {
-                setError('Error: failed to GET criteria 2 !');
-            }
-        };
-
-        const fetchcriterionThreeValue = async () => {
-            try {
-                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_3`);
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-
-                const value = parseFloat(data.score);
-
-                setcriterionThreeValue(value);
-            } catch (Error) {
-                setError('Error: failed to GET criteria 3 !');
-            }
-        };
-        const fetchcriterionFourValue = async () => {
-            try {
-                const response = await fetch(`http://10.100.30.244:8000/feedback/1/criterion_4`);
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-
-                const value = parseFloat(data.score);
-
-                setcriterionFourValue(value);
-            } catch (Error) {
-                setError('Error: failed to GET criteria 4 !');
-            }
-        };
-
-        fetchcriterionOneValue();
-        fetchcriterionTwoValue();
-        fetchcriterionThreeValue();
-        fetchcriterionFourValue();
         resetFeedback();
-    }, [setFeedback]);
+        resetScore();
+    
+    }, [setFeedback, setCriteria]);
 
     return (
         <div>
@@ -144,7 +74,7 @@ const FeedbackPanel = () => {
                                 </svg>
                                 <div className='barF'>
                                     <div className='critdescF'>
-                                        <h6>{criterionOneValue}/10</h6>
+                                        <h6>{criteria.criterion_1}/10</h6>
                                         <p className='p5'>Averaga Criteria</p>
                                     </div>
                                     <div className='progbarF'></div>
@@ -171,7 +101,7 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criterionTwoValue}/10</h6>
+                                            <h6>{criteria.criterion_2}/10</h6>
                                             <p className='p5'>Averaga Criteria</p>
                                         </div>
                                         <div className='progbarF'></div>
@@ -199,7 +129,7 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criterionThreeValue}/10</h6>
+                                            <h6>{criteria.criterion_3}/10</h6>
                                             <p className='p5'>Averaga Criteria</p>
                                         </div>
                                         <div className='progbarF'></div>
@@ -225,7 +155,7 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criterionFourValue}/10</h6>
+                                            <h6>{criteria.criterion_4}/10</h6>
                                             <p className='p5'>Averaga Criteria</p>
                                         </div>
                                         <div className='progbarF'></div>
@@ -243,7 +173,6 @@ const FeedbackPanel = () => {
                         </div>
                         <div className='FeedDesc'>
                             <p>{feedback}</p>
-                            {/* <p>Personnaly I am not a cat expert, but I see that you successfully colected the nessacery information to ensure that Garfield in a good health. Here’s a tip, next time ask for Garfield favortie ice cream flavor !</p> */}
                         </div>
                     </div>
                 </div>
