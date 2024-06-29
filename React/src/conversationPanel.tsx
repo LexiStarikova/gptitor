@@ -39,7 +39,7 @@ export const ConversationPanel: React.FC = () => {
         const newQuery = text;
         setQueries(prevQueries => [...prevQueries, newQuery]);
         setText('');
-    
+
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
         }
@@ -66,15 +66,15 @@ export const ConversationPanel: React.FC = () => {
             const data = await response.json();
             setResponses(prevResponses => [...prevResponses, data.response_text]);
             setFeedback(data.comment);
-            console.log(`query_id = ${data.query_id}`, 
-                `criterion_1 = ${data.score.criterion_1} \n`, 
-                `criterion_2 = ${data.score.criterion_2} \n`, 
+            console.log(`query_id = ${data.query_id}`,
+                `criterion_1 = ${data.score.criterion_1} \n`,
+                `criterion_2 = ${data.score.criterion_2} \n`,
                 `criterion_3 = ${data.score.criterion_3} \n`,
                 `criterion_4 = ${data.score.criterion_4} \n`,);
             setCriteria(new Score(data.score.criterion_1, data.score.criterion_2, data.score.criterion_3, data.score.criterion_4));
-        
+
             console.log(`response_text: ${responses.slice(-1)[0]}`);
-            
+
         } catch (error) {
             console.error('There was a problem sending the message:', error);
         }
@@ -137,9 +137,6 @@ export const ConversationPanel: React.FC = () => {
                     <div className='sendBtn' onClick={handleSend}>
                         <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg1'>
                             <path d="M23.3154 3.64397L11.7983 15.1611M4.09215 9.37411L22.0265 3.15198C23.131 2.76881 24.1906 3.82842 23.8074 4.93287L17.5853 22.8672C17.159 24.0959 15.4337 24.1295 14.9598 22.9185L12.112 15.6407C11.9698 15.2772 11.6822 14.9896 11.3187 14.8474L4.04089 11.9995C2.82984 11.5257 2.86353 9.80037 4.09215 9.37411Z" stroke="white" stroke-width="2" stroke-linecap="round" />
-                        </svg>
-                        <svg width="31" height="21" viewBox="0 0 31 21" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg2'>
-                            <path d="M29.7792 10.5L13.8251 10.5M7.10208 15.7693H4.02939M7.10208 10.6851H1M7.10208 5.60082H4.02939M12.4958 1.14253L29.2272 9.26496C30.2576 9.76515 30.2576 11.2348 29.2272 11.735L12.4958 19.8575C11.3495 20.4139 10.1312 19.2408 10.6418 18.0723L13.7101 11.0501C13.8634 10.6994 13.8634 10.3006 13.7101 9.94986L10.6418 2.92772C10.1312 1.75922 11.3495 0.586091 12.4958 1.14253Z" stroke="white" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
                 </div>

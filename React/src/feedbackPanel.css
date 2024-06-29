@@ -16,16 +16,28 @@
     display: flex;
     flex-direction: column;
     column-gap: 0px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .TaskDesc {
+    overflow: hidden;
+    transition: height 0.3s ease;
     width: 675px;
-    height: 120px;
+    height: 0;
+    opacity: 0;
     background-color: #D3EBFF;
     border-radius: 0 20px 20px 20px;
     color: #59657D;
     padding: 0px 20px 5px 20px;
+}
+
+.TaskDesc.show {
+    height: 120px;
+    opacity: 1;
+}
+
+.DescTitle p {
+    margin: 0;
 }
 
 .TaskDesc>p {
@@ -36,19 +48,31 @@
 .DescTitle {
     width: 130px;
     height: 35px;
-    background-color: #6F7C98;
+    background-color: #0060AE;
     color: #FFFFFF;
     text-align: center;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 10px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+    transition: border-radius 0.5s ease;
+}
+
+.DescTitle:hover {
+    background-color: #2287DA;
+}
+
+.DescTitle.rounded {
+    border-radius: 10px 10px 0px 0px;
 }
 
 .res {
     position: relative;
     color: #3B4168;
     right: 250px;
+    bottom: 20px;
 }
 
 .results {
@@ -56,12 +80,6 @@
     flex-direction: column;
 }
 
-.score {
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    background-color: #3B4168;
-}
 
 .criterias {
     display: flex;
@@ -99,7 +117,7 @@
     width: 180px;
     height: 8px;
     border-radius: 64px;
-    background-color: #3B4168;
+    background-color: #2287DA;
     position: relative;
     bottom: 38px;
 }
@@ -164,21 +182,26 @@
     flex-direction: row;
     align-items: center;
     column-gap: 70px;
+    position: relative;
+    bottom: 60px;
 }
 
 .FeedContainer {
     display: flex;
     flex-direction: column;
-    column-gap: 0px;
+    position: relative;
+    bottom: 50px;
 }
 
 .FeedDesc {
     width: 600px;
-    height: 110px;
-    background-color: #3B4168;
+    min-height: 100px;
+    max-height: 200px;
+    height: auto;
+    background-color: #0060AE;
     border-radius: 0 20px 20px 20px;
     color: #FFFFFF;
-    padding: 5px 20px 20px 20px;
+    padding: 5px 20px 5px 20px;
 }
 
 .FeedDesc>p {
@@ -189,8 +212,8 @@
 .FeedTitle {
     width: 130px;
     height: 35px;
-    background-color: #6F7C98;
-    color: #FFFFFF;
+    background-color: #D3EBFF;
+    color: #12152A;
     text-align: center;
     border-radius: 10px 10px 0px 0px;
     display: flex;
@@ -206,7 +229,7 @@
 .option {
     width: 100px;
     height: 30px;
-    background-color: #6F7C98;
+    background-color: #2287DA;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -225,7 +248,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: #6F7C98;
+    color: #0F316C;
     border-radius: 10px 10px 0px 0px;
     cursor: pointer;
 }
@@ -251,12 +274,9 @@
     width: 10px;
 }
 
-.FeedDesc>p::-webkit-scrollbar-track {
-    background: #3B4168;
-}
 
 .FeedDesc>p::-webkit-scrollbar-thumb {
-    background: #efefef;
+    background: #FFFFFF;
     border-radius: 100px;
 }
 
@@ -264,11 +284,9 @@
     width: 10px;
 }
 
-.TaskDesc>p::-webkit-scrollbar-track {
-    background: #D3EBFF;
-}
+
 
 .TaskDesc>p::-webkit-scrollbar-thumb {
-    background: #efefef;
+    background: #FFFFFF;
     border-radius: 100px;
 }

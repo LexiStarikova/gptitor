@@ -20,7 +20,7 @@
 .option {
     width: 100px;
     height: 30px;
-    background-color: #6F7C98;
+    background-color: #2287DA;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -39,7 +39,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: #6F7C98;
+    color: #0F316C;
     border-radius: 10px 10px 0px 0px;
     cursor: pointer;
 }
@@ -53,12 +53,9 @@
 
 .option:hover {
     background-color: #FFFFFF;
-
+    color: #0F316C;
 }
 
-.option:hover {
-    color: #6F7C98;
-}
 
 .req {
     display: flex;
@@ -178,7 +175,7 @@
 .sendBtn {
     width: 48px;
     height: 48px;
-    background-color: #12152A;
+    background-color: #0060AE;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -188,30 +185,33 @@
 }
 
 .sendBtn:hover {
-    background-color: #1C203F;
+    background-color: #2287DA;
+}
+
+.sendBtn:hover .sendsvg1 {
+    animation: rotateTo45 0.8s ease-in-out forwards;
+}
+
+@keyframes rotateTo45 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
 }
 
 .sendsvg1 {
     position: relative;
     right: 1px;
     top: 2px;
+    transition: transform 0.8s ease-in-out;
+    transform: rotate(0deg);
 }
 
-.sendsvg2 {
-    display: none;
-}
 
-.sendBtn:hover .sendsvg1 {
-    display: none;
-}
 
-.sendBtn:hover .sendsvg2 {
-    display: inline-block;
-}
-
-.Convo::-webkit-scrollbar {
-    width: 10px;
-}
 
 .Convo::-webkit-scrollbar-track {
     background: #FFFFFF;

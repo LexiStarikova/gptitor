@@ -1,4 +1,4 @@
-import { useState, MouseEvent  } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar.css';
 import QueryComponent from './queryComponent';
@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => {
     const [nextId, setNextId] = useState(1);
 
     const addQuery = async () => {
-        
+
 
         const response = await fetch('http://10.100.30.244:8000/conversations', {
             method: 'POST',
@@ -40,7 +40,7 @@ const Sidebar: React.FC = () => {
             }
         });
         const data = await response.json();
-        console.log(`Number of messages: ${data.length}`); 
+        console.log(`Number of messages: ${data.length}`);
     };
 
     const deleteQuery = async (display_id: number, stored_id: number) => {
@@ -51,7 +51,7 @@ const Sidebar: React.FC = () => {
                 'Content-Type': 'application/json',
             }
         });
-        console.log(response.json()); 
+        console.log(response.json());
     };
 
     return (
@@ -76,7 +76,7 @@ const Sidebar: React.FC = () => {
                 </div>
                 <div className='historysearch'>
                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" className='searchicon'>
-                        <path d="M14.1057 15.077L17 17.877M9.5 6.87695C11.1569 6.87695 12.5 8.2201 12.5 9.87695M16.0667 10.4103C16.0667 14.0185 13.1416 16.9436 9.53333 16.9436C5.92507 16.9436 3 14.0185 3 10.4103C3 6.80203 5.92507 3.87695 9.53333 3.87695C13.1416 3.87695 16.0667 6.80203 16.0667 10.4103Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M14.1057 15.077L17 17.877M9.5 6.87695C11.1569 6.87695 12.5 8.2201 12.5 9.87695M16.0667 10.4103C16.0667 14.0185 13.1416 16.9436 9.53333 16.9436C5.92507 16.9436 3 14.0185 3 10.4103C3 6.80203 5.92507 3.87695 9.53333 3.87695C13.1416 3.87695 16.0667 6.80203 16.0667 10.4103Z" stroke="#0060AE" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                     <input type="text" placeholder='History' className='historyinpt' />
                 </div>
@@ -93,8 +93,8 @@ const Sidebar: React.FC = () => {
                     <p>TODAY</p>
                 </div>
                 <div className='queries'>
-                {queries.map(query => (
-                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteQuery} onOpen={openConversation}/>
+                    {queries.map(query => (
+                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteQuery} onOpen={openConversation} />
                     ))}
                 </div>
                 <Link to="/profile"><div className='profile'>
