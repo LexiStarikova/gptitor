@@ -11,8 +11,10 @@ const FeedbackPanel = () => {
     const { criteria, setCriteria } = useContext(FeedbackContext);
     const { task, setTask } = useContext(FeedbackContext);
     const [initialFetch, setInitialFetch] = useState<boolean>(false);
-    const [showDescription, setShowDescription] = useState(false);
-    const [isRounded, setIsRounded] = useState(false);
+    const [showDescription, setShowDescription] = useState(true);
+    const [showFDescription, setShowFDescription] = useState(true);
+    const [isRounded, setIsRounded] = useState(true);
+    const [isRoundedF, setIsRoundedF] = useState(true);
 
     useEffect(() => {
         if (!initialFetch) {
@@ -50,6 +52,7 @@ const FeedbackPanel = () => {
     const toggleDescription = () => {
         setShowDescription(!showDescription);
     };
+
     useEffect(() => {
         resetFeedback();
         resetScore();
@@ -58,6 +61,7 @@ const FeedbackPanel = () => {
     const toggleBorderRadius = () => {
         setIsRounded(!isRounded);
     };
+
     return (
         <div>
             <div className='feedbackbigcontainter'>
@@ -201,15 +205,15 @@ const FeedbackPanel = () => {
                         </div>
                     </div>
                     <div className='FeedContainer'>
-                        <div className='FeedTitle'>
-                            <p>Feedback</p>
+                        <div className={`FeedTitle ${isRounded ? 'roundede' : ''}`} onClick={() => { toggleDescription(); toggleBorderRadius(); }}>
+                            <h6>Feedback</h6>
                         </div>
                         {feedback ? (
-                            <div className='FeedDesc'>
+                            <div className={`FeedDesc ${showDescription ? 'show' : 'hide'}`}>
                                 <p>{feedback}</p>
                             </div>
                         ) : (
-                            <div className='FeedDesc'>
+                            <div className={`FeedDesc ${showDescription ? 'show' : 'hide'}`}>
                                 <p>Write The Prompt there to get your Feedback here.</p>
                             </div>
                         )}

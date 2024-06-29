@@ -186,22 +186,30 @@
     bottom: 60px;
 }
 
+
+
 .FeedContainer {
     display: flex;
     flex-direction: column;
     position: relative;
-    bottom: 50px;
+    bottom: 80px;
 }
 
 .FeedDesc {
-    width: 600px;
-    min-height: 100px;
-    max-height: 200px;
-    height: auto;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    width: 675px;
+    height: 0;
     background-color: #0060AE;
     border-radius: 0 20px 20px 20px;
     color: #FFFFFF;
     padding: 5px 20px 5px 20px;
+    opacity: 0;
+}
+
+.FeedDesc.show {
+    height: 175px;
+    opacity: 1;
 }
 
 .FeedDesc>p {
@@ -210,15 +218,25 @@
 }
 
 .FeedTitle {
-    width: 130px;
-    height: 35px;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
     background-color: #D3EBFF;
     color: #12152A;
     text-align: center;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 10px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
+    top: 325px;
+    transition: border-radius 0.5s ease;
+    transition: top 0.4s ease-in-out;
+}
+
+.FeedTitle.roundede {
+    border-radius: 10px 10px 0px 0px;
+    top: 0px;
 }
 
 .optionContainer {
