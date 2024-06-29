@@ -183,7 +183,12 @@
     align-items: center;
     column-gap: 70px;
     position: relative;
-    bottom: 60px;
+    top: 80px;
+    transition: top 0.2s ease;
+}
+
+.scoreBoxes.rounded {
+    top: -70px;
 }
 
 
