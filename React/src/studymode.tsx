@@ -1,6 +1,6 @@
 import './studymode.css';
 import { ConversationPanel } from './conversationPanel.tsx';
-import Sidebar from './sidebar';
+import SideBar from './sidebar';
 import FeedbackPanel from './feedbackPanel.tsx';
 import FeedbackContextProvider from './feedbackContextProvider.tsx';
 
@@ -58,7 +58,7 @@ const StudyMode: React.FC = () => {
         <div>
             <FeedbackContextProvider>
                 <div className='chatpage'>
-                    <Sidebar openConversation={openConversation} data={data} />
+                    <SideBar openConversation={openConversation} data={data} />
                     {isOpen && <ConversationPanel data={data} />} 
                     <FeedbackPanel></FeedbackPanel>
                 </div>
