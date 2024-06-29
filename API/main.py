@@ -88,7 +88,7 @@ class QueryResponsePair(BaseModel):
     comment: str = Field(default="", 
                          examples=["Example comment"], 
                          max_length=2048)
-    #score: Optional[Score] 
+    score: Optional[Score] = Field(default=Score(criterion_1=0.0, criterion_2=0.0, criterion_3=0.0, criterion_4=0.0))
     conversation_id: int = Field(default=0, 
                                  examples=[0])
     
