@@ -2,9 +2,27 @@ import { useState, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar.css';
 import QueryComponent from './queryComponent';
+import ConversationPanel from './conversationPanel';
 
-const Sidebar: React.FC = () => {
+interface Message {
+        user_id: number;
+        query_id: number;
+        query_text: string;
+        llm_id: number;
+        response_id: number;
+        response_text: string;
+        comment: string;
+        conversation_id: number;
+}
 
+interface SideBarProps {
+  openConversation: (stored_id: number) => void;
+  data: Message[];
+}
+
+const SideBar: React.FC<SideBarProps> = ({ openConversation, data }) => {
+
+    
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const toggleSidebar = () => {
         setSidebarVisible(prev => !prev);
@@ -29,18 +47,6 @@ const Sidebar: React.FC = () => {
         const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}` };
         setQueries([...queries, newQuery]);
         setNextId(nextId + 1);
-    };
-
-    const openConversation = async (stored_id: number) => {
-        console.log('Conversation is opening...');
-        const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        console.log(`Number of messages: ${data.length}`);
     };
 
     const deleteQuery = async (display_id: number, stored_id: number) => {
@@ -94,7 +100,14 @@ const Sidebar: React.FC = () => {
                 </div>
                 <div className='queries'>
                     {queries.map(query => (
-                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteQuery} onOpen={openConversation} />
+                        <QueryComponent
+                            key={query.display_id}
+                            display_id={query.display_id}
+                            stored_id={query.stored_id}
+                            queryText={query.text}
+                            onDelete={deleteQuery}
+                            onOpen={openConversation} // transfer of a function `openConversation`
+                        />
                     ))}
                 </div>
                 <Link to="/profile"><div className='profile'>
@@ -136,4 +149,4 @@ const Sidebar: React.FC = () => {
     );
 };
 
-export default Sidebar;
+export default SideBar;
