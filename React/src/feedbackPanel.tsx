@@ -2,7 +2,7 @@ import './feedbackPanel.css';
 import { useState, useEffect, useContext } from 'react';
 import TaskPanel from './taskpanel';
 import { FeedbackContext } from './feedbackContext';
-import { Score } from './models/score';
+import { Metrics } from './models/metrics';
 import { Task } from './models/task';
 
 const FeedbackPanel = () => {
@@ -46,7 +46,7 @@ const FeedbackPanel = () => {
     };
 
     const resetScore = () => {
-        setCriteria(new Score(0.0, 0.0, 0.0, 0.0));
+        setCriteria(new Metrics(0.0, 0.0, 0.0, 0.0));
     };
 
     const toggleDescription = () => {

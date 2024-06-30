@@ -1,4 +1,4 @@
-export class Score {
+export class Metrics {
     criterion_1: number;
     criterion_2: number;
     criterion_3: number;

@@ -13,14 +13,15 @@ const Sidebar: React.FC = () => {
     const [queries, setQueries] = useState<{ display_id: number; stored_id: number; text: string }[]>([]);
     const [nextId, setNextId] = useState(1);
 
-    const addQuery = async () => {
-
-
+    const CreateConversation = async () => {
         const response = await fetch('http://10.100.30.244:8000/conversations', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({
+                llm_id: 0
+            })
         });
         const data = await response.json();
         setConvId(data.conversation_id);
@@ -33,7 +34,7 @@ const Sidebar: React.FC = () => {
 
     const openConversation = async (stored_id: number) => {
         console.log('Conversation is opening...');
-        const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
+        const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}/messages`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ const Sidebar: React.FC = () => {
         console.log(`Number of messages: ${data.length}`);
     };
 
-    const deleteQuery = async (display_id: number, stored_id: number) => {
+    const deleteConversation = async (display_id: number, stored_id: number) => {
         setQueries(queries.filter(query => query.display_id !== display_id));
         const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
             method: 'DELETE',
@@ -69,7 +70,7 @@ const Sidebar: React.FC = () => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         className='chaticonout'
-                        onClick={addQuery}
+                        onClick={CreateConversation}
                     >
                         <path d="M15 15.0147V12.0118M15 12.0118V9.00883M15 12.0118H12M15 12.0118H18M18.2609 20.7595L15 27.0265L12 20.7595H6C4.34315 20.7595 3 19.415 3 17.7566V6.00588C3 4.3474 4.34315 3.00293 6 3.00293H24C25.6569 3.00293 27 4.3474 27 6.00588V17.7566C27 19.415 25.6569 20.7595 24 20.7595H18.2609Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -94,7 +95,7 @@ const Sidebar: React.FC = () => {
                 </div>
                 <div className='queries'>
                     {queries.map(query => (
-                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteQuery} onOpen={openConversation} />
+                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} />
                     ))}
                 </div>
                 <Link to="/profile"><div className='profile'>
@@ -121,7 +122,7 @@ const Sidebar: React.FC = () => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className='chaticonhidden'
-                    onClick={addQuery}
+                    onClick={CreateConversation}
                 >
                     <path d="M12.9996 13.0001V10.4001M12.9996 10.4001V7.8001M12.9996 10.4001H10.3996M12.9996 10.4001H15.5996M12.6605 17.974L7.23439 23.4001V17.974H5.19961C3.76367 17.974 2.59961 16.8099 2.59961 15.374V5.2001C2.59961 3.76416 3.76367 2.6001 5.19961 2.6001H20.7996C22.2355 2.6001 23.3996 3.76416 23.3996 5.2001V15.374C23.3996 16.8099 22.2355 17.974 20.7996 17.974H12.6605Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
