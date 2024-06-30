@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
-import { Score } from './models/score';
+import { Metrics } from './models/metrics';
 
 export const ConversationPanel: React.FC = () => {
     const [text, setText] = useState<string>('');
@@ -66,12 +66,16 @@ export const ConversationPanel: React.FC = () => {
             const data = await response.json();
             setResponses(prevResponses => [...prevResponses, data.response_text]);
             setFeedback(data.comment);
+            console.log(data.metrics);
             console.log(`query_id = ${data.query_id}`,
-                `criterion_1 = ${data.score.criterion_1} \n`,
-                `criterion_2 = ${data.score.criterion_2} \n`,
-                `criterion_3 = ${data.score.criterion_3} \n`,
-                `criterion_4 = ${data.score.criterion_4} \n`,);
-            setCriteria(new Score(data.score.criterion_1, data.score.criterion_2, data.score.criterion_3, data.score.criterion_4));
+                `criterion_1 = ${data.metrics.metrics.criterion_1} \n`,
+                `criterion_2 = ${data.metrics.metrics.criterion_2} \n`,
+                `criterion_3 = ${data.metrics.metrics.criterion_3} \n`,
+                `criterion_4 = ${data.metrics.metrics.criterion_4} \n`,);
+            setCriteria(new Metrics(data.metrics.metrics.criterion_1, 
+                                  data.metrics.metrics.criterion_2, 
+                                  data.metrics.metrics.criterion_3, 
+                                  data.metrics.metrics.criterion_4));
 
             console.log(`response_text: ${responses.slice(-1)[0]}`);
 
