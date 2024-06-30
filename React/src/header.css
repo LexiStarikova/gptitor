@@ -1,7 +1,7 @@
 .NavContanaire {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 100vw;
     height: 64px;
     background-color: #FFFFFF;
 }

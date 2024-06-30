@@ -12,7 +12,7 @@ const App: React.FC = () => {
     <Router basename='/gptitor'>
       <NavBar></NavBar>
       <SideBar></SideBar>
-      <main>
+      <main className='main-height'>
         <Routes>
           <Route path="/" element={<Navigate to="/chatpage" />} />
           <Route path='/chatpage' element={<StudyMode />}></Route>

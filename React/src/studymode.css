@@ -3,6 +3,8 @@
     flex-direction: row;
     column-gap: 60px;
     justify-content: center;
-    align-items: center;
-    margin: 20px;
+    height: 100%;    
+    /* align-items: center; */
+    margin-top: 10px;
+    /* margin: 0 5px 0 5px; */
 }

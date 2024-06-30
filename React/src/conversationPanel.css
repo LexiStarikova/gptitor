@@ -1,7 +1,7 @@
 .conversationcontainer {
     position: relative;
-    width: 800px;
-    height: 750px;
+    width: 42vw;
+    height: calc(80vh - 64px);
     border-radius: 0 25px 25px 25px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
@@ -139,7 +139,7 @@
 
 .chatinput {
     margin: 15px 15px 15px 0px;
-    width: 750px;
+    width: 86%;
     min-height: 45px;
     border-radius: 25px;
     background-color: #FFFFFF;
