@@ -3,22 +3,7 @@ import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Score } from './models/score';
 
-interface Message {
-    user_id: number;
-    query_id: number;
-    query_text: string;
-    llm_id: number;
-    response_id: number;
-    response_text: string;
-    comment: string;
-    conversation_id: number;
-}
-
-interface ConversationPanelProps {
-    data: Message[];
-}
-
-export const ConversationPanel: React.FС <ConversationPanelProps> = ({ inputData }) => {
+export const ConversationPanel: React.FC = () => {
     const [text, setText] = useState<string>('');
     const [queries, setQueries] = useState<string[]>([]);
     const [responses, setResponses] = useState<string[]>([]);
@@ -30,14 +15,6 @@ export const ConversationPanel: React.FС <ConversationPanelProps> = ({ inputDat
     useEffect(() => {
         adjustTextareaHeight();
     }, [text]);
-
-    useEffect(() => {
-        const extractedQueries = inputData.map(message => message.query_text);
-        const extractedResponses = inputData.map(message => message.response_text);
-    
-        setQueries(extractedQueries);
-        setResponses(extractedResponses);
-    }, [inputData]);
 
     const adjustTextareaHeight = () => {
         if (inputRef.current) {
