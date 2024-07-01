@@ -1,12 +1,10 @@
-#here utility functions
-
 import sqlite3
 from Core.schemas import *
 from fastapi import (
     HTTPException,
 )
 
-from Utilities.my_llm import LLM
+from Utilities.llm import LLM
 llm = LLM()
 
 async def get_chatbot_response(query: str, task: str) -> str:    
