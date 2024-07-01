@@ -88,11 +88,8 @@ export const ConversationPanel: React.FC = () => {
         <div>
             <div className='chatbigcontainter'>
                 <div className='optionContainer'>
-                    <div className='option1'>
-                        <p>GPT-4</p>
-                    </div>
                     <div className='option'>
-                        <p>Illama3</p>
+                        <p>Qwen2</p>
                     </div>
                 </div>
                 <div className='conversationcontainer'>
