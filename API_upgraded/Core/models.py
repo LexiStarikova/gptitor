@@ -42,6 +42,7 @@ class AIModel(Base):
 class Message(Base):
     __tablename__ = 'messages'
     message_id = Column(Integer, primary_key=True, autoincrement=True)
+    task_id = Column(Integer)
     conversation_id = Column(Integer, ForeignKey('conversations.conversation_id'))
     message_class = Column(String)
     content = Column(String)

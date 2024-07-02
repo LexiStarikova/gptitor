@@ -2,7 +2,7 @@ import sqlite3
 from datetime import datetime
 from fastapi import (HTTPException, Depends,)
 from typing import List
-from Core.schemas import Query, Conversation, EntireResponse, Metrics, Task, Message
+from Core.schemas import Query, Conversation, EntireResponse, Metrics, Task, Message, PersonalStatistics
 from Utilities.feedback import *
 import json
 
@@ -105,12 +105,12 @@ async def send_query(conversation_id: int, query: Query, user_id: int):
         feedback_id=cursor.lastrowid
         conn.commit()
 
-        sql_insert_message = '''INSERT INTO messages (conversation_id, message_class, content, feedback_id, created_at)
-                                VALUES (?, ?, ?, ?, ?)'''
-        cursor.execute(sql_insert_message, (conversation_id, 'Request', query.query_text, feedback_id, request_created_at))
+        sql_insert_message = '''INSERT INTO messages (conversation_id, message_class, content, task_id, feedback_id, created_at)
+                                VALUES (?, ?, ?, ?, ?, ?)'''
+        cursor.execute(sql_insert_message, (conversation_id, 'Request', query.query_text, query.task_id, feedback_id, request_created_at))
         query_id=cursor.lastrowid
         conn.commit() 
-        cursor.execute(sql_insert_message, (conversation_id, 'Response', response, feedback_id, response_created_at))
+        cursor.execute(sql_insert_message, (conversation_id, 'Response', response, query.task_id, feedback_id, response_created_at))
         response_id=cursor.lastrowid
         conn.commit() 
         entire_response = EntireResponse(conversation_id=conversation_id,
@@ -118,7 +118,7 @@ async def send_query(conversation_id: int, query: Query, user_id: int):
                                       response_id=response_id,
                                       response_text=response,
                                       comment=comment,
-                                      metrics=Metrics(metrics=metrics)
+                                      metrics=metrics
                                      )
         return entire_response
     except sqlite3.Error as e:
@@ -226,7 +226,67 @@ def get_metrics_by_query_id(query_id: int):
         
         if not metrics:
             raise HTTPException(status_code=404, detail=f"Metrics with ID {query_id} not found.")
-        return Metrics(**json.loads(metrics[0]))
+        return Metrics(metrics=json.loads(metrics[0]))
+    except sqlite3.Error as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
+    finally:
+        if conn:
+            conn.close()
+
+def calculate_personal_statistics(user_id: int):
+    try:
+        conn = sqlite3.connect(db_file)
+        cursor = conn.cursor()
+
+        select_query = '''SELECT round(AVG(json_extract(f.metrics, '$.criterion_1')), 1) AS avg_criterion_1, 
+                                round(AVG(json_extract(f.metrics, '$.criterion_2')), 1) AS avg_criterion_2,
+                                round(AVG(json_extract(f.metrics, '$.criterion_3')), 1) AS avg_criterion_3,
+                                round(AVG(json_extract(f.metrics, '$.criterion_4')), 1) AS avg_criterion_4
+                            FROM 
+                                messages m
+                            JOIN 
+                                conversations c ON m.conversation_id = c.conversation_id
+                            JOIN 
+                                feedback f ON m.feedback_id = f.feedback_id
+                            WHERE 
+                                c.user_id = ?
+                                AND m.message_class = 'Request';
+                            '''
+        cursor.execute(select_query, (user_id,))
+        data = cursor.fetchone()
+        if not data:
+            raise HTTPException(status_code=404, detail=f"Personal statistics with ID {query_id} not found.")
+        if not data[0] or not data[1] or not data[2] or not data[3]:
+            metrics = Metrics().metrics
+        else:
+            metrics={
+                    "criterion_1": data[0],
+                    "criterion_2": data[1],
+                    "criterion_3": data[2],
+                    "criterion_4": data[3]
+                    }
+        select_query = '''  SELECT
+                                COUNT(DISTINCT c.conversation_id) AS total_conversations,
+                                COUNT(m.message_id) AS total_messages,
+                                COUNT(DISTINCT m.task_id) AS task_ids
+                            FROM
+                                conversations c
+                            JOIN
+                                messages m ON c.conversation_id = m.conversation_id
+                            WHERE
+                                c.user_id = ?
+                                AND m.message_class = 'Request';
+                       '''
+        cursor.execute(select_query, (user_id,))
+        data = cursor.fetchone()
+        if not data:
+            raise HTTPException(status_code=404, detail=f"Personal statistics with ID {query_id} not found.")
+        activity = {
+            "total_queries": data[0],
+            "total_conversations": data[1],
+            "tasks_solved": data[2]
+        }
+        return PersonalStatistics(metrics=metrics, activity=activity)
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
     finally:
