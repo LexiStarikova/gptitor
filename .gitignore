@@ -24,3 +24,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# Ignore all files and directories containing .ipynb_checkpoints
+**/.ipynb_checkpoints/
+
+# Ignore all files and directories containing __pycache__
+**/__pycache__/
