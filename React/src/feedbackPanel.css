@@ -1,7 +1,7 @@
 .feedbackcontainer {
     position: relative;
-    width: 42vw;
-    height: 100%;
+    width: 800px;
+    height: 825px;
     border-radius: 0 25px 25px 25px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
@@ -194,7 +194,6 @@
 
 
 .FeedContainer {
-    height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -214,7 +213,7 @@
 }
 
 .FeedDesc.show {
-    height: 170px;
+    height: 175px;
     opacity: 1;
 }
 
@@ -295,7 +294,6 @@
 
 
 .FeedDesc>p::-webkit-scrollbar {
-    
     width: 10px;
 }
 
@@ -314,9 +312,4 @@
 .TaskDesc>p::-webkit-scrollbar-thumb {
     background: #FFFFFF;
     border-radius: 100px;
-}
-
-.FeedDesc>p{
-    overflow-y: scroll;
-    height: 80%;
 }

@@ -98,47 +98,40 @@ const Sidebar: React.FC = () => {
                         <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} />
                     ))}
                 </div>
-                <div className ="icons-nothidden">
-                    <Link to="/profile"><div className='profile'>
-                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 32.8996C9.76862 32.0379 13.3684 28.0727 14.4233 28.0727H25.5773C27.106 28.0727 30.2266 31.3596 31 32.5183M36 20.8878C36 29.7331 28.8365 36.9036 20 36.9036C11.1634 36.9036 4 29.7331 4 20.8878C4 12.0426 11.1634 4.87207 20 4.87207C28.8365 4.87207 36 12.0426 36 20.8878ZM25.7314 15.429C25.7314 12.3735 23.1545 9.87699 20.0005 9.87699C16.8465 9.87699 14.2696 12.3735 14.2696 15.429C14.2696 18.4846 16.8465 20.9811 20.0005 20.9811C23.1544 20.9811 25.7314 18.4846 25.7314 15.429Z" stroke="white" strokeWidth="2.5" />
-                        </svg>
-                        <p>Profile</p>
-                    </div></Link>
-                    <div className='info'>
-                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 20.944L20 28.9518M20 15.0084V14.9381M4 20.944C4 12.0987 11.1634 4.92822 20 4.92822C28.8366 4.92822 36 12.0987 36 20.944C36 29.7892 28.8366 36.9597 20 36.9597C11.1634 36.9597 4 29.7892 4 20.944Z" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        <p>Help</p>
-                    </div>
+                <Link to="/profile"><div className='profile'>
+                    <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 32.8996C9.76862 32.0379 13.3684 28.0727 14.4233 28.0727H25.5773C27.106 28.0727 30.2266 31.3596 31 32.5183M36 20.8878C36 29.7331 28.8365 36.9036 20 36.9036C11.1634 36.9036 4 29.7331 4 20.8878C4 12.0426 11.1634 4.87207 20 4.87207C28.8365 4.87207 36 12.0426 36 20.8878ZM25.7314 15.429C25.7314 12.3735 23.1545 9.87699 20.0005 9.87699C16.8465 9.87699 14.2696 12.3735 14.2696 15.429C14.2696 18.4846 16.8465 20.9811 20.0005 20.9811C23.1544 20.9811 25.7314 18.4846 25.7314 15.429Z" stroke="white" strokeWidth="2.5" />
+                    </svg>
+                    <p>Profile</p>
+                </div></Link>
+                <div className='info'>
+                    <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 20.944L20 28.9518M20 15.0084V14.9381M4 20.944C4 12.0987 11.1634 4.92822 20 4.92822C28.8366 4.92822 36 12.0987 36 20.944C36 29.7892 28.8366 36.9597 20 36.9597C11.1634 36.9597 4 29.7892 4 20.944Z" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <p>Help</p>
                 </div>
             </div>
             <div className='sidebarhidden' style={{ display: sidebarVisible ? 'none' : 'block' }}>
-            <div className='iconshidden'>
                 <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden' onClick={toggleSidebar}>
-                        <path d="M23.3996 20.8H2.59961M23.3996 13H2.59961M23.3996 5.19995H2.59961" stroke="white" strokeWidth="3" strokeLinecap="round" />
-                    </svg>
-                    <svg
-                        width="26"
-                        height="26"
-                        viewBox="0 0 26 26"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className='chaticonhidden'
-                        onClick={CreateConversation}
-                    >
-                        <path d="M12.9996 13.0001V10.4001M12.9996 10.4001V7.8001M12.9996 10.4001H10.3996M12.9996 10.4001H15.5996M12.6605 17.974L7.23439 23.4001V17.974H5.19961C3.76367 17.974 2.59961 16.8099 2.59961 15.374V5.2001C2.59961 3.76416 3.76367 2.6001 5.19961 2.6001H20.7996C22.2355 2.6001 23.3996 3.76416 23.3996 5.2001V15.374C23.3996 16.8099 22.2355 17.974 20.7996 17.974H12.6605Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-            </div>
-            <div className="icons-hidden-bottom">
+                    <path d="M23.3996 20.8H2.59961M23.3996 13H2.59961M23.3996 5.19995H2.59961" stroke="white" strokeWidth="3" strokeLinecap="round" />
+                </svg>
+                <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 26 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className='chaticonhidden'
+                    onClick={CreateConversation}
+                >
+                    <path d="M12.9996 13.0001V10.4001M12.9996 10.4001V7.8001M12.9996 10.4001H10.3996M12.9996 10.4001H15.5996M12.6605 17.974L7.23439 23.4001V17.974H5.19961C3.76367 17.974 2.59961 16.8099 2.59961 15.374V5.2001C2.59961 3.76416 3.76367 2.6001 5.19961 2.6001H20.7996C22.2355 2.6001 23.3996 3.76416 23.3996 5.2001V15.374C23.3996 16.8099 22.2355 17.974 20.7996 17.974H12.6605Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
                 <Link to="/profile"><svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" className='profileiconhidden'>
-                        <path d="M6.52539 23.1999C7.08264 22.5758 9.69249 19.7038 10.4573 19.7038H18.544C19.6523 19.7038 21.9147 22.0845 22.4754 22.9237M26.1004 14.4999C26.1004 20.9064 20.9069 26.0999 14.5004 26.0999C8.09389 26.0999 2.90039 20.9064 2.90039 14.4999C2.90039 8.0934 8.09389 2.8999 14.5004 2.8999C20.9069 2.8999 26.1004 8.0934 26.1004 14.4999ZM18.6557 10.5462C18.6557 8.33311 16.7874 6.5249 14.5007 6.5249C12.2141 6.5249 10.3458 8.33311 10.3458 10.5462C10.3458 12.7593 12.2141 14.5675 14.5007 14.5675C16.7874 14.5675 18.6557 12.7593 18.6557 10.5462Z" stroke="white" strokeWidth="2" />
-                    </svg></Link>
-                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden'>
-                        <path d="M12.9996 13.0001L12.9996 18.2001M12.9996 9.1458V9.1001M2.59961 13.0001C2.59961 7.25633 7.25585 2.6001 12.9996 2.6001C18.7434 2.6001 23.3996 7.25634 23.3996 13.0001C23.3996 18.7439 18.7434 23.4001 12.9996 23.4001C7.25585 23.4001 2.59961 18.7439 2.59961 13.0001Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-            </div>
-
+                    <path d="M6.52539 23.1999C7.08264 22.5758 9.69249 19.7038 10.4573 19.7038H18.544C19.6523 19.7038 21.9147 22.0845 22.4754 22.9237M26.1004 14.4999C26.1004 20.9064 20.9069 26.0999 14.5004 26.0999C8.09389 26.0999 2.90039 20.9064 2.90039 14.4999C2.90039 8.0934 8.09389 2.8999 14.5004 2.8999C20.9069 2.8999 26.1004 8.0934 26.1004 14.4999ZM18.6557 10.5462C18.6557 8.33311 16.7874 6.5249 14.5007 6.5249C12.2141 6.5249 10.3458 8.33311 10.3458 10.5462C10.3458 12.7593 12.2141 14.5675 14.5007 14.5675C16.7874 14.5675 18.6557 12.7593 18.6557 10.5462Z" stroke="white" strokeWidth="2" />
+                </svg></Link>
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden'>
+                    <path d="M12.9996 13.0001L12.9996 18.2001M12.9996 9.1458V9.1001M2.59961 13.0001C2.59961 7.25633 7.25585 2.6001 12.9996 2.6001C18.7434 2.6001 23.3996 7.25634 23.3996 13.0001C23.3996 18.7439 18.7434 23.4001 12.9996 23.4001C7.25585 23.4001 2.59961 18.7439 2.59961 13.0001Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
             </div>
         </div>
     );
