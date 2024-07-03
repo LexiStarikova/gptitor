@@ -1,6 +1,7 @@
 import './studymode.css';
 import { ConversationPanel } from './conversationPanel.tsx';
 import FeedbackPanel from './feedbackPanel.tsx';
+import TaskDesc from "./taskdescription.tsx"
 import FeedbackContextProvider from './feedbackContextProvider.tsx';
 
 const StudyMode: React.FC = () => {

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import './taskpanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Task } from './models/task';
@@ -27,8 +27,6 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
     return (
         <div className={`panel ${isOpen ? 'open' : ''}`}>
             <div className='panelcontainer'>
-                <div className='blured' onClick={close}>
-                </div>
                 <div className='taskcontainer'>
                     <div className='Tasks'>
                         <div className='tasktitle'>
@@ -42,6 +40,40 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
                             <li onClick={() => handleTaskClick(2)}><p className='listbox'>Task 2</p></li>
                             <li onClick={() => handleTaskClick(3)}><p className='listbox'>Task 3</p></li>
                         </ul>
+                    </div>
+                    <div className='Categories'>
+                        <div className='CategoriesTitle'>
+                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.2801 1.3418L14.9844 5.93633L19.59 7.63647L14.9844 9.3366L13.2801 13.9311L11.5759 9.3366L6.97018 7.63647L11.5759 5.93633L13.2801 1.3418Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" />
+                                <path d="M5.3927 11.8329L6.88145 14.0196L9.07349 15.5048L6.88145 16.99L5.3927 19.1767L3.90395 16.99L1.71191 15.5048L3.90395 14.0196L5.3927 11.8329Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" />
+                            </svg>
+                            <h6>Topics</h6>
+                        </div>
+                        <div>
+                            <ul>
+                                <li onClick={() => handleTaskClick(1)}><p className='listboxCat'>Math</p></li>
+                                <li onClick={() => handleTaskClick(2)}><p className='listboxCat'>Physics</p></li>
+                                <li onClick={() => handleTaskClick(3)}><p className='listboxCat'>Computer</p></li>
+                                <li onClick={() => handleTaskClick(4)}><p className='listboxCat'>Entertainment</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div className='taskDes' onClick={close}>
+                    <div className='Titles'>
+                        <div className='taskName'>
+                            <h6 className='Taskt'>Task:</h6>
+                            <h6 className='Taskn'>Garfield</h6>
+                        </div>
+                        <div className='catName'>
+                            <h6 className='Catt'>Category:</h6>
+                            <h6 className='Catn'>Entertainment</h6>
+                        </div>
+                    </div>
+                    <div className='Divider'></div>
+                    <div className='Desc'>
+                        <h6 className='DescT'>Desciption</h6>
+                        <p className='Descript'>Let Garfield be your favorite cat, in order to please your cat you’ll try to give it the best care. You should write the right prompt to get relevant details of how to take care of Garfield. If you fail Garfield will get mad</p>
                     </div>
                 </div>
             </div>

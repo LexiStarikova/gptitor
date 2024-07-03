@@ -70,9 +70,9 @@
 
 .res {
     position: relative;
-    color: #3B4168;
+    color: #0060AE;
     right: 250px;
-    bottom: 20px;
+    bottom: 80px;
 }
 
 .results {
@@ -242,18 +242,14 @@
     overflow: hidden;
     transition: height 0.3s ease;
     width: 675px;
-    height: 0;
+    height: 175px;
     background-color: #0060AE;
     border-radius: 0 20px 20px 20px;
     color: #FFFFFF;
     padding: 5px 20px 5px 20px;
-    opacity: 0;
 }
 
-.FeedDesc.show {
-    height: 175px;
-    opacity: 1;
-}
+
 
 .FeedDesc>p {
     overflow-y: scroll;
@@ -267,20 +263,17 @@
     background-color: #D3EBFF;
     color: #12152A;
     text-align: center;
-    border-radius: 10px 10px 10px 0px;
+    border-radius: 10px 10px 0px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-    top: 325px;
+    top: 0px;
     transition: border-radius 0.5s ease;
     transition: top 0.4s ease-in-out;
 }
 
-.FeedTitle.roundede {
-    border-radius: 10px 10px 0px 0px;
-    top: 0px;
-}
+
 
 .optionContainer {
     display: flex;
@@ -350,4 +343,20 @@
 .TaskDesc>p::-webkit-scrollbar-thumb {
     background: #FFFFFF;
     border-radius: 100px;
+}
+
+.viewTask {
+    color: #0060AE;
+    text-align: right;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.unline {
+    background-color: #0060AE;
+    height: 0.25rem;
+    width: 40rem;
+    margin-bottom: 5rem;
+    border-radius: 50px;
 }

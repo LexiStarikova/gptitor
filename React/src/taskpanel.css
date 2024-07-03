@@ -1,10 +1,10 @@
 .panelcontainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .taskcontainer {
-    position: absolute;
+    position: relative;
     width: 252px;
     height: 825px;
     border-radius: 0 0px 0px 25px;
@@ -36,29 +36,30 @@ li {
 }
 
 .listbox {
-    background: linear-gradient(100deg, rgba(0, 96, 174, 1) 0%, rgba(211, 235, 255, 0.5) 100%);
+    background: #2287DA;
     width: 100px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 10px 0px 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.blured {
-    width: 800px;
+.taskDes {
+    width: 548px;
     height: 825px;
-    background-color: rgba(18, 21, 42, 0.25);
-    border-radius: 25px;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background-color: #F5F6F8;
+    border-radius: 0px 25px 25px 0;
     animation: fadeIn 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .panel.open {
     position: absolute;
-    top: 126px;
-    left: 1009px;
+    top: 7.875rem;
+    left: 63.0625rem;
     z-index: 2;
     display: block;
     animation: fadeIn 0.5s ease-in-out;
@@ -76,4 +77,137 @@ li {
     to {
         opacity: 1;
     }
+}
+
+.taskName {
+    color: #000000;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.Taskt {
+    width: 80px;
+    height: 40px;
+    background-color: #D3EBFF;
+    border-radius: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Taskn {
+    width: 80px;
+    height: 40px;
+    border-radius: 0 20px 20px 0;
+    border-right: solid #D3EBFF;
+    border-bottom: solid #D3EBFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.45rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.catName {
+    color: #000000;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: -4rem;
+}
+
+.Catt {
+    width: 125px;
+    height: 40px;
+    background-color: #D3EBFF;
+    border-radius: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Catn {
+    width: 150px;
+    height: 40px;
+    border-radius: 0 20px 20px 0;
+    border-right: solid #D3EBFF;
+    border-bottom: solid #D3EBFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.45rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.Titles {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 1rem;
+    margin-left: 2rem;
+    margin-top: 6rem;
+}
+
+.Divider {
+    width: 27rem;
+    height: 0.20rem;
+    background-color: #0060AE;
+    border-radius: 25px;
+    align-self: center;
+    opacity: 25%;
+}
+
+.Desc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 83%;
+    padding-left: 2rem;
+}
+
+.DescT {
+    color: #0060AE;
+    text-align: left;
+}
+
+.Descript {
+    margin-top: -1rem;
+    color: #59657D;
+}
+
+.CategoriesTitle {
+    position: relative;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    right: 20px;
+    margin-top: -3rem;
+    margin-left: -2.5rem;
+}
+
+.Categories {
+    display: flex;
+    flex-direction: column;
+}
+
+.listboxCat {
+    background: #2287DA;
+    width: 125px;
+    height: 30px;
+    border-radius: 10px 0px 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.5s ease-in-out;
+}
+
+.listboxCat:hover {
+    color: #2287DA;
+    background: #FFFFFF;
 }

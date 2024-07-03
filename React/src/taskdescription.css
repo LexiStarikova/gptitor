@@ -1,0 +1,88 @@
+.DescCont {
+    width: 800px;
+    height: 825px;
+    border-radius: 0 25px 25px 25px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 99999;
+}
+
+.CloseTask {
+    color: #0060AE;
+    text-align: right;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+}
+
+.unlineD {
+    background-color: #0060AE;
+    height: 0.25rem;
+    width: 40rem;
+    margin-bottom: 5rem;
+    border-radius: 50px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.DescCont.openD {
+    position: absolute;
+    top: 7.875rem;
+    left: 63.0625rem;
+    z-index: 2;
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.DescCont {
+    display: none;
+}
+
+
+
+.close {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    left: 17rem;
+    cursor: pointer;
+}
+
+.Xclose {
+    margin-top: 2.28rem;
+}
+
+.TaskDline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.TaskD {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -6rem;
+}
+
+.DescD {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+    padding-left: 2rem;
+}
