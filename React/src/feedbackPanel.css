@@ -1,7 +1,7 @@
 .feedbackcontainer {
     position: relative;
-    width: 800px;
-    height: 825px;
+    width: 717px;
+    height: 750px;
     border-radius: 0 25px 25px 25px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
@@ -241,9 +241,9 @@
 .FeedDesc {
     overflow: hidden;
     transition: height 0.3s ease;
-    width: 675px;
-    height: 175px;
-    background-color: #0060AE;
+    width: 600px;
+    height: 120px;
+    background-color: #2287DA;
     border-radius: 0 20px 20px 20px;
     color: #FFFFFF;
     padding: 5px 20px 5px 20px;
@@ -280,18 +280,27 @@
     flex-direction: row;
 }
 
-.option {
-    width: 100px;
+.optionS {
+    width: 33.3%;
     height: 30px;
-    background-color: #AAABFA;
+    background-color: #2287DA;
+    opacity: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     color: #FFFFFF;
-    border-radius: 10px 10px 0px 0px;
-    transition: background-color 0.6s ease;
+    border-radius: 10px 30px 0px 0px;
+    transition: opacity 0.6s ease;
     cursor: pointer;
+    padding: 0.3rem;
+    padding-left: 0.5rem;
+}
+
+.optionS:hover {
+    background-color: #2287DA;
+    opacity: 80%;
+
 }
 
 .option1 {

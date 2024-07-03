@@ -6,9 +6,9 @@
 .taskcontainer {
     position: relative;
     width: 252px;
-    height: 825px;
+    height: 750px;
     border-radius: 0 0px 0px 25px;
-    background-color: #AAABFA;
+    background-color: #0060AE;
 
 }
 
@@ -36,7 +36,7 @@ li {
 }
 
 .listbox {
-    background: #B969EF;
+    background: #2287DA;
     width: 100px;
     height: 30px;
     border-radius: 10px 0px 10px 0;
@@ -48,8 +48,8 @@ li {
 }
 
 .taskDes {
-    width: 548px;
-    height: 825px;
+    width: 465px;
+    height: 750px;
     background-color: #F5F6F8;
     border-radius: 0px 25px 25px 0;
     animation: fadeIn 1s ease-in-out;
@@ -60,8 +60,8 @@ li {
 
 .panel.open {
     position: absolute;
-    top: 7.875rem;
-    left: 63.0625rem;
+    top: 10.25rem;
+    left: 65.6rem;
     z-index: 2;
     display: block;
     animation: fadeIn 0.5s ease-in-out;
@@ -91,12 +91,12 @@ li {
 .Taskt {
     width: 80px;
     height: 40px;
-    background-color: #AAABFA;
+    background-color: #D3EBFF;
     border-radius: 10px 0 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #FFFFFF;
+    color: #000000;
 
 }
 
@@ -104,8 +104,8 @@ li {
     width: 75%;
     height: 40px;
     border-radius: 0 20px 20px 0;
-    border-right: solid #AAABFA;
-    border-bottom: solid #AAABFA;
+    border-right: solid #D3EBFF;
+    border-bottom: solid #D3EBFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -125,20 +125,20 @@ li {
 .Catt {
     width: 125px;
     height: 40px;
-    background-color: #AAABFA;
+    background-color: #D3EBFF;
     border-radius: 10px 0 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 .Catn {
     width: 75%;
     height: 40px;
     border-radius: 0 20px 20px 0;
-    border-right: solid #AAABFA;
-    border-bottom: solid #AAABFA;
+    border-right: solid #D3EBFF;
+    border-bottom: solid #D3EBFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,23 +153,23 @@ li {
     align-self: center;
     margin: 1rem;
     margin-left: 2rem;
-    margin-top: 6rem;
+    margin-top: 2rem;
 }
 
 .Divider {
-    width: 27rem;
+    width: 25rem;
     height: 0.20rem;
-    background-color: #AAABFA;
+    background-color: #0060AE;
     border-radius: 25px;
     align-self: center;
-    opacity: 100%;
+    opacity: 25%;
 }
 
 .Desc {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 75%;
+    width: 85%;
     padding-left: 1.5rem;
 }
 
@@ -179,7 +179,7 @@ li {
 }
 
 .Descript {
-    margin-top: -1rem;
+    margin-top: -2rem;
     color: #59657D;
 }
 
@@ -202,7 +202,7 @@ li {
 }
 
 .listboxCat {
-    background: #B969EF;
+    background: #2287DA;
     width: 125px;
     height: 30px;
     border-radius: 10px 0px 10px 0;

@@ -1,6 +1,6 @@
 .DescCont {
-    width: 800px;
-    height: 825px;
+    width: 717px;
+    height: 750px;
     border-radius: 0 25px 25px 25px;
     background-color: #FFFFFF;
     display: flex;
@@ -22,6 +22,7 @@
     width: 40rem;
     margin-bottom: 5rem;
     border-radius: 50px;
+    opacity: 70%;
 }
 
 @keyframes fadeIn {
@@ -36,8 +37,8 @@
 
 .DescCont.openD {
     position: absolute;
-    top: 7.875rem;
-    left: 63.0625rem;
+    top: 10.25rem;
+    left: 65.6rem;
     z-index: 2;
     display: block;
     animation: fadeIn 0.5s ease-in-out;

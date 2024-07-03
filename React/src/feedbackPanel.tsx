@@ -65,15 +65,13 @@ const FeedbackPanel = () => {
         <div>
             <div className='feedbackbigcontainter'>
                 <div className='optionContainer'>
-                    <div className='option' onClick={toggleSidebar}>
+                    <div className='optionS' onClick={toggleSidebar}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='searchsicon'>
                             <path d="M16.9265 17.0401L20.3996 20.4001M11.3996 7.2001C13.3878 7.2001 14.9996 8.81187 14.9996 10.8001M19.2796 11.4401C19.2796 15.77 15.7695 19.2801 11.4396 19.2801C7.1097 19.2801 3.59961 15.77 3.59961 11.4401C3.59961 7.11018 7.1097 3.6001 11.4396 3.6001C15.7695 3.6001 19.2796 7.11018 19.2796 11.4401Z" stroke="white" strokeWidth="2" strokeLinecap="round" />
                         </svg>
+                        <p className='pbtn'>Search Tasks</p>
                     </div>
                     <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
-                    <div className='option1'>
-                        <p>Task {task.task_id}</p>
-                    </div>
                 </div>
                 <TaskDesc isOpenD={showDescription} closeD={toggleDescription} />
                 <div className='feedbackcontainer'>
@@ -84,10 +82,12 @@ const FeedbackPanel = () => {
                     <h4 className='res'>Results:</h4>
                     <div className={`scoreBoxes ${isRounded ? 'rounded' : ''}`}>
                         <div className='progressbar-rounded'>
-                            <div className='progressbar-rounded-base-circle' style={{ background : 
-                            `radial-gradient(closest-side, white 80%, transparent 80% 100%),
-                                conic-gradient(#0060AE ${((criteria.criterion_1+criteria.criterion_2+criteria.criterion_3+criteria.criterion_4)/2*10).toFixed(0)}%, #D3EBFF 0)`}}>
-                                <h3 className='progressbar-rounded-score'>{((criteria.criterion_1+criteria.criterion_2+criteria.criterion_3+criteria.criterion_4)/4).toFixed(0)}/5</h3>
+                            <div className='progressbar-rounded-base-circle' style={{
+                                background:
+                                    `radial-gradient(closest-side, white 80%, transparent 80% 100%),
+                                conic-gradient(#0060AE ${((criteria.criterion_1 + criteria.criterion_2 + criteria.criterion_3 + criteria.criterion_4) / 2 * 10).toFixed(0)}%, #D3EBFF 0)`
+                            }}>
+                                <h3 className='progressbar-rounded-score'>{((criteria.criterion_1 + criteria.criterion_2 + criteria.criterion_3 + criteria.criterion_4) / 4).toFixed(0)}/5</h3>
                             </div>
                         </div>
                         <div className='criterias'>
@@ -110,7 +110,7 @@ const FeedbackPanel = () => {
                                         <p className='p5'>Conciseness & Focus</p>
                                     </div>
                                     <div className='progbarF'>
-                                        <div className='progressbar-internals' style={{ width: `${(criteria.criterion_1/5*100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                        <div className='progressbar-internals' style={{ width: `${(criteria.criterion_1 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                     </div>
                                 </div>
                                 <div className='detailsF'>
@@ -139,7 +139,7 @@ const FeedbackPanel = () => {
                                             <p className='p5'>Clarity & Specificity</p>
                                         </div>
                                         <div className='progbarF'>
-                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_2/5*100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_2 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -169,7 +169,7 @@ const FeedbackPanel = () => {
                                             <p className='p5'>Relevance & Context</p>
                                         </div>
                                         <div className='progbarF'>
-                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_3/5*100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_3 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -197,7 +197,7 @@ const FeedbackPanel = () => {
                                             <p className='p5'>Purpose & Output</p>
                                         </div>
                                         <div className='progbarF'>
-                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_4/5*100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_4 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
