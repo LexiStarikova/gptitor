@@ -3,13 +3,27 @@ import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 
-export const ConversationPanel: React.FC = () => {
+interface MessageSimplifyed {
+    id: number,
+    text: string
+  }
+
+interface ConversationPanelProps {
+    responses: MessageSimplifyed[];
+    setResponses: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
+    requests: MessageSimplifyed[];
+    setRequests: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
+    conversation_id : number;
+}
+
+
+export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses, setResponses, requests, setRequests, conversation_id }) => {
     const [text, setText] = useState<string>('');
-    const [queries, setQueries] = useState<string[]>([]);
-    const [responses, setResponses] = useState<string[]>([]);
     const { feedback, setFeedback } = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
     const { task, setTask } = useContext(FeedbackContext);
+
+
 
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -36,16 +50,14 @@ export const ConversationPanel: React.FC = () => {
 
     const handleSend = async () => {
         if (text.trim() === "") return;
-        const newQuery = text;
-        setQueries(prevQueries => [...prevQueries, newQuery]);
         setText('');
 
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
         }
         try {
-            console.log(`task_id = ${task.task_id}`);
-            const response = await fetch('http://10.100.30.244:8000/conversations/1/messages', {
+            console.log(`task_id = ${task.task_id}, conversation_id = ${conversation_id}`);
+            const response = await fetch(`http://10.100.30.244:8000/conversations/${conversation_id}/messages`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +76,9 @@ export const ConversationPanel: React.FC = () => {
             }
             console.log('Message sent successfully');
             const data = await response.json();
-            setResponses(prevResponses => [...prevResponses, data.response_text]);
+            const newRequest = { id : data.query_id, text : text};
+            setRequests(prevRequests => [...prevRequests, newRequest]);
+            setResponses(prevResponses => [...prevResponses, {id : data.response_id, text : data.response_text}]);
             setFeedback(data.comment);
             console.log(data.metrics);
             console.log(`query_id = ${data.query_id}`,
@@ -84,6 +98,7 @@ export const ConversationPanel: React.FC = () => {
         }
     };
 
+
     return (
         <div>
             <div className='chatbigcontainter'>
@@ -94,11 +109,11 @@ export const ConversationPanel: React.FC = () => {
                 </div>
                 <div className='conversationcontainer'>
                     <div className='Convo'>
-                        {queries.map((query, index) => (
+                        {requests.map((request, index) => (
                             <div key={`conversation-${index}`} className='conversation-item'>
                                 <div className='req'>
                                     <div className='reqbub'>
-                                        <p>{query}</p>
+                                        <p>{request.text}</p>
                                     </div>
                                     <div className='pdpchat'></div>
                                 </div>
@@ -107,7 +122,7 @@ export const ConversationPanel: React.FC = () => {
                                         <div className='resp'>
                                             <div className='pdpchat'></div>
                                             <div className='resbub'>
-                                                <p>{responses[index]}</p>
+                                                <p>{responses[index].text}</p>
                                             </div>
                                         </div>
                                         <div className='reactions'>
