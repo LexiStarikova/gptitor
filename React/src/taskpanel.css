@@ -43,6 +43,8 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background 0.5s ease-in-out;
+    cursor: pointer;
 }
 
 .taskDes {
@@ -89,19 +91,21 @@ li {
 .Taskt {
     width: 80px;
     height: 40px;
-    background-color: #D3EBFF;
+    background-color: #AAABFA;
     border-radius: 10px 0 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #FFFFFF;
+
 }
 
 .Taskn {
-    width: 80px;
+    width: 75%;
     height: 40px;
     border-radius: 0 20px 20px 0;
-    border-right: solid #D3EBFF;
-    border-bottom: solid #D3EBFF;
+    border-right: solid #AAABFA;
+    border-bottom: solid #AAABFA;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,19 +125,20 @@ li {
 .Catt {
     width: 125px;
     height: 40px;
-    background-color: #D3EBFF;
+    background-color: #AAABFA;
     border-radius: 10px 0 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #FFFFFF;
 }
 
 .Catn {
-    width: 150px;
+    width: 75%;
     height: 40px;
     border-radius: 0 20px 20px 0;
-    border-right: solid #D3EBFF;
-    border-bottom: solid #D3EBFF;
+    border-right: solid #AAABFA;
+    border-bottom: solid #AAABFA;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -154,10 +159,10 @@ li {
 .Divider {
     width: 27rem;
     height: 0.20rem;
-    background-color: #0060AE;
+    background-color: #AAABFA;
     border-radius: 25px;
     align-self: center;
-    opacity: 25%;
+    opacity: 100%;
 }
 
 .Desc {
@@ -208,6 +213,11 @@ li {
 }
 
 .listboxCat:hover {
+    color: #2287DA;
+    background: #FFFFFF;
+}
+
+.listbox:hover {
     color: #2287DA;
     background: #FFFFFF;
 }

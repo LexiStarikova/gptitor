@@ -64,8 +64,8 @@ const FeedbackPanel = () => {
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='searchsicon'>
                             <path d="M16.9265 17.0401L20.3996 20.4001M11.3996 7.2001C13.3878 7.2001 14.9996 8.81187 14.9996 10.8001M19.2796 11.4401C19.2796 15.77 15.7695 19.2801 11.4396 19.2801C7.1097 19.2801 3.59961 15.77 3.59961 11.4401C3.59961 7.11018 7.1097 3.6001 11.4396 3.6001C15.7695 3.6001 19.2796 7.11018 19.2796 11.4401Z" stroke="white" strokeWidth="2" strokeLinecap="round" />
                         </svg>
-                        <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
                     </div>
+                    <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
                     <div className='option1'>
                         <p>Task {task.task_id}</p>
                     </div>
@@ -91,9 +91,7 @@ const FeedbackPanel = () => {
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.2927 11.2412L11.2927 15.3791M11.2927 8.17411V8.13775M3.00977 11.2412C3.00977 6.67056 6.71816 2.96533 11.2927 2.96533C15.8672 2.96533 19.5756 6.67056 19.5756 11.2412C19.5756 15.8118 15.8672 19.5171 11.2927 19.5171C6.71816 19.5171 3.00977 15.8118 3.00977 11.2412Z" stroke="#3B4168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-
-                                    <p className='crittooltipF'>Ah Yes, Criteria Description.</p>
-                                </div>
+                                    <p className='crittooltipF'>The prompt should be concise and focused on a specific topic or question. Long, convoluted prompts can confuse the LLM and result in less coherent answers.</p>                                </div>
                                 <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                                     <rect y="0.975586" width="40" height="40" rx="20" fill="#2287DA" />
                                     <path d="M20 23.6006C19.385 23.6006 18.875 23.0906 18.875 22.4756V14.9756C18.875 14.3606 19.385 13.8506 20 13.8506C20.615 13.8506 21.125 14.3606 21.125 14.9756V22.4756C21.125 23.0906 20.615 23.6006 20 23.6006Z" fill="white" />
@@ -102,7 +100,7 @@ const FeedbackPanel = () => {
                                 <div className='barF'>
                                     <div className='critdescF'>
                                         <h6>{criteria.criterion_1}/5</h6>
-                                        <p className='p5'>Averaga Criteria</p>
+                                        <p className='p5'>Conciseness & Focus</p>
                                     </div>
                                     <div className='progbarF'></div>
                                 </div>
@@ -116,10 +114,7 @@ const FeedbackPanel = () => {
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.2927 11.2412L11.2927 15.3791M11.2927 8.17411V8.13775M3.00977 11.2412C3.00977 6.67056 6.71816 2.96533 11.2927 2.96533C15.8672 2.96533 19.5756 6.67056 19.5756 11.2412C19.5756 15.8118 15.8672 19.5171 11.2927 19.5171C6.71816 19.5171 3.00977 15.8118 3.00977 11.2412Z" stroke="#3B4168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-
-
-                                        <p className='crittooltipF'>Ah Yes, Criteria Description.</p>
-                                    </div>
+                                        <p className='crittooltipF'>The prompt should be clear and specific, leaving little room for ambiguity. Vague or broad prompts can lead to off-target or generalized responses.</p>                                    </div>
                                     <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                                         <rect x="1" y="1.71948" width="38" height="38" rx="19" fill="white" />
                                         <rect x="1" y="1.71948" width="38" height="38" rx="19" stroke="#2287DA" stroke-width="2" />
@@ -129,7 +124,7 @@ const FeedbackPanel = () => {
                                     <div className='barF'>
                                         <div className='critdescF'>
                                             <h6>{criteria.criterion_2}/5</h6>
-                                            <p className='p5'>Averaga Criteria</p>
+                                            <p className='p5'>Clarity & Specificity</p>
                                         </div>
                                         <div className='progbarF'></div>
                                     </div>
@@ -144,9 +139,7 @@ const FeedbackPanel = () => {
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.2927 11.2412L11.2927 15.3791M11.2927 8.17411V8.13775M3.00977 11.2412C3.00977 6.67056 6.71816 2.96533 11.2927 2.96533C15.8672 2.96533 19.5756 6.67056 19.5756 11.2412C19.5756 15.8118 15.8672 19.5171 11.2927 19.5171C6.71816 19.5171 3.00977 15.8118 3.00977 11.2412Z" stroke="#3B4168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-
-                                        <p className='crittooltipF'>Ah Yes, Criteria Description.</p>
-                                    </div>
+                                        <p className='crittooltipF'>The prompt should include relevant context to guide the LLM. Providing necessary background information can help the model generate a more accurate and pertinent response.</p>                                    </div>
                                     <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                                         <rect y="0.804932" width="40" height="40" rx="20" fill="#2287DA" />
                                         <path d="M15.755 26.175C15.47 26.175 15.185 26.07 14.96 25.845C14.525 25.41 14.525 24.69 14.96 24.255L23.45 15.765C23.885 15.33 24.605 15.33 25.04 15.765C25.475 16.2 25.475 16.92 25.04 17.355L16.55 25.845C16.34 26.07 16.04 26.175 15.755 26.175Z" fill="white" />
@@ -157,7 +150,7 @@ const FeedbackPanel = () => {
                                     <div className='barF'>
                                         <div className='critdescF'>
                                             <h6>{criteria.criterion_3}/5</h6>
-                                            <p className='p5'>Averaga Criteria</p>
+                                            <p className='p5'>Relevance & Context</p>
                                         </div>
                                         <div className='progbarF'></div>
                                     </div>
@@ -172,9 +165,7 @@ const FeedbackPanel = () => {
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.2927 11.2412L11.2927 15.3791M11.2927 8.17411V8.13775M3.00977 11.2412C3.00977 6.67056 6.71816 2.96533 11.2927 2.96533C15.8672 2.96533 19.5756 6.67056 19.5756 11.2412C19.5756 15.8118 15.8672 19.5171 11.2927 19.5171C6.71816 19.5171 3.00977 15.8118 3.00977 11.2412Z" stroke="#3B4168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-
-                                        <p className='crittooltipF'>Ah Yes, Criteria Description.</p>
-                                    </div>
+                                        <p className='crittooltipF'>The prompt should clearly state the desired output or purpose of the response. This helps the LLM understand the expected format and detail level.</p>                                    </div>
                                     <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                                         <rect y="0.890137" width="40" height="40" rx="20" fill="#2287DA" />
                                         <path d="M17.8702 26.26C17.5702 26.26 17.2852 26.14 17.0752 25.93L12.8302 21.685C12.3952 21.25 12.3952 20.53 12.8302 20.095C13.2652 19.66 13.9852 19.66 14.4202 20.095L17.8702 23.545L25.5802 15.835C26.0152 15.4 26.7352 15.4 27.1702 15.835C27.6052 16.27 27.6052 16.99 27.1702 17.425L18.6652 25.93C18.4552 26.14 18.1702 26.26 17.8702 26.26Z" fill="white" />
@@ -183,7 +174,7 @@ const FeedbackPanel = () => {
                                     <div className='barF'>
                                         <div className='critdescF'>
                                             <h6>{criteria.criterion_4}/5</h6>
-                                            <p className='p5'>Averaga Criteria</p>
+                                            <p className='p5'>Purpose & Output</p>
                                         </div>
                                         <div className='progbarF'></div>
                                     </div>

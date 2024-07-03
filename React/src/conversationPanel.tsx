@@ -106,7 +106,7 @@ export const ConversationPanel: React.FC = () => {
                                     <div className='rescomplete'>
                                         <div className='resp'>
                                             <div className='pdpchat'></div>
-                                            <div className='reqbub'>
+                                            <div className='resbub'>
                                                 <p>{responses[index]}</p>
                                             </div>
                                         </div>

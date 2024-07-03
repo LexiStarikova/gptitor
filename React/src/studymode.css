@@ -5,4 +5,12 @@
     justify-content: center;
     align-items: center;
     margin: 20px;
+    padding-bottom: 3%;
+    background: none;
+}
+
+body {
+    margin: 0;
+    background-image: radial-gradient(circle at right bottom, #AAABFA 10%, #efefef 75%);
+    background-repeat: no-repeat;
 }

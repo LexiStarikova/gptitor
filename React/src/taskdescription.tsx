@@ -1,9 +1,26 @@
 import './taskdescription.css';
+import React, { useContext } from 'react';
+import './taskpanel.css';
+import { FeedbackContext } from './feedbackContext';
+import { Task } from './models/task';
 interface TaskDescProps {
     isOpenD: boolean;
     closeD: () => void;
 }
 const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
+    const { task, setTask } = useContext(FeedbackContext);
+
+    const handleTaskClick = (taskId: number) => {
+        fetch(`http://10.100.30.244:8000/tasks/${taskId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setTask(new Task(data.task_id, data.task_name, data.category, data.description));
+            })
+            .catch(error => {
+                console.error('Error fetching task:', error);
+            });
+    };
     return (
         <div>
             <div className={`DescCont ${isOpenD ? 'openD' : ''}`}>
@@ -20,17 +37,17 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
                     <div className='Titles'>
                         <div className='taskName'>
                             <h6 className='Taskt'>Task:</h6>
-                            <h6 className='Taskn'>Garfield</h6>
+                            <h6 className='Taskn'>{task.task_name}</h6>
                         </div>
                         <div className='catName'>
                             <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>Entertainment</h6>
+                            <h6 className='Catn'>{task.category}</h6>
                         </div>
                     </div>
                     <div className='Divider'></div>
                     <div className='DescD'>
                         <h6 className='DescT'>Desciption</h6>
-                        <p className='Descript'>Let Garfield be your favorite cat, in order to please your cat you’ll try to give it the best care. You should write the right prompt to get relevant details of how to take care of Garfield. If you fail Garfield will get mad</p>
+                        <p className='Descript'>{task.description}</p>
                     </div>
                 </div>
             </div>

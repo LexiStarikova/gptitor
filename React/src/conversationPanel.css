@@ -3,7 +3,7 @@
     width: 800px;
     height: 750px;
     border-radius: 0 25px 25px 25px;
-    background-color: #FFFFFF;
+    background-color: #F5F6F8;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
         0 6px 20px rgba(0, 0, 0, 0.19);
     display: flex;
@@ -67,7 +67,7 @@
 }
 
 .reqbub {
-    width: 600px;
+    width: 575px;
     height: auto;
     background-color: #D3EBFF;
     color: #3B4168;
@@ -76,6 +76,23 @@
     animation: fadeIn 0.8s ease-in-out;
     max-width: 100%;
     word-wrap: break-word;
+    margin: 0.5rem;
+
+}
+
+.resbub {
+    width: 575px;
+    height: auto;
+    background-color: #D3EBFF;
+    color: #3B4168;
+    border-radius: 20px;
+    padding: 0px 25px 5px 25px;
+    animation: fadeIn 0.8s ease-in-out;
+    max-width: 100%;
+    word-wrap: break-word;
+    margin: 0.5rem;
+    margin-bottom: 1rem;
+
 }
 
 .pdpchat {
