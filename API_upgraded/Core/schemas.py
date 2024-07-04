@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any, List
-from datetime import datetime
+from datetime import datetime, date
 
 class Query(BaseModel):
     query_text: str = Field(default="", 
@@ -52,7 +52,7 @@ class PersonalStatistics(BaseModel):
             "criterion_4": 0.0
         }]
     )
-    activity: Dict[str, Any] = Field(
+    total_activity: Dict[str, Any] = Field(
         default={
             "total_queries": 0,
             "total_conversations": 0,
@@ -62,6 +62,16 @@ class PersonalStatistics(BaseModel):
             "total_queries": 10,
             "total_conversations": 15,
             "tasks_solved": 3
+        }]
+    )
+    daily_activity: List[Dict[str, Any]] = Field(
+        default={
+            "date": None,
+            "number_of_queries": 0
+        },
+        examples = [{
+            "date": "%Y-%m-%d",
+            "number_of_queries": 34
         }]
     )
 

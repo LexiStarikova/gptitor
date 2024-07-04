@@ -281,12 +281,37 @@ def calculate_personal_statistics(user_id: int):
         data = cursor.fetchone()
         if not data:
             raise HTTPException(status_code=404, detail=f"Personal statistics with ID {query_id} not found.")
-        activity = {
+        total_activity = {
             "total_queries": data[0],
             "total_conversations": data[1],
             "tasks_solved": data[2]
         }
-        return PersonalStatistics(metrics=metrics, activity=activity)
+        select_query = '''SELECT 
+                            DATE(messages.created_at) AS message_date,
+                            COUNT(messages.message_id) AS daily_message_count
+                        FROM 
+                            messages
+                        JOIN 
+                            conversations
+                        ON 
+                            messages.conversation_id = conversations.conversation_id
+                        WHERE 
+                            messages.message_class = 'Request'
+                            AND conversations.user_id = ?
+                        GROUP BY 
+                            DATE(messages.created_at)
+                        ORDER BY 
+                            message_date;
+                        '''
+        cursor.execute(select_query, (user_id,))
+        data = cursor.fetchall()
+        if not data:
+            raise HTTPException(status_code=404, detail=f"Daily activity for ID {query_id} not found.")
+        daily_activity: List[Dict[str, Any]] = [
+            {"date":row[0], "number_of_queries":row[1]}
+            for row in data
+        ]
+        return PersonalStatistics(metrics=metrics, total_activity=total_activity, daily_activity=daily_activity)
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
     finally:
