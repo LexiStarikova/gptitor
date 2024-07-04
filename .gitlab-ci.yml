@@ -1,10 +1,18 @@
 stages:
+  - cleanup
   - build
   - test
   - deploy
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   APP: "my-app"
+cleanup:
+  stage: cleanup
+  image: docker:24.0.5
+  script:
+    - docker system prune -af
+    - docker volume prune -f
+    - df -h
 build:
   stage: build
   image: docker:24.0.5
@@ -71,3 +79,8 @@ deploy:
     - dev-env
   needs:
     - container_scanning
+check_disk_space:
+  stage: .pre
+  script:
+    - df -h
+    - docker system df
