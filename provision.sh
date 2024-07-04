@@ -35,7 +35,7 @@ sudo usermod -aG docker gitlab-runner
 sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
 sudo gitlab-runner start
 
-RUNNER_TOKEN="glrt-d7Bxo_zFBvV98AdsL9rH"
+RUNNER_TOKEN="glrt-z6PpGXcoqhkBLbHgose-"
 
 sudo gitlab-runner register \
   --non-interactive \
