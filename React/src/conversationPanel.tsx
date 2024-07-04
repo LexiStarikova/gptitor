@@ -51,6 +51,8 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
     const handleSend = async () => {
         if (text.trim() === "") return;
         setText('');
+        const newRequest = { id : 0, text : text};
+        setRequests(prevRequests => [...prevRequests, newRequest]);
 
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
@@ -76,8 +78,14 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
             }
             console.log('Message sent successfully');
             const data = await response.json();
-            const newRequest = { id : data.query_id, text : text};
-            setRequests(prevRequests => [...prevRequests, newRequest]);
+            setRequests((prevRequests) => {
+                const updatedMessages = [...prevRequests];
+                const lastIndex = updatedMessages.length - 1;
+                if (lastIndex >= 0) {
+                  updatedMessages[lastIndex].id = data.query_id;
+                }
+                return updatedMessages;
+            });
             setResponses(prevResponses => [...prevResponses, {id : data.response_id, text : data.response_text}]);
             setFeedback(data.comment);
             console.log(data.metrics);
