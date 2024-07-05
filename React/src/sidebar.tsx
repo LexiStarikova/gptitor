@@ -34,10 +34,18 @@ const Sidebar: React.FC<SidebarProps> = ({
     const toggleSidebar = () => {
         setSidebarVisible(prev => !prev);
     };
+
+    const handleMouseEnter = () => {
+        setSidebarVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+        setSidebarVisible(false);
+    };
     
     return (
         <div>
-            <div className={`sidebar ${sidebarVisible ? 'sidebar-visible' : ''} sidebarshown`}>
+            <div className={`sidebar ${sidebarVisible ? 'sidebar-visible' : ''} sidebarshown`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 <div className='sidetitle'>
                     <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconout' onClick={toggleSidebar}>
                         <path d="M27 24.0807H3M27 15.0718H3M27 6.06299H3" stroke="#3B4168" strokeWidth="3" strokeLinecap="round" />
