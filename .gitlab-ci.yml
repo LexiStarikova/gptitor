@@ -19,6 +19,19 @@ build:
     - docker tag my-docker-image $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:$CI_JOB_ID
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
+test:
+  stage: test
+  image: node:16
+  before_script:
+    - npm install
+  script:
+    - npm run test
+  artifacts:
+    when: always
+    reports:
+      junit: junit.xml
+    paths:
+      - coverage/
 container_scanning:
   stage: test
   image:

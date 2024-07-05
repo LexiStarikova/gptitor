@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "test": "jest",
+    "test": "jest --ci --reporters=default --reporters=jest-junit",
     "build": "babel src -d dist && vite build",
     "dev": "vite"
+  },
+  "jest-junit": {
+    "output": "./junit.xml"
   },
   "dependencies": {
     "react": "^18.2.0",
