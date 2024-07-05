@@ -33,10 +33,10 @@ jest_tests:
       - junit.xml
     reports:
       junit: junit.xml
-    tags:
-      - docker
-    needs:
-      - build
+  tags:
+    - docker
+  needs:
+    - build
 container_scanning:
   stage: test
   image:
