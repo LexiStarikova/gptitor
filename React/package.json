@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "test": "jest --ci --reporters=default --reporters=jest-junit",
+    "test": "jest --coverage",
     "build": "babel src -d dist && vite build",
     "dev": "vite"
   },
   "jest": {
+    "collectCoverage": true,
     "coverageDirectory": "coverage",
     "reporters": [
       "default",
