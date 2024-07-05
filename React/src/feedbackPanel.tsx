@@ -61,6 +61,20 @@ const FeedbackPanel = () => {
         resetScore();
     }, [setFeedback, setCriteria, setTask]);
 
+    const returnOverallScore = () => {
+        let score = ((criteria.criterion_1
+            + criteria.criterion_2
+            + criteria.criterion_3
+            + criteria.criterion_4) / 20 * 5)
+        if (score % 1 === 0) return score.toFixed(0)
+        else return score.toFixed(1)
+    }
+    
+    const returnFloatOrNum = (criterion: number) => {
+        if (criterion % 1 === 0) return criterion.toFixed(0)
+        else return criterion.toFixed(1)
+    }
+
     return (
         <div>
             <div className='feedbackbigcontainter'>
@@ -85,9 +99,12 @@ const FeedbackPanel = () => {
                             <div className='progressbar-rounded-base-circle' style={{
                                 background:
                                     `radial-gradient(closest-side, white 80%, transparent 80% 100%),
-                                conic-gradient(#0060AE ${((criteria.criterion_1 + criteria.criterion_2 + criteria.criterion_3 + criteria.criterion_4) / 2 * 10).toFixed(0)}%, #D3EBFF 0)`
+                                conic-gradient(#0060AE ${((criteria.criterion_1
+                                    + criteria.criterion_2
+                                    + criteria.criterion_3
+                                    + criteria.criterion_4) * 5)}%, #D3EBFF 0)`
                             }}>
-                                <h3 className='progressbar-rounded-score'>{((criteria.criterion_1 + criteria.criterion_2 + criteria.criterion_3 + criteria.criterion_4) / 4).toFixed(0)}/5</h3>
+                                <h3 className='progressbar-rounded-score'>{returnOverallScore()}/5</h3>
                             </div>
                         </div>
                         <div className='criterias'>
@@ -106,11 +123,11 @@ const FeedbackPanel = () => {
                                 </svg>
                                 <div className='barF'>
                                     <div className='critdescF'>
-                                        <h6>{criteria.criterion_1.toFixed(0)}/5</h6>
+                                        <h6>{returnFloatOrNum(criteria.criterion_1)}/5</h6>
                                         <p className='p5'>Conciseness & Focus</p>
                                     </div>
                                     <div className='progbarF'>
-                                        <div className='progressbar-internals' style={{ width: `${(criteria.criterion_1 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                        <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_1*20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                     </div>
                                 </div>
                                 <div className='detailsF'>
@@ -135,11 +152,11 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criteria.criterion_2.toFixed(0)}/5</h6>
+                                            <h6>{returnFloatOrNum(criteria.criterion_2)}/5</h6>
                                             <p className='p5'>Clarity & Specificity</p>
                                         </div>
                                         <div className='progbarF'>
-                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_2 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                            <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_2*20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -165,11 +182,11 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criteria.criterion_3.toFixed(0)}/5</h6>
+                                            <h6>{returnFloatOrNum(criteria.criterion_3)}/5</h6>
                                             <p className='p5'>Relevance & Context</p>
                                         </div>
                                         <div className='progbarF'>
-                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_3 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                            <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_3*20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -193,11 +210,11 @@ const FeedbackPanel = () => {
 
                                     <div className='barF'>
                                         <div className='critdescF'>
-                                            <h6>{criteria.criterion_4.toFixed(0)}/5</h6>
+                                            <h6>{returnFloatOrNum(criteria.criterion_4)}/5</h6>
                                             <p className='p5'>Purpose & Output</p>
                                         </div>
                                         <div className='progbarF'>
-                                            <div className='progressbar-internals' style={{ width: `${(criteria.criterion_4 / 5 * 100).toFixed(0)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                            <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_4*20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                         </div>
                                     </div>
                                     <div className='detailsF'>

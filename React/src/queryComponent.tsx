@@ -33,7 +33,9 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, 
           fill="#3B4168"
         />
       </svg>
-      <p className='queryname'>{queryText}</p>
+        <p className='queryname' onClick={() => onOpen(stored_id)}>
+        {queryText}
+        query</p>
       <div className='actions'>
         <svg
           width="16"
