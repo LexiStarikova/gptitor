@@ -1,13 +1,15 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Sidebar from './sidebar.tsx';
-import NavBar from './header.tsx';
-import StudyMode from './studymode.tsx';
-import Profile from './profile.tsx';
+
 import { useState, useContext } from 'react';
-import { FeedbackContext } from './feedbackContext.tsx';
-import { Metrics } from './models/metrics';
+import { FeedbackContext } from './feedbackContext';
 import FeedbackContextProvider from './feedbackContextProvider';
+import Sidebar from './sidebar';
+import NavBar from './header';
+import StudyMode from './studymode';
+import Profile from './profile';
+import { Metrics } from './models/metrics';
+
 
 interface Message {
   id: number;

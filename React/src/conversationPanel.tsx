@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
@@ -19,11 +19,7 @@ interface ConversationPanelProps {
 
 export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses, setResponses, requests, setRequests, conversation_id }) => {
     const [text, setText] = useState<string>('');
-    const { feedback, setFeedback } = useContext(FeedbackContext);
-    const { criteria, setCriteria } = useContext(FeedbackContext);
-    const { task, setTask } = useContext(FeedbackContext);
-
-
+    const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
 
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -177,11 +173,12 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
                         onChange={handleTextChange}
                         onKeyPress={handleKeyPress}
                     ></textarea>
-                    <div className='sendBtn' onClick={handleSend}>
+                    <button className='sendBtn' role="button" aria-label="Send" onClick={handleSend}>
                         <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg1'>
-                            <path d="M23.3154 3.64397L11.7983 15.1611M4.09215 9.37411L22.0265 3.15198C23.131 2.76881 24.1906 3.82842 23.8074 4.93287L17.5853 22.8672C17.159 24.0959 15.4337 24.1295 14.9598 22.9185L12.112 15.6407C11.9698 15.2772 11.6822 14.9896 11.3187 14.8474L4.04089 11.9995C2.82984 11.5257 2.86353 9.80037 4.09215 9.37411Z" stroke="white" stroke-width="2" stroke-linecap="round" />
+                            <path d="M23.3154 3.64397L11.7983 15.1611M4.09215 9.37411L22.0265 3.15198C23.131 2.76881 24.1906 3.82842 23.8074 4.93287L17.5853 22.8672C17.159 24.0959 15.4337 24.1295 14.9598 22.9185L12.112 15.6407C11.9698 15.2772 11.6822 14.9896 11.3187 14.8474L4.04089 11.9995C2.82984 11.5257 2.86353 9.80037 4.09215 9.37411Z" stroke="white" strokeWidth="2" strokeLinecap="round" />
                         </svg>
-                    </div>
+                    </button>
+
                 </div>
             </div>
         </div>
