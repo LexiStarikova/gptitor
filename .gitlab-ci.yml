@@ -31,10 +31,10 @@ jest_tests:
   artifacts:
     when: always
     paths:
-      - coverage/
-      - junit.xml
+      - React/coverage/  
+      - React/junit.xml  
     reports:
-      junit: junit.xml
+      junit: React/junit.xml 
   tags:
     - docker
   needs:
