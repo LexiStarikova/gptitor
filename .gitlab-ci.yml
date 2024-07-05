@@ -22,7 +22,7 @@ build:
 jest_tests:
   stage: test
   image: node:16-alpine
- before_script:
+  before_script:
     - cd React  # Change directory to where package.json resides
     - npm install
   script:
