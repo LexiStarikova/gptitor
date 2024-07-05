@@ -19,19 +19,24 @@ build:
     - docker tag my-docker-image $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:$CI_JOB_ID
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
-test:
+jest_tests:
   stage: test
   image: node:16
   before_script:
     - npm install
   script:
-    - npm run test
+    - npm run test -- --coverage --reporters=default --reporters=jest-junit
   artifacts:
     when: always
-    reports:
-      junit: junit.xml
     paths:
       - coverage/
+      - junit.xml
+    reports:
+      junit: junit.xml
+    tags:
+      - docker
+    needs:
+      - build
 container_scanning:
   stage: test
   image:

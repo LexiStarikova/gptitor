@@ -11,7 +11,11 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$'
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  reporters: [
+    'default',
+    ['jest-junit', { outputDirectory: './', outputName: 'junit.xml' }]
+  ],
 };
 
 export default config;
