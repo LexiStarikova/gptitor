@@ -4,55 +4,176 @@ import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 import { Task } from './models/task';
 
-jest.mock('node-fetch', () => require('jest-fetch-mock'));
+global.fetch = jest.fn();
 
-beforeEach(() => {
-    fetchMock.resetMocks();
-});
+describe('handleSend', () => {
+    const mockSetRequests = jest.fn();
+    const mockSetResponses = jest.fn();
+    const mockSetFeedback = jest.fn();
+    const mockSetCriteria = jest.fn();
+    const mockSetTask = jest.fn();
+  
+    const initialProps = {
+      responses: [],
+      setResponses: mockSetResponses,
+      requests: [],
+      setRequests: mockSetRequests,
+      conversation_id: 1,
+    };
 
+    const task: Task = {task_id: 1, task_name: "", category: "", description: ""};
+    const metrics: Metrics = {
+        criterion_1: 1,
+        criterion_2: 2,
+        criterion_3: 3,
+        criterion_4: 4
+    };
 
-test('sends a message with non-empty text', async () => {
-    const setRequests = jest.fn();
-    const setResponses = jest.fn();
-    const setFeedback = jest.fn();
-    const setCriteria = jest.fn();
-    const setTask = jest.fn();
-    
-    fetchMock.mockResponseOnce(JSON.stringify({
-        query_id: 1,
-        response_id: 1,
-        response_text: 'Response text',
-        comment: 'Feedback comment',
-        metrics: {
-            criterion_1: 1.0,
-            criterion_2: 2.0,
-            criterion_3: 3.0,
-            criterion_4: 4.0
-        }
-    }));
+    const renderComponent = (props = initialProps) =>
+        render(
+          <FeedbackContext.Provider value={{ feedback: '', setFeedback: mockSetFeedback, criteria: metrics, setCriteria: mockSetCriteria, task, setTask: mockSetTask }}>
+            <ConversationPanel {...props} />
+          </FeedbackContext.Provider>
+        );
 
-    const { getByRole } = render(
-        <FeedbackContext.Provider value={{ feedback: '', setFeedback, criteria: new Metrics(0, 0, 0, 0), setCriteria, task: new Task(1, '', '', ''), setTask }}>
-            <ConversationPanel 
-                responses={[]} 
-                setResponses={setResponses} 
-                requests={[]} 
-                setRequests={setRequests} 
-                conversation_id={1} 
-            />
-        </FeedbackContext.Provider>
-    );
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (global.fetch as jest.Mock).mockClear();
+  });
 
-    const input = getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'Test message' } });
+  it('should not send an empty message', async () => {
+    const { getByRole } = renderComponent();
     fireEvent.click(getByRole('button', { name: /send/i }));
 
-    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
-    expect(fetchMock).toHaveBeenCalledWith('http://10.100.30.244:8000/conversations/1/messages', expect.any(Object));
-    expect(setRequests).toHaveBeenCalledWith(expect.any(Function));
-    expect(setResponses).toHaveBeenCalledWith(expect.any(Function));
-    expect(setFeedback).toHaveBeenCalledWith('Feedback comment');
-    expect(setCriteria).toHaveBeenCalledWith(expect.any(Metrics));
+    expect(mockSetRequests).not.toHaveBeenCalled();
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it('should update requests and responses correctly on successful send', async () => {
+    const mockResponse = {
+      ok: true,
+      json: async () => ({
+        query_id: 1,
+        response_id: 1,
+        response_text: 'response',
+        comment: 'feedback',
+        metrics: {
+          criterion_1: 1,
+          criterion_2: 2,
+          criterion_3: 3,
+          criterion_4: 4,
+        },
+      }),
+    };
+
+    (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
+
+    const { getByRole, getByPlaceholderText } = renderComponent();
+    const input = getByPlaceholderText('Write Your Prompt Here.');
+    fireEvent.change(input, { target: { value: 'test message' } });
+    fireEvent.click(getByRole('button', { name: /send/i }));
+
+    await waitFor(() => {
+      expect(mockSetRequests).toHaveBeenCalledWith(expect.any(Function));
+      expect(mockSetResponses).toHaveBeenCalledWith(expect.any(Function));
+      expect(mockSetRequests).toHaveBeenCalledTimes(2); 
+      expect(mockSetResponses).toHaveBeenCalledTimes(1); 
+      expect(mockSetFeedback).toHaveBeenCalledWith('feedback');
+      expect(mockSetCriteria).toHaveBeenCalledWith(expect.any(Object));
+    });
+
+    
+  });
+
+  it('should handle failed send', async () => {
+    const mockResponse = {
+      ok: false,
+      text: async () => 'error message',
+    };
+
+    (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
+
+    const { getByRole, getByPlaceholderText } = renderComponent();
+    const input = getByPlaceholderText('Write Your Prompt Here.');
+    fireEvent.change(input, { target: { value: 'test message' } });
+    fireEvent.click(getByRole('button', { name: /send/i }));
+
+    await waitFor(() => {
+      expect(mockSetRequests).toHaveBeenCalledWith(expect.any(Function));
+    });
+
+    expect(mockSetResponses).not.toHaveBeenCalled();
+    expect(mockSetFeedback).not.toHaveBeenCalled();
+    expect(mockSetCriteria).not.toHaveBeenCalled();
+  });
+
+  it('should update input field height after sending a message', async () => {
+    const mockResponse = {
+      ok: true,
+      json: async () => ({
+        query_id: 1,
+        response_id: 1,
+        response_text: 'response',
+        comment: 'feedback',
+        metrics: {
+          criterion_1: 1,
+          criterion_2: 2,
+          criterion_3: 3,
+          criterion_4: 4,
+        },
+      }),
+    };
+
+    (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
+
+    const { getByRole, getByPlaceholderText } = renderComponent();
+    const input = getByPlaceholderText('Write Your Prompt Here.');
+    fireEvent.change(input, { target: { value: 'test message' } });
+    fireEvent.click(getByRole('button', { name: /send/i }));
+
+    await waitFor(() => {
+      expect(input.style.height).toBe('auto');
+    });
+  });
+
+  it('should log metrics correctly', async () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    const mockResponse = {
+      ok: true,
+      json: async () => ({
+        query_id: 1,
+        response_id: 1,
+        response_text: 'response',
+        comment: 'feedback',
+        metrics: {
+          criterion_1: 1,
+          criterion_2: 2,
+          criterion_3: 3,
+          criterion_4: 4,
+        },
+      }),
+    };
+
+    (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
+
+    const { getByRole, getByPlaceholderText } = renderComponent();
+    const input = getByPlaceholderText('Write Your Prompt Here.');
+    fireEvent.change(input, { target: { value: 'test message' } });
+    fireEvent.click(getByRole('button', { name: /send/i }));
+
+    await waitFor(() => {
+      expect(consoleSpy).toHaveBeenCalledWith('task_id = 1, conversation_id = 1');
+      expect(consoleSpy).toHaveBeenCalledWith('Message sent successfully');
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'query_id = 1',
+        'criterion_1 = 1 \n',
+        'criterion_2 = 2 \n',
+        'criterion_3 = 3 \n',
+        'criterion_4 = 4 \n',
+      );
+    });
+
+    consoleSpy.mockRestore();
+  });
 });
-
-

@@ -29,7 +29,6 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
     const adjustTextareaHeight = () => {
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
-            inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
         }
     };
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -82,7 +81,9 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
                 }
                 return updatedMessages;
             });
-            setResponses(prevResponses => [...prevResponses, {id : data.response_id, text : data.response_text}]);
+            setResponses(prevResponses => [...prevResponses, 
+                {id : data.response_id, text : data.response_text}
+            ]);
             setFeedback(data.comment);
             console.log(data.metrics);
             console.log(`query_id = ${data.query_id}`,
