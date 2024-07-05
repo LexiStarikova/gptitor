@@ -4,7 +4,10 @@ import Sidebar from './sidebar.tsx';
 import NavBar from './header.tsx';
 import StudyMode from './studymode.tsx';
 import Profile from './profile.tsx';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { FeedbackContext } from './feedbackContext.tsx';
+import { Metrics } from './models/metrics';
+import FeedbackContextProvider from './feedbackContextProvider';
 
 interface Message {
   id: number;
@@ -18,8 +21,9 @@ interface MessageSimplifyed {
   text: string
 }
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
 
+  const { feedback, setFeedback, criteria, setCriteria, task, setTask } = useContext(FeedbackContext);
   const [convId, setConvId] = useState(1);
   const [queries, setQueries] = useState<{ display_id: number; stored_id: number; text: string }[]>([]);
   const [nextId, setNextId] = useState(1);
@@ -96,6 +100,26 @@ const openConversation = async (stored_id: number) => {
 
   setResponses(extractedResponses);
   setRequests(extractedRequests);
+
+  if (extractedResponses.length > 0) {
+      const lastRequest = extractedRequests[extractedRequests.length - 1].id;
+      const response_2 = await fetch(`http://10.100.30.244:8000/feedback/${lastRequest}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      const data_2 = await response_2.json();
+
+      setFeedback(data_2.comment);
+      setCriteria(new Metrics(data_2.metrics.criterion_1,
+        data_2.metrics.criterion_2,
+        data_2.metrics.criterion_3,
+        data_2.metrics.criterion_4));
+    } else {
+      setFeedback('');
+      setCriteria(new Metrics(0,0,0,0));
+    }
 };
 
 const deleteConversation = async (display_id: number, stored_id: number) => {
@@ -131,5 +155,13 @@ return (
   </Router>
 )
 }
+
+const App: React.FC = () => {
+  return (
+    <FeedbackContextProvider>
+      <AppContent />
+    </FeedbackContextProvider>
+  );
+};
 
 export default App;
