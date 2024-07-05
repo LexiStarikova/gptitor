@@ -12,10 +12,12 @@ const config: Config.InitialOptions = {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  coverageDirectory: 'coverage', // Directory where coverage reports are stored
+  collectCoverage: true, // Enable collecting coverage information
   reporters: [
     'default',
-    ['jest-junit', { outputDirectory: './', outputName: 'junit.xml' }]
-  ],
+    ['jest-junit', { outputDirectory: 'junit', outputName: 'junit.xml' }]
+  ]
 };
 
 export default config;
