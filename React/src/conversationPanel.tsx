@@ -106,6 +106,25 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
         }
     };
 
+    const handleClickFeedback = (query_id: number) => async (event: React.MouseEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        await showFeedback(query_id);
+      };
+
+    const showFeedback = async (query_id : number) => {
+        const response = await fetch(`http://10.100.30.244:8000/feedback/${query_id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+          const data = await response.json();
+          setFeedback(data.comment);
+          setCriteria(new Metrics(data.metrics.criterion_1,
+            data.metrics.criterion_2,
+            data.metrics.criterion_3,
+            data.metrics.criterion_4));
+    };
 
     return (
         <div>
@@ -120,7 +139,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
                         {requests.map((request, index) => (
                             <div key={`conversation-${index}`} className='conversation-item'>
                                 <div className='req'>
-                                    <div className='reqbub'>
+                                    <div className='reqbub' onClick={handleClickFeedback(request.id)}>
                                         <p>{request.text}</p>
                                     </div>
                                     <div className='pdpchat'></div>
