@@ -112,22 +112,22 @@ const deleteConversation = async (display_id: number, stored_id: number) => {
 return (
   <Router basename='/gptitor'>
     <NavBar></NavBar>
-    <Sidebar
-      UpdateQueries={UpdateQueries}
-      CreateConversation={CreateConversation}
-      openConversation={openConversation}
-      deleteConversation={deleteConversation}
-      requests={requests}
-      responses={responses}
-      queries={queries}
-    />
-    <main className='main-height'>
+    <div className='sidebarr'>
+      <Sidebar
+        UpdateQueries={UpdateQueries}
+        CreateConversation={CreateConversation}
+        openConversation={openConversation}
+        deleteConversation={deleteConversation}
+        requests={requests}
+        responses={responses}
+        queries={queries}
+      />
+    </div>
       <Routes>
-        <Route path="/" element={<Navigate to="/chatpage" />} />
-        <Route path='/chatpage' element={<StudyMode requests={requests} setRequests={setRequests} responses={responses} setResponses={setResponses} conversation_id={convId} />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
+          <Route path="/" element={<Navigate to="/chatpage" />} />
+            <Route path='/chatpage' element={<StudyMode requests={requests} setRequests={setRequests} responses={responses} setResponses={setResponses} conversation_id={convId} />}></Route>
+          <Route path='/profile' element={<Profile />}></Route>
       </Routes>
-    </main>
   </Router>
 )
 }

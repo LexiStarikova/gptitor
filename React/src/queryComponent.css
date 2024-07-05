@@ -1,0 +1,15 @@
+.query {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.queryname{
+    margin: 0px 25px 0px 10px;
+}
+.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

@@ -1,16 +1,13 @@
-.chatpage {
-    display: flex;
-    flex-direction: row;
-    column-gap: 60px;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    padding-bottom: 3%;
-    background: none;
+.panelscontainer{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: calc(100vh);
+    /* overflow-x: auto; */
 }
 
-body {
-    margin: 0;
-    background-image: radial-gradient(circle at right bottom, #AAABFA 10%, #efefef 75%);
-    background-repeat: no-repeat;
+.leftgradient{
+    position: relative;
+    bottom: -437px;
+    
 }

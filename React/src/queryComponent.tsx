@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './queryComponent.css'
 
 type QueryComponentProps = {
   display_id: number;
@@ -32,7 +33,7 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, 
           fill="#3B4168"
         />
       </svg>
-      <p>{queryText}</p>
+      <p className='queryname'>{queryText}</p>
       <div className='actions'>
         <svg
           width="16"

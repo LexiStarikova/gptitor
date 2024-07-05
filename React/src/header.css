@@ -1,7 +1,9 @@
 .NavContanaire {
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
-    width: 100%;
+    align-items: center;
+    width: 100vw;
     height: 64px;
     background-color: #FFFFFF;
 }
@@ -9,40 +11,30 @@
 .IULogo {
     position: relative;
     left: 28px;
-    top: calc(50% - 36px/2);
-}
-
-.choices {
-    color: #0071CE;
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 9px;
 }
 
 .navcontent {
-    position: relative;
-    left: 200px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    column-gap: 2.3vw;
+    
+
+}
+
+.choices{
+    display: flex;
     align-items: center;
-    column-gap: 44px;
-    justify-self: center;
+    column-gap: 5px;
+    color: #3B4168;
 }
 
 .PProfile {
-    position: relative;
+    right: 10px;
     display: flex;
-    flex-direction: row;
-    column-gap: 20px;
-    align-self: center;
-    left: 400px;
+    align-items: center;
+    column-gap: 40px;
 }
 
 .msgNotif {
-    position: relative;
     width: 44px;
     height: 44px;
     background-color: #FFFFFF;
@@ -55,23 +47,20 @@
     cursor: pointer;
 }
 
+
 .ProfileBox {
+    position: relative;
+    right: 28px;
     width: 145px;
     height: 45px;
     background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    column-gap: 8px;
-    transition: background-color 0.8s ease;
     cursor: pointer;
 }
-
-
-
 .pdp {
     width: 32px;
     height: 32px;
@@ -79,15 +68,7 @@
     border-radius: 50%;
 }
 
-.pdpt {
+.ProfileBox > p {
     color: #3B4168;
     transition: color 0.8s ease;
-}
-
-.ProfileBox:hover {
-    background-color: green;
-}
-
-.ProfileBox:hover .pdpt {
-    color: white;
 }

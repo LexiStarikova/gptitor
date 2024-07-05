@@ -1,7 +1,115 @@
-.conversationcontainer {
+.chatbigcontainter {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 10vh);
+    top: 0px;
+    left: 0px;
+    /* margin-top: 80px; */
+    margin-top: 10vh;
+    margin-left: 4vw;
+}
+
+
+
+.optionContainer{
+    background: linear-gradient(184.42deg, rgba(255, 255, 255, 0.7) 3.6%, rgba(255, 255, 255, 0.21) 130.07%);
+    border-bottom: 1px solid #2287DA;
+    border-radius: 10px 10px 0px 0px;
+    width: 91px;
+    height: 36px;
+}
+
+
+
+
+
+.conversationcontainer{
+    height: 78vh;
+    /* width: 1014px; */
+    width: 53vw;
+    /* height: 740px; */
+
+    background: rgba(245, 246, 248, 0.8);
+    box-shadow: 0px 4px 4px rgba(170, 171, 250, 0.25);
+    border-radius: 0px 15px 15px 15px;
+}
+
+.option>p{
+    position: relative;
+    padding: 5px 15px;
+    margin: 0px;
+
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #2287DA;
+}
+
+.chatinput{
+
+    position: relative;
+    /* padding-top: 10px; */
+    background: #FFFFFF;
+    border: 3.5px solid #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;    
+    transition: min-height 0.8s ease;
+    resize: none;
+
+    width: 100vh;
+}
+.convo{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+}
+
+.inputField{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    /* height: 30px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19); */
+    
+    /* overflow-y: auto; */
+}
+
+
+.sendBtn{
+    /* Ellipse 3 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 37px;
+    width: 37px;
+    background: #0060AE;
+    border-radius: 50%;
+
+}
+
+::placeholder {
+    
+    color: #6F6F6F;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    
+}
+
+
+
+/* .conversationcontainer {
     position: relative;
     width: 800px;
-    height: 750px;
+    height: 720px;
     border-radius: 0 25px 25px 25px;
     background-color: #F5F6F8;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
@@ -45,6 +153,9 @@
 }
 
 .chatbigcontainter {
+    position: absolute;
+    top: -100px;
+    
     display: flex;
     flex-direction: column;
     column-gap: 0px;
@@ -251,4 +362,4 @@
         opacity: 1;
         transform: translateY(0);
     }
-}
+}*/
