@@ -22,10 +22,12 @@ build:
 jest_tests:
   stage: test
   image: node:16
+  image: node:16-alpine
   before_script:
+    - cd React
     - npm install
   script:
-    - npm run test
+    - npm run test -- --coverage --reporters=default --reporters=jest-junit
   artifacts:
     when: always
     paths:
