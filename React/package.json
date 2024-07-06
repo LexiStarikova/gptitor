@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "vite",
+    "lint": "npx eslint . -f html -o eslint-report.html",
+    "eslint-output": "eslint-output",
     "test": "jest --config jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "build": "babel src -d dist && vite build",
     "dev": "vite"
@@ -14,14 +16,20 @@
     "coverageDirectory": "coverage",
     "reporters": [
       "default",
-      ["jest-junit", { "outputDirectory": "./", "outputName": "junit.xml" }]
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "./",
+          "outputName": "junit.xml"
+        }
+      ]
     ]
   },
   "dependencies": {
+    "jest-junit": "^12.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.24.0",
-    "jest-junit": "^12.0.0"
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.7",
@@ -39,6 +47,12 @@
     "@typescript-eslint/parser": "^7.14.1",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",
+    "eslint-formatter-gitlab": "^5.1.0",
+    "eslint-formatter-html": "^2.7.2",
+    "eslint-formatter-json": "^8.40.0",
+    "eslint-formatter-pretty": "^6.0.1",
+    "eslint-html-reporter": "^0.7.4",
+    "eslint-output": "^3.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "identity-obj-proxy": "^3.0.0",

@@ -1,6 +1,7 @@
 stages:
   - cleanup
   - build
+  - lint
   - test
   - deploy
 variables:
@@ -36,6 +37,22 @@ build:
     - docker tag my-docker-image $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:$CI_JOB_ID
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
+lint:
+  stage: lint
+  image: node:16  
+  before_script:
+    - cd React
+    - npm install  
+  script:
+    - npm run lint
+  artifacts:
+    when: always
+    paths:
+      - React/eslint-report.html
+  tags:
+    - docker
+  needs:
+    - build
 jest_tests:
   stage: test
   image: node:16-alpine
@@ -45,11 +62,12 @@ jest_tests:
   script:
     - npm run test
   artifacts:
+    when: always
     paths:
-      - coverage/  # Adjust paths based on your project structure
-      - junit.xml  # Adjust paths based on your project structure
+      - React/coverage/  # Adjust paths based on your project structure
+      - React/junit.xml  # Adjust paths based on your project structure
     reports:
-      junit: junit.xml  # Adjust paths based on your project structure
+      junit: React/junit.xml  # Adjust paths based on your project structure
   tags:
     - docker
   needs:
