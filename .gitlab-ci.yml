@@ -45,6 +45,7 @@ jest_tests:
   script:
     - npm run test
   artifacts:
+    when: always
     paths:
       - React/coverage/  # Adjust paths based on your project structure
       - React/junit.xml  # Adjust paths based on your project structure
