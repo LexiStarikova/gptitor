@@ -27,8 +27,9 @@ lint:
     - cd React
     - npm install  
   script:
-    - npm run lint || true  # Run lint and ignore errors
+    - npm run lint
   artifacts:
+    when: always
     paths:
       - React/eslint-report.html
   tags:
