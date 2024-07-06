@@ -2,15 +2,19 @@
     position: absolute;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
     height: calc(100vh - 10vh);
     top: 0px;
     left: 0px;
-    /* margin-top: 80px; */
     margin-top: 10vh;
-    margin-left: 4vw;
+    margin-left: 90px;
 }
 
-
+.area{
+    display: flex;
+    flex-direction: column;
+}
 
 .optionContainer{
     background: linear-gradient(184.42deg, rgba(255, 255, 255, 0.7) 3.6%, rgba(255, 255, 255, 0.21) 130.07%);
@@ -20,11 +24,13 @@
     height: 36px;
 }
 
-
-
-
-
 .conversationcontainer{
+    padding-bottom: 10px;
+    position: relative;
+    display: flex;
+    row-gap: 15px;
+    flex-direction: column;
+    align-items: center;
     height: 78vh;
     /* width: 1014px; */
     width: 53vw;
@@ -33,6 +39,7 @@
     background: rgba(245, 246, 248, 0.8);
     box-shadow: 0px 4px 4px rgba(170, 171, 250, 0.25);
     border-radius: 0px 15px 15px 15px;
+    overflow-y: scroll;
 }
 
 .option>p{
@@ -54,33 +61,44 @@
     /* padding-top: 10px; */
     background: #FFFFFF;
     border: 3.5px solid #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
     border-radius: 20px;    
     transition: min-height 0.8s ease;
     resize: none;
 
     width: 100vh;
 }
-.convo{
+.Convo{
+    position: relative;
+    padding-top: 20px;
+    width: 90%;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
     align-items: center;
 }
 
+.conversation-item{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
 .inputField{
-    z-index: 0 !important;
+    position: relative;
+    width: 51vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 10px;
     /* height: 30px; */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
-        0 6px 20px rgba(0, 0, 0, 0.19); */
+     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19);  */
     
     /* overflow-y: auto; */
 }
-
 
 .sendBtn{
     /* Ellipse 3 */
@@ -88,8 +106,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 37px;
-    width: 37px;
+    height: 40px;
+    width: 40px;
     background: #0060AE;
     border-radius: 50%;
 
@@ -105,7 +123,154 @@
     
 }
 
+.pdpchat{
 
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    background-color: black;
+    border-radius: 50%;
+
+
+}
+
+.req{
+    position: relative;
+    right: 0px;
+    width: 90%;
+    margin-left: auto;
+    display: flex;
+    align-items:flex-end;
+    justify-content: end;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.reqbub {
+
+    /* Rectangle 4153 */
+
+    position: relative;
+    width: auto;
+    max-width: 80%;
+    margin-left: 20%;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 20px;
+    /* word-wrap: break-word; */
+    display: block;
+}
+
+.requesttext {
+    position: relative;
+    justify-content: center;
+    margin: 0px;
+    padding: 10px 17px;
+    width: 95%;
+    white-space: normal;
+    word-wrap: break-word;
+    text-wrap:stable;
+}
+
+.rescomplete{
+    position: relative;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.resp{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: flex-end;
+}
+
+.modelpdp{
+
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    margin-bottom: 25px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+
+
+}
+
+.resbub {
+
+    /* Rectangle 4153 */
+
+    position: relative;
+    width: auto;
+    max-width: 80%;
+    height: auto;
+    margin-right: 20%;
+    background: #E5F5FF;
+    border-radius: 20px;
+}
+
+.restext{
+    position: relative;
+    justify-content: center;
+    margin: 0px;
+    padding: 10px 17px;
+    width: 95%;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+
+.reactions{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2px;
+    margin-left: 10px;
+}
+
+.respreacts {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.like,
+.dislike,
+.pin {
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+}
+
+.iconn :hover {
+    stroke: #40BA21;
+}
+
+.iconnn :hover {
+    stroke: #C41717;
+}
+
+.iconnnn :hover {
+    stroke: #FF7139;
+}
+
+.Convo::-webkit-scrollbar-track {
+    background: #FFFFFF;
+}
+
+.Convo::-webkit-scrollbar-thumb {
+    background: #3B4168;
+    border-radius: 25px;
+}
+
+/* .conversation-item{
+    position: relative;
+    width: 40vw;
+} */
 
 /* .conversationcontainer {
     position: relative;

@@ -28,7 +28,9 @@
 }
 
 .PProfile {
-    right: 10px;
+    /* margin-right: 10px; */
+    position: relative;
+    width: auto;
     display: flex;
     align-items: center;
     column-gap: 40px;
