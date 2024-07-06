@@ -27,7 +27,8 @@ lint:
     - cd React
     - npm install  
   script:
-    - npm run lint
+    - npx eslint . | tee eslint-console-output.txt  # run ESLint and save console output
+    - npx eslint . -f html -o eslint-report.html  # generate HTML report
   artifacts:
     paths:
       - React/eslint-console-output.txt
