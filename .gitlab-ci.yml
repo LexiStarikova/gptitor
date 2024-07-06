@@ -30,9 +30,9 @@ jest_tests:
   artifacts:
     paths:
       - React/coverage/  # Adjust paths based on your project structure
-      - junit.xml  # Adjust paths based on your project structure
+      - React/junit.xml  # Adjust paths based on your project structure
     reports:
-      junit: junit.xml  # Adjust paths based on your project structure
+      junit: React/junit.xml  # Adjust paths based on your project structure
   tags:
     - docker
   needs:
