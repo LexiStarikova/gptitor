@@ -1,60 +1,51 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Table
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy_json import NestedMutableJson
+from sqlalchemy.sql import func
+from .database import Base, engine 
 
-engine = create_engine('sqlite:///gptitor.db', echo=True)
-
-Base = declarative_base()
-
-# Define association table for Conversations <-> Messages (many-to-many relationship)
-conversation_message_association = Table(
-    'conversation_message_association',
-    Base.metadata,
-    Column('conversation_id', Integer, ForeignKey('conversations.conversation_id')),
-    Column('message_id', Integer, ForeignKey('messages.message_id'))
-)
-
-# Define User model
 class User(Base):
     __tablename__ = 'users'
     user_id = Column(Integer, primary_key=True, autoincrement=True)
     token = Column(String)
     name = Column(String)
 
-# Define Conversation model
 class Conversation(Base):
     __tablename__ = 'conversations'
     conversation_id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String)
-    user_id = Column(Integer, ForeignKey('users.user_id'))
-    messages = relationship('Message', secondary=conversation_message_association, backref='conversations')
-    llm_id = Column(Integer, ForeignKey('aimodels.llm_id'))
-    created_at = Column(DateTime)
+    user_id = Column(Integer, ForeignKey("users.user_id"))
+    llm_id = Column(Integer, ForeignKey("aimodels.llm_id"))
+    created_at = Column(DateTime, server_default=func.now())
 
-# Define AIModels model
+    messages = relationship("Message", back_populates="conversation")
+
 class AIModel(Base):
     __tablename__ = 'aimodels'
     llm_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     api = Column(String)
 
-# Define Message model
 class Message(Base):
     __tablename__ = 'messages'
     message_id = Column(Integer, primary_key=True, autoincrement=True)
-    task_id = Column(Integer)
+    task_id = Column(Integer, ForeignKey('tasks.task_id'))
     conversation_id = Column(Integer, ForeignKey('conversations.conversation_id'))
     message_class = Column(String)
     content = Column(String)
-    feedback_id = Column(Integer)
-    created_at = Column(DateTime)
+    feedback_id = Column(Integer, ForeignKey("feedback.feedback_id"))
+    created_at = Column(DateTime, server_default=func.now())
 
-# Define Feedback model (document-oriented table)
+    conversation = relationship("Conversation", back_populates="messages")
+    feedback = relationship("Feedback", back_populates="messages")
+
 class Feedback(Base):
     __tablename__ = 'feedback'
     feedback_id = Column(Integer, primary_key=True, autoincrement=True)
     comment = Column(String)
     metrics = Column(NestedMutableJson)
+
+    messages = relationship("Message", back_populates="feedback")
     
 class Task(Base):
     __tablename__ = 'tasks'
@@ -63,5 +54,4 @@ class Task(Base):
     task_name = Column(String)
     task_description = Column(String)
 
-# Create all tables in the database
 Base.metadata.create_all(engine)
