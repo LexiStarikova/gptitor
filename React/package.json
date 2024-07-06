@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "lint": "npx eslint . && npx eslint . -f html -o eslint-report.html",
+    "lint": "npx eslint . -f html -o eslint-report.html",
     "eslint-output": "eslint-output",
     "test": "jest --config jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "build": "babel src -d dist && vite build",
