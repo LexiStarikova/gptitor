@@ -11,11 +11,14 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', '@typescript-eslint'],
+  plugins: ['react-refresh', '@typescript-eslint', 'eslint-plugin-html'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
+    "html/report": {
+      "output": "eslint-report.html"
+    }
   },
 };
