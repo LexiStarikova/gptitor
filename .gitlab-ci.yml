@@ -29,7 +29,7 @@ jest_tests:
     - npm run test
   artifacts:
     paths:
-      - coverage/  # Adjust paths based on your project structure
+      - React/coverage/  # Adjust paths based on your project structure
       - junit.xml  # Adjust paths based on your project structure
     reports:
       junit: junit.xml  # Adjust paths based on your project structure
