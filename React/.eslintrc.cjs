@@ -17,8 +17,5 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    "html/report": {
-      "output": "eslint-report.html"
-    }
   },
 };
