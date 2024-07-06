@@ -21,21 +21,21 @@ build:
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:$CI_JOB_ID
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
 lint:
-stage: lint
-image: node:16  
-script:
-  - cd React
-  - npm install  
-  - npx eslint . | tee eslint-console-output.txt  
-  - npx eslint . -f html -o eslint-report.html  
-artifacts:
-  paths:
-    - React/eslint-console-output.txt
-    - React/eslint-report.html
-tags:
-  - docker
-needs:
-  - build
+  stage: lint
+  image: node:16  
+  before_script:
+    - cd React
+    - npm install  
+  script:
+    - npm run lint
+  artifacts:
+    paths:
+      - React/eslint-console-output.txt
+      - React/eslint-report.html
+  tags:
+    - docker
+  needs:
+    - build
 jest_tests:
   stage: test
   image: node:16-alpine
