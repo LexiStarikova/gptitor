@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from typing import Optional, Dict, Any, List
 from datetime import datetime, date
 
@@ -104,10 +104,19 @@ class Feedback(BaseModel):
     comment: str = Field(default="", 
                          examples=["Example comment"], 
                          max_length=2048)
-    metrics: Metrics = Field(default={"criterion_1": 0.0,
-                                      "criterion_2": 0.0,
-                                      "criterion_3": 0.0,
-                                      "criterion_4": 0.0})  
+    metrics: Dict[str, Any] = Field(
+        default={
+            "criterion_1": 0.5,
+            "criterion_2": 0.0,
+            "criterion_3": 0.0,
+            "criterion_4": 0.0
+        },
+        examples=[{
+            "criterion_1": 5,
+            "criterion_2": 4.5,
+            "criterion_3": 3.2,
+            "criterion_4": 0.0
+        }])
 
 class Message(BaseModel):
     message_id: int = Field(default=0, 
@@ -129,13 +138,10 @@ class Conversation(BaseModel):
                                  max_length=255)
     llm_id: int = Field(default=1, 
                         examples=[1])
-    created_at: datetime = Field(default=None, 
-                                 examples=["%Y-%m-%d %H:%M:%S"])
-    # keywords: Optional[str] = Field(default=None, 
-    #                                 examples=["Example keywords"], 
-    #                                 max_length=255)
-    # task_id: Optional[int] = Field(default=1, 
-    #                                examples=[1])
+    created_at: str = Field(default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 
+                                    examples=["2024-07-06 17:50:41"])
+    class Config:
+        from_attributes = True
 
 
 class Criterion(BaseModel):

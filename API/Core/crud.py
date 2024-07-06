@@ -2,318 +2,246 @@ import sqlite3
 from datetime import datetime
 from fastapi import (HTTPException, Depends,)
 from typing import List
-from Core.schemas import Query, Conversation, EntireResponse, Metrics, Task, Message, PersonalStatistics
+from Core import schemas, models
 from Utilities.feedback import *
 import json
+from sqlalchemy.orm import Session
+from sqlalchemy import func, cast, Date
 
 db_file = "gptitor.db"
 
-def create_new_conversation(user_id: int, llm_id: int):
+def create_new_conversation(db: Session, user_id: int, llm_id: int):
     try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-        sql_insert = '''INSERT INTO conversations (title, user_id, llm_id, created_at)
-                         VALUES (?, ?, ?, ?)'''
-        created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        cursor.execute(sql_insert, ("Untitled", user_id, llm_id, created_at))
-        conn.commit() 
-        conversation = Conversation(user_id=user_id, 
-                                    conversation_id=cursor.lastrowid,
-                                    llm_id=llm_id,
-                                    created_at=created_at
-                                    )
-        return conversation
-    except sqlite3.Error as e:
+        created_at = datetime.now()
+        new_conversation = models.Conversation(
+            title="Untitled",
+            user_id=user_id,
+            llm_id=llm_id,
+            created_at=created_at
+        )
+        db.add(new_conversation)
+        db.commit()
+        db.refresh(new_conversation)
+        return schemas.Conversation(
+            conversation_id=new_conversation.conversation_id,
+            user_id=new_conversation.user_id,
+            title=new_conversation.title,
+            llm_id=new_conversation.llm_id,
+            created_at=created_at.strftime('%Y-%m-%d %H:%M:%S')
+        )
+    except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    finally:
-        if conn:
-            conn.close()
 
-def delete_conversation(conversation_id: int, user_id: int):
+def delete_conversation(db: Session, conversation_id: int, user_id: int) -> str:
     try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-    
-        cursor.execute("SELECT * FROM conversations WHERE conversation_id = ?", (conversation_id,))
-        conversation = cursor.fetchone()
+        conversation = db.query(models.Conversation).filter_by(conversation_id=conversation_id).first()
         
-        if conversation:
-            cursor.execute("""
-                DELETE FROM feedback
-                WHERE feedback_id IN (
-                    SELECT feedback_id
-                    FROM messages
-                    WHERE conversation_id = ?
-                )
-            """, (conversation_id,))
-            
-            cursor.execute("DELETE FROM messages WHERE conversation_id = ?", (conversation_id,))
-            cursor.execute("DELETE FROM conversations WHERE conversation_id = ?", (conversation_id,))
-            
-            conn.commit()
-            return f"Conversation with ID {conversation_id} deleted successfully."
-        else:
+        if not conversation:
             raise HTTPException(status_code=404, detail=f"Conversation with ID {conversation_id} not found.")
-    except sqlite3.Error as e:
+        
+        db.query(models.Feedback).filter(
+            models.Feedback.feedback_id.in_(
+                db.query(models.Message.feedback_id).filter_by(conversation_id=conversation_id)
+            )
+        ).delete(synchronize_session=False)
+        db.query(models.Message).filter_by(conversation_id=conversation_id).delete(synchronize_session=False)
+        db.query(models.Conversation).filter_by(conversation_id=conversation_id).delete(synchronize_session=False)
+        db.commit()
+        
+        return f"Conversation with ID {conversation_id} deleted successfully."
+    except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
-    finally:
-        if conn:
-            conn.close()
 
-def get_all_conversations(user_id: int):
-    conn = sqlite3.connect(db_file)
-    cursor = conn.cursor()
-    cursor.execute("SELECT conversation_id, title, user_id, llm_id, created_at FROM conversations WHERE user_id = ?", (user_id,))
-    data=cursor.fetchall()
-    conn.close()
-    conversations = [Conversation(conversation_id=row[0], 
-                      title=row[1], 
-                      user_id=row[2], 
-                      llm_id=row[3], 
-                      created_at=row[4]) for row in data]
-    return conversations
+def get_all_conversations(db: Session, user_id: int) -> list[schemas.Conversation]:
+    try:
+        conversations = db.query(models.Conversation).filter_by(user_id=user_id).all()
+        return [
+            schemas.Conversation(
+                conversation_id=conversation.conversation_id,
+                title=conversation.title,
+                user_id=conversation.user_id,
+                llm_id=conversation.llm_id,
+                created_at=conversation.created_at
+            )
+            for conversation in conversations
+        ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-async def send_query(conversation_id: int, query: Query, user_id: int):
+async def send_query(db: Session, conversation_id: int, query: Query, user_id: int):
     if not query.query_text.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
     try:
-        request_created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT * FROM conversations WHERE conversation_id = ?", (conversation_id,))
-        conversation = cursor.fetchone()
-        
+        request_created_at = datetime.now()
+        conversation = db.query(models.Conversation).filter_by(conversation_id=conversation_id).first()
         if not conversation:
             raise HTTPException(status_code=404, detail=f"Conversation with ID {conversation_id} not found.")
-
-        cursor.execute("SELECT task_description FROM tasks WHERE task_id = ?", (query.task_id,))
-        task = cursor.fetchone()
         
+        task = db.query(models.Task).filter_by(task_id=query.task_id).first()
         if not task:
             raise HTTPException(status_code=404, detail=f"Task with ID {query.task_id} not found.")
-            
-        response = str(await get_chatbot_response(query=query.query_text, task=task))
-        response_created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
-        comment = str(await get_chatbot_comment(query=query.query_text, task=task))
+        response = await get_chatbot_response(query=query.query_text, task=task)
+        response_created_at = datetime.now()
+        
+        comment = await get_chatbot_comment(query=query.query_text, task=task)
         metrics = await calculate_metrics(query=query.query_text, task=task)
-        metrics_json = json.dumps(metrics)
         
-        sql_insert_feedback = """INSERT INTO feedback (comment, metrics) VALUES (?, ?)"""
-        cursor.execute(sql_insert_feedback, (comment, metrics_json))
-        feedback_id=cursor.lastrowid
-        conn.commit()
-
-        sql_insert_message = '''INSERT INTO messages (conversation_id, message_class, content, task_id, feedback_id, created_at)
-                                VALUES (?, ?, ?, ?, ?, ?)'''
-        cursor.execute(sql_insert_message, (conversation_id, 'Request', query.query_text, query.task_id, feedback_id, request_created_at))
-        query_id=cursor.lastrowid
-        conn.commit() 
-        cursor.execute(sql_insert_message, (conversation_id, 'Response', response, query.task_id, feedback_id, response_created_at))
-        response_id=cursor.lastrowid
-        conn.commit() 
-        entire_response = EntireResponse(conversation_id=conversation_id,
-                                      query_id=query_id,
-                                      response_id=response_id,
-                                      response_text=response,
-                                      comment=comment,
-                                      metrics=metrics
-                                     )
+        feedback = models.Feedback(comment=comment, metrics=metrics)
+        db.add(feedback)
+        db.commit()
+        
+        request_message = models.Message(
+            conversation_id=conversation_id,
+            message_class='Request',
+            content=query.query_text,
+            task_id=query.task_id,
+            feedback_id=feedback.feedback_id,
+            created_at=request_created_at
+        )
+        db.add(request_message)
+        db.commit()
+        
+        response_message = models.Message(
+            conversation_id=conversation_id,
+            message_class='Response',
+            content=response,
+            task_id=query.task_id,
+            feedback_id=feedback.feedback_id,
+            created_at=response_created_at
+        )
+        db.add(response_message)
+        db.commit()
+        
+        entire_response = schemas.EntireResponse(
+            conversation_id=conversation_id,
+            query_id=request_message.message_id,
+            response_id=response_message.message_id,
+            response_text=response,
+            comment=comment,
+            metrics=metrics
+        )
         return entire_response
-    except sqlite3.Error as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    finally:
-        if conn:
-            conn.close()
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-def get_task_by_id(task_id: int):
+def get_task_by_id(db: Session, task_id: int) -> schemas.Task:
     try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT * FROM tasks WHERE task_id = ?", (task_id,))
-        row = cursor.fetchone()
-        if not row:
+        task = db.query(models.Task).filter(models.Task.task_id == task_id).first()
+        if not task:
             raise HTTPException(status_code=404, detail=f"Task with ID {task_id} not found.")
-        return Task(task_id=row[0], 
-                    task_name=row[1], 
-                    category=row[2], 
-                    description=row[3])
-    except sqlite3.Error as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    finally:
-        if conn:
-            conn.close()
+        return schemas.Task(
+            task_id=task_id,
+            task_name=task.task_name,
+            category=task.task_category,
+            description=task.task_description
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-def get_all_messages_by_conversation_id(conversation_id: int):
+def get_all_messages_by_conversation_id(db: Session, conversation_id: int) -> List[schemas.Message]:
     try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-        
-        cursor.execute("SELECT * FROM conversations WHERE conversation_id = ?", (conversation_id,))
-        conversation = cursor.fetchone()
+        conversation = db.query(models.Conversation).filter(models.Conversation.conversation_id == conversation_id).first()
         if not conversation:
             raise HTTPException(status_code=404, detail=f"Conversation with ID {conversation_id} not found.")
-        
-        sql_select = ''' SELECT message_id, message_class, content, feedback_id
-                         FROM messages
-                         WHERE conversation_id = ?
-                     '''
-        cursor.execute(sql_select, (conversation_id,))
-        rows = cursor.fetchall()
-        
-        messages: List[Message] = [
-            Message(
-                message_id=row[0],
-                message_class=row[1],
-                content=row[2],
-                feedback_id=row[3]
-            ) for row in rows]
-        return messages
-    except sqlite3.Error as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    finally:
-        if conn:
-            conn.close()
+        messages = db.query(models.Message).filter(models.Message.conversation_id == conversation_id).all()
+        message_schemas = [
+            schemas.Message(
+                message_id=message.message_id,
+                message_class=message.message_class,
+                content=message.content,
+                feedback_id=message.feedback_id
+            ) for message in messages
+        ]
+        return message_schemas
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-def get_feedback_by_query_id(query_id: int):
+def get_feedback_by_query_id(db: Session, query_id: int) -> schemas.Feedback:
     try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM messages WHERE message_id = ?", (query_id,))
-        message = cursor.fetchone()
+        message = db.query(models.Message).filter(models.Message.message_id == query_id).first()
         if not message:
             raise HTTPException(status_code=404, detail=f"Request with ID {query_id} not found.")
-            
-        sql_join_query = """SELECT feedback.feedback_id, feedback.comment, feedback.metrics
-                        FROM feedback
-                        JOIN messages ON feedback.feedback_id = messages.feedback_id
-                        WHERE messages.message_id = ?"""
-        
-        cursor.execute(sql_join_query, (query_id,))
-        row = cursor.fetchone()
-        feedback = Feedback(
-            feedback_id=row[0],
-            comment=row[1],
-            metrics=Metrics(metrics=json.loads(row[2]))
+        feedback = db.query(models.Feedback).filter(models.Feedback.feedback_id == message.feedback_id).first()
+        if not feedback:
+            raise HTTPException(status_code=404, detail=f"Feedback for request with ID {query_id} not found.")
+        metrics = feedback.metrics
+        if isinstance(metrics, str):
+            metrics = json.loads(metrics)
+        feedback_schema = schemas.Feedback(
+            feedback_id=feedback.feedback_id,
+            comment=feedback.comment,
+            metrics=metrics
         )
-        return feedback
-    except sqlite3.Error as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    finally:
-        if conn:
-            conn.close()
+        return feedback_schema
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-def get_metrics_by_query_id(query_id: int):
+def calculate_personal_statistics(db: Session, user_id: int) -> schemas.PersonalStatistics:
     try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
+        avg_metrics_query = db.query(
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_1')), 1).label('avg_criterion_1'),
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_2')), 1).label('avg_criterion_2'),
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_3')), 1).label('avg_criterion_3'),
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_4')), 1).label('avg_criterion_4')
+        ).join(models.Message, models.Message.feedback_id == models.Feedback.feedback_id
+        ).join(models.Conversation, models.Conversation.conversation_id == models.Message.conversation_id
+        ).filter(
+            models.Conversation.user_id == user_id,
+            models.Message.message_class == 'Request'
+        ).first()
         
-        cursor.execute("SELECT * FROM messages WHERE message_id = ?", (query_id,))
-        request = cursor.fetchone()
-        
-        if not request:
-            raise HTTPException(status_code=404, detail=f"Request with ID {query_id} not found.")
+        if not avg_metrics_query:
+            raise HTTPException(status_code=404, detail=f"Personal statistics not found for user ID {user_id}.")
 
-        sql_select = """SELECT feedback.metrics
-                        FROM feedback
-                        JOIN messages ON feedback.feedback_id = messages.feedback_id
-                        WHERE messages.message_id = ?"""
+        avg_metrics = avg_metrics_query._asdict()
+        metrics = {k: v if v is not None else 0 for k, v in avg_metrics.items()}
         
-        cursor.execute(sql_select, (query_id,))
-        metrics = cursor.fetchone()
+        total_activity_query = db.query(
+            func.count(models.Conversation.conversation_id).label('total_conversations'),
+            func.count(models.Message.message_id).label('total_messages'),
+            func.count(func.distinct(models.Message.task_id)).label('task_ids')
+        ).join(models.Message, models.Message.conversation_id == models.Conversation.conversation_id
+        ).filter(
+            models.Conversation.user_id == user_id,
+            models.Message.message_class == 'Request'
+        ).first()
         
-        if not metrics:
-            raise HTTPException(status_code=404, detail=f"Metrics with ID {query_id} not found.")
-        return Metrics(metrics=json.loads(metrics[0]))
-    except sqlite3.Error as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    finally:
-        if conn:
-            conn.close()
+        if not total_activity_query:
+            raise HTTPException(status_code=404, detail=f"Total activity statistics not found for user ID {user_id}.")
 
-def calculate_personal_statistics(user_id: int):
-    try:
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-
-        select_query = '''SELECT round(AVG(json_extract(f.metrics, '$.criterion_1')), 1) AS avg_criterion_1, 
-                                round(AVG(json_extract(f.metrics, '$.criterion_2')), 1) AS avg_criterion_2,
-                                round(AVG(json_extract(f.metrics, '$.criterion_3')), 1) AS avg_criterion_3,
-                                round(AVG(json_extract(f.metrics, '$.criterion_4')), 1) AS avg_criterion_4
-                            FROM 
-                                messages m
-                            JOIN 
-                                conversations c ON m.conversation_id = c.conversation_id
-                            JOIN 
-                                feedback f ON m.feedback_id = f.feedback_id
-                            WHERE 
-                                c.user_id = ?
-                                AND m.message_class = 'Request';
-                            '''
-        cursor.execute(select_query, (user_id,))
-        data = cursor.fetchone()
-        if not data:
-            raise HTTPException(status_code=404, detail=f"Personal statistics with ID {query_id} not found.")
-        if not data[0] or not data[1] or not data[2] or not data[3]:
-            metrics = Metrics().metrics
-        else:
-            metrics={
-                    "criterion_1": data[0],
-                    "criterion_2": data[1],
-                    "criterion_3": data[2],
-                    "criterion_4": data[3]
-                    }
-        select_query = '''  SELECT
-                                COUNT(DISTINCT c.conversation_id) AS total_conversations,
-                                COUNT(m.message_id) AS total_messages,
-                                COUNT(DISTINCT m.task_id) AS task_ids
-                            FROM
-                                conversations c
-                            JOIN
-                                messages m ON c.conversation_id = m.conversation_id
-                            WHERE
-                                c.user_id = ?
-                                AND m.message_class = 'Request';
-                       '''
-        cursor.execute(select_query, (user_id,))
-        data = cursor.fetchone()
-        if not data:
-            raise HTTPException(status_code=404, detail=f"Personal statistics with ID {query_id} not found.")
         total_activity = {
-            "total_queries": data[0],
-            "total_conversations": data[1],
-            "tasks_solved": data[2]
+            "total_queries": total_activity_query.total_conversations,
+            "total_conversations": total_activity_query.total_messages,
+            "tasks_solved": total_activity_query.task_ids
         }
-        select_query = '''SELECT 
-                            DATE(messages.created_at) AS message_date,
-                            COUNT(messages.message_id) AS daily_message_count
-                        FROM 
-                            messages
-                        JOIN 
-                            conversations
-                        ON 
-                            messages.conversation_id = conversations.conversation_id
-                        WHERE 
-                            messages.message_class = 'Request'
-                            AND conversations.user_id = ?
-                        GROUP BY 
-                            DATE(messages.created_at)
-                        ORDER BY 
-                            message_date;
-                        '''
-        cursor.execute(select_query, (user_id,))
-        data = cursor.fetchall()
-        if not data:
-            raise HTTPException(status_code=404, detail=f"Daily activity for ID {query_id} not found.")
+        
+        daily_activity_query = db.query(
+            models.Message.created_at.label('message_date'),
+            func.count(models.Message.message_id).label('daily_message_count')
+        ).join(models.Conversation, models.Conversation.conversation_id == models.Message.conversation_id
+        ).filter(
+            models.Conversation.user_id == user_id,
+            models.Message.message_class == 'Request'
+        ).group_by(
+            models.Message.created_at
+        ).order_by(
+            'message_date'
+        ).all()
+        
+        if not daily_activity_query:
+            raise HTTPException(status_code=404, detail=f"Daily activity statistics not found for user ID {user_id}.")
+
         daily_activity: List[Dict[str, Any]] = [
-            {"date":row[0], "number_of_queries":row[1]}
-            for row in data
+            {"date": row.message_date.strftime('%Y-%m-%d %H:%M:%S'), "number_of_queries": row.daily_message_count}
+            for row in daily_activity_query
         ]
-        return PersonalStatistics(metrics=metrics, total_activity=total_activity, daily_activity=daily_activity)
-    except sqlite3.Error as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    finally:
-        if conn:
-            conn.close()
+        
+        return schemas.PersonalStatistics(metrics=metrics, total_activity=total_activity, daily_activity=daily_activity)
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
