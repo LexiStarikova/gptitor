@@ -53,6 +53,8 @@ jest_tests:
     - docker
   needs:
     - build
+  dependencies:
+    - lint 
 container_scanning:
   stage: test
   image:
