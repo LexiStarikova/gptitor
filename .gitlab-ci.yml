@@ -77,6 +77,10 @@ pytest:
       - ${COV_HTML_REPORT_PATH}
       - ${COV_XML_REPORT_PATH}
       - ${COV_ANNOTATE_REPORT_PATH}
+  tags:
+    - docker
+  needs:
+    - build
 container_scanning:
   stage: test
   image:
