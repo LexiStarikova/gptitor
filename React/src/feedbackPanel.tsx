@@ -114,7 +114,7 @@ const FeedbackPanel = () => {
                             </div>
                         </div>
                     </div>
-                    <TaskPanel /*isOpen={isSidebarOpen} close={toggleSidebar} *//>
+                    <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} />
                 </div>
 
 

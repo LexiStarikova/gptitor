@@ -90,7 +90,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 <p className='Date'>TODAY</p>
                             </div>
                             <div className='queries'>
-                            {/* <QueryComponent /> */}
                                 {queries.map(query => (
                                     <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} />
                                 ))}
@@ -129,7 +128,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
 
 
-            <div className={`sidebarhidden${sidebarVisible ? 'hd' : ''}`} /*onMouseEnter={handleMouseEnter} */>
+            <div className={`sidebarhidden${sidebarVisible ? 'hd' : ''}`} onMouseEnter={handleMouseEnter} >
                 <div className='iconshidden'>
                     <svg onClick={toggleSidebar} width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden'>
                         <path d="M23.3996 20.8H2.59961M23.3996 13H2.59961M23.3996 5.19995H2.59961" stroke="#3B4168" strokeWidth="3" strokeLinecap="round" />
