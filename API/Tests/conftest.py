@@ -7,6 +7,9 @@ from fastapi.testclient import TestClient
 import Core
 from Core.database import Base, get_db
 from Core.main import app 
+from sqlalchemy.orm import Session
+from Core import models
+from datetime import datetime
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 
@@ -43,3 +46,47 @@ def client(db_session):
     app.dependency_overrides[get_db] = override_get_db
     yield TestClient(app)
     app.dependency_overrides[get_db] = get_db
+
+@pytest.fixture(scope="function")
+def feedback_data(db_session: Session):
+    feedback = models.Feedback(comment="Test Comment", metrics={"criterion_1": 4.0, 
+                                                                "criterion_2": 3.5, 
+                                                                "criterion_3": 2.0, 
+                                                                "criterion_4": 1.0})
+    db_session.add(feedback)
+    db_session.commit()
+    return feedback
+
+@pytest.fixture(scope="function")
+def conversation_data(db_session: Session, user_data):
+    conversation = models.Conversation(title="Test Conversation", user_id=user_data.user_id, llm_id=1, created_at=datetime.now())
+    db_session.add(conversation)
+    db_session.commit()
+    return conversation
+
+@pytest.fixture(scope="function")
+def message_data(db_session: Session, conversation_data, feedback_data):
+    message = models.Message(conversation_id=conversation_data.conversation_id, message_class='Request', content='Test message', task_id=1, feedback_id=feedback_data.feedback_id, created_at=datetime.now())
+    db_session.add(message)
+    db_session.commit()
+    return message
+
+@pytest.fixture(scope="function")
+def task_data(db_session: Session):
+    task = models.Task(task_name="Test Task", task_category="General", task_description="Testing task")
+    db_session.add(task)
+    db_session.commit()
+    return task
+
+@pytest.fixture(scope="function")
+def llm_data():
+    return {
+        "llm_id": 1
+    }
+
+@pytest.fixture(scope="function")
+def user_data(db_session: Session):
+    user = models.User(token="token", name="username")
+    db_session.add(user)
+    db_session.commit()
+    return user

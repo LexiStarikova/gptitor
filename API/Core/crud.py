@@ -185,10 +185,10 @@ def get_feedback_by_query_id(db: Session, query_id: int) -> schemas.Feedback:
 def calculate_personal_statistics(db: Session, user_id: int) -> schemas.PersonalStatistics:
     try:
         avg_metrics_query = db.query(
-            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_1')), 1).label('avg_criterion_1'),
-            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_2')), 1).label('avg_criterion_2'),
-            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_3')), 1).label('avg_criterion_3'),
-            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_4')), 1).label('avg_criterion_4')
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_1')), 1).label('criterion_1'),
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_2')), 1).label('criterion_2'),
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_3')), 1).label('criterion_3'),
+            func.round(func.avg(func.json_extract(models.Feedback.metrics, '$.criterion_4')), 1).label('criterion_4')
         ).join(models.Message, models.Message.feedback_id == models.Feedback.feedback_id
         ).join(models.Conversation, models.Conversation.conversation_id == models.Message.conversation_id
         ).filter(
@@ -213,7 +213,7 @@ def calculate_personal_statistics(db: Session, user_id: int) -> schemas.Personal
         ).first()
         
         if not total_activity_query:
-            raise HTTPException(status_code=404, detail=f"Total activity statistics not found for user ID {user_id}.")
+            raise HTTPException(status_code=404, detail=f"Total activity not found for user ID {user_id}.")
 
         total_activity = {
             "total_queries": total_activity_query.total_conversations,
@@ -235,7 +235,7 @@ def calculate_personal_statistics(db: Session, user_id: int) -> schemas.Personal
         ).all()
         
         if not daily_activity_query:
-            raise HTTPException(status_code=404, detail=f"Daily activity statistics not found for user ID {user_id}.")
+            raise HTTPException(status_code=404, detail=f"Daily activity not found for user ID {user_id}.")
 
         daily_activity: List[Dict[str, Any]] = [
             {"date": row.message_date.strftime('%Y-%m-%d %H:%M:%S'), "number_of_queries": row.daily_message_count}
@@ -243,6 +243,7 @@ def calculate_personal_statistics(db: Session, user_id: int) -> schemas.Personal
         ]
         
         return schemas.PersonalStatistics(metrics=metrics, total_activity=total_activity, daily_activity=daily_activity)
-    
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
