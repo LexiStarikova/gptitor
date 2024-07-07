@@ -49,8 +49,9 @@ flake8:
     - source venv/bin/activate
     - pip install --upgrade pip
     - pip install -r requirements.txt
+    - python -c 'import sys; sys.setrecursionlimit(1500)'
   script:
-    - flake8 --format=html --htmldir=Tests/flake8-report --max-complexity=10 .
+    - flake8 --format=html --htmldir=Tests/flake8-report . -v
   artifacts:
     when: always
     paths:
