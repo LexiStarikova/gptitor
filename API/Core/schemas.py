@@ -76,8 +76,8 @@ class PersonalStatistics(BaseModel):
     )
 
 class EntireResponse(BaseModel):
-    conversation_id: int = Field(default=0, 
-                                 examples=[0])
+    conversation_id: int = Field(default=1, 
+                                 examples=[1])
     query_id: int = Field(default=0, 
                           examples=[0])
     response_id: int = Field(default=0, 
@@ -140,7 +140,7 @@ class Conversation(BaseModel):
                         examples=[1])
     created_at: str = Field(default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 
                                     examples=["2024-07-06 17:50:41"])
-    class Config:
+    class ConfigDict:
         from_attributes = True
 
 
@@ -149,8 +149,8 @@ class Criterion(BaseModel):
                          examples=[0.0])
 
 class Task(BaseModel):
-    task_id: int = Field(default=0, 
-                         examples=[0])
+    task_id: int = Field(default=1, 
+                         examples=[1])
     task_name: str = Field(default="", 
                            examples=["Example name"], 
                            max_length=255)

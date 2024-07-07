@@ -35,7 +35,7 @@ async def calculate_criterion_conciseness_and_focus(query: str, task: str) -> fl
     There is the query that user formulated for this problem: {query}
     Rate this query in terms of conciseness and focus, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    res = await llm.get_response({"prompt": prompt, "regex": r"([0-4](\.[0-9]))"})
     return float(res)
 
 async def calculate_criterion_clarity_and_specificity(query: str, task: str) -> float:    
@@ -44,7 +44,7 @@ async def calculate_criterion_clarity_and_specificity(query: str, task: str) -> 
     There is the query that user formulated for this problem: {query}
     Rate this query in terms of clarity and specificity, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    res = await llm.get_response({"prompt": prompt, "regex": r"([0-4](\.[0-9]))"})
     return float(res)
 
 async def calculate_criterion_relevance_and_context(query: str, task: str) -> float:
@@ -53,7 +53,7 @@ async def calculate_criterion_relevance_and_context(query: str, task: str) -> fl
     There is the query that user formulated for this problem: {query}
     Rate this query in terms of relevance and context, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    res = await llm.get_response({"prompt": prompt, "regex": r"([0-4](\.[0-9]))"})
     return float(res)
 
 async def calculate_criterion_purpose_and_desired_output(query: str, task: str) -> float:
@@ -62,5 +62,5 @@ async def calculate_criterion_purpose_and_desired_output(query: str, task: str) 
     There is the query that user formulated for this problem: {query}
     Rate this query in terms of purpose and desired output, give a rating from 0 to 5. Put only one number:"""
     
-    res = await llm.get_response({"prompt": prompt, "regex": "([0-4](\.[0-9]))"})
+    res = await llm.get_response({"prompt": prompt, "regex": r"([0-4](\.[0-9]))"})
     return float(res)
