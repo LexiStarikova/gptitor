@@ -55,7 +55,7 @@ flake8:
   artifacts:
     when: always
     paths:
-      - API/Tests/flake8-report.html  
+      - API/Tests/flake8-report/
   allow_failure: false  # Set to true to make the pipeline to pass even if Flake8 fails
 jest_tests:
   stage: test
