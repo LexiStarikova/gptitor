@@ -39,6 +39,7 @@ requests-toolbelt==1.0.0
 rich==13.7.1
 SQLAlchemy==2.0.31
 SQLAlchemy-Utils==0.41.2
+sqlalchemy-json==0.4.0
 sqlite-fts4==1.0.3
 sqlite-utils==3.36
 starlette==0.37.2

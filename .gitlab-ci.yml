@@ -60,9 +60,9 @@ pytest:
   image: python:3.9
   variables:
     PYTHONDONTWRITEBYTECODE: "1"
-    COV_HTML_REPORT_PATH: "Tests/coverage/cov_html_report/"
-    COV_XML_REPORT_PATH: "Tests/coverage/cov_xml_report/coverage.xml"
-    COV_ANNOTATE_REPORT_PATH: "Tests/coverage/cov_annotate_report/"
+    COV_HTML_REPORT_PATH: "API/Tests/coverage/cov_html_report/"
+    COV_XML_REPORT_PATH: "API/Tests/coverage/cov_xml_report/coverage.xml"
+    COV_ANNOTATE_REPORT_PATH: "API/Tests/coverage/cov_annotate_report/"
   before_script:
     - cd API
     - python -m venv venv
