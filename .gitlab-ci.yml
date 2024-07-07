@@ -24,9 +24,9 @@ build:
     - docker tag my-docker-image $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:$CI_JOB_ID
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
-lint:
+eslint:
   stage: lint
-  image: node:16
+  image: node:18-alpine
   before_script:
     - cd React
     - npm install  
@@ -40,9 +40,25 @@ lint:
     - docker
   needs:
     - build
+flake8:
+  stage: lint
+  image: python:3.9  
+  before_script:
+    - cd API
+    - python -m venv venv
+    - source venv/bin/activate
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - flake8 --format=html --htmldir=Tests/flake8-report .
+  artifacts:
+    when: always
+    paths:
+      - API/Tests/flake8-report.html  
+  allow_failure: false  # Set to true to make the pipeline to pass even if Flake8 fails
 jest_tests:
   stage: test
-  image: node:16
+  image: node:18-alpine
   before_script:
     - cd React 
     - npm install
