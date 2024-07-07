@@ -25,12 +25,12 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
     };
 
     return (
-        <div className={`panel ${isOpen ? 'open' : ''}`}>
+        <div className='panelopen'/*{`panel ${isOpen ? 'open' : ''}`}*/>
             <div className='panelcontainer'>
                 <div className='taskcontainer'>
                     <div className='Tasks'>
                         <div className='tasktitle'>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.2219 14.4888L9.51081 21.5999L18.7553 11.6443L13.7775 8.7999L14.4886 2.3999L5.24414 12.3555L10.2219 14.4888Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                             <h6>Suggested</h6>
@@ -57,6 +57,16 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
                                 <li onClick={() => handleTaskClick(4)}><p className='listboxCat'>Entertainment</p></li>
                             </ul>
                         </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    {/* <svg className='selectedtask' width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.44211 4.17079L10.3246 8.28494L6.21044 12.1674" stroke="white" stroke-width="1.5"/>
+                                    </svg> */}
+                                    <p></p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div className='taskDes' onClick={close}>
@@ -75,6 +85,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
                         <h6 className='DescT'>Desciption</h6>
                         <p className='Descript'>{task.description}</p>
                     </div>
+                    <p className='solvebutton'>Solve task</p>
                 </div>
             </div>
         </div>
