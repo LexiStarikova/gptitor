@@ -57,6 +57,10 @@ flake8:
     paths:
       - API/Tests/flake8-report/
   allow_failure: false  # Set to true to make the pipeline to pass even if Flake8 fails
+  tags:
+    - docker
+  needs:
+    - build
 jest_tests:
   stage: test
   image: node:18-alpine
@@ -158,4 +162,6 @@ deploy:
     - dev-env
   needs:
     - container_scanning
+    - pytest
+    - jest_tests
 
