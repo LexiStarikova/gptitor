@@ -70,7 +70,8 @@ pytest:
     - pip install --upgrade pip
     - pip install -r requirements.txt
   script:
-    - pytest --cov=Core --cov-report=term-missing --cov-report=html:${COV_HTML_REPORT_PATH} --cov-report=xml:${COV_XML_REPORT_PATH} --cov-report=annotate:${COV_ANNOTATE_REPORT_PATH}
+    - pytest 
+    - ls -l API/Tests/coverage 
   artifacts:
     when: always
     paths:
