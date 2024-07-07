@@ -22,7 +22,7 @@ build:
     - docker push $HARBOR_HOST/$HARBOR_PROJECT/$APP:latest
 lint:
   stage: lint
-  image: node:16  
+  image: node:18
   before_script:
     - cd React
     - npm install  
@@ -38,7 +38,7 @@ lint:
     - build
 jest_tests:
   stage: test
-  image: node:16-alpine
+  image: node:18
   before_script:
     - cd React 
     - npm install
