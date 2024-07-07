@@ -24,6 +24,9 @@ def new_task(db_session: Session):
 def test_send_query_success(client: TestClient, db_session: Session, new_conversation, new_task):
     query = schemas.Query(query_text="Test query", task_id=new_task.task_id)
     response = client.post(f"/conversations/{new_conversation.conversation_id}/messages", json=query.model_dump())
+    if response.status_code != 201:
+        print(response.status_code)
+        print(response.json())
     assert response.status_code == 201
     data = response.json()
     assert "conversation_id" in data
