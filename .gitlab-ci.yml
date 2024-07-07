@@ -73,7 +73,6 @@ pytest:
     - pip install -r requirements.txt
   script:
     - pytest 
-    - ls -l API/Tests/ 
   artifacts:
     when: always
     paths:
