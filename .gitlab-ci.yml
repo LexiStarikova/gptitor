@@ -63,6 +63,8 @@ pytest:
     COV_HTML_REPORT_PATH: "API/Tests/coverage/cov_html_report/"
     COV_XML_REPORT_PATH: "API/Tests/coverage/cov_xml_report/coverage.xml"
     COV_ANNOTATE_REPORT_PATH: "API/Tests/coverage/cov_annotate_report/"
+    PYTEST_JUNIT_PATH: "API/Tests/results/results.xml"
+    PYTEST_JSON_PATH: "API/Tests/results/results.json"
   before_script:
     - cd API
     - python -m venv venv
@@ -71,13 +73,15 @@ pytest:
     - pip install -r requirements.txt
   script:
     - pytest 
-    - ls -l API/Tests/coverage 
+    - ls -l API/Tests/ 
   artifacts:
     when: always
     paths:
       - ${COV_HTML_REPORT_PATH}
       - ${COV_XML_REPORT_PATH}
       - ${COV_ANNOTATE_REPORT_PATH}
+      - ${PYTEST_JUNIT_PATH}
+      - ${PYTEST_JSON_PATH}
   tags:
     - docker
   needs:
