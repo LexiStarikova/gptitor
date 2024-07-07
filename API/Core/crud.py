@@ -124,8 +124,9 @@ async def send_query(db: Session, conversation_id: int, query: Query, user_id: i
             metrics=metrics
         )
         return entire_response
+    except HTTPException:
+        raise
     except Exception as e:
-        db.rollback()
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 def get_task_by_id(db: Session, task_id: int) -> schemas.Task:
