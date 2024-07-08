@@ -19,6 +19,7 @@
     position: absolute;
     top: 0px;
     display: flex;
+    height: calc(100vh - 12vh);
     width: 100vw;
     flex-direction: row;
     column-gap: 5%;
