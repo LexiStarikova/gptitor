@@ -37,17 +37,14 @@ const Sidebar: React.FC<SidebarProps> = ({
         setSidebarVisible(prev => !prev);
     };
 
-    const handleMouseEnter = () => {
-        setSidebarVisible(true);
-    };
 
     const handleMouseLeave = () => {
         setSidebarVisible(false);
     };
-    
+
     return (
         <div>
-            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} onMouseLeave={handleMouseLeave}>
+            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} /*onMouseLeave={handleMouseLeave}*/>
                 <div className='sideindex'>
                     <div className='sidetitle'>
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden' onClick={toggleSidebar}>
@@ -100,9 +97,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <div className="icons-nothidden">
                         <Link to="/profile" className='prof'>
                             <div className='profile'>
-                            <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" className='profileiconhidden'>
-                                <path d="M6.52539 23.1999C7.08264 22.5758 9.69249 19.7038 10.4573 19.7038H18.544C19.6523 19.7038 21.9147 22.0845 22.4754 22.9237M26.1004 14.4999C26.1004 20.9064 20.9069 26.0999 14.5004 26.0999C8.09389 26.0999 2.90039 20.9064 2.90039 14.4999C2.90039 8.0934 8.09389 2.8999 14.5004 2.8999C20.9069 2.8999 26.1004 8.0934 26.1004 14.4999ZM18.6557 10.5462C18.6557 8.33311 16.7874 6.5249 14.5007 6.5249C12.2141 6.5249 10.3458 8.33311 10.3458 10.5462C10.3458 12.7593 12.2141 14.5675 14.5007 14.5675C16.7874 14.5675 18.6557 12.7593 18.6557 10.5462Z" stroke="#3B4168" strokeWidth="2" />
-                            </svg>
+                                <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" className='profileiconhidden'>
+                                    <path d="M6.52539 23.1999C7.08264 22.5758 9.69249 19.7038 10.4573 19.7038H18.544C19.6523 19.7038 21.9147 22.0845 22.4754 22.9237M26.1004 14.4999C26.1004 20.9064 20.9069 26.0999 14.5004 26.0999C8.09389 26.0999 2.90039 20.9064 2.90039 14.4999C2.90039 8.0934 8.09389 2.8999 14.5004 2.8999C20.9069 2.8999 26.1004 8.0934 26.1004 14.4999ZM18.6557 10.5462C18.6557 8.33311 16.7874 6.5249 14.5007 6.5249C12.2141 6.5249 10.3458 8.33311 10.3458 10.5462C10.3458 12.7593 12.2141 14.5675 14.5007 14.5675C16.7874 14.5675 18.6557 12.7593 18.6557 10.5462Z" stroke="#3B4168" strokeWidth="2" />
+                                </svg>
 
                                 <p>Profile</p>
                             </div>
@@ -111,24 +108,24 @@ const Sidebar: React.FC<SidebarProps> = ({
                             <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden'>
                                 <path d="M12.9996 13.0001L12.9996 18.2001M12.9996 9.1458V9.1001M2.59961 13.0001C2.59961 7.25633 7.25585 2.6001 12.9996 2.6001C18.7434 2.6001 23.3996 7.25634 23.3996 13.0001C23.3996 18.7439 18.7434 23.4001 12.9996 23.4001C7.25585 23.4001 2.59961 18.7439 2.59961 13.0001Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
-                                <p>Help</p>
+                            <p>Help</p>
                         </div>
                     </div>
                     <svg className='gradient-mn' width="305" height="305" viewBox="0 0 305 305" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.499973 -1.33101e-05C40.4875 -1.5058e-05 80.0834 7.87608 117.027 23.1787C153.971 38.4812 187.539 60.9105 215.814 89.186C244.089 117.461 266.519 151.029 281.821 187.973C297.124 224.917 305 264.512 305 304.5L0.499987 304.5L0.499973 -1.33101e-05Z" fill="url(#paint0_radial_916_1156)"/>
+                        <path d="M0.499973 -1.33101e-05C40.4875 -1.5058e-05 80.0834 7.87608 117.027 23.1787C153.971 38.4812 187.539 60.9105 215.814 89.186C244.089 117.461 266.519 151.029 281.821 187.973C297.124 224.917 305 264.512 305 304.5L0.499987 304.5L0.499973 -1.33101e-05Z" fill="url(#paint0_radial_916_1156)" />
                         <defs>
-                        <radialGradient id="paint0_radial_916_1156" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0.861193 297.276) rotate(-149.546) scale(310.416)">
-                        <stop stop-color="#AAABFA"/>
-                        <stop offset="0.916" stop-color="white"/>
-                        <stop offset="1" stop-color="white"/>
-                        </radialGradient>
+                            <radialGradient id="paint0_radial_916_1156" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0.861193 297.276) rotate(-149.546) scale(310.416)">
+                                <stop stop-color="#AAABFA" />
+                                <stop offset="0.916" stop-color="white" />
+                                <stop offset="1" stop-color="white" />
+                            </radialGradient>
                         </defs>
                     </svg>
                 </div>
             </div>
 
 
-            <div className={`sidebarhidden${sidebarVisible ? 'hd' : ''}`} onMouseEnter={handleMouseEnter} >
+            <div className={`sidebarhidden${sidebarVisible ? 'hd' : ''}`} >
                 <div className='iconshidden'>
                     <svg onClick={toggleSidebar} width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden'>
                         <path d="M23.3996 20.8H2.59961M23.3996 13H2.59961M23.3996 5.19995H2.59961" stroke="#3B4168" strokeWidth="3" strokeLinecap="round" />
@@ -154,21 +151,21 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden'>
                         <path d="M12.9996 13.0001L12.9996 18.2001M12.9996 9.1458V9.1001M2.59961 13.0001C2.59961 7.25633 7.25585 2.6001 12.9996 2.6001C18.7434 2.6001 23.3996 7.25634 23.3996 13.0001C23.3996 18.7439 18.7434 23.4001 12.9996 23.4001C7.25585 23.4001 2.59961 18.7439 2.59961 13.0001Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    
+
 
                 </div>
                 <svg className='gradient' width="54" height="48" viewBox="0 0 54 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-7.47368 0C0.474747 0 8.34534 1.29329 15.6887 3.80602C23.0321 6.31876 29.7045 10.0017 35.3249 14.6447C40.9453 19.2876 45.4036 24.7996 48.4453 30.8658C51.4871 36.9321 53.0526 43.4339 53.0526 50L-7.47368 50V0Z" fill="url(#paint0_radial_904_1170)"/>
-                        <defs>
+                    <path d="M-7.47368 0C0.474747 0 8.34534 1.29329 15.6887 3.80602C23.0321 6.31876 29.7045 10.0017 35.3249 14.6447C40.9453 19.2876 45.4036 24.7996 48.4453 30.8658C51.4871 36.9321 53.0526 43.4339 53.0526 50L-7.47368 50V0Z" fill="url(#paint0_radial_904_1170)" />
+                    <defs>
                         <radialGradient id="paint0_radial_904_1170" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-7.40188 48.8138) rotate(-154.094) scale(59.1317 53.1871)">
-                        <stop stop-color="#AAABFA"/>
-                        <stop offset="0.916" stop-color="white"/>
-                        <stop offset="1" stop-color="white"/>
+                            <stop stop-color="#AAABFA" />
+                            <stop offset="0.916" stop-color="white" />
+                            <stop offset="1" stop-color="white" />
                         </radialGradient>
-                        </defs>
+                    </defs>
                 </svg>
             </div>
-            
+
         </div>
     );
 };

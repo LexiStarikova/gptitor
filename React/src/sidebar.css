@@ -1,4 +1,4 @@
-.sidebarhidden{
+.sidebarhidden {
     position: relative;
     z-index: 1;
     height: calc(100vh - 64px);
@@ -9,36 +9,37 @@
     justify-content: space-between;
     transition: all 0.3s ease-in-out;
     animation: slidein 0.6s ease-out;
-
 }
 
-.sidebarhiddenhd{
+
+
+.sidebarhiddenhd {
     transition: all 0.3s ease-in-out;
     display: none;
 }
 
 
-.iconshidden{
+.iconshidden {
     position: relative;
     top: 24px;
     left: 14px;
     display: flex;
     flex-direction: column;
     row-gap: 32px;
-    /* bottom: 20px; */
 }
 
-.gradient{
+.gradient {
     position: absolute;
     bottom: 0px;
 }
 
 
-.icons-hidden-bottom{
+.icons-hidden-bottom {
     z-index: 1;
     position: relative;
     left: 12px;
-    bottom: 15px;;
+    bottom: 15px;
+    ;
     display: flex;
     flex-direction: column;
 
@@ -49,61 +50,57 @@
     z-index: 1;
     width: 300px;
     height: calc(100vh - 64px);
-    background-color: white;    
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: all 0.3s ease-in-out;
     animation: slidein 0.3s ease-in-out;
-    
 }
 
-.sidebar.enter{
+.sidebar.enter {
     opacity: 1;
 }
 
 @keyframes slidein {
     from {
         transform: translateX(-100%);
-        /* width: -300px; */
-
     }
-  
+
     to {
         transform: translateX(0%);
         transition: all 0.3s ease-in-out;
-        /* width: 300px; */
-
     }
-  }
+}
 
-.gradient-mn{
+.gradient-mn {
     position: absolute;
     bottom: 0px;
 }
 
-.sidebarhd{
+.sidebarhd {
     /* transition: transform 300ms ease-out;
     transform: translateX(-100%);  */
-    animation: slidein 0.3s ease-in-out;
     display: none;
 }
 
 
 
-.sidetitle{
+.sidetitle {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
     margin: 18px 10px;
 }
 
-.gpttitle{
+
+.gpttitle {
     text-decoration: none;
+    color: #9747FF;
 }
 
-.gpttitle > h4{
+.gpttitle>h4 {
     margin: 0px;
 }
 
@@ -115,14 +112,14 @@
     margin-bottom: 64vh;
 }
 
-.historysearch{
+.historysearch {
     display: flex;
     flex-direction: row;
     align-items: center;
 
 }
 
-.historyinpt{
+.historyinpt {
     background: #FAFAFF;
     width: 185px;
     padding-left: 35px;
@@ -130,9 +127,10 @@
     height: 30px;
     border: 1px solid #3B4168;
     border-radius: 25px;
+    font-family: 'IBM Plex Sans';
 }
 
-.historyinpt::placeholder{
+.historyinpt::placeholder {
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
@@ -141,7 +139,7 @@
     color: #909EBB;
 }
 
-.searchicon{
+.searchicon {
     position: relative;
     left: 30px;
 }
@@ -152,26 +150,31 @@
     column-gap: 7px;
 }
 
-.fav{
+.fav {
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 103px;
 }
 
-.querylist{
+.querylist {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin-left: 10px;
-
+    height: 49.5%;
+    max-height: 31.5rem;
+    overflow: auto;
+    position: absolute;
+    top: 10rem;
+    z-index: 3;
 }
 
-.sideindex{
-    background-color: white;
+
+.sideindex {
+    background-color: #FFFFFF;
 }
 
-.Date{
+.Date {
     margin: 0px;
 }
 
@@ -184,35 +187,91 @@
     margin-top: auto;
 }
 
-.profile{
+.profile {
     display: flex;
-    height: 20px;
+    height: 1.25rem;
     flex-direction: row;
     align-items: center;
-    margin-right: 150px;
-    column-gap: 10px;
+    margin-right: 9.375rem;
+    column-gap: 0.625rem;
 }
 
-.profile > p {
-color: #3B4168;
+.profile>p {
+    color: #3B4168;
 }
 
 .prof {
     text-decoration: none;
 }
 
-.info{
+.info {
     display: flex;
-    height: 40px;
+    height: 2.5rem;
     flex-direction: row;
     align-items: center;
-    column-gap: 10px;
-    margin-right: 164px;
-    padding-bottom: 10px;
+    column-gap: 0.625rem;
+    margin-right: 10.25rem;
+    padding-bottom: 0.625rem;
 }
 
-.info > p {
+.info>p {
     color: #3B4168;
+}
+
+
+.menuiconhidden {
+    cursor: pointer;
+}
+
+.profileiconhidden {
+    cursor: pointer;
+}
+
+.chaticonhidden {
+    cursor: pointer;
+}
+
+.infoiconhidden {
+    cursor: pointer;
+}
+
+.likeicon path {
+    fill: none;
+    stroke: #3B4168;
+    transition: fill 0.8s ease, stroke 0.8s ease;
+    cursor: pointer;
+}
+
+
+
+.likeicon:hover path {
+    fill: #FF4033;
+    stroke: #FF4033;
+}
+
+
+
+.likeicon.liked path {
+    fill: #FF4033;
+    stroke: #FF4033;
+}
+
+.favicon {
+    transition: 0.4s;
+
+}
+
+.favicon:hover {
+    background-color: #9747FF;
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
+    transition: 0.8s;
+    cursor: pointer;
+}
+
+.favicon:hover path {
+    stroke: #FFFFFF;
 }
 
 /* .queries {
@@ -232,33 +291,12 @@ color: #3B4168;
     background-position: center;
 }
 
-.menuiconhidden {
-    position: absolute;
-    left: 14px;
-    top: 20px;
-    cursor: pointer;
-}
 
-.chaticonhidden {
-    position: absolute;
-    left: 14px;
-    top: 78px;
-    cursor: pointer;
-}
 
-.profileiconhidden {
-    position: absolute;
-    left: 12px;
-    top: 828px;
-    cursor: pointer;
-}
 
-.infoiconhidden {
-    position: absolute;
-    left: 12px;
-    top: 863px;
-    cursor: pointer;
-}
+
+
+
 
 .sidebar {
     position: absolute;
@@ -268,7 +306,6 @@ color: #3B4168;
     background-color: #FFFFFF;
     transition: left 0.8s ease;
     z-index: 999999;
-    background: radial-gradient(circle at 1000px 1000px, #AAABFA, #FFFFFF);
 }
 
 .sidebar.sidebar-visible {
@@ -296,11 +333,6 @@ color: #3B4168;
     cursor: pointer;
 }
 
-.gpttitle {
-    position: relative;
-    color: #9747FF;
-    left: 10px;
-}
 
 .historysearch {
     position: relative;
@@ -348,21 +380,7 @@ color: #3B4168;
     left: 20px;
 }
 
-.favicon {
-    position: relative;
-    left: 125px;
-    transition: 0.4s;
 
-}
-
-.favicon:hover {
-    background-color: #273B4A;
-    border-radius: 50px;
-    height: 40px;
-    width: 40px;
-    transition: 0.8s;
-    cursor: pointer;
-}
 
 .query {
     position: relative;
@@ -398,49 +416,6 @@ color: #3B4168;
     gap: 6px;
 }
 
-.profile {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #3B4168;
-    left: 20px;
-    gap: 10px;
-    top: 828px;
-}
-
-.info {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #3B4168;
-    left: 20px;
-    gap: 10px;
-    top: 875px;
-}
-
-.likeicon path {
-    fill: none;
-    stroke: #3B4168;
-    transition: fill 0.8s ease, stroke 0.8s ease;
-}
-
-
-
-.likeicon:hover path {
-    fill: #FF4033;
-    stroke: #FF4033;
-}
-
-a {
-    text-decoration: none;
-}
-
-.likeicon.liked path {
-    fill: #FF4033;
-    stroke: #FF4033;
-}
 
 .Date {
     color: #3B4168;
