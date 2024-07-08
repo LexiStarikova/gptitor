@@ -7,7 +7,7 @@
     height: 100%;
     top: 0px;
     left: 0px;
-    
+
     margin-left: 110px;
 }
 
@@ -58,18 +58,20 @@
     font-weight: 600;
     font-size: 18px;
     position: relative;
-    /* padding-top: 10px; */
-    padding: 5px 5px 2.5px 5px;
-    line-height: 2;
+    padding-top: 5px;
+    padding-left: 15px;
+    height: auto;
+    min-height: 2rem;
     background: #FFFFFF;
     border: 3.5px solid #FFFFFF;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    transition: min-height 0.8s ease;
+    border-radius: 10px;
+    transition: all 0.8s ease;
     resize: none;
     width: 100vh;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
         0 6px 20px rgba(0, 0, 0, 0.19);
+    max-height: 3rem;
 }
 
 .Convo {
@@ -80,7 +82,7 @@
     width: 90%;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 5px;
     align-items: center;
 }
 
@@ -89,23 +91,17 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 5px;
 }
 
 .inputField {
     position: relative;
-    width: 51vw;
+    width: 52.75vw;
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 0.5rem;
     line-height: normal;
-    
-    /* height: 30px; */
-     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
-        0 6px 20px rgba(0, 0, 0, 0.19);  */
-    
-    /* overflow-y: auto; */
 }
 
 .sendBtn {
@@ -114,8 +110,8 @@
     justify-content: space-around;
     align-items: center;
     padding-right: 7px;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     background-color: #0060AE;
     border: #0060AE;
     border-radius: 50%;
@@ -231,7 +227,6 @@ button {
 }
 
 .modelpdp {
-
     width: 40px;
     min-width: 40px;
     height: 40px;
@@ -254,6 +249,7 @@ button {
     border-radius: 20px;
     word-wrap: break-word;
     display: block;
+    margin-bottom: 10px;
 }
 
 .restext {
@@ -272,8 +268,8 @@ button {
     position: relative;
     display: flex;
     flex-direction: row;
-    margin-top: 2px;
-    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: flex-end;
 }
 
 .respreacts {
@@ -285,21 +281,40 @@ button {
 .like,
 .dislike,
 .pin {
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
+}
+
+
+.iconn {
+    padding: 2px;
+    margin-bottom: 10px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
 }
 
-.iconn :hover {
-    stroke: #40BA21;
+
+
+.iconn:active path {
+    stroke: #AAABFA;
+    background-color: #aaabfa;
+    border-radius: 10px;
+
 }
 
-.iconnn :hover {
-    stroke: #C41717;
+.iconn:active {
+    background: #aaabfa;
+    border-radius: 10px;
+
 }
 
-.iconnnn :hover {
-    stroke: #FF7139;
+.iconn:hover {
+    background: #ffffff;
+    border-radius: 10px;
+
 }
 
 .Convo::-webkit-scrollbar-track {
