@@ -30,11 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
     const [selectedQueryId, setSelectedQueryId] = useState<number | null>(null);
     const handleQuerySelection = (stored_id: number) => {
-        if (selectedQueryId === stored_id) {
-            setSelectedQueryId(null);
-        } else {
-            setSelectedQueryId(stored_id);
-        }
+        setSelectedQueryId(stored_id);
     };
 
     const [sidebarVisible, setSidebarVisible] = useState(false);
