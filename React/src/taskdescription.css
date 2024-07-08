@@ -15,6 +15,10 @@
 
 }
 
+.DescConthd{
+    display: none;
+}
+
 .close{
     position: relative;
     display: flex;

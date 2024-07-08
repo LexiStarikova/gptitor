@@ -2,6 +2,9 @@
     position: relative;
     width: 100%;
 }
+.panel{
+    display: none;
+}
 
 .panelcontainer {
     position: relative;

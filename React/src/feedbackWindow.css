@@ -1,4 +1,4 @@
-.feedbackcontainer{
+.feedbackcontaineropen{
     position: relative;
     height: 100%;
     width: 100%;
@@ -10,6 +10,10 @@
     /* row-gap: 5%; */
     background: rgba(255, 255, 255, 0.93);
     border-radius: 0px 20px 20px 20px;
+}
+
+.feedbackcontainer{
+    display: none;
 }
 
 .TaskDlinex{

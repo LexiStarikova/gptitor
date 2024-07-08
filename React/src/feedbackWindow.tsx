@@ -10,7 +10,17 @@ import './feedbackWindow.css'
 import TaskDesc from './taskdescription';
 import { Task } from './models/task';
 
-const FeedbackWindow = () => {
+
+interface feedbackWindowProps {
+    isOpenF: boolean;
+    isOpenD: boolean;
+    isOpenS: boolean;
+    closeF: () => void;
+}
+
+const FeedbackWindow : React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpenS, closeF }) => {
+
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { feedback, setFeedback } = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
@@ -76,10 +86,11 @@ const FeedbackWindow = () => {
         else return criterion.toFixed(1)
     }
 
+
     return (        
-            <div className='feedbackcontainer'>
+            <div className={`feedbackcontainer${isOpenF&&!isOpenD&&!isOpenS ? 'open' : ''}`}>
                 <div className='TaskDlinex'>
-                    <h6 className='viewTask' onClick={toggleDescription}>View Task</h6>
+                    <h6 className='viewTask' onClick={closeF}>View Task</h6>
                     <div className='unlineDx'></div>
                 </div>
                 

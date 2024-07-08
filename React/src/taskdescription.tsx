@@ -22,7 +22,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
             });
     };
     return (
-        <div className={`DescCont ${isOpenD ? 'openD' : ''}`}>
+        <div className={`DescCont${isOpenD ? '' : 'hd'}`}>
                 <div className='TaskDline'>
                     <div className='close' onClick={closeD}>
                         <h6 className='CloseTask'>CLOSE</h6>

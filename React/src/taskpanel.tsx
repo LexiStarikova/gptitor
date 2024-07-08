@@ -4,11 +4,11 @@ import { FeedbackContext } from './feedbackContext';
 import { Task } from './models/task';
 
 interface TaskPanelProps {
-    isOpen: boolean;
+    isOpenS: boolean;
     close: () => void;
 }
 
-const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
+const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
 
     const { task, setTask } = useContext(FeedbackContext);
 
@@ -25,7 +25,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
     };
 
     return (
-        <div className='panelopen'/*{`panel ${isOpen ? 'open' : ''}`}*/>
+        <div className={`panel${isOpenS ? 'open' : ''}`}>
             <div className='panelcontainer'>
                 <div className='taskcontainer'>
                     <div className='Tasks'>
@@ -69,7 +69,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
                         </div>
                     </div>
                 </div>
-                <div className='taskDes' onClick={close}>
+                <div className='taskDes' /*onClick={close}*/>
                     <div className='Titles'>
                         <div className='taskName'>
                             <h6 className='Taskt'>Task:</h6>
@@ -85,7 +85,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpen, close }) => {
                         <h6 className='DescT'>Desciption</h6>
                         <p className='Descript'>{task.description}</p>
                     </div>
-                    <p className='solvebutton'>Solve task</p>
+                    <p className='solvebutton' onClick={close}>Solve task</p>
                 </div>
             </div>
         </div>

@@ -9,7 +9,8 @@ import TaskDesc from './taskdescription';
 import { Task } from './models/task';
 
 const FeedbackPanel = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isFeedbackOpen, setFeedbackOpen] = useState(true);
     const { feedback, setFeedback } = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
     const { task, setTask } = useContext(FeedbackContext);
@@ -55,6 +56,11 @@ const FeedbackPanel = () => {
 
     const toggleDescription = () => {
         setShowDescription(!showDescription);
+        // setFeedbackOpen(!isFeedbackOpen);
+    };
+
+    const toggleFeedback = () => {
+        setFeedbackOpen(!isFeedbackOpen);
     };
 
     useEffect(() => {
@@ -118,9 +124,10 @@ const FeedbackPanel = () => {
 
                         {/* TODO: finish state magement of panels and remove unnecessary functions*/}
 
-                        {/* <TaskPanel isOpen={isSidebarOpen} close={toggleSidebar} /> */}
-                        {/* <TaskDesc isOpenD={showDescription} closeD={toggleDescription} /> */}
-                        {/* <FeedbackWindow/> */}
+                        <TaskPanel isOpenS={isSidebarOpen} close={toggleSidebar} />
+                        <FeedbackWindow isOpenS={isSidebarOpen} isOpenF={isFeedbackOpen} isOpenD={showDescription} closeF={toggleDescription}/>
+                        <TaskDesc  isOpenD={showDescription} closeD={toggleDescription} />
+                        
                     </div>
                 </div>
             </div>
