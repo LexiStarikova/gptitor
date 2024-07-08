@@ -22,8 +22,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
             });
     };
     return (
-        <div>
-            <div className='DescCont'/*{`DescCont ${isOpenD ? 'openD' : ''}`}*/>
+        <div className='DescCont'/*{`DescCont ${isOpenD ? 'openD' : ''}`}*/>
                 <div className='TaskDline'>
                     <div className='close' onClick={closeD}>
                         <h6 className='CloseTask'>CLOSE</h6>
@@ -33,8 +32,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
                     </div>
                     <div className='unlineD'></div>
                 </div>
-                <div className='TaskD'>
-                    <div className='Titles'>
+                <div className='Titlesdes'>
                         <div className='taskName'>
                             <h6 className='Taskt'>Task:</h6>
                             <h6 className='Taskn'>{task.task_name}</h6>
@@ -44,13 +42,14 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
                             <h6 className='Catn'>{task.category}</h6>
                         </div>
                     </div>
-                    <div className='Divider'></div>
+                <div className='TaskD'>
+                    
+                    <div className='Dividers'></div>
                     <div className='DescD'>
                         <h6 className='DescT'>Desciption</h6>
                         <p className='Descript'>{task.description}</p>
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

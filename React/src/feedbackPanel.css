@@ -7,16 +7,23 @@
     margin-top: 4px;
     /* align-items: center; */
     /* row-gap: 10px; */
-    height: 78vh;
+    height: 90%;
     /* top: 0px; */
     /* left: 0px; */
     /* margin-left: 90px; */
 
 }
 
+.rightpanel{
+    position: relative;
+    width: 100%;
+    height: calc(100% - 34px);
+}
+
 .optioncontainer{
     position: relative;
-    height: 79vh;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     

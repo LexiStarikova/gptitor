@@ -1,3 +1,78 @@
+.DescCont{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    /* padding: 10% 10%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* Rectangle 4179 */
+
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.93);
+    border-radius: 0px 20px 20px 20px;
+
+}
+
+.close{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: #0060AE;
+}
+
+.TaskDline{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 5% 10%;
+}
+
+.unlineD{
+    position: relative;
+    /* margin-right: 10px; */
+    border: 1px solid rgba(0, 96, 174, 0.7);
+}
+
+.TaskD{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10%;
+}
+
+.Titlesdes{
+    position: relative;
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    /* margin-right: auto;
+    margin-left: auto; */
+    margin-top: 0px;
+}
+
+.Dividers{
+    position: relative;
+    width: 70%;
+    margin: 0px auto 40px auto;
+    border: 2px solid rgba(0, 96, 174, 0.25);
+    border-radius: 10px;
+}
+
+.DescD{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+
+
 /* .DescCont {
     position: relative;
     width: 717px;
