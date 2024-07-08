@@ -48,6 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     useEffect(() => {
         if (queries.length > 0) {
             setSelectedQueryId(queries[queries.length - 1].stored_id);
+            openConversation(queries[queries.length - 1].stored_id);
         }
     }, [queries]);
 
@@ -58,6 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     const handleMouseLeave = () => {
         setSidebarVisible(false);
     };
+
 
     return (
         <div>
