@@ -1,9 +1,9 @@
-.panelopen{
+.panelopen {
     position: relative;
     width: 100%;
 }
 
-.panelcontainer{
+.panelcontainer {
     position: relative;
     height: 76vh;
     /* width: 100%; */
@@ -13,7 +13,7 @@
 }
 
 
-.taskcontainer{
+.taskcontainer {
     position: relative;
     width: fit-content;
     /* block-size: fit-content; */
@@ -29,14 +29,14 @@
     border-radius: 0px 0px 0px 20px;
 }
 
-.Tasks{
+.Tasks {
     position: relative;
     height: auto;
     display: flex;
     flex-direction: column;
 }
 
-.tasktitle{
+.tasktitle {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -45,26 +45,27 @@
     margin-left: 10px;
     margin-top: 10px;
 }
-.tasktitle>h6{
+
+.tasktitle>h6 {
     margin: 0px;
     color: white;
 }
 
-.Tasks ul{
+.Tasks ul {
     position: relative;
     width: 60%;
     display: flex;
     flex-direction: column;
     row-gap: 7px;
-    margin: 10px 0px 0px 0px ;
+    margin: 10px 0px 0px 0px;
     list-style-type: none;
 }
 
-.Tasks ul li{
+.Tasks ul li {
     width: auto;
 }
 
-.Tasks ul li p{
+.Tasks ul li p {
     position: relative;
     width: auto;
     padding-left: 10px;
@@ -79,13 +80,13 @@
     color: white;
     word-wrap: break-word;
     text-wrap: stable;
-    
+
     background: #2287DA;
     border-radius: 10px 20px 10px 10px;
 
 }
 
-.CategoriesTitle{
+.CategoriesTitle {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -95,18 +96,18 @@
     margin-top: 25px;
 }
 
-.Categories{
+.Categories {
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-.CategoriesTitle>h6{
+.CategoriesTitle>h6 {
     margin: 0px;
     color: white;
 }
 
-.topictitle{
+.topictitle {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -116,17 +117,17 @@
     margin-top: 10px;
 }
 
-.Categories ul{
+.Categories ul {
     position: relative;
     width: 60%;
     display: flex;
     flex-direction: column;
     row-gap: 7px;
-    margin: 10px 0px 0px 0px ;
+    margin: 10px 0px 0px 0px;
     list-style-type: none;
 }
 
-.listboxCat{
+.listboxCat {
     position: relative;
     height: auto;
     width: auto;
@@ -141,13 +142,13 @@
     color: white;
     word-wrap: break-word;
     text-wrap: stable;
-    
+
     background: #2287DA;
     border-radius: 10px 20px 10px 10px;
 
 }
 
-.selectedtask{
+.selectedtask {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -156,7 +157,7 @@
     margin-left: 5px;
 }
 
-.selectedtask > p{
+.selectedtask>p {
     margin: 0px;
 }
 
@@ -177,7 +178,7 @@
     border-radius: 0px 20px 20px 0px;
 }
 
-.Titles{
+.Titles {
     position: relative;
     display: flex;
     width: 80%;
@@ -188,7 +189,7 @@
 }
 
 
-.Taskt{
+.Taskt {
     width: auto;
     padding: 5px 10px 0px 10px;
     height: 34.34px;
@@ -196,7 +197,7 @@
     border-radius: 10px 0px 0px 0px;
 }
 
-.Taskn{
+.Taskn {
     width: auto;
     height: 31.31px;
     padding: 5px 10px 0px 10px;
@@ -207,7 +208,7 @@
 
 }
 
-.taskName{
+.taskName {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -215,22 +216,22 @@
     /* column-gap: 10px; */
 }
 
-.taskName > h6{
+.taskName>h6 {
     margin: 0px;
 }
 
-.catName{
+.catName {
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.catName > h6 {
+.catName>h6 {
     margin: 0px;
 }
 
-.Catt{
+.Catt {
     width: auto;
     padding: 5px 10px 0px 10px;
     height: 34.34px;
@@ -238,7 +239,7 @@
     border-radius: 10px 0px 0px 0px;
 }
 
-.Catn{
+.Catn {
     width: auto;
     height: 31.31px;
     padding: 5px 10px 0px 10px;
@@ -248,7 +249,7 @@
     border-radius: 0px 20px 20px 0px;
 }
 
-.Divider{
+.Divider {
     margin: 40px auto 40px auto;
     position: relative;
     width: 80%;
@@ -257,7 +258,7 @@
 
 }
 
-.Desc{
+.Desc {
     position: relative;
     display: flex;
     width: 80%;
@@ -267,25 +268,25 @@
     row-gap: 10px;
 }
 
-.Desc>h6{
+.Desc>h6 {
     color: #0060AE;
     margin: 0px;
 }
 
-.Desc>p{
+.Desc>p {
     position: relative;
     width: 100%;
     text-wrap: balance;
     margin: 00px;
 }
 
-.Descript{
+.Descript {
     position: relative;
     height: 30vh;
     overflow-y: scroll;
 }
 
-.solvebutton{
+.solvebutton {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
