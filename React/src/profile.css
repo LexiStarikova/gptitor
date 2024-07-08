@@ -1,11 +1,15 @@
 .profilepage {
+    position: absolute;
+    top: 0px;
     display: flex;
     flex-direction: row;
     align-content: center;
+    column-gap: 2%;
+    margin-top: 10vh;
 }
 
 .profileimg {
-    z-index: 1;
+    z-index: 0;
     position: absolute;
     width: 200px;
     height: 200px;
@@ -25,6 +29,7 @@
     align-items: center;
     top: 50px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    z-index: -1;
 }
 
 .name {
@@ -271,7 +276,7 @@
     width: 400px;
     height: 8px;
     border-radius: 64px;
-    background-color: #2287DA;
+    background-color: rgb(211, 235, 255);
     position: relative;
     bottom: 38px;
 }
@@ -348,4 +353,57 @@
     display: flex;
     flex-direction: row;
 
+}
+
+@property --progress-value {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+  }
+
+@property --calculated-value {
+    syntax: '<number>';
+    initial-value: 1;
+    inherits: false;
+  }
+
+
+@keyframes progress {
+    to { --progress-value: var(--calculated-value); }
+}
+
+@keyframes fill {
+    to { width: var();}
+}
+
+#progressChart {
+    width: 50%;
+    height: 150px;
+}
+
+.progressbar-rounded{
+    width: 300px;
+    height: 300px;
+    animation: fill 2s ease-out forwards;
+}
+
+.progressbar-internals{
+    transition: width 1.5s ease-in-out;
+}
+
+.progressbar-rounded-base-circle{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 300px;
+    background: 
+        radial-gradient(closest-side, white 80%, transparent 80%, transparent 100%), 
+        conic-gradient(rgb(0, 96, 174) calc(var(--progress-value) * 1%), rgb(211, 235, 255) 0deg);
+}
+
+.progressbar-rounded-base-circle h3, h6{
+    margin: 0;
 }

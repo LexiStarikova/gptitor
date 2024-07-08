@@ -1,3 +1,8 @@
 .sidebarr{
     z-index: 2;
 }
+
+:root{
+    --progress-value: 0;
+    --calculated-value: 25;
+}
