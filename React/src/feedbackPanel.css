@@ -2,7 +2,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 40%;
+    margin-right: 60px;
     margin-top: 4px;
     /* align-items: center; */
     /* row-gap: 10px; */
@@ -16,7 +17,6 @@
 .optioncontainer{
     position: relative;
     height: 79vh;
-    /* width: 60%; */
     display: flex;
     flex-direction: column;
     
@@ -56,6 +56,7 @@
 
 .have_a_GOOD_DAY{
     position: relative;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;

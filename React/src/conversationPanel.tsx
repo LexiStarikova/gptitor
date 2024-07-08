@@ -179,7 +179,8 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
                     </div>
                 </div>
                 <div className='inputField'>
-                    <textarea className='chatinput'
+                    <textarea rows={1}
+                    className='chatinput'
                         ref={inputRef}
                         placeholder='Write Your Prompt Here.'
                         value={text}

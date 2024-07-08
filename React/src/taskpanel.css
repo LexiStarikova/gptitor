@@ -1,12 +1,12 @@
 .panelopen{
     position: relative;
-    width: 60%;
+    width: 100%;
 }
 
 .panelcontainer{
     position: relative;
     height: 76vh;
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     flex-direction: row;
 
@@ -164,13 +164,15 @@
 
 
 .taskDes{
+    flex-shrink: 1;
     position: relative;
     display: flex;
-    flex-shrink: 0;
+    flex-shrink: 1;
     width: 100%;
     flex-direction: column;
-    padding-left: 5%; 
-    padding-right: 5%; 
+    
+    /* padding-left: 10px;  */
+    /* padding-right: 5%;  */
     background: rgba(245, 246, 248, 0.8);
     border-radius: 0px 20px 20px 0px;
 }
@@ -178,9 +180,11 @@
 .Titles{
     position: relative;
     display: flex;
+    width: 80%;
+
     flex-direction: column;
     row-gap: 20px;
-    margin-top: 70px;
+    margin: 70px auto 0px auto;
 }
 
 
@@ -247,7 +251,7 @@
 .Divider{
     margin: 40px auto 40px auto;
     position: relative;
-    width: 100%;
+    width: 80%;
     border: 2px solid rgba(0, 96, 174, 0.25);
     border-radius: 10px;
 
@@ -256,6 +260,9 @@
 .Desc{
     position: relative;
     display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
     row-gap: 10px;
 }
