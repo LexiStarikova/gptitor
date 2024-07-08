@@ -3,11 +3,21 @@
     flex-direction: row;
     align-items: center;
     margin-left: 10px;
+    cursor: pointer;
 }
 
-.queryname{
+.query.selected {
+    background: linear-gradient(100deg, rgba(151, 71, 255, 0.616) 0%, rgb(137, 135, 255) 100%);
+    border-radius: 15px;
+    padding: 0.25rem;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.queryname {
     margin: 0px 25px 0px 10px;
 }
+
 .actions {
     display: flex;
     flex-direction: row;

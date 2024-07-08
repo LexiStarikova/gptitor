@@ -28,7 +28,14 @@ const Sidebar: React.FC<SidebarProps> = ({
     responses,
     queries
 }) => {
-
+    const [selectedQueryId, setSelectedQueryId] = useState<number | null>(null);
+    const handleQuerySelection = (stored_id: number) => {
+        if (selectedQueryId === stored_id) {
+            setSelectedQueryId(null);
+        } else {
+            setSelectedQueryId(stored_id);
+        }
+    };
 
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const sidebarRef = useRef<HTMLDivElement>(null);
@@ -38,13 +45,14 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
 
+
     const handleMouseLeave = () => {
         setSidebarVisible(false);
     };
 
     return (
         <div>
-            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} onMouseLeave={handleMouseLeave}>
+            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} >
                 <div className='sideindex'>
                     <div className='sidetitle'>
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden' onClick={toggleSidebar}>
@@ -88,7 +96,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                             </div>
                             <div className='queries'>
                                 {queries.map(query => (
-                                    <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} />
+                                    <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
+                                        handleSelection={() => handleQuerySelection(query.stored_id)} />
                                 ))}
                             </div>
                         </div>

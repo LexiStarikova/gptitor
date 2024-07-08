@@ -7,9 +7,11 @@ type QueryComponentProps = {
   queryText: string;
   onDelete: (display_id: number, stored_id: number) => void;
   onOpen: (stored_id: number) => void;
+  isSelected: boolean;
+  handleSelection: () => void;
 };
 
-const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, queryText, onDelete, onOpen }) => {
+const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, queryText, onDelete, onOpen, isSelected, handleSelection, }) => {
   const [liked, setLiked] = useState(false);
 
   const toggleLike = () => {
@@ -17,7 +19,7 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, 
   };
 
   return (
-    <div className='query'>
+    <div className={`query ${isSelected ? 'selected' : ''}`} onClick={handleSelection}>
       <svg
         width="16"
         height="17"
@@ -33,7 +35,7 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, 
           fill="#3B4168"
         />
       </svg>
-        <p className='queryname' onClick={() => onOpen(stored_id)}>
+      <p className='queryname' onClick={() => onOpen(stored_id)}>
         {queryText}
         query</p>
       <div className='actions'>
