@@ -44,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     return (
         <div>
-            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} /*onMouseLeave={handleMouseLeave}*/>
+            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} onMouseLeave={handleMouseLeave}>
                 <div className='sideindex'>
                     <div className='sidetitle'>
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden' onClick={toggleSidebar}>
@@ -166,7 +166,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </svg>
             </div>
 
-        </div>
+        </div >
     );
 };
 
