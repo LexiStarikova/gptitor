@@ -39,8 +39,21 @@ const Sidebar: React.FC<SidebarProps> = ({
     const toggleSidebar = () => {
         setSidebarVisible(prev => !prev);
     };
+    useEffect(() => {
+        if (queries.length === 0) {
+            CreateConversation();
+            UpdateQueries();
+        }
+    }, []);
+    useEffect(() => {
+        if (queries.length > 0) {
+            setSelectedQueryId(queries[queries.length - 1].stored_id);
+        }
+    }, [queries]);
 
-
+    const handleCreateConversation = () => {
+        CreateConversation();
+    };
 
     const handleMouseLeave = () => {
         setSidebarVisible(false);
@@ -48,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     return (
         <div>
-            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} >
+            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} onMouseLeave={handleMouseLeave}>
                 <div className='sideindex'>
                     <div className='sidetitle'>
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden' onClick={toggleSidebar}>
@@ -62,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                             className='chaticonhidden'
-                            onClick={CreateConversation}
+                            onClick={handleCreateConversation}
                         >
                             <path d="M12.9996 13.0001V10.4001M12.9996 10.4001V7.8001M12.9996 10.4001H10.3996M12.9996 10.4001H15.5996M12.6605 17.974L7.23439 23.4001V17.974H5.19961C3.76367 17.974 2.59961 16.8099 2.59961 15.374V5.2001C2.59961 3.76416 3.76367 2.6001 5.19961 2.6001H20.7996C22.2355 2.6001 23.3996 3.76416 23.3996 5.2001V15.374C23.3996 16.8099 22.2355 17.974 20.7996 17.974H12.6605Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
