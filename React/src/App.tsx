@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { FeedbackContext } from './feedbackContext';
 import FeedbackContextProvider from './feedbackContextProvider';
 import Sidebar from './sidebar';
@@ -33,25 +33,37 @@ const AppContent: React.FC = () => {
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
 
 
-  const UpdateQueries = async () => {
+  const addQueries = (data: any[]) => {
+    setQueries(
+      data.map(item => ({
+        display_id: item.conversation_id,
+        stored_id: item.conversation_id,
+        text: `Query ${item.conversation_id}`,
+  })));
 
-    const response = await fetch('http://10.100.30.244:8000/conversations', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
-
-    const data = await response.json();
-    const addQueries = data.map((item: any) => {
-      setQueries([]);
-      setQueries(prevQueries => [
-        ...prevQueries,
-        { display_id: item.conversation_id, stored_id: item.conversation_id, text: `Query ${nextId}` }
-      ]);
-      setNextId(nextId + 1);
-    });    
+      const highestId = Math.max(...data.map(item => item.conversation_id));
+      setNextId(highestId + 1);
     };
+
+  useEffect(() => {
+    const fetchDialogs = async () => {
+      setQueries([]);
+      setNextId(1);
+      try {
+        const response = await fetch('http://10.100.30.244:8000/conversations', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        const data = await response.json();
+        addQueries(data);
+      } catch (error) {
+        console.error('There was a mistake with data uploading: ', error);
+      }
+    };
+    fetchDialogs();
+  }, []); 
 
 const CreateConversation = async () => {
   const response = await fetch('http://10.100.30.244:8000/conversations', {
@@ -140,7 +152,6 @@ return (
     <NavBar></NavBar>
     <div className='sidebarr'>
       <Sidebar
-        UpdateQueries={UpdateQueries}
         CreateConversation={CreateConversation}
         openConversation={openConversation}
         deleteConversation={deleteConversation}
