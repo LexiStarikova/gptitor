@@ -5,9 +5,10 @@ import { FeedbackContext } from './feedbackContext';
 import { Task } from './models/task';
 interface TaskDescProps {
     isOpenD: boolean;
+    isOpenS: boolean;
     closeD: () => void;
 }
-const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
+const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
     const { task, setTask } = useContext(FeedbackContext);
 
     const handleTaskClick = (taskId: number) => {
@@ -22,7 +23,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenD, closeD }) => {
             });
     };
     return (
-        <div className={`DescCont${isOpenD ? '' : 'hd'}`}>
+        <div className={`DescCont${isOpenD&&!isOpenS ? '' : 'hd'}`}>
                 <div className='TaskDline'>
                     <div className='close' onClick={closeD}>
                         <h6 className='CloseTask'>CLOSE</h6>
