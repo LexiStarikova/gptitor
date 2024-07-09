@@ -14,7 +14,7 @@ interface StudyModeProps {
     setRequests: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
     responses: MessageSimplifyed[];
     setResponses: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
-    conversation_id : number;
+    conversation_id: number;
 }
 
 
@@ -22,23 +22,23 @@ const StudyMode: React.FC<StudyModeProps> = ({ requests, responses, setRequests,
     return (
         <div >
             <svg className='leftgradient' width="674.1" height="509.6" viewBox="74.9 0 674.1 509.6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="327.5" cy="421.5" r="421.5" fill="url(#paint0_radial_878_1741)"/>
+                <circle cx="327.5" cy="421.5" r="421.5" fill="url(#paint0_radial_878_1741)" />
                 <defs>
                     <radialGradient id="paint0_radial_878_1741" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(337.5 422) rotate(-59.5461) scale(429.689)">
-                    <stop stop-color="#AAABFA"/>
-                    <stop offset="0.916" stop-color="#EFEFEF"/>
-                    <stop offset="1" stop-color="#EFEFEF"/>
+                        <stop stop-color="#AAABFA" />
+                        <stop offset="0.916" stop-color="#EFEFEF" />
+                        <stop offset="1" stop-color="#EFEFEF" />
                     </radialGradient>
                 </defs>
             </svg>
             <svg className='rightgradient' width="429" height="336" viewBox="0 0 429 336" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="336.5" cy="336.5" r="336.5" fill="url(#paint0_radial_878_1740)"/>
+                <circle cx="336.5" cy="336.5" r="336.5" fill="url(#paint0_radial_878_1740)" />
                 <defs>
-                <radialGradient id="paint0_radial_878_1740" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(344.483 336.899) rotate(-59.5461) scale(343.037)">
-                <stop stop-color="#AAABFA"/>
-                <stop offset="0.916" stop-color="#EFEFEF"/>
-                <stop offset="1" stop-color="#EFEFEF"/>
-                </radialGradient>
+                    <radialGradient id="paint0_radial_878_1740" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(344.483 336.899) rotate(-59.5461) scale(343.037)">
+                        <stop stop-color="#AAABFA" />
+                        <stop offset="0.916" stop-color="#EFEFEF" />
+                        <stop offset="1" stop-color="#EFEFEF" />
+                    </radialGradient>
                 </defs>
             </svg>
 

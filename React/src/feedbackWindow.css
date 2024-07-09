@@ -1,4 +1,4 @@
-.feedbackcontaineropen{
+.feedbackcontaineropen {
     position: relative;
     height: 100%;
     width: 100%;
@@ -12,42 +12,41 @@
     border-radius: 0px 20px 20px 20px;
 }
 
-.feedbackcontainer{
+.feedbackcontainer {
     display: none;
 }
 
-.TaskDlinex{
+.TaskDlinex {
     position: relative;
     width: 90%;
     display: flex;
     flex-direction: column;
-
+    cursor: pointer;
     justify-content: flex-end;
     text-align: right;
     margin: 5% 10%;
     color: #0060AE;
-
 }
 
-.unlineDx{
+.unlineDx {
     position: relative;
     /* margin-right: 10px; */
     border: 1px solid rgba(0, 96, 174, 0.7);
 }
 
-.hg{
+.hg {
     position: relative;
     width: 90%;
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 
 
 
-.criterias{
+.criterias {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -61,20 +60,20 @@
     border-radius: 8px;
 }
 
-.p5{
+.p5 {
     position: relative;
     margin: 0px;
 }
 
-.criteriaBoxF{
+.criteriaBoxF {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
-    
+
 }
 
-.box1{
+.box1 {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -82,7 +81,7 @@
     column-gap: 10px;
 }
 
-.critdescF{
+.critdescF {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -92,19 +91,19 @@
 
 }
 
-.barF{
+.barF {
     position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.criteriaicon{
+.criteriaicon {
     position: relative;
     width: auto;
 }
 
-.progressbar-internals{
+.progressbar-internals {
     position: relative;
     width: 100%;
     height: 8px;
@@ -116,7 +115,7 @@
     align-self: stretch;
 }
 
-.scoree{
+.scoree {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -125,12 +124,12 @@
 }
 
 
-.detailsF{
+.detailsF {
     position: relative;
     text-align: right;
 }
 
-.sup{
+.sup {
     position: relative;
     display: flex;
     width: 50%;
@@ -139,7 +138,7 @@
     row-gap: 5px;
 }
 
-.values{
+.values {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -191,14 +190,14 @@
 
 
 
-.FeedContainer{
+.FeedContainer {
     position: relative;
     width: 90%;
     display: flex;
     flex-direction: column;
 }
 
-.FeedTitle{
+.FeedTitle {
     position: relative;
     width: 165px;
     height: 30px;
@@ -210,26 +209,28 @@
 
 }
 
-.lowpart{
-    position: relative;
+.lowpart {
+    position: absolute;
+    margin-top: 3rem;
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.FeedDesc{
+.FeedDesc {
     position: relative;
     width: calc(100% - 20px);
     height: auto;
+    max-height: 10rem;
     padding-left: 20px;
     color: white;
     background: #2287DA;
     border-radius: 0px 20px 20px 20px;
-
+    overflow: auto;
 }
 
-.lowpartt{
+.lowpartt {
     position: relative;
     width: 100%;
     display: flex;

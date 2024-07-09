@@ -2,7 +2,8 @@
     position: relative;
     width: 100%;
 }
-.panel{
+
+.panel {
     display: none;
 }
 
@@ -167,14 +168,14 @@
 
 
 
-.taskDes{
+.taskDes {
     flex-shrink: 1;
     position: relative;
     display: flex;
     flex-shrink: 1;
     width: 100%;
     flex-direction: column;
-    
+
     /* padding-left: 10px;  */
     /* padding-right: 5%;  */
     background: rgba(245, 246, 248, 0.8);
@@ -203,7 +204,7 @@
 .Taskn {
     width: auto;
     height: 31.31px;
-    padding: 5px 10px 0px 10px;
+    padding: 6px 10px 0px 10px;
     border-width: 0px 1px 2px 0px;
     border-style: solid;
     border-color: #D3EBFF;
@@ -250,6 +251,7 @@
     border-style: solid;
     border-color: #D3EBFF;
     border-radius: 0px 20px 20px 0px;
+    white-space: nowrap;
 }
 
 .Divider {
@@ -299,6 +301,7 @@
     margin-right: 5%;
     margin-left: auto;
     margin-top: auto;
+    cursor: pointer;
 }
 
 

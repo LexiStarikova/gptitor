@@ -1,4 +1,4 @@
-.DescCont{
+.DescCont {
     position: relative;
     height: 100%;
     width: 100%;
@@ -15,11 +15,12 @@
 
 }
 
-.DescConthd{
+.DescConthd {
     display: none;
 }
 
-.close{
+.close {
+    cursor: pointer;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -28,7 +29,7 @@
     color: #0060AE;
 }
 
-.TaskDline{
+.TaskDline {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -36,13 +37,13 @@
     margin: 5% 10%;
 }
 
-.unlineD{
+.unlineD {
     position: relative;
     /* margin-right: 10px; */
     border: 1px solid rgba(0, 96, 174, 0.7);
 }
 
-.TaskD{
+.TaskD {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -50,7 +51,7 @@
     padding-bottom: 10%;
 }
 
-.Titlesdes{
+.Titlesdes {
     position: relative;
     display: flex;
     width: 70%;
@@ -58,9 +59,11 @@
     /* margin-right: auto;
     margin-left: auto; */
     margin-top: 0px;
+    row-gap: 1rem;
+    align-items: center;
 }
 
-.Dividers{
+.Dividers {
     position: relative;
     width: 70%;
     margin: 0px auto 40px auto;
@@ -68,7 +71,7 @@
     border-radius: 10px;
 }
 
-.DescD{
+.DescD {
     position: relative;
     display: flex;
     flex-direction: column;
