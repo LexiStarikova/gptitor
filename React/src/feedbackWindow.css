@@ -148,7 +148,7 @@
     width: 100%;
 }
 
-.a {
+.progressbar-score {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,15 +157,36 @@
     height: 160px;
 }
 
-.b {
+.progressbar-internals {
     display: flex;
     justify-content: center;
     align-items: center;
 
     border-radius: 300px;
 
+    -webkit-transition: background 1s ease-out;  
+    -moz-transition: background 1s ease-out;  
+    -o-transition: background 1s ease-out;  
+    transition: background 1s ease-out;  
+
     width: 100%;
     height: 100%;
+}
+
+@property --progress-main-value {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+  }
+
+@property --calculated-main-value {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+}
+
+@keyframes progress_main {
+    to { --progress-main-value: var(--calculated-main-value); }
 }
 
 .progressbar-rounded-progress-circle {
@@ -188,7 +209,23 @@
     align-items: center;
 }
 
+.progress-criteria-outer{
 
+
+    background-color: rgb(211, 235, 255);
+    border-radius: 100px;
+
+    width: 100%;
+    height: 5px;
+}
+
+.progress-criteria-inner{
+
+    background-color: rgb(0, 96, 174);
+    border-radius: 100px;
+
+    height: 5px;
+}
 
 .FeedContainer {
     position: relative;

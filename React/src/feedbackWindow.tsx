@@ -67,10 +67,13 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
         setShowDescription(!showDescription);
     };
 
-    useEffect(() => {
-        resetFeedback();
-        resetScore();
-    }, [setFeedback, setCriteria, setTask]);
+    const animateProgressBar = async (grade: number) => {
+        const progressbar = await document.querySelector('.progressbar-internals') as HTMLElement;
+
+        console.log(grade)
+        progressbar.style.setProperty('--calculated-main-value', `${criteria.criterion_1}`);
+        progressbar.style.animation = "progress_main 1.5s forwards";
+    }
 
     const returnOverallScore = () => {
         let score = ((criteria.criterion_1
@@ -80,6 +83,16 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
         if (score % 1 === 0) return score.toFixed(0)
         else return score.toFixed(1)
     }
+
+    useEffect(() => {
+        resetFeedback();
+        resetScore();
+
+        console.log(((criteria.criterion_1
+            + criteria.criterion_2
+            + criteria.criterion_3
+            + criteria.criterion_4) / 20 * 10))
+    }, [setFeedback, setCriteria, setTask]);
 
     const returnFloatOrNum = (criterion: number) => {
         if (criterion % 1 === 0) return criterion.toFixed(0)
@@ -98,8 +111,8 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                 <div className={`hg ${isRounded ? 'rounded' : ''}`}>
                     <h4 className='res'>Results:</h4>
                     <div className='values'>
-                        <div className='a'>
-                            <div className='b'
+                        <div className='progressbar-score'>
+                            <div className='progressbar-internals'
                                 style={{
                                     background:
                                         `radial-gradient(closest-side, white 80%, transparent 80% 100%),
@@ -133,10 +146,10 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                                     <p className='crittooltipF'>The prompt should be concise and focused on a specific topic or question. Long, convoluted prompts can confuse the LLM and result in less coherent answers.</p>
                                                 </div>
                                             </div>
-                                            <div className='progbarF'>
-                                                <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_1 * 20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
-                                            </div>
-
+                                        </div>
+                                    </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%`}}>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -168,10 +181,10 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                                     <p className='crittooltipF'>The prompt should be clear and specific, leaving little room for ambiguity. Vague or broad prompts can lead to off-target or generalized responses.</p>
                                                 </div>
                                             </div>
-                                            <div className='progbarF'>
-                                                <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_2 * 20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
-                                            </div>
-
+                                        </div>
+                                    </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_2 * 20)}%`}}>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -203,10 +216,10 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                                     <p className='crittooltipF'>The prompt should include relevant context to guide the LLM. Providing necessary background information can help the model generate a more accurate and pertinent response.</p>
                                                 </div>
                                             </div>
-                                            <div className='progbarF'>
-                                                <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_3 * 20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
-                                            </div>
-
+                                        </div>
+                                    </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_3 * 20)}%`}}>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -238,18 +251,16 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                                     <p className='crittooltipF'>The prompt should clearly state the desired output or purpose of the response. This helps the LLM understand the expected format and detail level.</p>
                                                 </div>
                                             </div>
-                                            <div className='progbarF'>
-                                                <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
-                                            </div>
-
+                                        </div>
+                                    </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%`}}>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
                                         <p className='p5'>More Details &lt;</p>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>

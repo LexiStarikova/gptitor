@@ -365,8 +365,7 @@
     syntax: '<number>';
     initial-value: 1;
     inherits: false;
-  }
-
+}
 
 @keyframes progress {
     to { --progress-value: var(--calculated-value); }

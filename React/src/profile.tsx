@@ -49,7 +49,7 @@ const Profile: React.FC = () => {
         return await (data.metrics.criterion_1
             + data.metrics.criterion_2
             + data.metrics.criterion_3
-            + data.metrics.criterion_4)
+            + data.metrics.criterion_4)/4
     };
 
     const animateProgressBar = async (grade: number) => {
@@ -204,11 +204,11 @@ const Profile: React.FC = () => {
                         </svg>
                         <div className='bar'>
                             <div className='critdesc'>
-                                <h5>{statistics.metrics.criterion_1*10}/10</h5>
+                                <h5>{statistics.metrics.criterion_1}/5</h5>
                                 <h6>Conciseness & Focus</h6>
                             </div>
                             <div className='progbar'>
-                                <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_1 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_1/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                             </div>
                         </div>
                     </div>
@@ -228,11 +228,11 @@ const Profile: React.FC = () => {
 
                             <div className='bar'>
                                 <div className='critdesc'>
-                                    <h5>{statistics.metrics.criterion_2*10}/10</h5>
+                                    <h5>{statistics.metrics.criterion_2}/5</h5>
                                     <h6>Clarity & Specificity</h6>
                                 </div>
                                 <div className='progbar'>
-                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_2 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_2/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                 </div>
                             </div>
                             <div className='details'>
@@ -256,11 +256,11 @@ const Profile: React.FC = () => {
 
                             <div className='bar'>
                                 <div className='critdesc'>
-                                    <h5>{statistics.metrics.criterion_3*10}/10</h5>
+                                    <h5>{statistics.metrics.criterion_3}/5</h5>
                                     <h6>Relevance & Context</h6>
                                 </div>
                                 <div className='progbar'>
-                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_3 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_3/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                 </div>
                             </div>
                             <div className='details'>
@@ -283,11 +283,11 @@ const Profile: React.FC = () => {
 
                             <div className='bar'>
                                 <div className='critdesc'>
-                                    <h5>{statistics.metrics.criterion_4*10}/10</h5>
+                                    <h5>{statistics.metrics.criterion_4}/5</h5>
                                     <h6>Purpose & Output</h6>
                                 </div>
                                 <div className='progbar'>
-                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_4 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_4/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                 </div>
                             </div>
                             <div className='details'>
