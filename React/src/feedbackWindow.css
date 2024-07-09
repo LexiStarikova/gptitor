@@ -1,7 +1,8 @@
 .feedbackcontaineropen {
     position: relative;
-    height: 100%;
+    height: 108%;
     width: 100%;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +15,10 @@
 
 .feedbackcontainer {
     display: none;
+}
+.FeedDesc.hide{
+    position: relative;
+    height: 60%;
 }
 
 .TaskDlinex {
@@ -51,11 +56,9 @@
     display: flex;
     flex-direction: column;
     /* margin-left: auto; */
-    width: 100%;
+    width: 90%;
     align-items: center;
     padding: 10px 12px;
-
-
     background: #F5F6F8;
     border-radius: 8px;
 }
@@ -101,6 +104,12 @@
 .criteriaicon {
     position: relative;
     width: auto;
+}
+
+.res{
+    margin: 0px;
+    margin-top: 5%;
+    margin-bottom: 2%;
 }
 
 .progressbar-internals {
@@ -230,6 +239,7 @@
 .FeedContainer {
     position: relative;
     width: 90%;
+    height: 60%;
     display: flex;
     flex-direction: column;
 }
@@ -250,6 +260,7 @@
     position: absolute;
     margin-top: 3rem;
     width: 100%;
+    height: 60%;
     display: flex;
     align-items: center;
     flex-direction: column;
