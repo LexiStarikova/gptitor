@@ -113,7 +113,6 @@ const FeedbackPanel = () => {
                 </div>
                 <div className='rightpanel'>
 
-                    {/* TODO: finish state magement of panels and remove unnecessary functions*/}
 
                     <TaskPanel isOpenS={isSidebarOpen} close={toggleSidebar} />
                     {isStudyMode ? (
@@ -121,7 +120,7 @@ const FeedbackPanel = () => {
                     ) : (
                         <NotStudyMode isOpenS={isSidebarOpen} isOpenF={isFeedbackOpen} isOpenD={showDescription} closeF={toggleDescription} />
                     )}
-                    <TaskDesc isOpenD={showDescription} closeD={toggleDescription} />
+                    <TaskDesc isOpenS={isSidebarOpen} isOpenD={showDescription} closeD={toggleDescription} />
                 </div>
             </div>
         </div>
