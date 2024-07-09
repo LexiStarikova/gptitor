@@ -189,8 +189,8 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
                         onKeyPress={handleKeyPress}
                     ></textarea>
                     <button className='sendBtn' role="button" aria-label="Send" onClick={handleSend}>
-                        <svg width="30" height="30" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.7044 2.29573L10.7074 14.2927M2.68018 8.26463L21.3618 1.78324C22.5123 1.3841 23.616 2.48787 23.2169 3.63833L16.7355 22.32C16.2915 23.5998 14.4943 23.6349 14.0007 22.3734L11.0342 14.7923C10.886 14.4137 10.5865 14.1141 10.2078 13.966L2.62678 10.9995C1.36527 10.5058 1.40036 8.70864 2.68018 8.26463Z" stroke="#186FB5" stroke-width="2" stroke-linecap="round"/>
+                        <svg width="32" height="32" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg1'>
+                            <path d="M23.3154 3.64397L11.7983 15.1611M4.09215 9.37411L22.0265 3.15198C23.131 2.76881 24.1906 3.82842 23.8074 4.93287L17.5853 22.8672C17.159 24.0959 15.4337 24.1295 14.9598 22.9185L12.112 15.6407C11.9698 15.2772 11.6822 14.9896 11.3187 14.8474L4.04089 11.9995C2.82984 11.5257 2.86353 9.80037 4.09215 9.37411Z" stroke="white" strokeWidth="2" strokeLinecap="round" />
                         </svg>
                     </button>
 
