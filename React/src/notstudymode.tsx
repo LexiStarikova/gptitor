@@ -98,8 +98,8 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                 <div className={`hg ${isRounded ? 'rounded' : ''}`}>
                     <h4 className='res'>Results:</h4>
                     <div className='values'>
-                        <div className='a'>
-                            <div className='b'
+                        <div className='progressbar-score'>
+                            <div className='progressbar-internals'
                                 style={{
                                     background:
                                         `radial-gradient(closest-side, white 80%, transparent 80% 100%),
