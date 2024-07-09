@@ -9,7 +9,6 @@ interface MessageSimplifyed {
 }
 
 interface SidebarProps {
-    UpdateQueries: () => void;
     CreateConversation: () => void;
     openConversation: (stored_id: number) => void;
     deleteConversation: (display_id: number, stored_id: number) => void;
@@ -20,7 +19,6 @@ interface SidebarProps {
 
 
 const Sidebar: React.FC<SidebarProps> = ({
-    UpdateQueries,
     CreateConversation,
     openConversation,
     deleteConversation,
