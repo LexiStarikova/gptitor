@@ -4,9 +4,10 @@
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
-    height: 100%;
+    height: calc(100vh - 12vh);
     top: 0px;
     left: 0px;
+    width: 53vw;
 
     margin-left: 110px;
 }
@@ -14,6 +15,8 @@
 .area {
     display: flex;
     flex-direction: column;
+    flex-shrink: 1;
+    width: 100%;
     height: 90%;
 }
 
@@ -60,19 +63,33 @@
     position: relative;
     padding-top: 5px;
     padding-left: 15px;
-    height: auto;
     min-height: 2rem;
     background: #FFFFFF;
     border: 3.5px solid #FFFFFF;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    border-radius: 20px;
     transition: all 0.8s ease;
     resize: none;
-    width: 100vh;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
-        0 6px 20px rgba(0, 0, 0, 0.19);
+    width: 90%;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.19); */
     max-height: 3rem;
+
+    background: linear-gradient(90deg, #FFFFFF 0%, #E5F5FF 100%);
+    border: 3.5px solid #FFFFFF;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    border-radius: 20px;
+
+
 }
+
+
+
+
+
+
+
+
 
 .Convo {
     position: relative;
@@ -96,7 +113,8 @@
 
 .inputField {
     position: relative;
-    width: 52.75vw;
+    height: 40px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -105,6 +123,7 @@
 }
 
 .sendBtn {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -112,10 +131,12 @@
     padding-right: 7px;
     height: 50px;
     width: 50px;
-    background-color: #0060AE;
-    border: #0060AE;
+    /* background-color: #0060AE;
+    color: #0060AE;
+    border: #0060AE; */
     border-radius: 50%;
     cursor: pointer;
+    background-color: white;
 }
 
 button {
@@ -123,11 +144,11 @@ button {
 }
 
 .sendBtn:hover {
-    background-color: #2287DA;
+    background-color: #E5F5FF;
 }
 
 .sendBtn:active {
-    background-color: #0060AE;
+    background-color: #E5F5FF;
 }
 
 .sendBtn:hover .sendsvg1 {
