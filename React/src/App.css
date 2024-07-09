@@ -1,10 +1,11 @@
-.sidebarr{
+.sidebarr {
     z-index: 2;
 }
 
-:root{
+:root {
     --progress-value: 0;
     --calculated-value: 0;
     --progress-main-value: 0;
     --calculated-main-value: 0;
+    overflow: hidden;
 }

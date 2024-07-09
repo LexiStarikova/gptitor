@@ -1,4 +1,4 @@
-.panelscontainer{
+.panelscontainer {
     position: relative;
     /* display: flex;
     flex-direction: row; */
@@ -8,25 +8,25 @@
     /* overflow-x: auto; */
 }
 
-.leftgradient{
+.leftgradient {
     z-index: -1;
     position: absolute;
     bottom: 0px;
     /* bottom: -437px; */
 }
 
-.panels{
+.panels {
     position: absolute;
     top: 0px;
     display: flex;
     height: calc(100vh - 12vh);
     width: 100vw;
     flex-direction: row;
-    column-gap: 5%;
-    margin-top: 12vh;
+    column-gap: 2.5%;
+    margin-top: 10vh;
 }
 
-.rightgradient{
+.rightgradient {
     position: absolute;
     right: 0px;
     bottom: 0px;

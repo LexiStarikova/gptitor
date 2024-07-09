@@ -30,6 +30,13 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
             inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+
+            // Adjust bottom position dynamically based on textarea height
+            const scrollHeight = inputRef.current.scrollHeight;
+            const maxHeight = parseInt(window.getComputedStyle(inputRef.current).maxHeight);
+            const bottomOffset = Math.min(scrollHeight, maxHeight) - 14 * parseFloat(window.getComputedStyle(inputRef.current).borderWidth);
+
+            inputRef.current.style.bottom = `${bottomOffset}px`;
         }
     };
 
@@ -177,24 +184,25 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
                                 </div>
                             ))}
                         </div>
+                        <div className='inputField'>
+                            <textarea rows={1}
+                                className='chatinput'
+                                ref={inputRef}
+                                placeholder='Write Your Prompt Here.'
+                                value={text}
+                                onChange={handleTextChange}
+                                onKeyPress={handleKeyPress}
+                            ></textarea>
+                            <button className='sendBtn' role="button" aria-label="Send" onClick={handleSend}>
+                                <svg width="32" height="32" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg1'>
+                                    <path d="M23.3154 3.64397L11.7983 15.1611M4.09215 9.37411L22.0265 3.15198C23.131 2.76881 24.1906 3.82842 23.8074 4.93287L17.5853 22.8672C17.159 24.0959 15.4337 24.1295 14.9598 22.9185L12.112 15.6407C11.9698 15.2772 11.6822 14.9896 11.3187 14.8474L4.04089 11.9995C2.82984 11.5257 2.86353 9.80037 4.09215 9.37411Z" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div className='inputField'>
-                    <textarea rows={1}
-                        className='chatinput'
-                        ref={inputRef}
-                        placeholder='Write Your Prompt Here.'
-                        value={text}
-                        onChange={handleTextChange}
-                        onKeyPress={handleKeyPress}
-                    ></textarea>
-                    <button className='sendBtn' role="button" aria-label="Send" onClick={handleSend}>
-                        <svg width="32" height="32" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg1'>
-                            <path d="M23.3154 3.64397L11.7983 15.1611M4.09215 9.37411L22.0265 3.15198C23.131 2.76881 24.1906 3.82842 23.8074 4.93287L17.5853 22.8672C17.159 24.0959 15.4337 24.1295 14.9598 22.9185L12.112 15.6407C11.9698 15.2772 11.6822 14.9896 11.3187 14.8474L4.04089 11.9995C2.82984 11.5257 2.86353 9.80037 4.09215 9.37411Z" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-                    </button>
 
                 </div>
+
             </div>
         </div>
     );
