@@ -237,3 +237,47 @@
     flex-direction: column;
     row-gap: 30px;
 }
+
+.crittooltip-containerF {
+    display: inline-block;
+    gap: 1px;
+}
+
+.infoiconcrits {
+    position: relative;
+    bottom: 0.5rem;
+}
+
+.crittooltip-containerF .crittooltipF {
+    visibility: hidden;
+    width: 222px;
+    background-color: #12152A;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 60%;
+    right: 0;
+    margin-left: -46px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.crittooltip-containerF .crittooltipF::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #12152A transparent transparent transparent;
+
+
+}
+
+.crittooltip-containerF:hover .crittooltipF {
+    visibility: visible;
+    opacity: 1;
+}
