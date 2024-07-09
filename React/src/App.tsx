@@ -31,7 +31,7 @@ const AppContent: React.FC = () => {
   const [nextId, setNextId] = useState(1);
   const [responses, setResponses] = useState<MessageSimplifyed[]>([]);
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
-
+  const [isLoading, setIsLoading] = useState(true);
 
   const addQueries = (data: any[]) => {
     setQueries(
@@ -39,11 +39,12 @@ const AppContent: React.FC = () => {
         display_id: item.conversation_id,
         stored_id: item.conversation_id,
         text: `Query ${item.conversation_id}`,
-  })));
+      })));
 
-      const highestId = Math.max(...data.map(item => item.conversation_id));
-      setNextId(highestId + 1);
-    };
+    const highestId = Math.max(...data.map(item => item.conversation_id));
+    setNextId(highestId + 1);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const fetchDialogs = async () => {
@@ -57,65 +58,72 @@ const AppContent: React.FC = () => {
           }
         });
         const data = await response.json();
+        setIsLoading(true);
         addQueries(data);
       } catch (error) {
         console.error('There was a mistake with data uploading: ', error);
       }
     };
     fetchDialogs();
-  }, []); 
+  }, []);
 
-const CreateConversation = async () => {
-  const response = await fetch('http://10.100.30.244:8000/conversations', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      llm_id: 0,
-    }),
-  });
-  const data = await response.json();
-  console.log(`New conversation_id: ${data.conversation_id}`); // ID in DB
-
-  const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}` };
-  setQueries(prevQueries => [...prevQueries, newQuery]);
-  setNextId(nextId + 1);
-};
-
-const openConversation = async (stored_id: number) => {
-  console.log('Conversation is opening...');
-  const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}/messages`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
+  useEffect(() => {
+    if (!isLoading && queries.length === 0) {
+      CreateConversation();
     }
-  });
-  const data = await response.json();
-  setConvId(stored_id);
-  console.log(`Number of messages: ${data.length}`);
+  }, [isLoading, queries]);
 
-  const parsedMessages: Message[] = data.map((item: any) => ({
-    id: item.message_id,
-    message_class: item.message_class,
-    text: item.content,
-    feedback_id: item.feedback_id,
-  }));
+  const CreateConversation = async () => {
+    const response = await fetch('http://10.100.30.244:8000/conversations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        llm_id: 0,
+      }),
+    });
+    const data = await response.json();
+    console.log(`New conversation_id: ${data.conversation_id}`); // ID in DB
 
-  const responses = parsedMessages.filter(message => message.message_class === 'Response');
-  const requests = parsedMessages.filter(message => message.message_class === 'Request');
-
-  const extractIdAndText = (messages: Message[]) => {
-    return messages.map(({ id, text }) => ({ id, text }));
+    const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}` };
+    setQueries(prevQueries => [...prevQueries, newQuery]);
+    setNextId(nextId + 1);
   };
 
-  const extractedRequests = extractIdAndText(requests);
-  const extractedResponses = extractIdAndText(responses);
+  const openConversation = async (stored_id: number) => {
+    console.log('Conversation is opening...');
+    const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}/messages`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const data = await response.json();
+    setConvId(stored_id);
+    console.log(`Number of messages: ${data.length}`);
 
-  setResponses(extractedResponses);
-  setRequests(extractedRequests);
+    const parsedMessages: Message[] = data.map((item: any) => ({
+      id: item.message_id,
+      message_class: item.message_class,
+      text: item.content,
+      feedback_id: item.feedback_id,
+    }));
 
-  if (extractedResponses.length > 0) {
+    const responses = parsedMessages.filter(message => message.message_class === 'Response');
+    const requests = parsedMessages.filter(message => message.message_class === 'Request');
+
+    const extractIdAndText = (messages: Message[]) => {
+      return messages.map(({ id, text }) => ({ id, text }));
+    };
+
+    const extractedRequests = extractIdAndText(requests);
+    const extractedResponses = extractIdAndText(responses);
+
+    setResponses(extractedResponses);
+    setRequests(extractedRequests);
+
+    if (extractedResponses.length > 0) {
       const lastRequest = extractedRequests[extractedRequests.length - 1].id;
       const response_2 = await fetch(`http://10.100.30.244:8000/feedback/${lastRequest}`, {
         method: 'GET',
@@ -132,41 +140,41 @@ const openConversation = async (stored_id: number) => {
         data_2.metrics.criterion_4));
     } else {
       setFeedback('');
-      setCriteria(new Metrics(0,0,0,0));
+      setCriteria(new Metrics(0, 0, 0, 0));
     }
-};
+  };
 
-const deleteConversation = async (display_id: number, stored_id: number) => {
-  setQueries(queries.filter(query => query.display_id !== display_id));
-  const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  });
-  console.log(response.json());
-};
+  const deleteConversation = async (display_id: number, stored_id: number) => {
+    setQueries(queries.filter(query => query.display_id !== display_id));
+    const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    console.log(response.json());
+  };
 
-return (
-  <Router basename='/gptitor'>
-    <NavBar></NavBar>
-    <div className='sidebarr'>
-      <Sidebar
-        CreateConversation={CreateConversation}
-        openConversation={openConversation}
-        deleteConversation={deleteConversation}
-        requests={requests}
-        responses={responses}
-        queries={queries}
-      />
-    </div>
+  return (
+    <Router basename='/gptitor'>
+      <NavBar></NavBar>
+      <div className='sidebarr'>
+        <Sidebar
+          CreateConversation={CreateConversation}
+          openConversation={openConversation}
+          deleteConversation={deleteConversation}
+          requests={requests}
+          responses={responses}
+          queries={queries}
+        />
+      </div>
       <Routes>
-          <Route path="/" element={<Navigate to="/chatpage" />} />
-            <Route path='/chatpage' element={<StudyMode requests={requests} setRequests={setRequests} responses={responses} setResponses={setResponses} conversation_id={convId} />}></Route>
-          <Route path='/profile' element={<Profile />}></Route>
+        <Route path="/" element={<Navigate to="/chatpage" />} />
+        <Route path='/chatpage' element={<StudyMode requests={requests} setRequests={setRequests} responses={responses} setResponses={setResponses} conversation_id={convId} />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
       </Routes>
-  </Router>
-)
+    </Router>
+  )
 }
 
 const App: React.FC = () => {
