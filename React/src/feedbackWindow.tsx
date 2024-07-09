@@ -99,6 +99,9 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
         else return criterion.toFixed(1)
     }
 
+    useEffect(() => {
+        console.log("Criteria updated for window:", criteria);
+    }, [criteria]);
 
     return (
         <div className={`feedbackcontainer${isOpenF && !isOpenD && !isOpenS ? 'open' : ''}`}>

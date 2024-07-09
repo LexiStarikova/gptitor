@@ -1,8 +1,7 @@
 import './studymode.css';
-import { ConversationPanel } from './conversationPanel.tsx';
-import FeedbackPanel from './feedbackPanel.tsx';
-import TaskDesc from "./taskdescription.tsx"
-import FeedbackContextProvider from './feedbackContextProvider.tsx';
+import { ConversationPanel } from './conversationPanel';
+import FeedbackPanel from './feedbackPanel';
+import TaskDesc from "./taskdescription"
 
 interface MessageSimplifyed {
     id: number,
@@ -41,14 +40,10 @@ const StudyMode: React.FC<StudyModeProps> = ({ requests, responses, setRequests,
                     </radialGradient>
                 </defs>
             </svg>
-
-
-            <FeedbackContextProvider>
                 <div className='panels'>
                     <ConversationPanel requests={requests} setRequests={setRequests} setResponses={setResponses} responses={responses} conversation_id={conversation_id} ></ConversationPanel>
                     <FeedbackPanel></FeedbackPanel>
                 </div>
-            </FeedbackContextProvider>
         </div>
     );
 };

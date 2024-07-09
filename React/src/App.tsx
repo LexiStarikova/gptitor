@@ -23,7 +23,7 @@ interface MessageSimplifyed {
   text: string
 }
 
-const AppContent: React.FC = () => {
+const App: React.FC = () => {
 
   const { feedback, setFeedback, criteria, setCriteria, task, setTask } = useContext(FeedbackContext);
   const [convId, setConvId] = useState(1);
@@ -144,6 +144,11 @@ const AppContent: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("Criteria updated:", criteria);
+  }, [criteria]);
+
+
   const deleteConversation = async (display_id: number, stored_id: number) => {
     setQueries(queries.filter(query => query.display_id !== display_id));
     const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
@@ -176,13 +181,5 @@ const AppContent: React.FC = () => {
     </Router>
   )
 }
-
-const App: React.FC = () => {
-  return (
-    <FeedbackContextProvider>
-      <AppContent />
-    </FeedbackContextProvider>
-  );
-};
 
 export default App;
