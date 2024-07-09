@@ -89,7 +89,7 @@ class EntireResponse(BaseModel):
                          examples=["Example comment"], 
                          max_length=2048)
     metrics: Dict[str, Any] = Field(default={"criterion_1": 0.0,
-                                             "criterion_2": 0.0,
+                                             "criterion_1": 0.0,
                                              "criterion_3": 0.0,
                                              "criterion_4": 0.0},
                                    examples=[{
