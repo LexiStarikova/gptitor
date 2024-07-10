@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+package-lock.json
 dist
 dist-ssr
 *.local
@@ -29,3 +30,10 @@ dist-ssr
 
 # Ignore all files and directories containing __pycache__
 **/__pycache__/
+
+*coverage*
+*report*
+*results*
+*assets*
+
+

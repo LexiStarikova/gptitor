@@ -1,93 +1,99 @@
-# GPTitor
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.pg.innopolis.university/a.nasibullina/gptitor.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+# **GPTitor**
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+GPTitor is an interactive sandbox that helps users learn to write effective prompts for Large Language Models (LLMs). Users can select tasks, write prompts, and receive feedback and grades from different LLMs to improve their skills.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## Demo
+![Screenshot of GPTitor Chat Interface](http://10.100.30.244:8801/gptitor/chatpage)
+![Watch Demo Video](http://10.100.30.244:8801/gptitor/chatpage)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## How to Use
+1. Open the [GPTitor](http://10.100.30.244:8801/gptitor/chatpage) web application.
+2. Choose a task from the list provided.
+3. Write a prompt for the task and submit it.
+4. Review the feedback and grading based on the prompt evaluation criteria.
+5. Adjust the prompt based on feedback and resubmit to see improvements.
+6. Switch between different LLMs to practice and compare responses.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## Features
+- Interactive chatbot interface.
+- Task selection for targeted prompt writing practice.
+- Prompt grading based on specific evaluation criteria.
+- Feedback on areas for improvement.
+- Option to switch between different LLMs for diverse practice.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Project Installation / Deployment
+### Prerequisites
+- Node.js and npm installed.
+- Python 3.9 installed.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Installation
+1. Clone the repository:
+    ```bash
+    git clone https://gitlab.pg.innopolis.university/a.nasibullina/gptitor.git
+    cd gptitor
+    ```
+2. Install frontend dependencies:
+    ```bash
+    cd React
+    npm install
+    ```
+3. Install backend dependencies:
+    ```bash
+    cd ../API
+    pip install -r requirements.txt
+    ```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+### Deployment
+1. Start the frontend application:
+    ```bash
+    cd React
+    npm start
+    ```
+2. Run the backend API using uvicorn:
+    ```bash
+    cd ../API
+    uvicorn Core.main:app --reload
+    ```
+ 
+### Note on Deployment
+- The service is currently available only within the Innopolis network. 
+- If you wish to deploy the service elsewhere, ensure to update links in the React files and API requests accordingly.
+- You may access the API documentation (Swagger UI) at http://127.0.0.1:8000/docs in your web browser after the deployment.
+- The public API documentation (Swagger UI) is available [here](http://10.100.30.244:8000/docs).
+- LLMs are hosted on remote servers; the API interacts with these servers.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## Frameworks or Technology
+- **Frontend**: React, CSS, TypeScript
+- **Build Tool**: Vite
+- **Backend**: FastAPI
+- **Database**: SQLite
+- **Deployment**: npm, Uvicorn
 
 ## License
-For open source projects, say how it is licensed.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Contact Information
+For any questions, issues, or contributions, you can reach out to the developers:
+- **Alexandra Starikova-Nasibullina**
+  - Email: [a.nasibullina@innopolis.university](mailto:a.nasibullina@innopolis.university)
+  - Telegram: [@lexandrinnn_t](https://t.me/lexandrinnn_t)
+
+- **Makar Dyachenko**
+  - Email: [m.dyachenko@innopolis.university](mailto:m.dyachenko@innopolis.university)
+  - Telegram: [@index099](https://t.me/index099)
+
+- **Anas Hamrouni**
+  - Email: [a.hamrouni@innopolis.university](mailto:a.hamrouni@innopolis.university)
+  - Telegram: [@reachnasta](https://t.me/reachnasta)
+
+- **Ahmed Baha Eddine Alimi**
+  - Email: [a.alimi@innopolis.university](mailto:a.alimi@innopolis.university)
+  - Telegram: [@Allimi3](https://t.me/Allimi3)
+
+- **Ildar Rakiev**
+  - Email: [i.rakiev@innopolis.university](mailto:i.rakiev@innopolis.university)
+  - Telegram: [@mescudiway](https://t.me/mescudiway)
+
+## Links
