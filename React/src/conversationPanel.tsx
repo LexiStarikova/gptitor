@@ -3,6 +3,7 @@ import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 import ReactLoading from 'react-loading';
+import API_URL from './config';
 
 interface MessageSimplifyed {
     id: number,
@@ -85,7 +86,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
         }
 
         try {
-            const response = await fetch(`http://10.100.30.244:8005/conversations/${conversation_id}/messages`, {
+            const response = await fetch(`${API_URL}/conversations/${conversation_id}/messages`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
