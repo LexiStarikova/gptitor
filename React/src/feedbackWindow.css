@@ -157,6 +157,14 @@
     height: 160px;
 }
 
+.hg.rounded{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
 .progressbar-internals {
     display: flex;
     justify-content: center;
@@ -234,6 +242,7 @@
     max-height: 30%;
     display: flex;
     flex-direction: column;
+    /* -ms-flex-item-align: start; */
 }
 
 .FeedDesc.hide{
@@ -254,13 +263,19 @@
 }
 
 .res{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: flex-start;
     margin: 0px;
+    /* text-align: left; */
 }
 
 .lowpart {
     position: relative;
     /* margin-top: 3rem; */
-    height: 80%;
+    height: 85%;
     width: 100%;
     display: flex;
     align-items: center;

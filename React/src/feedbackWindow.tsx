@@ -111,8 +111,9 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
             </div>
 
             <div className='lowpart'>
+                <h4 className='res'>Results:</h4>
                 <div className={`hg ${isRounded ? 'rounded' : ''}`}>
-                    <h4 className='res'>Results:</h4>
+                    
                     <div className='values'>
                         <div className='progressbar-score'>
                             <div className='progressbar-internals'
@@ -266,7 +267,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                 </div>
                             </div>
                         </div>
-                    </div>
+                </div>
                 </div>
 
                 <div className='FeedContainer'>
