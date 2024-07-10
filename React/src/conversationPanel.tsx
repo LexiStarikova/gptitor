@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
+import ReactLoading from 'react-loading';
+import API_URL from './config';
 
 interface MessageSimplifyed {
     id: number,
@@ -23,9 +25,10 @@ interface ConversationPanelProps {
 }
 
 
-export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, close, isOpenD, closeD ,responses, setResponses, requests, setRequests, conversation_id }) => {
+export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id }) => {
     const [text, setText] = useState<string>('');
     const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -46,6 +49,15 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
         }
     };
 
+    const scrollToBottom = () => {
+        const conversationContainer = document.querySelector('.Convo');
+        if (conversationContainer) {
+            conversationContainer.scrollTop = conversationContainer.scrollHeight;
+        }
+    };
+    useEffect(() => {
+        scrollToBottom();
+    }, [requests, responses]);
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
         adjustTextareaHeight();
@@ -54,9 +66,9 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
         if (e.key === 'Enter') {
             e.preventDefault();
             handleSend();
-            if(isOpenS)
+            if (isOpenS)
                 close();
-            if(isOpenD)
+            if (isOpenD)
                 closeD();
         }
     };
@@ -67,29 +79,31 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
         const newRequest = { id: 0, text: text };
         setRequests(prevRequests => [...prevRequests, newRequest]);
 
+        setLoading(true);
+
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
         }
+
         try {
-            console.log(`task_id = ${task.task_id}, conversation_id = ${conversation_id}`);
-            const response = await fetch(`http://10.100.30.244:8000/conversations/${conversation_id}/messages`, {
+            const response = await fetch(`${API_URL}/conversations/${conversation_id}/messages`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     query_text: text,
-                    task_id: task.task_id,
-                    llm_id: 0
+                    task_id: task.task_id
                 })
             });
 
             if (!response.ok) {
                 const errorMessage = await response.text();
                 console.error('Failed to send message:', errorMessage);
+                setLoading(false);
                 return;
             }
-            console.log('Message sent successfully');
+
             const data = await response.json();
             setRequests((prevRequests) => {
                 const updatedMessages = [...prevRequests];
@@ -99,35 +113,22 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
                 }
                 return updatedMessages;
             });
-            setResponses(prevResponses => [...prevResponses,
-            { id: data.response_id, text: data.response_text }
-            ]);
+            setResponses(prevResponses => [...prevResponses, { id: data.response_id, text: data.response_text }]);
             setFeedback(data.comment);
-            console.log(data.metrics);
-            console.log(`query_id = ${data.query_id}`,
-                `criterion_1 = ${data.metrics.criterion_1} \n`,
-                `criterion_2 = ${data.metrics.criterion_2} \n`,
-                `criterion_3 = ${data.metrics.criterion_3} \n`,
-                `criterion_4 = ${data.metrics.criterion_4} \n`,);
-            setCriteria(new Metrics(data.metrics.criterion_1,
-                data.metrics.criterion_2,
-                data.metrics.criterion_3,
-                data.metrics.criterion_4));
-
-            console.log(`response_text: ${responses.slice(-1)[0]}`);
-
+            setCriteria(new Metrics(data.metrics.criterion_1, data.metrics.criterion_2, data.metrics.criterion_3, data.metrics.criterion_4));
+            setLoading(false);
         } catch (error) {
             console.error('There was a problem sending the message:', error);
+            setLoading(false);
         }
     };
-
     const handleClickFeedback = (query_id: number) => async (event: React.MouseEvent<HTMLDivElement>) => {
         event.preventDefault();
         await showFeedback(query_id);
     };
 
     const showFeedback = async (query_id: number) => {
-        const response = await fetch(`http://10.100.30.244:8000/feedback/${query_id}`, {
+        const response = await fetch(`http://10.100.30.244:8005/feedback/${query_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -193,6 +194,15 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
                                     )}
                                 </div>
                             ))}
+                            {loading && (
+                                <div className='loading'>
+                                    <div className='modelpdp'>
+                                    </div>
+                                    <div className='loadingres'>
+                                        <ReactLoading type='spin' color='#000' height={30} width={30} />
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div className='inputField'>
                             <textarea rows={1}
