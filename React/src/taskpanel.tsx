@@ -13,7 +13,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     const { task, setTask } = useContext(FeedbackContext);
 
     const handleTaskClick = (taskId: number) => {
-        fetch(`http://10.100.30.244:8000/tasks/${taskId}`)
+        fetch(`http://10.100.30.244:8005/tasks/${taskId}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);

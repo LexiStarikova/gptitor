@@ -35,7 +35,7 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
 
     useEffect(() => {
         if (!initialFetch) {
-            fetch(`http://10.100.30.244:8000/tasks/1`)
+            fetch(`http://10.100.30.244:8005/tasks/1`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);

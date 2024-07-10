@@ -51,7 +51,7 @@ const App: React.FC = () => {
       setQueries([]);
       setNextId(1);
       try {
-        const response = await fetch('http://10.100.30.244:8000/conversations', {
+        const response = await fetch('http://10.100.30.244:8005/conversations', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const App: React.FC = () => {
   }, [isLoading, queries]);
 
   const CreateConversation = async () => {
-    const response = await fetch('http://10.100.30.244:8000/conversations', {
+    const response = await fetch('http://10.100.30.244:8005/conversations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ const App: React.FC = () => {
 
   const openConversation = async (stored_id: number) => {
     console.log('Conversation is opening...');
-    const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}/messages`, {
+    const response = await fetch(`http://10.100.30.244:8005/conversations/${stored_id}/messages`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ const App: React.FC = () => {
 
     if (extractedResponses.length > 0) {
       const lastRequest = extractedRequests[extractedRequests.length - 1].id;
-      const response_2 = await fetch(`http://10.100.30.244:8000/feedback/${lastRequest}`, {
+      const response_2 = await fetch(`http://10.100.30.244:8005/feedback/${lastRequest}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -151,7 +151,7 @@ const App: React.FC = () => {
 
   const deleteConversation = async (display_id: number, stored_id: number) => {
     setQueries(queries.filter(query => query.display_id !== display_id));
-    const response = await fetch(`http://10.100.30.244:8000/conversations/${stored_id}`, {
+    const response = await fetch(`http://10.100.30.244:8005/conversations/${stored_id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
