@@ -1,4 +1,5 @@
 import './studymode.css';
+import { useState } from 'react';
 import { ConversationPanel } from './conversationPanel';
 import FeedbackPanel from './feedbackPanel';
 import TaskDesc from "./taskdescription"
@@ -14,10 +15,26 @@ interface StudyModeProps {
     responses: MessageSimplifyed[];
     setResponses: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
     conversation_id: number;
+
+    isOpenS: boolean;
+    close: () => void;
 }
 
 
 const StudyMode: React.FC<StudyModeProps> = ({ requests, responses, setRequests, setResponses, conversation_id }) => {
+    
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [showDescription, setShowDescription] = useState(false);
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const toggleDescription = () => {
+        setShowDescription(!showDescription);
+        // setFeedbackOpen(!isFeedbackOpen);
+    };
+    
     return (
         <div >
             <svg className='leftgradient' width="674.1" height="509.6" viewBox="74.9 0 674.1 509.6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,8 +58,8 @@ const StudyMode: React.FC<StudyModeProps> = ({ requests, responses, setRequests,
                 </defs>
             </svg>
                 <div className='panels'>
-                    <ConversationPanel requests={requests} setRequests={setRequests} setResponses={setResponses} responses={responses} conversation_id={conversation_id} ></ConversationPanel>
-                    <FeedbackPanel></FeedbackPanel>
+                    <ConversationPanel isOpenS={isSidebarOpen} close={toggleSidebar} requests={requests} setRequests={setRequests}  isOpenD={showDescription} closeD={toggleDescription}setResponses={setResponses} responses={responses} conversation_id={conversation_id} ></ConversationPanel>
+                    <FeedbackPanel isOpenS={isSidebarOpen} close={toggleSidebar} isOpenD={showDescription} closeD={toggleDescription}></FeedbackPanel>
                 </div>
         </div>
     );

@@ -140,6 +140,10 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
 
                                         </div>
                                     </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_1 * 20)}%`}}>
+                                        </div>
+                                    </div>
                                     <div className='detailsF'>
                                         <p className='p5'>More Details &lt;</p>
                                     </div>
@@ -173,6 +177,10 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                                                 <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_2 * 20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                             </div>
 
+                                        </div>
+                                    </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_2 * 20)}%`}}>
                                         </div>
                                     </div>
                                     <div className='detailsF'>
@@ -210,6 +218,10 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
 
                                         </div>
                                     </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_3 * 20)}%`}}>
+                                        </div>
+                                    </div>
                                     <div className='detailsF'>
                                         <p className='p5'>More Details &lt;</p>
                                     </div>
@@ -243,6 +255,10 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                                                 <div className='progressbar-internals' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                             </div>
 
+                                        </div>
+                                    </div>
+                                    <div className='progress-criteria-outer'>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%`}}>
                                         </div>
                                     </div>
                                     <div className='detailsF'>

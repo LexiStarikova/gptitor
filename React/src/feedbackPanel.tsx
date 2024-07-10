@@ -9,14 +9,24 @@ import TaskDesc from './taskdescription';
 import NotStudyMode from './notstudymode';
 import { Task } from './models/task';
 
-const FeedbackPanel = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+interface TaskPanelProps {
+    isOpenS: boolean;
+    close: () => void;
+
+    isOpenD: boolean;
+    closeD: () => void;
+}
+
+// const FeedbackPanel = () => {
+const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, closeD  }) => {
+
+    // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [isFeedbackOpen, setFeedbackOpen] = useState(true);
     const { feedback, setFeedback } = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
     const { task, setTask } = useContext(FeedbackContext);
     const [initialFetch, setInitialFetch] = useState<boolean>(false);
-    const [showDescription, setShowDescription] = useState(false);
+    // const [showDescription, setShowDescription] = useState(false);
     const [isRounded, setIsRounded] = useState(true);
     const [isRoundedF, setIsRoundedF] = useState(true);
     const [criterionValue, setCriterionValue] = useState(criteria.criterion_1);
@@ -46,9 +56,13 @@ const FeedbackPanel = () => {
 
     const toggleStudyMode = () => {
         setIsStudyMode(!isStudyMode);
+        if(isOpenS)
+            close();
+        if(isOpenD)
+            closeD();
     };
     const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
+        close();
     };
 
     const resetFeedback = () => {
@@ -60,7 +74,7 @@ const FeedbackPanel = () => {
     };
 
     const toggleDescription = () => {
-        setShowDescription(!showDescription);
+        closeD();
         // setFeedbackOpen(!isFeedbackOpen);
     };
 
@@ -114,13 +128,13 @@ const FeedbackPanel = () => {
                 <div className='rightpanel'>
 
 
-                    <TaskPanel isOpenS={isSidebarOpen} close={toggleSidebar} />
+                    <TaskPanel isOpenS={isOpenS} close={toggleSidebar} />
                     {isStudyMode ? (
-                        <FeedbackWindow isOpenS={isSidebarOpen} isOpenF={isFeedbackOpen} isOpenD={showDescription} closeF={toggleDescription} />
+                        <FeedbackWindow isOpenS={isOpenS} isOpenF={isFeedbackOpen} isOpenD={isOpenD} closeF={toggleDescription} />
                     ) : (
-                        <NotStudyMode isOpenS={isSidebarOpen} isOpenF={isFeedbackOpen} isOpenD={showDescription} closeF={toggleDescription} />
+                        <NotStudyMode isOpenS={isOpenS} isOpenF={isFeedbackOpen} isOpenD={isOpenD} closeF={toggleDescription} />
                     )}
-                    <TaskDesc isOpenS={isSidebarOpen} isOpenD={showDescription} closeD={toggleDescription} />
+                    <TaskDesc isOpenS={isOpenS} isOpenD={isOpenD} closeD={toggleDescription} />
                 </div>
             </div>
         </div>

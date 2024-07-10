@@ -153,7 +153,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                         </div>
                                     </div>
                                     <div className='progress-criteria-outer'>
-                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%`}}>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_1 * 20)}%`}}>
                                         </div>
                                     </div>
                                     <div className='detailsF'>

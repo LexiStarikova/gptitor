@@ -14,10 +14,16 @@ interface ConversationPanelProps {
     requests: MessageSimplifyed[];
     setRequests: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
     conversation_id: number;
+
+    isOpenS: boolean;
+    close: () => void;
+
+    isOpenD: boolean;
+    closeD: () => void;
 }
 
 
-export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses, setResponses, requests, setRequests, conversation_id }) => {
+export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, close, isOpenD, closeD ,responses, setResponses, requests, setRequests, conversation_id }) => {
     const [text, setText] = useState<string>('');
     const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
 
@@ -48,6 +54,10 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ responses,
         if (e.key === 'Enter') {
             e.preventDefault();
             handleSend();
+            if(isOpenS)
+                close();
+            if(isOpenD)
+                closeD();
         }
     };
 
