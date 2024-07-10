@@ -1,9 +1,14 @@
-# TODO: remove unused imports (flake8)
 from pydantic import BaseModel, Field
-# from pydantic import validator
 from typing import Optional, Dict, Any, List
 from datetime import datetime
-# from datetime import date
+
+
+class LLM(BaseModel):
+    llm_id: int = Field(default=1,
+                        examples=[1])
+    name: str = Field(default="Untitled",
+                      examples=["Example name"],
+                      max_length=2048)
 
 
 class Query(BaseModel):
@@ -11,9 +16,7 @@ class Query(BaseModel):
                             examples=["Example query"],
                             max_length=2048)
     task_id: int = Field(default=1,
-                         examples=[0])
-    llm_id: int = Field(default=0,
-                        examples=[0])
+                         examples=[1])
 
 
 # TODO: implement renaming
@@ -150,10 +153,8 @@ class Conversation(BaseModel):
                                  max_length=255)
     llm_id: int = Field(default=1,
                         examples=[1])
-    created_at: str = Field(default=datetime
-                            .now()
-                            .strftime('%Y-%m-%d %H:%M:%S'),
-                            examples=["2024-07-06 17:50:41"])
+    created_at: datetime = Field(default=datetime.now(),
+                                 examples=["2024-07-06 17:50:41"])
 
     class ConfigDict:
         from_attributes = True
