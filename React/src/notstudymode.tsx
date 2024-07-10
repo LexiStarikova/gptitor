@@ -95,8 +95,9 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
             </div>
 
             <div className='lowpart'>
+                <h4 className='res'>Results:</h4>
                 <div className={`hg ${isRounded ? 'rounded' : ''}`}>
-                    <h4 className='res'>Results:</h4>
+                    
                     <div className='values'>
                         <div className='progressbar-score'>
                             <div className='progressbar-internals'
