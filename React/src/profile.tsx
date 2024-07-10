@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './profile.css';
 import { log } from 'console';
 import { Chart } from 'chart.js/auto';
+import API_URL from './config';
 
 const Profile: React.FC = () => {
     const [statistics, setStatistics] = useState({
@@ -18,7 +19,7 @@ const Profile: React.FC = () => {
 
     const fetchStatistics = async () => {
         try {
-            const response = await fetch('http://10.100.30.244:8000/profile/statistics', {
+            const response = await fetch(`${API_URL}/profile/statistics`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,11 +92,6 @@ const Profile: React.FC = () => {
             loadProgressChart()
         }
     }, [isLoading]);
-
-    // console.log('---');
-    // console.log(statistics.total_activity.total_conversations);
-    // console.log(calculateAverageGrade(statistics));
-    // console.log(statistics);
 
     return (
         <div>

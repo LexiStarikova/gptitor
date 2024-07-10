@@ -1,0 +1,12 @@
+[
+    {
+      "llm_id": 1,
+      "name": "Qwen2",
+      "url": "http://10.100.30.240:1222/generate"
+    },
+    {
+      "llm_id": 2,
+      "name": "Llama3",
+      "url": "http://10.100.30.240:1223/generate"
+    }
+  ]

@@ -7,8 +7,8 @@ import { useState, useEffect, useContext } from 'react';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 import './feedbackWindow.css'
-import TaskDesc from './taskdescription';
-import { Task } from './models/task';
+import API_URL from './config';
+
 
 
 interface NotStudyModeProps {
@@ -35,7 +35,7 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
 
     useEffect(() => {
         if (!initialFetch) {
-            fetch(`http://10.100.30.244:8000/tasks/1`)
+            fetch(`${API_URL}/tasks/1`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);

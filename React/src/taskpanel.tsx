@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './taskpanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Task } from './models/task';
+import API_URL from './config';
 
 interface TaskPanelProps {
     isOpenS: boolean;
@@ -13,7 +14,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     const { task, setTask } = useContext(FeedbackContext);
 
     const handleTaskClick = (taskId: number) => {
-        fetch(`http://10.100.30.244:8000/tasks/${taskId}`)
+        fetch(`${API_URL}/tasks/${taskId}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);

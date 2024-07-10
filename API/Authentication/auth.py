@@ -1,6 +1,7 @@
-from fastapi import Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer
-from Core import models
+# TODO: remove unused imports (flake8)
+# from fastapi import Depends, HTTPException
+# from fastapi.security import OAuth2PasswordBearer
+# from Core import models
 
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 # TODO: check whether user has a real access to the conversation
@@ -9,11 +10,12 @@ from Core import models
 def get_current_user():
     # Here you would typically implement authentication logic
     # For example, verify the token and fetch the current user from database
-    # Replace with your actual implementation based on your authentication method
+    # Replace with your actual implementation based on authentication method
     # user_id = verify_token(token)
     # if user_id is None:
     #     raise HTTPException(status_code=401, detail="Invalid credentials")
     return 1
+
 
 def verify_token(token: str) -> int:
     # Example function to verify JWT token
