@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from Core import schemas, models
 from Utilities.feedback import (get_chatbot_response,
-                                get_chatbot_comment, 
+                                get_chatbot_comment,
                                 calculate_metrics)
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
@@ -59,12 +59,15 @@ def delete_conversation(db: Session,
                 .filter_by(conversation_id=conversation_id)
             )
         ).delete(synchronize_session=False)
-        db.query(models.Message) \
-        .filter_by(conversation_id=conversation_id) \
-        .delete(synchronize_session=False)
-        db.query(models.Conversation) \
-        .filter_by(conversation_id=conversation_id) \
-        .delete(synchronize_session=False)
+
+        db.query(models.Message).filter_by(
+            conversation_id=conversation_id
+        ).delete(synchronize_session=False)
+
+        db.query(models.Conversation).filter_by(
+            conversation_id=conversation_id
+        ).delete(synchronize_session=False)
+
         db.commit()
         return f"Conversation with ID {conversation_id} deleted successfully."
     except Exception as e:
@@ -205,8 +208,8 @@ def get_task_by_id(db: Session,
         )
 
 
-def get_all_messages_by_conversation_id(db: Session,
-                                        conversation_id: int) -> List[schemas.Message]:
+def get_all_messages_by_conversation_id(
+        db: Session, conversation_id: int) -> List[schemas.Message]:
     try:
         conversation = (
             db.query(models.Conversation)
@@ -214,8 +217,9 @@ def get_all_messages_by_conversation_id(db: Session,
             .first()
         )
         if not conversation:
+            error_msg = f"Conversation with ID {conversation_id} not found."
             raise HTTPException(status_code=404,
-                                detail=f"Conversation with ID {conversation_id} not found.")
+                                detail=error_msg)
         messages = (
             db.query(models.Message)
             .filter(models.Message.conversation_id == conversation_id)
@@ -246,16 +250,18 @@ def get_feedback_by_query_id(db: Session,
             .first()
         )
         if not message:
+            error_msg = f"Request with ID {query_id} not found."
             raise HTTPException(status_code=404,
-                                detail=f"Request with ID {query_id} not found.")
+                                detail=error_msg)
         feedback = (
             db.query(models.Feedback)
             .filter(models.Feedback.feedback_id == message.feedback_id)
             .first()
         )
         if not feedback:
+            error_msg = f"Feedback for request with ID {query_id} not found."
             raise HTTPException(status_code=404,
-                                detail=f"Feedback for request with ID {query_id} not found.")
+                                detail=error_msg)
         metrics = feedback.metrics
         if isinstance(metrics, str):
             metrics = json.loads(metrics)
@@ -265,7 +271,7 @@ def get_feedback_by_query_id(db: Session,
             metrics=metrics
         )
         return feedback_schema
-    
+
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -279,24 +285,33 @@ def calculate_personal_statistics(db: Session,
         avg_metrics_query = db.query(
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_1')), 1).label('criterion_1'),
+                    models.Feedback.metrics, '$.criterion_1')), 1
+                        ).label('criterion_1'),
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_2')), 1).label('criterion_2'),
+                    models.Feedback.metrics, '$.criterion_2')), 1
+                        ).label('criterion_2'),
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_3')), 1).label('criterion_3'),
+                    models.Feedback.metrics, '$.criterion_3')), 1
+                        ).label('criterion_3'),
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_4')), 1).label('criterion_4')
+                    models.Feedback.metrics, '$.criterion_4')), 1
+                        ).label('criterion_4')
         ).join(
-            models.Message, models.Message.feedback_id == models.Feedback.feedback_id
+            models.Message,
+            models.Message.feedback_id == (
+                models.Feedback.feedback_id)
         ).join(
-            models.Conversation, 
-            models.Conversation.conversation_id == models.Message.conversation_id
+            models.Conversation,
+            models.Conversation.conversation_id == (
+                models.Message.conversation_id)
         ).filter(
-            models.Conversation.user_id == user_id,
-            models.Message.message_class == 'Request'
+            models.Conversation.user_id == (
+                user_id),
+            models.Message.message_class == (
+                'Request')
         ).first()
         if not avg_metrics_query:
             raise HTTPException(
@@ -304,17 +319,27 @@ def calculate_personal_statistics(db: Session,
                 detail=f"Personal statistics not found for user ID {user_id}."
             )
         avg_metrics = avg_metrics_query._asdict()
-        metrics = {k: v if v is not None else 0 for k, v in avg_metrics.items()}
+        metrics = {k: v if v is not None
+                   else 0 for k, v in avg_metrics.items()}
         total_activity_query = db.query(
-            func.count(models.Conversation.conversation_id).label('total_conversations'),
-            func.count(models.Message.message_id).label('total_messages'),
-            func.count(func.distinct(models.Message.task_id)).label('task_ids')
+            func.count(
+                models.Conversation.conversation_id
+                    ).label('total_conversations'),
+            func.count(
+                models.Message.message_id
+                    ).label('total_messages'),
+            func.count(
+                func.distinct(models.Message.task_id)
+                    ).label('task_ids')
         ).join(
-            models.Message, 
-            models.Message.conversation_id == models.Conversation.conversation_id
+            models.Message,
+            models.Message.conversation_id == (
+                models.Conversation.conversation_id)
         ).filter(
-            models.Conversation.user_id == user_id,
-            models.Message.message_class == 'Request'
+            models.Conversation.user_id == (
+                user_id),
+            models.Message.message_class == (
+                'Request')
         ).first()
         if not total_activity_query:
             raise HTTPException(
@@ -330,21 +355,25 @@ def calculate_personal_statistics(db: Session,
             models.Message.created_at.label('message_date'),
             func.count(models.Message.message_id).label('daily_message_count')
         ).join(
-            models.Conversation, 
-            models.Conversation.conversation_id == models.Message.conversation_id
+            models.Conversation,
+            models.Conversation.conversation_id == (
+                models.Message.conversation_id)
         ).filter(
-            models.Conversation.user_id == user_id,
-            models.Message.message_class == 'Request'
+            models.Conversation.user_id == (
+                user_id),
+            models.Message.message_class == (
+                'Request')
         ).group_by(
             models.Message.created_at
         ).order_by(
             'message_date'
         ).all()
         if not daily_activity_query:
+            error_msg = f"Daily activity not found for user ID {user_id}."
             raise HTTPException(status_code=404,
-                                detail=f"Daily activity not found for user ID {user_id}.")
+                                detail=error_msg)
         daily_activity: List[Dict[str, Any]] = [
-            {"date": row.message_date.strftime('%Y-%m-%d %H:%M:%S'), 
+            {"date": row.message_date.strftime('%Y-%m-%d %H:%M:%S'),
              "number_of_queries": row.daily_message_count}
             for row in daily_activity_query
         ]

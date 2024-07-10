@@ -1,25 +1,32 @@
-from pydantic import BaseModel, Field, validator
+# TODO: remove unused imports (flake8)
+from pydantic import BaseModel, Field
+# from pydantic import validator
 from typing import Optional, Dict, Any, List
-from datetime import datetime, date
+from datetime import datetime
+# from datetime import date
+
 
 class Query(BaseModel):
-    query_text: str = Field(default="", 
-                            examples=["Example query"], 
+    query_text: str = Field(default="",
+                            examples=["Example query"],
                             max_length=2048)
-    task_id: int = Field(default=1, 
+    task_id: int = Field(default=1,
                          examples=[0])
-    llm_id: int = Field(default=0, 
+    llm_id: int = Field(default=0,
                         examples=[0])
 
-#TODO: implement renaming
+
+# TODO: implement renaming
 class Name(BaseModel):
-    new_name: str = Field(default="Untitled", 
-                            examples=["Example name"], 
-                            max_length=2048)
+    new_name: str = Field(default="Untitled",
+                          examples=["Example name"],
+                          max_length=2048)
+
 
 class LLM_ID(BaseModel):
-    llm_id: int = Field(default=1, 
+    llm_id: int = Field(default=1,
                         examples=[1])
+
 
 class Metrics(BaseModel):
     metrics: Dict[str, Any] = Field(
@@ -36,6 +43,7 @@ class Metrics(BaseModel):
             "criterion_4": 0.0
         }]
     )
+
 
 class PersonalStatistics(BaseModel):
     metrics: Dict[str, Any] = Field(
@@ -69,40 +77,42 @@ class PersonalStatistics(BaseModel):
             "date": None,
             "number_of_queries": 0
         },
-        examples = [{
+        examples=[{
             "date": "%Y-%m-%d",
             "number_of_queries": 34
         }]
     )
 
+
 class EntireResponse(BaseModel):
-    conversation_id: int = Field(default=1, 
+    conversation_id: int = Field(default=1,
                                  examples=[1])
-    query_id: int = Field(default=0, 
+    query_id: int = Field(default=0,
                           examples=[0])
-    response_id: int = Field(default=0, 
+    response_id: int = Field(default=0,
                              examples=[0])
-    response_text: str = Field(default="", 
-                               examples=["Example response"], 
+    response_text: str = Field(default="",
+                               examples=["Example response"],
                                max_length=2048)
-    comment: str = Field(default="", 
-                         examples=["Example comment"], 
+    comment: str = Field(default="",
+                         examples=["Example comment"],
                          max_length=2048)
     metrics: Dict[str, Any] = Field(default={"criterion_1": 0.0,
                                              "criterion_1": 0.0,
                                              "criterion_3": 0.0,
                                              "criterion_4": 0.0},
-                                   examples=[{
+                                    examples=[{
                                             "criterion_1": 5,
                                             "criterion_2": 4.5,
                                             "criterion_3": 3.2,
-                                            "criterion_4": 0.0
-                                            }])   
+                                            "criterion_4": 0.0}])
+
+
 class Feedback(BaseModel):
-    feedback_id: int = Field(default=0, 
+    feedback_id: int = Field(default=0,
                              examples=[0])
-    comment: str = Field(default="", 
-                         examples=["Example comment"], 
+    comment: str = Field(default="",
+                         examples=["Example comment"],
                          max_length=2048)
     metrics: Dict[str, Any] = Field(
         default={
@@ -118,28 +128,33 @@ class Feedback(BaseModel):
             "criterion_4": 0.0
         }])
 
+
 class Message(BaseModel):
-    message_id: int = Field(default=0, 
+    message_id: int = Field(default=0,
                             examples=[0])
     message_class: str = Field(default='Request',
                                examples=['Request', 'Response'])
     content: str = Field(default="",
                          examples=["Example content"])
-    feedback_id: int = Field(default=0, 
-                 examples=[0])
+    feedback_id: int = Field(default=0,
+                             examples=[0])
+
 
 class Conversation(BaseModel):
-    conversation_id: int = Field(default=0, 
+    conversation_id: int = Field(default=0,
                                  examples=[0])
-    user_id: int = Field(default=0, 
+    user_id: int = Field(default=0,
                          examples=[0])
-    title: Optional[str] = Field(default="Untitled", 
-                                 examples=["Example title"], 
+    title: Optional[str] = Field(default="Untitled",
+                                 examples=["Example title"],
                                  max_length=255)
-    llm_id: int = Field(default=1, 
+    llm_id: int = Field(default=1,
                         examples=[1])
-    created_at: str = Field(default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 
-                                    examples=["2024-07-06 17:50:41"])
+    created_at: str = Field(default=datetime
+                            .now()
+                            .strftime('%Y-%m-%d %H:%M:%S'),
+                            examples=["2024-07-06 17:50:41"])
+
     class ConfigDict:
         from_attributes = True
 
@@ -148,15 +163,16 @@ class Criterion(BaseModel):
     score: float = Field(default=0.0,
                          examples=[0.0])
 
+
 class Task(BaseModel):
-    task_id: int = Field(default=1, 
+    task_id: int = Field(default=1,
                          examples=[1])
-    task_name: str = Field(default="", 
-                           examples=["Example name"], 
+    task_name: str = Field(default="",
+                           examples=["Example name"],
                            max_length=255)
-    category: str = Field(default="", 
-                           examples=["Example category"], 
-                           max_length=255)
-    description: str = Field(default="", 
-                             examples=["Example description"], 
+    category: str = Field(default="",
+                          examples=["Example category"],
+                          max_length=255)
+    description: str = Field(default="",
+                             examples=["Example description"],
                              max_length=2048)
