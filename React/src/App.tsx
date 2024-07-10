@@ -80,7 +80,7 @@ const App: React.FC = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        llm_id: 0,
+        llm_id: 1,
       }),
     });
     const data = await response.json();
