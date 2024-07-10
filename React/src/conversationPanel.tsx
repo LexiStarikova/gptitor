@@ -92,8 +92,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
                 },
                 body: JSON.stringify({
                     query_text: text,
-                    task_id: task.task_id,
-                    llm_id: 0
+                    task_id: task.task_id
                 })
             });
 

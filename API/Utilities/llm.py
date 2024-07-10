@@ -2,7 +2,9 @@ import aiohttp
 
 
 class LLM:
-    url = 'http://10.100.30.240:1222/generate'
+    def __init__(self, name: str,
+                 url: str = "http://10.100.30.240:1222/generate"):
+        self.url = url
 
     async def get_response(self, json_data):
         async with aiohttp.ClientSession() as session:

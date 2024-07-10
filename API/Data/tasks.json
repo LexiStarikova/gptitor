@@ -1,0 +1,18 @@
+[
+    {
+      "task_category": "Математика",
+      "task_name": "Автопутешествие",
+      "task_description": "Imagine you are on a road trip with your partner. The length of the route is 2300 kilometers. You travel at an average speed of 80 kilometers per hour between destinations. Daytime stops take from two to eight hours. You also make sure to go to sleep at night to avoid the risk of being involved in an accident. You've been on the road for two days and you're curious about how much of the route you've traveled. Your partner is wondering how many days this trip will last in total. Calculate the probability that your answer to your partner's question is correct. Get the answers to these three questions using the correct query to the language model."
+    },
+    {
+      "task_category": "Лирическая задача",
+      "task_name": "Старинная деревня",
+      "task_description": "Imagine that you have traveled to the distant past of a parallel universe. You are lucky enough to find yourself in an ancient village where they know your language. The villagers recognize you as a stranger, but you don't want to be conspicuous from the crowd to avoid troubles. You introduce yourself as a traveler named Hongo, and as proof, you decide to tell them about the sunniest weather you have ever experienced in the state of Miuo. To prevent your lie from being discovered, your speech should contain only the simplest and most understandable vocabulary inherent in the colloquial style. And the story should be detailed and interesting, so that the inhabitants are imbued with your story and forget about their suspicions. Get this description with a proper query to the language model."
+    },
+    {
+      "task_category": "Головоломка",
+      "task_name": "Логические сладости",
+      "task_description": "The boy Kyo is only five years old and is crazy about chocolate cakes and marzipan. His older sister Koyto is already in high school and has a passion for math. One day the girl comes home from school and treats her little brother to a single candy. The next day Koito treats the boy to another candy. Kyo was very happy, but did not even realize the reason for the treats. On the following days, Koyto treated the bral with two, three, and then five candies. The boy was happy, but he began to suspect his sister of something wrong. The next day his sister brought eight candies. Why so many sweets? On what principle does Koyto choose the number of candies? How many sweets will the girl bring the next day? Get the answer to this question by using the correct query to the language model."
+    }
+  ]
+  

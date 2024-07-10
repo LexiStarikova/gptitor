@@ -30,7 +30,7 @@ class AIModel(Base):
     __tablename__ = 'aimodels'
     llm_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
-    api = Column(String)
+    url = Column(String)
 
 
 class Message(Base):

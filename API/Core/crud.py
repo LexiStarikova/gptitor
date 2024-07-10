@@ -4,10 +4,41 @@ from Core import schemas, models
 from Utilities.feedback import (get_chatbot_response,
                                 get_chatbot_comment,
                                 calculate_metrics)
+from Utilities.llm import LLM
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from typing import Dict, Any, List
+
+
+def get_llm_dict(db: Session):
+    llm_dict = {}
+    data = db.query(models.AIModel).all()
+    if not data:
+        raise HTTPException(
+            status_code=404,
+            detail="LLMs data not found."
+        )
+    for model in data:
+        llm_instance = LLM(name=model.name,
+                           url=model.url)
+        llm_dict[model.llm_id] = llm_instance
+    return llm_dict
+
+
+def get_llm_list(db: Session):
+    data = db.query(models.AIModel).all()
+    if not data:
+        raise HTTPException(
+            status_code=404,
+            detail="LLMs data not found."
+        )
+    llm_list: List[schemas.LLM] = [
+        schemas.LLM(llm_id=llm.llm_id,
+                    name=llm.name)
+        for llm in data
+    ]
+    return llm_list
 
 
 def create_new_conversation(db: Session,
@@ -86,6 +117,8 @@ def get_all_conversations(db: Session,
             .filter_by(user_id=user_id)
             .all()
         )
+        if not conversations:
+            return []
         return [
             schemas.Conversation(
                 conversation_id=conversation.conversation_id,
@@ -122,6 +155,7 @@ async def send_query(db: Session,
             raise HTTPException(
                 status_code=404,
                 detail=f"Conversation with ID {conversation_id} not found.")
+        llm_id = conversation.llm_id
         task = db.query(models.Task).filter_by(task_id=query.task_id).first()
         if not task:
             raise HTTPException(
@@ -129,16 +163,19 @@ async def send_query(db: Session,
                 detail=f"Task with ID {query.task_id} not found.")
         response = await get_chatbot_response(
             query=query.query_text,
-            task=task
+            task=task,
+            llm_id=llm_id
         )
         response_created_at = datetime.now()
         comment = await get_chatbot_comment(
             query=query.query_text,
-            task=task
+            task=task,
+            llm_id=llm_id
         )
         metrics = await calculate_metrics(
             query=query.query_text,
-            task=task
+            task=task,
+            llm_id=llm_id
         )
         feedback = models.Feedback(
             comment=comment,

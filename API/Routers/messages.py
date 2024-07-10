@@ -1,6 +1,4 @@
-# TODO: remove unused imports (flake8)
 from fastapi import APIRouter, Depends
-# from fastapi import HTTPException
 from Core import crud, schemas, database
 from typing import List
 from Authentication import auth
