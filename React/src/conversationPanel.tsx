@@ -80,6 +80,10 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
         setRequests(prevRequests => [...prevRequests, newRequest]);
 
         setLoading(true);
+        if (isOpenS)
+            close();
+        if (isOpenD)
+            closeD();
 
         if (inputRef.current) {
             inputRef.current.style.height = 'auto';
