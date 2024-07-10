@@ -156,17 +156,16 @@ async def send_query(db: Session,
                 status_code=404,
                 detail=f"Conversation with ID {conversation_id} not found.")
         llm_id = conversation.llm_id
-        task = db.query(models.Task).filter_by(task_id=query.task_id).first()
-        if not task:
-            raise HTTPException(
-                status_code=404,
-                detail=f"Task with ID {query.task_id} not found.")
-        response = await get_chatbot_response(
-            query=query.query_text,
-            task=task,
-            llm_id=llm_id
-        )
-        response_created_at = datetime.now()
+        if not query.task_id:
+            task = ""
+        else:
+            task = (db.query(models.Task)
+                    .filter_by(task_id=query.task_id)
+                    .first())
+            if not task:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Task with ID {query.task_id} not found.")
         comment = await get_chatbot_comment(
             query=query.query_text,
             task=task,
@@ -177,6 +176,12 @@ async def send_query(db: Session,
             task=task,
             llm_id=llm_id
         )
+        response = await get_chatbot_response(
+            query=query.query_text,
+            llm_id=llm_id
+        )
+        response_created_at = datetime.now()
+        
         feedback = models.Feedback(
             comment=comment,
             metrics=metrics
