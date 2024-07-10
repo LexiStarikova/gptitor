@@ -7,7 +7,7 @@ import { Metrics } from './models/metrics';
 import FeedbackWindow from './feedbackWindow';
 import TaskDesc from './taskdescription';
 import NotStudyMode from './notstudymode';
-import API_URL from './config';
+import { Task } from './models/task';
 
 interface TaskPanelProps {
     isOpenS: boolean;
@@ -36,7 +36,7 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
 
     useEffect(() => {
         if (!initialFetch) {
-            fetch(`${API_URL}/tasks/1`)
+            fetch(`http://10.100.30.244:8000/tasks/1`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
