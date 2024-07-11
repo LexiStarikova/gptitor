@@ -15,9 +15,6 @@ interface StudyModeProps {
     responses: MessageSimplifyed[];
     setResponses: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
     conversation_id: number;
-
-    isOpenS: boolean;
-    close: () => void;
 }
 
 

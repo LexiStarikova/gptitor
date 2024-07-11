@@ -74,6 +74,10 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
     };
 
     const handleSend = async () => {
+        if (isOpenS)
+            close();
+        if (isOpenD)
+            closeD();
         if (text.trim() === "") return;
         setText('');
         const newRequest = { id: 0, text: text };
