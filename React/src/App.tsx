@@ -19,14 +19,14 @@ interface Message {
 
 interface MessageSimplifyed {
   id: number,
-  text: string
+  text: string,
 }
 
 const App: React.FC = () => {
 
   const { setFeedback, criteria, setCriteria } = useContext(FeedbackContext);
   const [convId, setConvId] = useState(1);
-  const [queries, setQueries] = useState<{ display_id: number; stored_id: number; text: string }[]>([]);
+  const [queries, setQueries] = useState<{ display_id: number; stored_id: number; text: string; date: Date }[]>([]);
   const [nextId, setNextId] = useState(1);
   const [responses, setResponses] = useState<MessageSimplifyed[]>([]);
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
@@ -38,12 +38,13 @@ const App: React.FC = () => {
         display_id: item.conversation_id,
         stored_id: item.conversation_id,
         text: `Query ${item.conversation_id}`,
+        date: new Date(item.created_at.replace(" ", "T")),
       })));
 
     const highestId = Math.max(...data.map(item => item.conversation_id));
     setNextId(highestId + 1);
   };
-  
+
   useEffect(() => {
     if (hasMounted.current) return;
     hasMounted.current = true;
@@ -84,7 +85,7 @@ const App: React.FC = () => {
     const data = await response.json();
     console.log(`New conversation_id: ${data.conversation_id}`); // ID in DB
 
-    const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}` };
+    const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}`, date: new Date(data.created_at.replace(" ", "T")) };
     setQueries(prevQueries => [...prevQueries, newQuery]);
     setNextId(nextId + 1);
   };

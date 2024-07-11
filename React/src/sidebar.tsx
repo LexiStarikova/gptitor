@@ -5,7 +5,7 @@ import QueryComponent from './queryComponent';
 
 interface MessageSimplifyed {
     id: number,
-    text: string
+    text: string,
 }
 
 interface SidebarProps {
@@ -14,7 +14,7 @@ interface SidebarProps {
     deleteConversation: (display_id: number, stored_id: number) => void;
     requests: MessageSimplifyed[];
     responses: MessageSimplifyed[];
-    queries: { display_id: number; stored_id: number; text: string }[]
+    queries: { display_id: number; stored_id: number; text: string; date: Date }[]
 }
 
 
@@ -53,6 +53,23 @@ const Sidebar: React.FC<SidebarProps> = ({
         setSidebarVisible(false);
     };
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const dialogsToday = queries.filter(query => {
+        const dialogDate = new Date(query.date);
+        dialogDate.setHours(0, 0, 0, 0);
+        return dialogDate.getTime() === today.getTime();
+    });
+
+    const dialogsPrevious = queries.filter(query => {
+        const dialogDate = new Date(query.date);
+        dialogDate.setHours(0, 0, 0, 0);
+        return dialogDate.getTime() !== today.getTime();
+    });
+
+    const sortedDialogsToday = dialogsToday.sort((a, b) => a.date.getTime() - b.date.getTime());
+    const sortedDialogsPrevious = dialogsPrevious.sort((a, b) => a.date.getTime() - b.date.getTime());
 
     return (
         <div>
@@ -97,11 +114,20 @@ const Sidebar: React.FC<SidebarProps> = ({
                             </svg>
                         </div>
                         <div className='querylist'>
-                            <div className='history'>
-                                <p className='Date'>TODAY</p>
+                            <div className='dialoguesToday'>
+                                {sortedDialogsToday.length > 0 && <p className='Date'>TODAY</p>}
                             </div>
                             <div className='queries'>
-                                {queries.map(query => (
+                                {sortedDialogsToday.map(query => (
+                                    <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
+                                        handleSelection={() => handleQuerySelection(query.stored_id)} />
+                                ))}
+                            </div>
+                            <div className='dialoguesBefore'>
+                                {sortedDialogsPrevious.length > 0 && <p className='Date'>BEFORE</p>}
+                            </div>
+                            <div className='queries'>
+                                {sortedDialogsPrevious.map(query => (
                                     <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
                                         handleSelection={() => handleQuerySelection(query.stored_id)} />
                                 ))}

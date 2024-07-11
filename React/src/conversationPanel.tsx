@@ -7,7 +7,7 @@ import API_URL from './config';
 
 interface MessageSimplifyed {
     id: number,
-    text: string
+    text: string,
 }
 
 interface ConversationPanelProps {
@@ -117,7 +117,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
                 }
                 return updatedMessages;
             });
-            setResponses(prevResponses => [...prevResponses, { id: data.response_id, text: data.response_text }]);
+            setResponses(prevResponses => [...prevResponses, { id: data.response_id, text: data.response_text}]);
             setFeedback(data.comment);
             setCriteria(new Metrics(data.metrics.criterion_1, data.metrics.criterion_2, data.metrics.criterion_3, data.metrics.criterion_4));
             setLoading(false);

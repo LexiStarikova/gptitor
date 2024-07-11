@@ -6,7 +6,7 @@ import TaskDesc from "./taskdescription"
 
 interface MessageSimplifyed {
     id: number,
-    text: string
+    text: string,
 }
 
 interface StudyModeProps {
