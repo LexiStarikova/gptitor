@@ -32,12 +32,30 @@ def insert_initial_data():
                 # Insert initial data
                 db.add_all(llm_models)
                 db.commit()
+        if db.query(models.Category).count() == 0:
+            # Load categories from JSON file
+            with open("Data/categories.json") as f:
+                categories = json.load(f)
+                # Convert to Category instances
+                category_models = [models.Category(**category) for category in categories]
+                # Insert initial categories data
+                db.add_all(category_models)
+                db.commit()
         if db.query(models.Task).count() == 0:
-            # Load data from JSON file
+            # Load tasks from JSON file
             with open("Data/tasks.json") as f:
                 tasks = json.load(f)
-                # Convert to Task instances
-                task_models = [models.Task(**task) for task in tasks]
-                # Insert initial data
-                db.add_all(task_models)
-                db.commit()
+                # Insert initial tasks data
+                for task in tasks:
+                # Find the category_id for the task's category
+                    category = (db.query(models.Category)
+                                .filter_by(category_name=task["task_category"])
+                                .first())
+                    if category:
+                        task_model = models.Task(
+                            task_category_id=category.category_id,
+                            task_name=task["task_name"],
+                            task_description=task["task_description"]
+                        )
+                        db.add(task_model)
+            db.commit()

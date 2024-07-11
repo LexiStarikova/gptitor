@@ -6,7 +6,8 @@ from Routers import (
     messages,
     tasks,
     profile,
-    llms
+    llms,
+    categories
 )
 from Utilities.feedback import init_llm_dict
 from Core.database import (
@@ -35,6 +36,9 @@ app.include_router(feedback.router,
 app.include_router(messages.router,
                    prefix="/conversations",
                    tags=["messages"])
+app.include_router(categories.router,
+                   prefix="/categories",
+                   tags=["task categories"])
 app.include_router(tasks.router,
                    prefix="/tasks",
                    tags=["tasks"])
