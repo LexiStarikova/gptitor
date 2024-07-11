@@ -9,15 +9,29 @@ from Routers import (
     llms,
     categories
 )
-from Utilities.feedback import init_llm_dict
+from contextlib import asynccontextmanager
+from Utilities.llm import init_llm_dict
 from Core.database import (
     engine,
     SessionLocal,
-    Base,
-    insert_initial_data
+    Base
 )
+from Utilities.init_db import insert_initial_data
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup event
+    Base.metadata.create_all(bind=engine)
+    insert_initial_data()
+    init_llm_dict()
+    yield
+    # Shutdown event
+    SessionLocal().close()
+
+
+app = FastAPI(lifespan=lifespan)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -48,22 +62,6 @@ app.include_router(profile.router,
 app.include_router(llms.router,
                    prefix="/llms",
                    tags=["LLMs"])
-
-
-@app.on_event("startup")
-def on_startup():
-    # Create the database tables
-    Base.metadata.create_all(bind=engine)
-    # Insert initial data if tables are empty
-    insert_initial_data()
-    # Initialize the llm_dict
-    init_llm_dict()
-
-
-@app.on_event("shutdown")
-def on_shutdown():
-    # Close the database connection
-    SessionLocal().close()
 
 
 if __name__ == "__main__":

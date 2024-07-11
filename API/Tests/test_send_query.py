@@ -1,13 +1,7 @@
-# TODO: remove unused imports (flake8)
-# import Core
-# import pytest
 from fastapi.testclient import TestClient
-# from datetime import datetime
-# from fastapi import HTTPException
 from Core import schemas
-# from Core import crud
-# from Core.models import Conversation, Task, Message, Feedback
 from sqlalchemy.orm import Session
+from Utilities.llm import init_llm_dict
 
 
 def test_send_query_success(client: TestClient,
@@ -16,6 +10,7 @@ def test_send_query_success(client: TestClient,
                             task_data):
     query = schemas.Query(query_text="Test query", task_id=task_data.task_id)
     url = f"/conversations/{conversation_data.conversation_id}/messages"
+    init_llm_dict()
     response = client.post(url, json=query.model_dump())
     if response.status_code != 201:
         print(response.status_code)

@@ -1,20 +1,16 @@
-# TODO: remove unused imports (flake8)
-# import pytest
-# from sqlalchemy.orm import Session
 from fastapi.testclient import TestClient
-# from Core import models, schemas, crud
-# from Core.main import app
 
 
-def test_create_conversation(client: TestClient, llm_data, user_data):
+
+def test_create_conversation(client: TestClient, llm_id, user_data):
     response = client.post("/conversations",
-                           json=llm_data,
+                           json=llm_id,
                            params={
                                "user_id": user_data.user_id})
     assert response.status_code == 201
     data = response.json()
     assert data["user_id"] == user_data.user_id
-    assert data["llm_id"] == llm_data["llm_id"]
+    assert data["llm_id"] == llm_id["llm_id"]
     assert data["title"] == "Untitled"
     assert "created_at" in data
 

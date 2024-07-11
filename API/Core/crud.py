@@ -12,20 +12,6 @@ from sqlalchemy import distinct
 from typing import Dict, Any, List
 
 
-def get_llm_dict(db: Session):
-    llm_dict = {}
-    data = db.query(models.AIModel).all()
-    if not data:
-        raise HTTPException(
-            status_code=404,
-            detail="LLMs data not found."
-        )
-    for model in data:
-        llm_instance = LLM(name=model.name,
-                           url=model.url)
-        llm_dict[model.llm_id] = llm_instance
-    return llm_dict
-
 
 def get_llm_list(db: Session):
     data = db.query(models.AIModel).all()

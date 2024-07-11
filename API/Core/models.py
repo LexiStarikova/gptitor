@@ -1,11 +1,8 @@
-# TODO: remove unused imports (flake8)
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
-# from sqlalchemy import create_engine, Table
 from sqlalchemy.orm import relationship
-# from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy_json import NestedMutableJson
 from sqlalchemy.sql import func
-from .database import Base, engine
+from Core.database import Base, engine
 
 
 class User(Base):

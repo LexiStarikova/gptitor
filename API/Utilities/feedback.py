@@ -1,17 +1,14 @@
-from Core.database import SessionLocal
 from Core import crud
-
-llm_dict = {}
-
-
-def init_llm_dict():
-    global llm_dict
-    with SessionLocal() as db:
-        llm_dict = crud.get_llm_dict(db)
+from fastapi import HTTPException
+from Utilities.llm import llm_dict
 
 
 async def get_chatbot_response(query: str,
                                llm_id: int = 1) -> str:
+    if not llm_dict:
+        raise HTTPException(
+                status_code=404,
+                detail=f"LLM with ID {llm_id} not found.")
     res = await llm_dict[llm_id].get_response({"prompt": query,
                                                'temperature': 0.1,
                                                'max_tokens': 300})
@@ -21,6 +18,10 @@ async def get_chatbot_response(query: str,
 async def get_chatbot_comment(query: str,
                               task: str = "",
                               llm_id: int = 1) -> str:
+    if not llm_dict:
+        raise HTTPException(
+                status_code=404,
+                detail=f"LLM with ID {llm_id} not found.")
     if task:
         prompt = (
             f"You evaluate user queries for task-solving LLM.\n"
@@ -45,6 +46,10 @@ async def get_chatbot_comment(query: str,
 async def calculate_metrics(query: str,
                             task: str,
                             llm_id: int = 1) -> dict:
+    if not llm_dict:
+        raise HTTPException(
+                status_code=404,
+                detail=f"LLM with ID {llm_id} not found.")
     metrics = {
         "criterion_1": await get_concise_focus(query, task, llm_id),
         "criterion_2": await get_clarity_spec(query, task, llm_id),

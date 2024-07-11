@@ -1,11 +1,8 @@
-# TODO: remove unused imports (flake8)
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-# from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy_utils import create_database, drop_database
 from fastapi.testclient import TestClient
-# import Core
 from Core.database import Base, get_db
 from Core.main import app
 from sqlalchemy.orm import Session
@@ -93,8 +90,8 @@ def message_data(db_session: Session, conversation_data, feedback_data):
 
 @pytest.fixture(scope="function")
 def task_data(db_session: Session):
-    task = models.Task(task_name="Test Task",
-                       task_category="General",
+    task = models.Task(task_category_id=1,
+                       task_name="Test Task",
                        task_description="Testing task")
     db_session.add(task)
     db_session.commit()
@@ -102,10 +99,30 @@ def task_data(db_session: Session):
 
 
 @pytest.fixture(scope="function")
-def llm_data():
+def llm_id():
     return {
         "llm_id": 1
     }
+
+@pytest.fixture(scope="function")
+def llm_id():
+    return {
+        "llm_id": 1
+    }
+
+@pytest.fixture(scope="function")
+def llm_dict():
+    return {
+        "llm_id": 1
+    }
+
+@pytest.fixture(scope="function")
+def llm_data(db_session: Session):
+    llm = models.AIModel(name="Test LLM",
+                         url="http:///generate")
+    db_session.add(llm)
+    db_session.commit()
+    return llm
 
 
 @pytest.fixture(scope="function")
