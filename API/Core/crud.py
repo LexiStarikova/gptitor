@@ -299,24 +299,24 @@ def get_task_categories(db: Session) -> List[schemas.TaskCategory]:
             detail=f"Internal server error: {str(e)}"
         )
 
-def get_tasks_by_task_category(category_name: str, db: Session) -> List[schemas.Task]:
+def get_tasks_by_category_id(category_id: int, db: Session) -> List[schemas.Task]:
     try:
-        if not category_name:
-            error_msg = "Invalid task category."
+        if not category_id:
+            error_msg = "Invalid task category ID."
             raise HTTPException(status_code=422, detail=error_msg)
         
         # Get the category by name
-        category = db.query(models.Category).filter_by(category_name=category_name).first()
+        category = db.query(models.Category).filter_by(category_id=category_id).first()
         
         if not category:
-            error_msg = f"Category '{category_name}' not found."
+            error_msg = f"Category with ID '{category_id}' not found."
             raise HTTPException(status_code=404, detail=error_msg)
         
         # Get tasks by category_id
-        tasks = db.query(models.Task).filter_by(task_category_id=category.category_id).all()
+        tasks = db.query(models.Task).filter_by(task_category_id=category_id).all()
         
         if not tasks:
-            error_msg = f"Tasks for category '{category_name}' not found."
+            error_msg = f"Tasks for category '{category.category_name}' not found."
             raise HTTPException(status_code=404, detail=error_msg)
         
         # Map to Pydantic schema
@@ -324,7 +324,7 @@ def get_tasks_by_task_category(category_name: str, db: Session) -> List[schemas.
             schemas.Task(
                 task_id=task.task_id,
                 task_name=task.task_name,
-                task_category=category_name,  # use category name here
+                task_category=category.category_name,
                 task_description=task.task_description
             ) for task in tasks
         ]
