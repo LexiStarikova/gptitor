@@ -249,6 +249,30 @@ def get_task_by_id(db: Session,
             detail=f"Internal server error: {str(e)}"
         )
 
+def get_all_tasks(db: Session) -> List[schemas.Task]:
+    try:
+        tasks = (
+            db.query(models.Task)
+            .all()
+        )
+        if not tasks:
+            error_msg = "Tasks data not found."
+            raise HTTPException(status_code=404,
+                                detail=error_msg)
+        task_shemas = [
+            schemas.Task(
+                task_id=task.task_id,
+                task_name=task.task_name,
+                category=task.task_category,
+                description=task.task_description
+            ) for task in tasks
+        ]
+        return task_shemas
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
 
 def get_all_messages_by_conversation_id(
         db: Session, conversation_id: int) -> List[schemas.Message]:
