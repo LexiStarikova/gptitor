@@ -37,11 +37,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     const toggleSidebar = () => {
         setSidebarVisible(prev => !prev);
     };
-    useEffect(() => {
-        if (queries.length === 0) {
-            CreateConversation();
-        }
-    }, []);
 
     useEffect(() => {
         if (queries.length > 0) {

@@ -132,7 +132,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
     };
 
     const showFeedback = async (query_id: number) => {
-        const response = await fetch(`http://10.100.30.244:8005/feedback/${query_id}`, {
+        const response = await fetch(`${API_URL}/feedback/${query_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

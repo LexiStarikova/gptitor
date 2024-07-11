@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { FeedbackContext } from './feedbackContext';
 import Sidebar from './sidebar';
 import NavBar from './header';
@@ -30,7 +30,7 @@ const App: React.FC = () => {
   const [nextId, setNextId] = useState(1);
   const [responses, setResponses] = useState<MessageSimplifyed[]>([]);
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const hasMounted = useRef(false);
 
   const addQueries = (data: any[]) => {
     setQueries(
@@ -42,10 +42,11 @@ const App: React.FC = () => {
 
     const highestId = Math.max(...data.map(item => item.conversation_id));
     setNextId(highestId + 1);
-    setIsLoading(false);
   };
-
+  
   useEffect(() => {
+    if (hasMounted.current) return;
+    hasMounted.current = true;
     const fetchDialogs = async () => {
       setQueries([]);
       setNextId(1);
@@ -57,20 +58,18 @@ const App: React.FC = () => {
           }
         });
         const data = await response.json();
-        setIsLoading(true);
-        addQueries(data);
+        if (data.length === 0){
+          CreateConversation();
+        }
+        else {
+          addQueries(data);
+        }
       } catch (error) {
         console.error('There was a mistake with data uploading: ', error);
       }
     };
     fetchDialogs();
   }, []);
-
-  useEffect(() => {
-    if (!isLoading && queries.length === 0) {
-      CreateConversation();
-    }
-  }, [isLoading, queries]);
 
   const CreateConversation = async () => {
     const response = await fetch(`${API_URL}/conversations`, {
