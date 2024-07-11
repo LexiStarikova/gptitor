@@ -42,8 +42,8 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                     setTask({
                         task_id: data.task_id,
                         task_name: data.task_name,
-                        category: data.category,
-                        description: data.description,
+                        category: data.task_category,
+                        description: data.task_description,
                     });
                     setInitialFetch(true);
                 })
