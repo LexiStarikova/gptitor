@@ -42,8 +42,8 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                     setTask({
                         task_id: data.task_id,
                         task_name: data.task_name,
-                        category: data.category,
-                        description: data.description,
+                        category: data.task_category,
+                        description: data.task_description,
                     });
                     setInitialFetch(true);
                 })

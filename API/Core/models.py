@@ -57,12 +57,22 @@ class Feedback(Base):
     messages = relationship("Message", back_populates="feedback")
 
 
+class Category(Base):
+    __tablename__ = 'categories'
+    category_id = Column(Integer, primary_key=True, autoincrement=True)
+    category_name = Column(String, nullable=False)
+    category_description = Column(String)
+
+    tasks = relationship('Task', back_populates='category')
+
 class Task(Base):
     __tablename__ = 'tasks'
     task_id = Column(Integer, primary_key=True, autoincrement=True)
-    task_category = Column(String)
-    task_name = Column(String)
+    task_category_id = Column(Integer, ForeignKey('categories.category_id'))
+    task_name = Column(String, nullable=False)
     task_description = Column(String)
+
+    category = relationship('Category', back_populates='tasks')
 
 
 Base.metadata.create_all(engine)

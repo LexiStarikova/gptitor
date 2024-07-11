@@ -8,6 +8,7 @@ from Utilities.llm import LLM
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
+from sqlalchemy import distinct
 from typing import Dict, Any, List
 
 
@@ -226,8 +227,7 @@ async def send_query(db: Session,
         )
 
 
-def get_task_by_id(db: Session,
-                   task_id: int) -> schemas.Task:
+def get_task_by_id(db: Session, task_id: int) -> schemas.Task:
     try:
         task = (
             db.query(models.Task)
@@ -235,14 +235,48 @@ def get_task_by_id(db: Session,
             .first()
         )
         if not task:
-            raise HTTPException(status_code=404,
-                                detail=f"Task with ID {task_id} not found.")
+            raise HTTPException(status_code=404, detail=f"Task with ID {task_id} not found.")
+        
+        # Get the category name
+        category_name = (db.query(models.Category.category_name)
+                         .filter_by(category_id=task.task_category_id)
+                         .scalar())
+
         return schemas.Task(
             task_id=task_id,
             task_name=task.task_name,
-            category=task.task_category,
-            description=task.task_description
+            task_category=category_name,
+            task_description=task.task_description
         )
+    except SQLAlchemyError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
+
+def get_all_tasks(db: Session) -> List[schemas.Task]:
+    try:
+        tasks = db.query(models.Task).all()
+        if not tasks:
+            error_msg = "Tasks data not found."
+            raise HTTPException(status_code=404, detail=error_msg)
+
+        # Fetch all category names in a single query
+        categories = (db.query(models.Category.category_id,
+                               models.Category.category_name)
+                      .all())
+        category_dict = {category.category_id: category.category_name
+                         for category in categories}
+
+        task_schemas = [
+            schemas.Task(
+                task_id=task.task_id,
+                task_name=task.task_name,
+                task_category=category_dict.get(task.task_category_id, "Unknown"),
+                task_description=task.task_description
+            ) for task in tasks
+        ]
+        return task_schemas
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -250,6 +284,56 @@ def get_task_by_id(db: Session,
         )
 
 
+def get_task_categories(db: Session) -> List[schemas.TaskCategory]:
+    try:
+        # Get all categories from the Category table
+        categories = db.query(models.Category).all()
+        # Map to Pydantic schema
+        return [schemas.TaskCategory(category_id=category.category_id,
+                                     category_name=category.category_name,
+                                     category_description=category.category_description)
+                for category in categories]
+    except SQLAlchemyError as e:
+        raise Exception(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
+
+def get_tasks_by_category_id(category_id: int, db: Session) -> List[schemas.Task]:
+    try:
+        if not category_id:
+            error_msg = "Invalid task category ID."
+            raise HTTPException(status_code=422, detail=error_msg)
+        
+        # Get the category by name
+        category = db.query(models.Category).filter_by(category_id=category_id).first()
+        
+        if not category:
+            error_msg = f"Category with ID '{category_id}' not found."
+            raise HTTPException(status_code=404, detail=error_msg)
+        
+        # Get tasks by category_id
+        tasks = db.query(models.Task).filter_by(task_category_id=category_id).all()
+        
+        if not tasks:
+            error_msg = f"Tasks for category '{category.category_name}' not found."
+            raise HTTPException(status_code=404, detail=error_msg)
+        
+        # Map to Pydantic schema
+        task_schemas = [
+            schemas.Task(
+                task_id=task.task_id,
+                task_name=task.task_name,
+                task_category=category.category_name,
+                task_description=task.task_description
+            ) for task in tasks
+        ]
+        return task_schemas
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
 def get_all_messages_by_conversation_id(
         db: Session, conversation_id: int) -> List[schemas.Message]:
     try:
@@ -415,7 +499,7 @@ def calculate_personal_statistics(db: Session,
             raise HTTPException(status_code=404,
                                 detail=error_msg)
         daily_activity: List[Dict[str, Any]] = [
-            {"date": row.message_date.strftime('%Y-%m-%d %H:%M:%S'),
+            {"date": row.message_date.strftime('%Y-%m-%d'),
              "number_of_queries": row.daily_message_count}
             for row in daily_activity_query
         ]

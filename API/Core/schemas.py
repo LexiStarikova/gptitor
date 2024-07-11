@@ -171,9 +171,19 @@ class Task(BaseModel):
     task_name: str = Field(default="",
                            examples=["Example name"],
                            max_length=255)
-    category: str = Field(default="",
-                          examples=["Example category"],
-                          max_length=255)
-    description: str = Field(default="",
-                             examples=["Example description"],
-                             max_length=2048)
+    task_category: str = Field(default="",
+                               examples=["Example category"],
+                               max_length=255)
+    task_description: str = Field(default="",
+                                  examples=["Example description"],
+                                  max_length=2048)
+
+class TaskCategory(BaseModel):
+    category_id: int = Field(default=1,
+                         examples=[1])
+    category_name: str = Field(default="",
+                               examples=["Example category"],
+                               max_length=255)
+    category_description: str = Field(default="",
+                                      examples=["Example description"],
+                                      max_length=255)

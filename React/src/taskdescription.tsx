@@ -18,7 +18,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                setTask(new Task(data.task_id, data.task_name, data.category, data.description));
+                setTask(new Task(data.task_id, data.task_name, data.task_category, data.task_description));
             })
             .catch(error => {
                 console.error('Error fetching task:', error);
