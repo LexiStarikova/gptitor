@@ -66,14 +66,20 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
         setText(e.target.value);
         adjustTextareaHeight();
     };
+
     const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSend();
-            if (isOpenS)
-                close();
-            if (isOpenD)
-                closeD();
+            if (e.ctrlKey) {
+                e.preventDefault();
+                const newText = text + '\n';
+                setText(newText);
+                adjustTextareaHeight();
+            } else {
+                e.preventDefault();
+                handleSend();
+                if (isOpenS) close();
+                if (isOpenD) closeD();
+            }
         }
     };
 
@@ -125,7 +131,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                 }
                 return updatedMessages;
             });
-            setResponses(prevResponses => [...prevResponses, { id: data.response_id, text: data.response_text}]);
+            setResponses(prevResponses => [...prevResponses, { id: data.response_id, text: data.response_text }]);
             setFeedback(data.comment);
             setCriteria(new Metrics(data.metrics.criterion_1, data.metrics.criterion_2, data.metrics.criterion_3, data.metrics.criterion_4));
             setLoading(false);
@@ -163,6 +169,9 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                     <div className='optionContainer'>
                         <div className='option'>
                             <p>Qwen2</p>
+                        </div>
+                        <div className='option'>
+                            <p>Llama3</p>
                         </div>
                     </div>
                     <div className='conversationcontainer'>
@@ -225,7 +234,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                 placeholder='Write Your Prompt Here.'
                                 value={text}
                                 onChange={handleTextChange}
-                                onKeyPress={handleKeyPress}
+                                onKeyDown={handleKeyPress}
                             ></textarea>
                             <button className='sendBtn' role="button" aria-label="Send" onClick={handleSend}>
                                 <svg width="32" height="32" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" className='sendsvg1'>

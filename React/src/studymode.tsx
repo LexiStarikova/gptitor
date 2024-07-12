@@ -21,7 +21,7 @@ interface StudyModeProps {
 
 
 const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id }) => {
-    
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [showDescription, setShowDescription] = useState(false);
 
@@ -33,7 +33,7 @@ const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requ
         setShowDescription(!showDescription);
         // setFeedbackOpen(!isFeedbackOpen);
     };
-    
+
     return (
         <div >
             <svg className='leftgradient' width="674.1" height="509.6" viewBox="74.9 0 674.1 509.6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,10 +56,10 @@ const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requ
                     </radialGradient>
                 </defs>
             </svg>
-                <div className='panels'>
-                    <ConversationPanel queries={queries} createConversation={createConversation} isOpenS={isSidebarOpen} close={toggleSidebar} requests={requests} setRequests={setRequests}  isOpenD={showDescription} closeD={toggleDescription}setResponses={setResponses} responses={responses} conversation_id={conversation_id} ></ConversationPanel>
-                    <FeedbackPanel isOpenS={isSidebarOpen} close={toggleSidebar} isOpenD={showDescription} closeD={toggleDescription}></FeedbackPanel>
-                </div>
+            <div className='panels'>
+                <ConversationPanel queries={queries} createConversation={createConversation} isOpenS={isSidebarOpen} close={toggleSidebar} requests={requests} setRequests={setRequests} isOpenD={showDescription} closeD={toggleDescription} setResponses={setResponses} responses={responses} conversation_id={conversation_id}></ConversationPanel>
+                <FeedbackPanel isOpenS={isSidebarOpen} close={toggleSidebar} isOpenD={showDescription} closeD={toggleDescription}></FeedbackPanel>
+            </div>
         </div>
     );
 };
