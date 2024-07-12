@@ -7,7 +7,7 @@ GPTitor is an interactive sandbox that helps users learn to write effective prom
 
 The feedback window will provide you with all the necessary information, namely: the name and description of the task, the category, as well as the user's rating.
 
-<img src="media/feedback_window.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/chat.gif" height="600">
 
 The chat allows you to send requests to the AI, as well as receive responses from it.
 
