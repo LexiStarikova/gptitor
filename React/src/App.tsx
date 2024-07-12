@@ -8,7 +8,7 @@ import StudyMode from './studymode';
 import Profile from './profile';
 import { Metrics } from './models/metrics';
 import API_URL from './config';
-
+import SendContextProvider from './sendContextProvider';
 
 interface Message {
   id: number;
@@ -32,13 +32,26 @@ const App: React.FC = () => {
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
   const hasMounted = useRef(false);
 
+  const addHoursToDate = (date: Date, hours: number): Date => {
+    const newDate = new Date(date.getTime());
+    newDate.setHours(newDate.getHours() + hours);
+    return newDate;
+  };
+
+  useEffect(() => {
+    if (queries.length === 0) {
+        setRequests([]);
+        setResponses([]);
+    }
+}, [queries]);
+
   const addQueries = (data: any[]) => {
     setQueries(
       data.map(item => ({
         display_id: item.conversation_id,
         stored_id: item.conversation_id,
         text: `Query ${item.conversation_id}`,
-        date: new Date(item.created_at.replace(" ", "T")),
+        date: addHoursToDate(new Date(item.created_at.replace(" ", "T")), 3),
       })));
 
     const highestId = Math.max(...data.map(item => item.conversation_id));
@@ -59,7 +72,7 @@ const App: React.FC = () => {
           }
         });
         const data = await response.json();
-        if (data.length === 0){
+        if (data.length === 0) {
           CreateConversation();
         }
         else {
@@ -85,9 +98,11 @@ const App: React.FC = () => {
     const data = await response.json();
     console.log(`New conversation_id: ${data.conversation_id}`); // ID in DB
 
-    const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}`, date: new Date(data.created_at.replace(" ", "T")) };
+    const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}`, date: addHoursToDate(new Date(data.created_at.replace(" ", "T")), 3) };
     setQueries(prevQueries => [...prevQueries, newQuery]);
     setNextId(nextId + 1);
+    console.log("sss")
+    console.log(newQuery.date);
   };
 
   const openConversation = async (stored_id: number) => {
@@ -160,8 +175,9 @@ const App: React.FC = () => {
   };
 
   return (
+    <SendContextProvider>
     <Router basename='/gptitor'>
-      <NavBar></NavBar>
+      <NavBar />
       <div className='sidebarr'>
         <Sidebar
           CreateConversation={CreateConversation}
@@ -174,11 +190,20 @@ const App: React.FC = () => {
       </div>
       <Routes>
         <Route path="/" element={<Navigate to="/chatpage" />} />
-        <Route path='/chatpage' element={<StudyMode requests={requests} setRequests={setRequests} responses={responses} setResponses={setResponses} conversation_id={convId} />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/chatpage' element={<StudyMode
+          queries={queries}
+          createConversation={CreateConversation}
+          requests={requests}
+          setRequests={setRequests}
+          responses={responses}
+          setResponses={setResponses}
+          conversation_id={convId}
+        />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </Router>
-  )
+  </SendContextProvider>
+  );  
 }
 
 export default App;

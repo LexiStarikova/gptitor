@@ -4,6 +4,7 @@ import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 import ReactLoading from 'react-loading';
 import API_URL from './config';
+import { SendContext } from './sendContext';
 
 interface MessageSimplifyed {
     id: number,
@@ -11,6 +12,8 @@ interface MessageSimplifyed {
 }
 
 interface ConversationPanelProps {
+    queries: { display_id: number; stored_id: number; text: string; date: Date }[];
+    createConversation: () => Promise<void>;
     responses: MessageSimplifyed[];
     setResponses: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
     requests: MessageSimplifyed[];
@@ -25,10 +28,11 @@ interface ConversationPanelProps {
 }
 
 
-export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id }) => {
+export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, createConversation, isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id }) => {
     const [text, setText] = useState<string>('');
     const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
     const [loading, setLoading] = useState<boolean>(false);
+    const { isSended, setIsSended } = useContext(SendContext);
 
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -80,6 +84,10 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
             closeD();
         if (text.trim() === "") return;
         setText('');
+        if (queries.length === 0) {
+            setIsSended(false);
+            await createConversation();
+        }
         const newRequest = { id: 0, text: text };
         setRequests(prevRequests => [...prevRequests, newRequest]);
 
@@ -121,6 +129,8 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
             setFeedback(data.comment);
             setCriteria(new Metrics(data.metrics.criterion_1, data.metrics.criterion_2, data.metrics.criterion_3, data.metrics.criterion_4));
             setLoading(false);
+            setIsSended(true);
+
         } catch (error) {
             console.error('There was a problem sending the message:', error);
             setLoading(false);
@@ -157,7 +167,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ isOpenS, c
                     </div>
                     <div className='conversationcontainer'>
                         <div className='Convo'>
-                            {requests.map((request, index) => (
+                            {queries.length > 0 && requests.map((request, index) => (
                                 <div key={`conversation-${index}`} className='conversation-item'>
                                     <div className='req'>
                                         <div className='reqbub' onClick={handleClickFeedback(request.id)}>

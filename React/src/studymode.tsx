@@ -10,6 +10,8 @@ interface MessageSimplifyed {
 }
 
 interface StudyModeProps {
+    queries: { display_id: number; stored_id: number; text: string; date: Date }[];
+    createConversation: () => Promise<void>;
     requests: MessageSimplifyed[];
     setRequests: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
     responses: MessageSimplifyed[];
@@ -18,7 +20,7 @@ interface StudyModeProps {
 }
 
 
-const StudyMode: React.FC<StudyModeProps> = ({ requests, responses, setRequests, setResponses, conversation_id }) => {
+const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id }) => {
     
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [showDescription, setShowDescription] = useState(false);
@@ -55,7 +57,7 @@ const StudyMode: React.FC<StudyModeProps> = ({ requests, responses, setRequests,
                 </defs>
             </svg>
                 <div className='panels'>
-                    <ConversationPanel isOpenS={isSidebarOpen} close={toggleSidebar} requests={requests} setRequests={setRequests}  isOpenD={showDescription} closeD={toggleDescription}setResponses={setResponses} responses={responses} conversation_id={conversation_id} ></ConversationPanel>
+                    <ConversationPanel queries={queries} createConversation={createConversation} isOpenS={isSidebarOpen} close={toggleSidebar} requests={requests} setRequests={setRequests}  isOpenD={showDescription} closeD={toggleDescription}setResponses={setResponses} responses={responses} conversation_id={conversation_id} ></ConversationPanel>
                     <FeedbackPanel isOpenS={isSidebarOpen} close={toggleSidebar} isOpenD={showDescription} closeD={toggleDescription}></FeedbackPanel>
                 </div>
         </div>

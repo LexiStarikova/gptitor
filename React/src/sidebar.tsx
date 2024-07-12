@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef, MouseEvent, SetStateAction, Dispatch } from 'react';
+import { useState, useEffect, useRef, MouseEvent, SetStateAction, Dispatch, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar.css';
 import QueryComponent from './queryComponent';
+import { SendContext } from './sendContext';
 
 interface MessageSimplifyed {
     id: number,
@@ -32,6 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
     const [sidebarVisible, setSidebarVisible] = useState(false);
+    const { isSended, setIsSended } = useContext(SendContext);
     const sidebarRef = useRef<HTMLDivElement>(null);
 
     const toggleSidebar = () => {
@@ -39,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
     useEffect(() => {
-        if (queries.length > 0) {
+        if (queries.length > 0 && isSended) {
             setSelectedQueryId(queries[queries.length - 1].stored_id);
             openConversation(queries[queries.length - 1].stored_id);
         }
