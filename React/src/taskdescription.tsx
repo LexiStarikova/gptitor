@@ -25,34 +25,34 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
             });
     };
     return (
-        <div className={`DescCont${isOpenD&&!isOpenS ? '' : 'hd'}`}>
-                <div className='TaskDline'>
-                    <div className='close' onClick={closeD}>
-                        <h6 className='CloseTask'>CLOSE</h6>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='Xclose'>
-                            <path d="M17 7L7 17M17 17L7 7" stroke="#0060AE" stroke-width="2.5" stroke-linecap="round" />
-                        </svg>
-                    </div>
-                    <div className='unlineD'></div>
+        <div className={`DescCont${isOpenD && !isOpenS ? '' : 'hd'}`}>
+            <div className='TaskDline'>
+                <div className='close' onClick={closeD}>
+                    <h6 className='CloseTask'>CLOSE</h6>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='Xclose'>
+                        <path d="M17 7L7 17M17 17L7 7" stroke="#0060AE" stroke-width="2.5" stroke-linecap="round" />
+                    </svg>
                 </div>
-                <div className='Titlesdes'>
-                        <div className='taskName'>
-                            <h6 className='Taskt'>Task:</h6>
-                            <h6 className='Taskn'>{task.task_name}</h6>
-                        </div>
-                        <div className='catName'>
-                            <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>{task.category}</h6>
-                        </div>
-                    </div>
-                <div className='TaskD'>
-                    
-                    <div className='Dividers'></div>
-                    <div className='DescD'>
-                        <h6 className='DescT'>Desciption</h6>
-                        <p className='Descript'>{task.description}</p>
-                    </div>
+                <div className='unlineD'></div>
+            </div>
+            <div className='Titlesdes'>
+                <div className='taskName'>
+                    <h6 className='Taskt'>Task:</h6>
+                    <h6 className='Taskn'>{task.task_name}</h6>
                 </div>
+                <div className='catName'>
+                    <h6 className='Catt'>Category:</h6>
+                    <h6 className='Catn'>{task.task_category}</h6>
+                </div>
+            </div>
+            <div className='TaskD'>
+
+                <div className='Dividers'></div>
+                <div className='DescD'>
+                    <h6 className='DescT'>Desciption</h6>
+                    <p className='Descript'>{task.task_description}</p>
+                </div>
+            </div>
         </div>
     );
 };
