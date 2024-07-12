@@ -42,7 +42,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
                 </div>
                 <div className='catName'>
                     <h6 className='Catt'>Category:</h6>
-                    <h6 className='Catn'>{task.task_category}</h6>
+                    <h6 className='Catn'>{task.category}</h6>
                 </div>
             </div>
             <div className='TaskD'>
@@ -50,7 +50,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
                 <div className='Dividers'></div>
                 <div className='DescD'>
                     <h6 className='DescT'>Desciption</h6>
-                    <p className='Descript'>{task.task_description}</p>
+                    <p className='Descript'>{task.description}</p>
                 </div>
             </div>
         </div>
