@@ -4,6 +4,27 @@
 GPTitor is an interactive sandbox that helps users learn to write effective prompts for Large Language Models (LLMs). Users can select tasks, write prompts, and receive feedback and grades from different LLMs to improve their skills.
 
 ## Demo
+
+The feedback window will provide you with all the necessary information, namely: the name and description of the task, the category, as well as the user's rating.
+
+![Feedback Window](media/feedback_window.gif)
+
+The chat allows you to send requests to the AI, as well as receive responses from it.
+
+![Chat](media/chat.gif)
+
+Users can practice working with hints using categorized tasks, instantly receiving feedback and tips for improving the query.
+
+![Tasks](media/tasks.gif)
+
+Each chat has a history, which allows the user to return to the previous request.
+
+![History](media/history.gif)
+
+Demonstration of the GPTitor.
+
+![Feedback Demo](media/feedback_demo.gif)
+
 ![Screenshot of GPTitor Chat Interface](http://10.100.30.244:8801/gptitor/chatpage)
 ![Watch Demo Video](http://10.100.30.244:8801/gptitor/chatpage)
 
