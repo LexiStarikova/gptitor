@@ -7,23 +7,23 @@ GPTitor is an interactive sandbox that helps users learn to write effective prom
 
 The feedback window will provide you with all the necessary information, namely: the name and description of the task, the category, as well as the user's rating.
 
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/chat.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_window.gif" height="600">
 
 The chat allows you to send requests to the AI, as well as receive responses from it.
 
-<img src="media/chat.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/chat.gif" height="600">
 
 Users can practice working with hints using categorized tasks, instantly receiving feedback and tips for improving the query.
 
-<img src="media/tasks.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/tasks.gif" height="600">
 
 Each chat has a history, which allows the user to return to the previous request.
 
-<img src="media/history.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/history.gif" height="600">
 
 Demonstration of the GPTitor.
 
-![Feedback Demo](media/feedback_demo.gif)
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_demo.gif" height="600">
 
 ![Screenshot of GPTitor Chat Interface](http://10.100.30.244:8801/gptitor/chatpage)
 ![Watch Demo Video](http://10.100.30.244:8801/gptitor/chatpage)
