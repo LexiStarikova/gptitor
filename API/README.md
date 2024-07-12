@@ -44,7 +44,6 @@ API/
 └── pytest.ini
 ```
 
-
 ## Usage
 
 ### Running the Server
@@ -60,6 +59,10 @@ The API will be accessible at `http://127.0.0.1:8000`.
 ### API Endpoints
 
 Detailed API documentation is available at [Swagger Documentation](http://10.100.30.244:1330/docs).
+
+### Database
+
+The database configuration is defined in `API/Core/database.py`.
 
 ### Initial Data Loading
 

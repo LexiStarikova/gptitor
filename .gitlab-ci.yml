@@ -5,7 +5,7 @@ stages:
   - deploy
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
-  APP: "my-app"
+  APP: "GPTитор"
 build:
   stage: build
   image: docker:24.0.5
@@ -85,11 +85,11 @@ pytest:
   image: python:3.9
   variables:
     PYTHONDONTWRITEBYTECODE: "1"
-    COV_HTML_REPORT_PATH: "API/Tests/coverage/cov_html_report/"
-    COV_XML_REPORT_PATH: "API/Tests/coverage/cov_xml_report/coverage.xml"
-    COV_ANNOTATE_REPORT_PATH: "API/Tests/coverage/cov_annotate_report/"
-    PYTEST_JUNIT_PATH: "API/Tests/results/results.xml"
-    PYTEST_JSON_PATH: "API/Tests/results/results.json"
+    COV_HTML_REPORT_PATH: "API/Tests/pytest-coverage/cov_html_report/"
+    COV_XML_REPORT_PATH: "API/Tests/pytest-coverage/cov_xml_report/coverage.xml"
+    COV_ANNOTATE_REPORT_PATH: "API/Tests/pytest-coverage/cov_annotate_report/"
+    PYTEST_JUNIT_PATH: "API/Tests/pytest-results/results.xml"
+    PYTEST_JSON_PATH: "API/Tests/pytest-results/results.json"
   before_script:
     - cd API
     - python -m venv venv
