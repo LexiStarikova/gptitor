@@ -75,6 +75,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
         setSelectedLLM(llmId);
     };
 
+
     useEffect(() => {
         if (selectedLLM !== previousLLM.current && selectedLLM !== null) {
             createConversation()

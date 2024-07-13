@@ -89,17 +89,8 @@ const App: React.FC = () => {
 
   const CreateConversation = async () => {
     if (selectedLLM === null) {
-      const response = await fetch(`${API_URL}/conversations`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          llm_id: 1,
-        }),
-      });
+      setSelectedLLM(1);
     }
-
     const response = await fetch(`${API_URL}/conversations`, {
       method: 'POST',
       headers: {
