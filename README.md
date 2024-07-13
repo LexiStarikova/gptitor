@@ -4,29 +4,8 @@
 GPTitor is an interactive sandbox that helps users learn to write effective prompts for Large Language Models (LLMs). Users can select tasks, write prompts, and receive feedback and grades from different LLMs to improve their skills.
 
 ## Demo
-
-The feedback window will provide you with all the necessary information, namely: the name and description of the task, the category, as well as the user's rating.
-
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_window.gif" height="400">
-
-The chat allows you to send requests to the AI, as well as receive responses from it.
-
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/chat.gif" height="400">
-
-Users can practice working with hints using categorized tasks, instantly receiving feedback and tips for improving the query.
-
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/tasks.gif" height="400">
-
-Each chat has a history, which allows the user to return to the previous request.
-
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/history.gif" height="400">
-
-Demonstration of the GPTitor.
-
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_demo.gif" height="400">
-
-![Screenshot of GPTitor Chat Interface](http://10.100.30.244:8801/gptitor/chatpage)
-![Watch Demo Video](http://10.100.30.244:8801/gptitor/chatpage)
+The following GIF shows the key idea of GPTитор in practice:
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/Demo.gif" height="400">
 
 ## How to Use
 1. Open the [GPTitor](http://10.100.30.244:8801/gptitor/chatpage) web application.
