@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory is a part of GPTитор that provides an API built using FastAPI. It includes various components for handling different functionalities such as database interactions, routing, authentication, and utilities. The API documentation can be accessed at [Swagger Documentation](http://10.100.30.244:1330/docs) within the Innopolis network. Alternatively, you can view the Swagger UI for the saved [OpenAPI JSON](openapi.json) using [this tool](https://editor.swagger.io/).
+This directory is a part of GPTитор that provides an API built using FastAPI. It includes various components for handling different functionalities such as database interactions, routing, authentication, and utilities. The API documentation can be accessed at [Swagger Documentation](http://10.100.30.244:1330/docs) within the Innopolis network. Alternatively, you can view the Swagger UI using the saved [OpenAPI JSON](openapi.json).
 ## Directory Structure
 
 ```
