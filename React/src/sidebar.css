@@ -274,6 +274,11 @@
     stroke: #FFFFFF;
 }
 
+.queryLink {
+    text-decoration: none;
+    color: #3B4168;
+}
+
 /* .queries {
     display: flex;
 } */

@@ -119,21 +119,25 @@ const Sidebar: React.FC<SidebarProps> = ({
                             <div className='dialoguesToday'>
                                 {sortedDialogsToday.length > 0 && <p className='Date'>TODAY</p>}
                             </div>
-                            <div className='queries'>
-                                {sortedDialogsToday.map(query => (
-                                    <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
-                                        handleSelection={() => handleQuerySelection(query.stored_id)} />
-                                ))}
-                            </div>
+                            <Link className='queryLink' to="/chatpage">
+                                <div className='queries'>
+                                    {sortedDialogsToday.map(query => (
+                                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
+                                            handleSelection={() => handleQuerySelection(query.stored_id)} />
+                                    ))}
+                                </div>
+                            </Link>
                             <div className='dialoguesBefore'>
                                 {sortedDialogsPrevious.length > 0 && <p className='Date'>BEFORE</p>}
                             </div>
-                            <div className='queries'>
-                                {sortedDialogsPrevious.map(query => (
-                                    <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
-                                        handleSelection={() => handleQuerySelection(query.stored_id)} />
-                                ))}
-                            </div>
+                            <Link className='queryLink' to="/chatpage">
+                                <div className='queries'>
+                                    {sortedDialogsPrevious.map(query => (
+                                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
+                                            handleSelection={() => handleQuerySelection(query.stored_id)} />
+                                    ))}
+                                </div>
+                            </Link>
                         </div>
                     </div>
 
