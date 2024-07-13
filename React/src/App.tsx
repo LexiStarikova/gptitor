@@ -31,6 +31,7 @@ const App: React.FC = () => {
   const [responses, setResponses] = useState<MessageSimplifyed[]>([]);
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
   const hasMounted = useRef(false);
+  const [selectedLLM, setSelectedLLM] = useState<number | null>(null);
 
   const addHoursToDate = (date: Date, hours: number): Date => {
     const newDate = new Date(date.getTime());
@@ -40,10 +41,10 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (queries.length === 0) {
-        setRequests([]);
-        setResponses([]);
+      setRequests([]);
+      setResponses([]);
     }
-}, [queries]);
+  }, [queries]);
 
   const addQueries = (data: any[]) => {
     setQueries(
@@ -52,6 +53,7 @@ const App: React.FC = () => {
         stored_id: item.conversation_id,
         text: `Query ${item.conversation_id}`,
         date: addHoursToDate(new Date(item.created_at.replace(" ", "T")), 3),
+        llm_id: item.llm_id,
       })));
 
     const highestId = Math.max(...data.map(item => item.conversation_id));
@@ -86,23 +88,37 @@ const App: React.FC = () => {
   }, []);
 
   const CreateConversation = async () => {
+    if (selectedLLM === null) {
+      console.error('No LLM selected');
+      return;
+    }
+
     const response = await fetch(`${API_URL}/conversations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        llm_id: 1,
+        llm_id: selectedLLM,
       }),
     });
+
     const data = await response.json();
     console.log(`New conversation_id: ${data.conversation_id}`); // ID in DB
 
-    const newQuery = { display_id: nextId, stored_id: data.conversation_id, text: `Query ${nextId}`, date: addHoursToDate(new Date(data.created_at.replace(" ", "T")), 3) };
+    const newQuery = {
+      display_id: nextId,
+      stored_id: data.conversation_id,
+      text: `Query ${nextId}`,
+      date: new Date(data.created_at.replace(' ', 'T')),
+      llm_id: selectedLLM,
+
+    };
+
     setQueries(prevQueries => [...prevQueries, newQuery]);
     setNextId(nextId + 1);
-    console.log("sss")
     console.log(newQuery.date);
+    console.log(selectedLLM)
   };
 
   const openConversation = async (stored_id: number) => {
@@ -176,34 +192,36 @@ const App: React.FC = () => {
 
   return (
     <SendContextProvider>
-    <Router basename='/gptitor'>
-      <NavBar />
-      <div className='sidebarr'>
-        <Sidebar
-          CreateConversation={CreateConversation}
-          openConversation={openConversation}
-          deleteConversation={deleteConversation}
-          requests={requests}
-          responses={responses}
-          queries={queries}
-        />
-      </div>
-      <Routes>
-        <Route path="/" element={<Navigate to="/chatpage" />} />
-        <Route path='/chatpage' element={<StudyMode
-          queries={queries}
-          createConversation={CreateConversation}
-          requests={requests}
-          setRequests={setRequests}
-          responses={responses}
-          setResponses={setResponses}
-          conversation_id={convId}
-        />} />
-        <Route path='/profile' element={<Profile />} />
-      </Routes>
-    </Router>
-  </SendContextProvider>
-  );  
+      <Router basename='/gptitor'>
+        <NavBar />
+        <div className='sidebarr'>
+          <Sidebar
+            CreateConversation={CreateConversation}
+            openConversation={openConversation}
+            deleteConversation={deleteConversation}
+            requests={requests}
+            responses={responses}
+            queries={queries}
+          />
+        </div>
+        <Routes>
+          <Route path="/" element={<Navigate to="/chatpage" />} />
+          <Route path='/chatpage' element={<StudyMode
+            queries={queries}
+            createConversation={CreateConversation}
+            requests={requests}
+            setRequests={setRequests}
+            responses={responses}
+            setResponses={setResponses}
+            conversation_id={convId}
+            selectedLLM={selectedLLM}
+            setSelectedLLM={setSelectedLLM}
+          />} />
+          <Route path='/profile' element={<Profile />} />
+        </Routes>
+      </Router>
+    </SendContextProvider>
+  );
 }
 
 export default App;

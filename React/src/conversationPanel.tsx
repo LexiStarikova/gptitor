@@ -25,14 +25,19 @@ interface ConversationPanelProps {
 
     isOpenD: boolean;
     closeD: () => void;
+
+    selectedLLM: number | null;
+    setSelectedLLM: (llmId: number | null) => void;
 }
 
 
-export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, createConversation, isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id }) => {
+export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, createConversation, isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id, selectedLLM,
+    setSelectedLLM, }) => {
     const [text, setText] = useState<string>('');
     const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
     const [loading, setLoading] = useState<boolean>(false);
     const { isSended, setIsSended } = useContext(SendContext);
+    const previousLLM = useRef<number | null>(null);
 
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -66,7 +71,21 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
         setText(e.target.value);
         adjustTextareaHeight();
     };
+    const handleLLMSelect = (llmId: number) => {
+        setSelectedLLM(llmId);
+    };
 
+    useEffect(() => {
+        if (selectedLLM !== previousLLM.current && selectedLLM !== null) {
+            createConversation()
+                .then(() => {
+                    previousLLM.current = selectedLLM;
+                })
+                .catch((error) => {
+                    console.error('Error creating conversation:', error);
+                });
+        }
+    }, [selectedLLM, createConversation]);
     const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             if (e.shiftKey) {
@@ -111,7 +130,8 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                 },
                 body: JSON.stringify({
                     query_text: text,
-                    task_id: task.task_id
+                    task_id: task.task_id,
+                    llm_id: selectedLLM,
                 })
             });
 
@@ -167,10 +187,10 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             <div className='chatbigcontainter'>
                 <div className='area'>
                     <div className='optionContainer'>
-                        <div className='option'>
+                        <div className={`option ${selectedLLM === 1 ? 'selected' : ''}`} onClick={() => handleLLMSelect(1)}>
                             <p>Qwen2</p>
                         </div>
-                        <div className='option'>
+                        <div className={`option ${selectedLLM === 2 ? 'selected' : ''}`} onClick={() => handleLLMSelect(2)}>
                             <p>Llama3</p>
                         </div>
                     </div>
