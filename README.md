@@ -7,23 +7,23 @@ GPTitor is an interactive sandbox that helps users learn to write effective prom
 
 The feedback window will provide you with all the necessary information, namely: the name and description of the task, the category, as well as the user's rating.
 
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_window.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_window.gif" height="400">
 
 The chat allows you to send requests to the AI, as well as receive responses from it.
 
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/chat.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/chat.gif" height="400">
 
 Users can practice working with hints using categorized tasks, instantly receiving feedback and tips for improving the query.
 
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/tasks.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/tasks.gif" height="400">
 
 Each chat has a history, which allows the user to return to the previous request.
 
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/history.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/history.gif" height="400">
 
 Demonstration of the GPTitor.
 
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_demo.gif" height="600">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Media/feedback_demo.gif" height="400">
 
 ![Screenshot of GPTitor Chat Interface](http://10.100.30.244:8801/gptitor/chatpage)
 ![Watch Demo Video](http://10.100.30.244:8801/gptitor/chatpage)
@@ -98,7 +98,7 @@ To simplify the development and deployment of your application, you can use Dock
 
 ### Prerequisites
 
-Make sure you have Docker and Docker Compose installed on your machine. You can download them from the official Docker website.
+Make sure you have Docker and Docker Compose installed on your machine. You can download them from the [official Docker website](https://www.docker.com/).
 
 ### Docker Compose Setup
 
@@ -134,7 +134,7 @@ Make sure you have Docker and Docker Compose installed on your machine. You can 
 
 ## Setting Up GitLab CI/CD Pipeline
 
-To automate the build, test, and deployment process, you can use GitLab CI/CD. The following guidance is applicaple only for the Innopolis University community. Below are the instructions to set up the GitLab CI/CD pipeline.
+To automate the build, test, and deployment process, you can use [GitLab CI/CD](https://docs.gitlab.com/ee/ci/). The following guidance is applicaple only for the Innopolis University community. Below are the instructions to set up the GitLab CI/CD pipeline.
 
 ### Prerequisites
 
@@ -184,5 +184,3 @@ For any questions, issues, or contributions, you can reach out to the developers
 - **Ildar Rakiev**
   - Email: [i.rakiev@innopolis.university](mailto:i.rakiev@innopolis.university)
   - Telegram: [@mescudiway](https://t.me/mescudiway)
-
-## Links
