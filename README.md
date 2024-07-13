@@ -132,89 +132,33 @@ Make sure you have Docker and Docker Compose installed on your machine. You can 
    docker-compose down
    ```
 
-5. **Testing and Linting**
-
-  To run linting and testing using Docker Compose, use the following commands:
-  - Run Backend Linting with Flake8:
-  ```sh
-   docker-compose run --rm lint_backend
-   ```
-   - Run Frontend Linting with ESLint:
-  ```sh
-   docker-compose run --rm lint_frontend
-   ```
-   - Run Backend Test with Pytest:
-  ```sh
-   docker-compose run --rm test_backend
-   ```
-  - Run Frontend Test with Jest:
-  ```sh
-   docker-compose run --rm test_frontend
-   ```
-   The results
-
 ## Setting Up GitLab CI/CD Pipeline
 
-To automate the build, test, and deployment process, you can use GitLab CI/CD. Below are the instructions to set up the GitLab CI/CD pipeline.
+To automate the build, test, and deployment process, you can use GitLab CI/CD. The following guidance is applicaple only for the Innopolis University community. Below are the instructions to set up the GitLab CI/CD pipeline.
 
 ### Prerequisites
 
-Make sure you have a GitLab account and your project is hosted on GitLab.
+- Ensure you have access to the Innopolis University GitLab instance.
+- Make sure you have the necessary credentials to work in Innopolis University DevOps Playground.
 
-### GitLab CI/CD Setup
+### Configuration
 
-1. **Add `.gitlab-ci.yml` to Your Repository**
-
-   Ensure that your `.gitlab-ci.yml` file is located in the root directory of your repository. Below is an example configuration for your pipeline:
-
-   ```yaml
-   stages:
-     - build
-     - lint
-     - test
-     - deploy
-
-   build:
-     stage: build
-     script:
-       - docker-compose -f docker-compose.yml build
-
-   lint:
-     stage: lint
-     script:
-       - docker run --rm -v $(pwd):/app -w /app gptitor_frontend npm run lint
-       - docker run --rm -v $(pwd):/app -w /app gptitor_backend flake8 .
-
-   test:
-     stage: test
-     script:
-       - docker run --rm -v $(pwd):/app -w /app gptitor_backend pytest
-       - docker run --rm -v $(pwd):/app -w /app gptitor_frontend npm test
-
-   deploy:
-     stage: deploy
-     script:
-       - echo "Deploy stage - Add your deployment commands here"
-   ```
-
-2. **Pipeline Stages**
+The CI/CD pipeline configuration is specified in the [`.gitlab-ci.yml`](.gitlab-ci.yml) file. This configuration includes the following stages:
 
    - **Build Stage:** Builds the Docker images for the backend and frontend services.
-   - **Lint Stage:** Runs linting tools for the frontend and backend code.
-   - **Test Stage:** Runs tests for the frontend and backend code.
-   - **Deploy Stage:** Contains commands for deploying your application. You need to customize this according to your deployment strategy (e.g., deploying to a cloud provider, Kubernetes, etc.).
+   - **Lint Stage:** Runs linting tools ESLint and Flake8 for the frontend and backend code.
+   - **Test Stage:** Runs tests for the frontend and backend code using Jest and Pytest respectively.
+   - **Deploy Stage:** Contains commands for deploying the application. You need to customize this according to the deployment strategy (e.g., deploying to a cloud provider, Kubernetes, etc.).
 
-3. **Commit and Push Changes**
+### Running the Pipeline
 
-   After setting up the `.gitlab-ci.yml` file, commit and push the changes to your GitLab repository:
+To start the CI pipeline, refer to the tutorial shared in the Innopolis University GitLab repository [here](https://gitlab.pg.innopolis.university/n.askarbekuly/demo_docker_ci_cd/-/blob/master/README.md).
 
-   ```sh
-   git add .gitlab-ci.yml
-   git commit -m "Add GitLab CI/CD configuration"
-   git push origin main
-   ```
+### Additional Notes
 
-   GitLab will automatically detect the `.gitlab-ci.yml` file and start the pipeline.
+- Ensure all required environment variables are set correctly in your GitLab CI/CD settings.
+- This pipeline is configured to work specifically for the Innopolis University environment.
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

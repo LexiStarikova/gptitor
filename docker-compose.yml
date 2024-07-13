@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    container_name: gptitor_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./API:/app
+    environment:
+      - DATABASE_URL=sqlite:///app/gptitor.db
+
+  frontend:
+    build:
+      context: ./React
+      dockerfile: Dockerfile
+    container_name: gptitor_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./React:/app
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - backend
