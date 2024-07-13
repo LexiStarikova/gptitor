@@ -69,7 +69,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
-            if (e.ctrlKey) {
+            if (e.shiftKey) {
                 e.preventDefault();
                 const newText = text + '\n';
                 setText(newText);
