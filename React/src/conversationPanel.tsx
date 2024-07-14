@@ -78,13 +78,17 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
 
     useEffect(() => {
         if (selectedLLM !== previousLLM.current && selectedLLM !== null) {
-            createConversation()
-                .then(() => {
-                    previousLLM.current = selectedLLM;
-                })
-                .catch((error) => {
+            previousLLM.current = selectedLLM;
+
+            const createAndSetConversation = async () => {
+                try {
+                    await createConversation();
+                } catch (error) {
                     console.error('Error creating conversation:', error);
-                });
+                }
+            };
+
+            createAndSetConversation();
         }
     }, [selectedLLM, createConversation]);
     const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
