@@ -5,6 +5,7 @@ from Utilities.feedback import (get_chatbot_response,
                                 get_chatbot_comment,
                                 calculate_metrics)
 from Utilities.llm import LLM
+from Utilities.conversation import generate_title
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -12,7 +13,9 @@ from sqlalchemy import distinct
 from typing import Dict, Any, List
 
 
-def rename_conversation(db: Session, conversation_id: int, new_title: str):
+def rename_conversation(db: Session,
+                        conversation_id: int,
+                        new_title: str):
     if not new_title.strip():
         raise HTTPException(status_code=400,
                             detail="Title cannot be empty.")
@@ -28,6 +31,21 @@ def rename_conversation(db: Session, conversation_id: int, new_title: str):
     message = (f"Conversation with ID {conversation_id} updated successfully."
                f" New title: {conversation.title}.")
     return message
+
+
+def get_conversation_by_id(db: Session,
+                           conversation_id: int):
+    conversation = (db.query(models.Conversation)
+                    .filter(models.Conversation.conversation_id == conversation_id)
+                    .first())
+    if not conversation:
+        raise HTTPException(status_code=404,
+                            detail=f"Conversation with ID {conversation_id} not found.")
+    return schemas.Conversation(conversation_id=conversation_id,
+                                user_id=conversation.user_id,
+                                title=conversation.title,
+                                llm_id=conversation.llm_id,
+                                created_at=conversation.created_at)
 
 
 def get_llm_list(db: Session):
@@ -159,6 +177,20 @@ async def send_query(db: Session,
             raise HTTPException(
                 status_code=404,
                 detail=f"Conversation with ID {conversation_id} not found.")
+        # Check if this is the first message in the conversation
+        existing_messages = (
+            db.query(models.Message)
+            .filter_by(conversation_id=conversation_id)
+            .count()
+        )
+        if existing_messages == 0:
+            # Rename the conversation since this is the first message
+            new_title = await generate_title(query=query.query_text,
+                                             llm_id=1)
+            rename_conversation(db=db,
+                                conversation_id=conversation_id,
+                                new_title=new_title)
+        
         llm_id = conversation.llm_id
         if not query.task_id:
             task = ""

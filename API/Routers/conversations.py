@@ -25,6 +25,13 @@ def delete_conversation(conversation_id: int,
                                     user_id=user_id)
 
 
+@router.get("/{conversation_id}", response_model=schemas.Conversation, status_code=200)
+def get_conversation_by_id(conversation_id: int,
+                           db: Session = Depends(database.get_db)):
+    return crud.get_conversation_by_id(db=db,
+                                       conversation_id=conversation_id)
+
+
 @router.get("", response_model=List[schemas.Conversation], status_code=200)
 def get_all_conversations(user_id: int = auth.get_current_user(),
                           db: Session = Depends(database.get_db)):
