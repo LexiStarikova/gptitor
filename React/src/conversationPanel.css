@@ -305,6 +305,12 @@ button {
     width: 20px;
 }
 
+.copy {
+    height: 14px;
+    width: 14px;
+    padding: 3px;
+}
+
 
 .iconn {
     padding: 2px;
