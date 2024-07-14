@@ -23,6 +23,8 @@ class ConversationTitle(BaseModel):
     content: str = Field(default="Untitled",
                          examples=["Example title"],
                          max_length=127)
+    generate: bool = Field(default=False,
+                           examples=[True])
 
 
 class LLM_ID(BaseModel):
