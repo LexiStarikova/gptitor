@@ -144,7 +144,7 @@ For more comprehensive details on the API, DB, and React components structure, p
 
 - [API Documentation](API/README.md): This document provides detailed information about the API endpoints, data formats, database structure, and usage instructions.
 
-- [React Components Documentation](React/README.md): Here you can find descriptions and usage guidelines for the React components implemented in this project.
+- [React Components Documentation](React/README.md): Here you can find comprehensive descriptions for the React components implemented in this project.
  
 
 ## License
