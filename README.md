@@ -145,6 +145,8 @@ For more comprehensive details on the API, DB, and React components structure, p
 - [API Documentation](API/README.md): This document provides detailed information about the API endpoints, data formats, database structure, and usage instructions.
 
 - [React Components Documentation](React/README.md): Here you can find comprehensive descriptions for the React components implemented in this project.
+
+Alternatively, you can visit the [GitLab Wiki Home Page](https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/wikis/home) created for simplified orientation through the detailed documentation.
  
 
 ## License
