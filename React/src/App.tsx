@@ -75,7 +75,7 @@ const App: React.FC = () => {
         });
         const data = await response.json();
         if (data.length === 0) {
-          CreateConversation();
+          console.log("wompwomp")
         }
         else {
           addQueries(data);
