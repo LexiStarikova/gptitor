@@ -1,11 +1,9 @@
 
-# Front-end
+# React Components Documentation
 
 ## Description
 
 The directory includes 16 React component, each has its style sheet
-
-## Directory structure
 
 [TOC]
 
