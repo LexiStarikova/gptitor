@@ -31,6 +31,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
     const [isRoundedF, setIsRoundedF] = useState(true);
     const [criterionValue, setCriterionValue] = useState(criteria.criterion_1);
     const [progressWidth, setProgressWidth] = useState(0);
+    const [expandedCriterion, setExpandedCriterion] = useState<string | null>(null);
 
 
     useEffect(() => {
@@ -66,7 +67,9 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
     const toggleDescription = () => {
         setShowDescription(!showDescription);
     };
-
+    const toggleDetails = (criterion: string) => {
+        setExpandedCriterion(prevCriterion => prevCriterion === criterion ? null : criterion);
+    };
     const animateProgressBar = async (grade: number) => {
         const progressbar = await document.querySelector('.progressbar-internals') as HTMLElement;
 
@@ -113,7 +116,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
             <div className='lowpart'>
                 <h4 className='res'>Results:</h4>
                 <div className={`hg ${isRounded ? 'rounded' : ''}`}>
-                    
+
                     <div className='values'>
                         <div className='progressbar-score'>
                             <div className='progressbar-internals'
@@ -153,14 +156,16 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                         </div>
                                     </div>
                                     <div className='progress-criteria-outer'>
-                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_1 * 20)}%`}}>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_1 * 20)}%` }}>
                                         </div>
                                     </div>
-                                    <div className='detailsF'>
-                                        <p className='p5'>More Details &lt;</p>
-                                    </div>
+                                    <button onClick={() => toggleDetails('criterion_1')} className='more-details-btn'>
+                                        {expandedCriterion === 'criterion_1' ? 'Less Details' : 'More Details'}
+                                    </button>
                                 </div>
-
+                                <div className={`criterion-details ${expandedCriterion === 'criterion_1' ? 'expanded' : ''}`}>
+                                    <p>Here are more details about Conciseness & Focus...</p>
+                                </div>
 
                             </div>
 
@@ -188,14 +193,16 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                         </div>
                                     </div>
                                     <div className='progress-criteria-outer'>
-                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_2 * 20)}%`}}>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_2 * 20)}%` }}>
                                         </div>
                                     </div>
-                                    <div className='detailsF'>
-                                        <p className='p5'>More Details &lt;</p>
-                                    </div>
+                                    <button onClick={() => toggleDetails('criterion_2')} className='more-details-btn'>
+                                        {expandedCriterion === 'criterion_2' ? 'Less Details' : 'More Details'}
+                                    </button>
                                 </div>
-
+                                <div className={`criterion-details ${expandedCriterion === 'criterion_2' ? 'expanded' : ''}`}>
+                                    <p>Here are more details about Conciseness & Focus...</p>
+                                </div>
 
                             </div>
 
@@ -223,14 +230,16 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                         </div>
                                     </div>
                                     <div className='progress-criteria-outer'>
-                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_3 * 20)}%`}}>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_3 * 20)}%` }}>
                                         </div>
                                     </div>
-                                    <div className='detailsF'>
-                                        <p className='p5'>More Details &lt;</p>
-                                    </div>
+                                    <button onClick={() => toggleDetails('criterion_3')} className='more-details-btn'>
+                                        {expandedCriterion === 'criterion_3' ? 'Less Details' : 'More Details'}
+                                    </button>
                                 </div>
-
+                                <div className={`criterion-details ${expandedCriterion === 'criterion_3' ? 'expanded' : ''}`}>
+                                    <p>Here are more details about Conciseness & Focus...</p>
+                                </div>
 
                             </div>
 
@@ -258,16 +267,19 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                         </div>
                                     </div>
                                     <div className='progress-criteria-outer'>
-                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%`}}>
+                                        <div className='progress-criteria-inner' style={{ width: `${returnFloatOrNum(criteria.criterion_4 * 20)}%` }}>
                                         </div>
                                     </div>
-                                    <div className='detailsF'>
-                                        <p className='p5'>More Details &lt;</p>
-                                    </div>
+                                    <button onClick={() => toggleDetails('criterion_4')} className='more-details-btn'>
+                                        {expandedCriterion === 'criterion_4' ? 'Less Details' : 'More Details'}
+                                    </button>
+                                </div>
+                                <div className={`criterion-details ${expandedCriterion === 'criterion_4' ? 'expanded' : ''}`}>
+                                    <p>Here are more details about Conciseness & Focus...</p>
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
 
                 <div className='FeedContainer'>
