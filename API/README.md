@@ -64,7 +64,7 @@ Detailed API documentation is available at [Swagger Documentation](http://10.100
 The database configuration is defined in `API/Core/database.py`.
 Here is its model:
 
-<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Diagrams/db_model.pdf" height="400">
+<img src="https://gitlab.pg.innopolis.university/a.nasibullina/gptitor/-/raw/main/Diagrams/db_model.png" height="400">
 
 ### Initial Data Loading
 
