@@ -91,6 +91,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             createAndSetConversation();
         }
     }, [selectedLLM, createConversation]);
+
     const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             if (e.shiftKey) {
@@ -106,6 +107,36 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             }
         }
     };
+
+    const copyToClipboard = (button: HTMLButtonElement) => {
+        const contentDiv = button.closest('.resbub');
+        if (contentDiv) {
+            const range = document.createRange();
+            range.selectNodeContents(contentDiv);
+            const selection = window.getSelection();
+            if (selection) {
+                selection.removeAllRanges();
+                selection.addRange(range);
+                try {
+                    document.execCommand('copy');
+                    console.log('Content copied to clipboard!');
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+                selection.removeAllRanges();
+            }
+        } else {
+            console.error('Not found');
+        }
+    }
+
+    const copyButtons = document.querySelectorAll('.copyButton');
+    copyButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const target = event.target as HTMLButtonElement;
+            copyToClipboard(target);
+        });
+    });
 
     const handleSend = async () => {
         if (isOpenS)
@@ -222,6 +253,13 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                                                 <svg width="18" height="18" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" className='like'>
                                                                     <path d="M6.46715 9.49724C6.25502 9.67402 6.22635 9.9893 6.40314 10.2014C6.57992 10.4136 6.8952 10.4422 7.10734 10.2655L6.46715 9.49724ZM10.4996 6.78773L10.8197 6.40362C10.6343 6.2491 10.3649 6.2491 10.1795 6.40362L10.4996 6.78773ZM13.8918 10.2655C14.104 10.4422 14.4192 10.4136 14.596 10.2014C14.7728 9.9893 14.7441 9.67402 14.532 9.49724L13.8918 10.2655ZM9.99958 14.2124C9.99958 14.4885 10.2234 14.7124 10.4996 14.7124C10.7757 14.7124 10.9996 14.4885 10.9996 14.2124H9.99958ZM7.10734 10.2655L10.8197 7.17184L10.1795 6.40362L6.46715 9.49724L7.10734 10.2655ZM10.1795 7.17184L13.8918 10.2655L14.532 9.49724L10.8197 6.40362L10.1795 7.17184ZM9.99958 6.78773V14.2124H10.9996V6.78773H9.99958ZM16.0857 4.91395C19.1709 7.9991 19.1709 13.0011 16.0857 16.0862L16.7929 16.7933C20.2685 13.3177 20.2685 7.68251 16.7929 4.20685L16.0857 4.91395ZM16.0857 16.0862C13.0006 19.1714 7.99861 19.1714 4.91347 16.0862L4.20636 16.7933C7.68202 20.269 13.3172 20.269 16.7929 16.7933L16.0857 16.0862ZM4.91347 16.0862C1.82832 13.0011 1.82832 7.9991 4.91347 4.91395L4.20636 4.20685C0.730693 7.68251 0.730693 13.3177 4.20636 16.7933L4.91347 16.0862ZM4.91347 4.91395C7.99861 1.82881 13.0006 1.82881 16.0857 4.91395L16.7929 4.20685C13.3172 0.731181 7.68202 0.731181 4.20636 4.20685L4.91347 4.91395Z" fill="#3B4168" />
                                                                 </svg>
+                                                            </div>
+                                                            <div className='iconn copyButton'>
+                                                                
+                                                                    <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M5.0001 13.4L2.6001 13.4C1.93735 13.4 1.4001 12.8627 1.4001 12.2L1.4001 3.39998C1.4001 2.29541 2.29553 1.39998 3.4001 1.39998L12.2001 1.39998C12.8628 1.39998 13.4001 1.93723 13.4001 2.59998L13.4001 4.99998M11.0001 20.6L18.2001 20.6C19.5256 20.6 20.6001 19.5255 20.6001 18.2L20.6001 11C20.6001 9.67449 19.5256 8.59998 18.2001 8.59998L11.0001 8.59998C9.67461 8.59998 8.6001 9.67449 8.6001 11L8.6001 18.2C8.6001 19.5255 9.67461 20.6 11.0001 20.6Z" stroke="#3B4168" stroke-width="2" stroke-linecap="round" />
+                                                                    </svg>
+                                                                
                                                             </div>
                                                             <div className='iconn'>
                                                                 <svg width="18" height="18" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" className='dislike'>
