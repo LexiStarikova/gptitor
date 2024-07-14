@@ -71,7 +71,7 @@ The following GIF shows the key idea of GPTитор in practice:
 - **Database**: SQLite
 - **Deployment**: npm, Uvicorn
 
-## Using Docker Compose
+## Using Docker Compose [For Customers]
 
 To simplify the development and deployment of your application, you can use Docker Compose. Below are the instructions on how to set up and run your application using Docker Compose.
 
@@ -138,6 +138,14 @@ To start the CI pipeline, refer to the tutorial shared in the Innopolis Universi
 - Ensure all required environment variables are set correctly in your GitLab CI/CD settings.
 - This pipeline is configured to work specifically for the Innopolis University environment.
 
+## Detailed Documentation [For Customers]
+
+For more comprehensive details on the API, DB, and React components structure, please refer to the following documents:
+
+- [API Documentation](API/README.md): This document provides detailed information about the API endpoints, data formats, database structure, and usage instructions.
+
+- [React Components Documentation](React/README.md): Here you can find descriptions and usage guidelines for the React components implemented in this project.
+ 
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
