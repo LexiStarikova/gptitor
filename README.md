@@ -58,9 +58,9 @@ The following GIF shows the key idea of GPTитор in practice:
  
 ### Note on Deployment
 - The service is currently available only within the Innopolis network. 
-- If you wish to deploy the service elsewhere, ensure to update links in the React files and API requests accordingly.
+- If you wish to deploy the service elsewhere, ensure to update links in the React [config.ts](React/src/config.ts) file and API requests accordingly.
 - You may access the API documentation (Swagger UI) at http://127.0.0.1:8000/docs in your web browser after the deployment.
-- The public API documentation (Swagger UI) is available [here](http://10.100.30.244:8000/docs).
+- The public API documentation (Swagger UI) is available [here](http://10.100.30.244:1330/docs).
 - LLMs are hosted on remote servers; the API interacts with these servers.
 
 
