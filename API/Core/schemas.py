@@ -19,11 +19,10 @@ class Query(BaseModel):
                          examples=[1])
 
 
-# TODO: implement renaming
-class Name(BaseModel):
-    new_name: str = Field(default="Untitled",
-                          examples=["Example name"],
-                          max_length=2048)
+class ConversationTitle(BaseModel):
+    content: str = Field(default="Untitled",
+                         examples=["Example title"],
+                         max_length=127)
 
 
 class LLM_ID(BaseModel):

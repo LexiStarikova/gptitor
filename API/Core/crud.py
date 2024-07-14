@@ -12,6 +12,23 @@ from sqlalchemy import distinct
 from typing import Dict, Any, List
 
 
+def rename_conversation(db: Session, conversation_id: int, new_title: str):
+    if not new_title.strip():
+        raise HTTPException(status_code=400,
+                            detail="Title cannot be empty.")
+    conversation = (db.query(models.Conversation)
+                    .filter(models.Conversation.conversation_id == conversation_id)
+                    .first())
+    if not conversation:
+        raise HTTPException(status_code=404,
+                            detail=f"Conversation with ID {conversation_id} not found.")
+    conversation.title = new_title
+    db.commit()
+    db.refresh(conversation)
+    message = (f"Conversation with ID {conversation_id} updated successfully."
+               f" New title: {conversation.title}.")
+    return message
+
 
 def get_llm_list(db: Session):
     data = db.query(models.AIModel).all()

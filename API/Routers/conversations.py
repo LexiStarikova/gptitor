@@ -1,9 +1,6 @@
-# TODO: remove unused imports (flake8)
 from fastapi import APIRouter, Depends
-# from fastapi import HTTPException
 from typing import List
 from Core import crud, schemas, database
-# from Core import models
 from Authentication import auth
 from sqlalchemy.orm import Session
 
@@ -33,3 +30,12 @@ def get_all_conversations(user_id: int = auth.get_current_user(),
                           db: Session = Depends(database.get_db)):
     return crud.get_all_conversations(db=db,
                                       user_id=user_id)
+
+
+@router.put("/{conversation_id}", response_model=str, status_code=200)
+def rename_conversation(conversation_id: int,
+                        new_title: schemas.ConversationTitle,
+                        db: Session = Depends(database.get_db)):
+    return crud.rename_conversation(db=db,
+                                    conversation_id=conversation_id,
+                                    new_title=new_title.content)
