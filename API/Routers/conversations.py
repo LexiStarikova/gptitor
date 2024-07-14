@@ -39,7 +39,8 @@ def get_all_conversations(user_id: int = auth.get_current_user(),
                                       user_id=user_id)
 
 
-@router.put("/{conversation_id}", response_model=Dict[str, Any], status_code=200)
+@router.put("/{conversation_id}", response_model=schemas.ConversationTitleUpdated,
+            status_code=200)
 async def rename_conversation(conversation_id: int,
                               new_title: schemas.ConversationTitle,
                               db: Session = Depends(database.get_db)):

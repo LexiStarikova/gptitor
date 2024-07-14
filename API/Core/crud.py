@@ -39,9 +39,9 @@ async def rename_conversation(db: Session,
         conversation.title = new_title
     db.commit()
     db.refresh(conversation)
-    response =  {"detail": f"Conversation with ID {conversation_id} updated successfully.",
-                 "new_title": conversation.title}
-    return response
+    detail = f"Conversation with ID {conversation_id} updated successfully."
+    return schemas.ConversationTitleUpdated(detail=detail,
+                                            new_title=conversation.title)
 
 
 def get_conversation_by_id(db: Session,

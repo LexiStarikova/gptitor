@@ -27,6 +27,11 @@ class ConversationTitle(BaseModel):
                            examples=[True])
 
 
+class ConversationTitleUpdated(BaseModel):
+    detail: str = Field(default="Conversation updated successfully.")
+    new_title: str = Field(default="New title example")
+
+
 class LLM_ID(BaseModel):
     llm_id: int = Field(default=1,
                         examples=[1])
