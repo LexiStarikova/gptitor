@@ -166,6 +166,8 @@ const App: React.FC = () => {
         data_2.metrics.criterion_2.score,
         data_2.metrics.criterion_3.score,
         data_2.metrics.criterion_4.score));
+      console.log(data_2.metrics.criterion_1);
+      console.log(data_2.metrics.criterion_1.score);
     } else {
       setFeedback('');
       setCriteria(new Metrics(0, 0, 0, 0));
