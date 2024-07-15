@@ -51,77 +51,52 @@ async def calculate_metrics(query: str,
                 status_code=404,
                 detail=f"LLM with ID {llm_id} not found.")
     metrics = {
-        "criterion_1": await get_concise_focus(query, task, llm_id),
-        "criterion_2": await get_clarity_spec(query, task, llm_id),
-        "criterion_3": await get_relevance_ctx(query, task, llm_id),
-        "criterion_4": await get_purpose_out(query, task, llm_id)
+        "criterion_1": await get_criterion_feedback(query,
+                                                    task,
+                                                    "conciseness and focus",
+                                                    llm_id),
+        "criterion_2": await get_criterion_feedback(query,
+                                                    task,
+                                                    "clarity and specifity",
+                                                    llm_id),
+        "criterion_3": await get_criterion_feedback(query,
+                                                    task,
+                                                    "relevance and context",
+                                                    llm_id),
+        "criterion_4": await get_criterion_feedback(query,
+                                                    task,
+                                                    "purpose and desired output",
+                                                    llm_id)
     }
     return metrics
 
 
-# calculate_criterion_conciseness_and_focus
-async def get_concise_focus(query: str,
-                            task: str,
-                            llm_id: int = 1) -> float:
+async def get_criterion_feedback(
+    query: str,
+    task: str,
+    string_criterion: str,
+    llm_id: int = 1) -> float:
     prompt_task = f"There is the task: {task}.\n" if task else ""
     prompt = (
         f"You evaluate user queries for task-solving LLM.\n"
         f"{prompt_task}"
         f"There is a query that the user formulated: {query}.\n"
-        f"Rate this query in terms of conciseness and focus,\n"
+        f"Rate this query in terms of {string_criterion},\n"
         f"give a rating from 0 to 5. Put only one number:"
     )
-    res = await llm_dict[llm_id].get_response({"prompt": prompt,
-                                               "regex": r"([0-4](\.[0-9]))"})
-    return float(res)
-
-
-# calculate_criterion_clarity_and_specificity
-async def get_clarity_spec(query: str,
-                           task: str,
-                           llm_id: int = 1) -> float:
-    prompt_task = f"There is the task: {task}.\n" if task else ""
+    score = await llm_dict[llm_id].get_response({"prompt": prompt,
+                                                 "regex": r"([0-4](\.[0-9]))"})
     prompt = (
         f"You evaluate user queries for task-solving LLM.\n"
         f"{prompt_task}"
         f"There is a query that the user formulated: {query}.\n"
-        f"Rate this query in terms of clarity and specificity,\n"
-        f"give a rating from 0 to 5. Put only one number:"
+        f"Suggest how to improve this query in terms of {string_criterion}.\n"
+        f"Be concise, formulate your suggestions in two sentences."
     )
-    res = await llm_dict[llm_id].get_response({"prompt": prompt,
-                                               "regex": r"([0-4](\.[0-9]))"})
-    return float(res)
-
-
-# calculate_criterion_relevance_and_context
-async def get_relevance_ctx(query: str,
-                            task: str,
-                            llm_id: int = 1) -> float:
-    prompt_task = f"There is the task: {task}.\n" if task else ""
-    prompt = (
-        f"You evaluate user queries for task-solving LLM.\n"
-        f"{prompt_task}"
-        f"There is a query that the user formulated: {query}.\n"
-        f"Rate this query in terms of relevance and context,\n"
-        f"give a rating from 0 to 5. Put only one number:"
-    )
-    res = await llm_dict[llm_id].get_response({"prompt": prompt,
-                                               "regex": r"([0-4](\.[0-9]))"})
-    return float(res)
-
-
-# calculate_criterion_purpose_and_desired_output
-async def get_purpose_out(query: str,
-                          task: str,
-                          llm_id: int = 1) -> float:
-    prompt_task = f"There is the task: {task}.\n" if task else ""
-    prompt = (
-        f"You evaluate user queries for task-solving LLM.\n"
-        f"{prompt_task}"
-        f"There is a query that the user formulated: {query}.\n"
-        f"Rate this query in terms of purpose and desired output,\n"
-        f"give a rating from 0 to 5. Put only one number:"
-    )
-    res = await llm_dict[llm_id].get_response({"prompt": prompt,
-                                               "regex": r"([0-4](\.[0-9]))"})
-    return float(res)
+    comment = await llm_dict[llm_id].get_response({
+        "prompt": prompt,
+        "temperature": 0.1,
+        "max_tokens": 300
+    })
+    return {"score": float(score),
+            "comment":comment}

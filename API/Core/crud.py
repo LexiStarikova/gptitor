@@ -443,19 +443,19 @@ def calculate_personal_statistics(db: Session,
         avg_metrics_query = db.query(
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_1')), 1
+                    models.Feedback.metrics, '$.criterion_1.score')), 1
                         ).label('criterion_1'),
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_2')), 1
+                    models.Feedback.metrics, '$.criterion_2.score')), 1
                         ).label('criterion_2'),
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_3')), 1
+                    models.Feedback.metrics, '$.criterion_3.score')), 1
                         ).label('criterion_3'),
             func.round(func.avg(
                 func.json_extract(
-                    models.Feedback.metrics, '$.criterion_4')), 1
+                    models.Feedback.metrics, '$.criterion_4.score')), 1
                         ).label('criterion_4')
         ).join(
             models.Message,
@@ -510,28 +510,25 @@ def calculate_personal_statistics(db: Session,
             "tasks_solved": total_activity_query.task_ids
         }
         daily_activity_query = db.query(
-            models.Message.created_at.label('message_date'),
+            func.date(models.Message.created_at).label('message_date'),
             func.count(models.Message.message_id).label('daily_message_count')
         ).join(
             models.Conversation,
-            models.Conversation.conversation_id == (
-                models.Message.conversation_id)
+            models.Conversation.conversation_id == models.Message.conversation_id
         ).filter(
-            models.Conversation.user_id == (
-                user_id),
-            models.Message.message_class == (
-                'Request')
+            models.Conversation.user_id == user_id,
+            models.Message.message_class == 'Request'
         ).group_by(
-            models.Message.created_at
+            func.date(models.Message.created_at)
         ).order_by(
-            'message_date'
+            func.date(models.Message.created_at)
         ).all()
         if not daily_activity_query:
             error_msg = f"Daily activity not found for user ID {user_id}."
             raise HTTPException(status_code=404,
                                 detail=error_msg)
         daily_activity: List[Dict[str, Any]] = [
-            {"date": row.message_date.strftime('%Y-%m-%d'),
+            {"date": row.message_date,
              "number_of_queries": row.daily_message_count}
             for row in daily_activity_query
         ]
