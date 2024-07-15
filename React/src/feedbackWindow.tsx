@@ -61,7 +61,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
     };
 
     const resetScore = () => {
-        setCriteria(new Metrics(0.0, 0.0, 0.0, 0.0));
+        setCriteria(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""));
     };
 
     const toggleDescription = () => {
@@ -164,7 +164,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_1' ? 'expanded' : ''}`}>
-                                    <p>Here are more details about Conciseness & Focus...</p>
+                                    <p>{criteria.comment_criterion_1 ? criteria.comment_criterion_1 : "Here are more details about your score..."}</p>
                                 </div>
 
                             </div>
@@ -201,7 +201,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_2' ? 'expanded' : ''}`}>
-                                    <p>Here are more details about Conciseness & Focus...</p>
+                                    <p>{criteria.comment_criterion_2 ? criteria.comment_criterion_2 : "Here are more details about your score..."}</p>
                                 </div>
 
                             </div>
@@ -238,7 +238,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_3' ? 'expanded' : ''}`}>
-                                    <p>Here are more details about Conciseness & Focus...</p>
+                                    <p>{criteria.comment_criterion_3 ? criteria.comment_criterion_3 : "Here are more details about your score..."}</p>
                                 </div>
 
                             </div>
@@ -275,7 +275,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_4' ? 'expanded' : ''}`}>
-                                    <p>Here are more details about Conciseness & Focus...</p>
+                                    <p>{criteria.comment_criterion_4 ? criteria.comment_criterion_4 : "Here are more details about your score..."}</p>
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ export const FeedbackContext = createContext<{
 }>({
     feedback: "",
     setFeedback: () => {},
-    criteria: new Metrics(0.0, 0.0, 0.0, 0.0),
+    criteria: new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""),
     setCriteria: () => {},
     task: new Task(1, "", "", ""),
     setTask: () => {}
