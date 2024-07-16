@@ -1,5 +1,5 @@
 import './studymode.css';
-import { useState } from 'react';
+import { MutableRefObject, useState } from 'react';
 import { ConversationPanel } from './conversationPanel';
 import FeedbackPanel from './feedbackPanel';
 import TaskDesc from "./taskdescription"
@@ -19,10 +19,11 @@ interface StudyModeProps {
     conversation_id: number;
     selectedLLM: number | null;
     setSelectedLLM: (llmId: number | null) => void;
+    skipEffect: MutableRefObject<boolean>;
 }
 
 
-const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id, selectedLLM, setSelectedLLM }) => {
+const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id, selectedLLM, setSelectedLLM, skipEffect }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [showDescription, setShowDescription] = useState(false);
@@ -61,7 +62,22 @@ const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requ
                 </defs>
             </svg>
             <div className='panels'>
-                <ConversationPanel queries={queries} createConversation={createConversation} isOpenS={isSidebarOpen} close={toggleSidebar} requests={requests} setRequests={setRequests} isOpenD={showDescription} closeD={toggleDescription} setResponses={setResponses} responses={responses} conversation_id={conversation_id} selectedLLM={selectedLLM} setSelectedLLM={setSelectedLLM}></ConversationPanel>
+                <ConversationPanel 
+                    queries={queries} 
+                    createConversation={createConversation} 
+                    isOpenS={isSidebarOpen} 
+                    close={toggleSidebar} 
+                    requests={requests} 
+                    setRequests={setRequests} 
+                    isOpenD={showDescription} 
+                    closeD={toggleDescription} 
+                    setResponses={setResponses} 
+                    responses={responses} 
+                    conversation_id={conversation_id} 
+                    selectedLLM={selectedLLM} 
+                    setSelectedLLM={setSelectedLLM}
+                    skipEffect={skipEffect}
+                />
                 <FeedbackPanel isOpenS={isSidebarOpen} close={toggleSidebar} isOpenD={showDescription} closeD={toggleDescription}></FeedbackPanel>
             </div>
         </div>
