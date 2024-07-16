@@ -128,7 +128,7 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_1)}/5</h6>
-                                                    <p className='p5'>Conciseness & Focus</p>
+                                                    <h6 className='criteriaT'>Conciseness & Focus</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_2)}/5</h6>
-                                                    <p className='p5'>Clarity & Specificity</p>
+                                                    <h6 className='criteriaT'>Clarity & Specificity</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -207,7 +207,7 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_3)}/5</h6>
-                                                    <p className='p5'>Relevance & Context</p>
+                                                    <h6 className='criteriaT'>Relevance & Context</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -246,7 +246,7 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_4)}/5</h6>
-                                                    <p className='p5'>Purpose & Output</p>
+                                                    <h6 className='criteriaT'>Purpose & Output</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
