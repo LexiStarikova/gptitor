@@ -144,7 +144,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_1)}/5</h6>
-                                                    <p className='p5'>Conciseness & Focus</p>
+                                                    <h6 className='criteriaT'>Conciseness & Focus</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +164,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_1' ? 'expanded' : ''}`}>
-                                    <p>{criteria.comment_criterion_1 ? criteria.comment_criterion_1 : "Here are more details about your score..."}</p>
+                                    <p className='pdetails'>{criteria.comment_criterion_1 ? criteria.comment_criterion_1 : "Here are more details about your score..."}</p>
                                 </div>
 
                             </div>
@@ -181,7 +181,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_2)}/5</h6>
-                                                    <p className='p5'>Clarity & Specificity</p>
+                                                    <h6 className='criteriaT'>Clarity & Specificity</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -201,7 +201,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_2' ? 'expanded' : ''}`}>
-                                    <p>{criteria.comment_criterion_2 ? criteria.comment_criterion_2 : "Here are more details about your score..."}</p>
+                                    <p className='pdetails'>{criteria.comment_criterion_2 ? criteria.comment_criterion_2 : "Here are more details about your score..."}</p>
                                 </div>
 
                             </div>
@@ -218,7 +218,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_3)}/5</h6>
-                                                    <p className='p5'>Relevance & Context</p>
+                                                    <h6 className='criteriaT'>Relevance & Context</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -238,7 +238,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_3' ? 'expanded' : ''}`}>
-                                    <p>{criteria.comment_criterion_3 ? criteria.comment_criterion_3 : "Here are more details about your score..."}</p>
+                                    <p className='pdetails'>{criteria.comment_criterion_3 ? criteria.comment_criterion_3 : "Here are more details about your score..."}</p>
                                 </div>
 
                             </div>
@@ -255,7 +255,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                             <div className='critdescF'>
                                                 <div className='scoree'>
                                                     <h6>{returnFloatOrNum(criteria.criterion_4)}/5</h6>
-                                                    <p className='p5'>Purpose & Output</p>
+                                                    <h6 className='criteriaT'>Purpose & Output</h6>
                                                 </div>
                                                 <div className='infoiconcrits crittooltip-containerF'>
                                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -275,7 +275,7 @@ const FeedbackWindow: React.FC<feedbackWindowProps> = ({ isOpenF, isOpenD, isOpe
                                     </button>
                                 </div>
                                 <div className={`criterion-details ${expandedCriterion === 'criterion_4' ? 'expanded' : ''}`}>
-                                    <p>{criteria.comment_criterion_4 ? criteria.comment_criterion_4 : "Here are more details about your score..."}</p>
+                                    <p className='pdetails'>{criteria.comment_criterion_4 ? criteria.comment_criterion_4 : "Here are more details about your score..."}</p>
                                 </div>
                             </div>
                         </div>
