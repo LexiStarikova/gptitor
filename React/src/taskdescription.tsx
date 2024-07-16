@@ -12,6 +12,7 @@ interface TaskDescProps {
 }
 const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
     const { task, setTask } = useContext(FeedbackContext);
+    
 
     const handleTaskClick = (taskId: number) => {
         fetch(`${API_URL}/tasks/${taskId}`)
@@ -35,22 +36,28 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
                 </div>
                 <div className='unlineD'></div>
             </div>
-            <div className='Titlesdes'>
-                <div className='taskName'>
-                    <h6 className='Taskt'>Task:</h6>
-                    <h6 className='Taskn'>{task.task_name}</h6>
+            <div className='low'>
+                <div className='sec'>
+                    <div className='Titlesdes'>
+                        <div className='taskName'>
+                            <h6 className='Taskt'>Task:</h6>
+                            <h6 className='Taskn'>{task.task_name}</h6>
+                        </div>
+                        <div className='catName'>
+                            <h6 className='Catt'>Category:</h6>
+                            <h6 className='Catn'>{task.category}</h6>
+                        </div>
+                    </div>
+                    
                 </div>
-                <div className='catName'>
-                    <h6 className='Catt'>Category:</h6>
-                    <h6 className='Catn'>{task.category}</h6>
-                </div>
-            </div>
-            <div className='TaskD'>
-
                 <div className='Dividers'></div>
-                <div className='DescD'>
-                    <h6 className='DescT'>Desciption</h6>
-                    <p className='Descript'>{task.description}</p>
+                <div className='TaskD'>
+
+                    
+                    <div className='DescD'>
+                        <h6 className='DescT'>Desciption</h6>
+                        <p className='Descript'>{task.description}</p>
+                    </div>
                 </div>
             </div>
         </div>

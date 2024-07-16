@@ -55,7 +55,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             const maxHeight = parseInt(window.getComputedStyle(inputRef.current).maxHeight);
             const bottomOffset = Math.min(scrollHeight, maxHeight) - 14 * parseFloat(window.getComputedStyle(inputRef.current).borderWidth);
 
-            inputRef.current.style.bottom = `${bottomOffset}px`;
+            inputRef.current.style.bottom = `${bottomOffset-40}px`;
         }
     };
 

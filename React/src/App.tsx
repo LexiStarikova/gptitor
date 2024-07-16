@@ -31,7 +31,7 @@ const App: React.FC = () => {
   const [responses, setResponses] = useState<MessageSimplifyed[]>([]);
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
   const hasMounted = useRef(false);
-  const [selectedLLM, setSelectedLLM] = useState<number | null>(null);
+  const [selectedLLM, setSelectedLLM] = useState<number | null>(1);
 
   const addHoursToDate = (date: Date, hours: number): Date => {
     const newDate = new Date(date.getTime());
@@ -188,7 +188,9 @@ const App: React.FC = () => {
     console.log(response.json());
   };
 
+
   return (
+
     <SendContextProvider>
       <Router basename='/gptitor'>
         <NavBar />

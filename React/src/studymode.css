@@ -23,7 +23,7 @@
     width: 100vw;
     flex-direction: row;
     column-gap: 2.5%;
-    margin-top: 10vh;
+    margin-top: calc(10vh + 0.5%);
 }
 
 .rightgradient {

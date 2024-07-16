@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './taskpanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Task } from './models/task';
@@ -12,8 +12,10 @@ interface TaskPanelProps {
 const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
 
     const { task, setTask } = useContext(FeedbackContext);
+    const [classname, setClassname] = useState(Number);
 
     const handleTaskClick = (taskId: number) => {
+        changeButtonStatus(taskId);
         fetch(`${API_URL}/tasks/${taskId}`)
             .then(response => response.json())
             .then(data => {
@@ -23,6 +25,10 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
             .catch(error => {
                 console.error('Error fetching task:', error);
             });
+    };
+
+    const changeButtonStatus = (taskId: number) => {
+        setClassname(taskId);
     };
 
     return (
@@ -37,9 +43,9 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                             <h6>Suggested</h6>
                         </div>
                         <ul>
-                            <li onClick={() => handleTaskClick(1)}><p className='listbox'>Task 1</p></li>
-                            <li onClick={() => handleTaskClick(2)}><p className='listbox'>Task 2</p></li>
-                            <li onClick={() => handleTaskClick(3)}><p className='listbox'>Task 3</p></li>
+                            <li onClick={() => handleTaskClick(1)}><p className={`${classname==1 ? 'clicked' : 'notclicked'}`}>Task 1</p></li>
+                            <li onClick={() => handleTaskClick(2)}><p className={`${classname==2 ? 'clicked' : 'notclicked'}`}>Task 2</p></li>
+                            <li onClick={() => handleTaskClick(3)}><p className={`${classname==3 ? 'clicked' : 'notclicked'}`}>Task 3</p></li>
                         </ul>
                     </div>
                     <div className='Categories'>
@@ -52,10 +58,10 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                         </div>
                         <div>
                             <ul>
-                                <li onClick={() => handleTaskClick(1)}><p className='listboxCat'>Math</p></li>
-                                <li onClick={() => handleTaskClick(2)}><p className='listboxCat'>Physics</p></li>
-                                <li onClick={() => handleTaskClick(3)}><p className='listboxCat'>Computer</p></li>
-                                <li onClick={() => handleTaskClick(4)}><p className='listboxCat'>Entertainment</p></li>
+                                <li onClick={() => handleTaskClick(1)}><p className={`${classname==1 ? 'clickedCat' : 'notclickedCat'}`}>Math</p></li>
+                                <li onClick={() => handleTaskClick(2)}><p className={`${classname==2 ? 'clickedCat' : 'notclickedCat'}`}>Physics</p></li>
+                                <li onClick={() => handleTaskClick(3)}><p className={`${classname==3 ? 'clickedCat' : 'notclickedCat'}`}>Computer</p></li>
+                                <li onClick={() => handleTaskClick(4)}><p className={`${classname==4 ? 'clickedCat' : 'notclickedCat'}`}>Entertainment</p></li>
                             </ul>
                         </div>
                         <div>
@@ -71,20 +77,22 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                     </div>
                 </div>
                 <div className='taskDes' /*onClick={close}*/>
-                    <div className='Titles'>
-                        <div className='taskName'>
-                            <h6 className='Taskt'>Task:</h6>
-                            <h6 className='Taskn'>{task.task_name}</h6>
+                    <div className='ndiv'>
+                        <div className='Titles'>
+                            <div className='taskName'>
+                                <h6 className='Taskt'>Task:</h6>
+                                <h6 className='Taskn'>{task.task_name}</h6>
+                            </div>
+                            <div className='catName'>
+                                <h6 className='Catt'>Category:</h6>
+                                <h6 className='Catn'>{task.category}</h6>
+                            </div>
                         </div>
-                        <div className='catName'>
-                            <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>{task.category}</h6>
+                        <div className='Divider'></div>
+                        <div className='Desc'>
+                            <h6 className='DescT'>Desciption</h6>
+                            <p className='Descript'>{task.description}</p>
                         </div>
-                    </div>
-                    <div className='Divider'></div>
-                    <div className='Desc'>
-                        <h6 className='DescT'>Desciption</h6>
-                        <p className='Descript'>{task.description}</p>
                     </div>
                     <p className='solvebutton' onClick={close}>Solve Task</p>
                 </div>
