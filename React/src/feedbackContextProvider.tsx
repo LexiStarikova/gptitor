@@ -8,7 +8,7 @@ import { Task } from './models/task';
 const FeedbackContextProvider = ({ children }) => {
   
   const [feedback, setFeedback] = useState('');
-  const [criteria, setCriteria ] = useState(new Metrics(0.0, 0.0, 0.0, 0.0))
+  const [criteria, setCriteria ] = useState(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""))
   const [task, setTask] = useState(new Task(1, "", "", ""));
   return (
     <FeedbackContext.Provider value={{ feedback, setFeedback, 

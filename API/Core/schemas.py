@@ -106,15 +106,18 @@ class EntireResponse(BaseModel):
     comment: str = Field(default="",
                          examples=["Example comment"],
                          max_length=2048)
-    metrics: Dict[str, Any] = Field(default={"criterion_1": 0.0,
-                                             "criterion_1": 0.0,
-                                             "criterion_3": 0.0,
-                                             "criterion_4": 0.0},
-                                    examples=[{
-                                            "criterion_1": 5,
-                                            "criterion_2": 4.5,
-                                            "criterion_3": 3.2,
-                                            "criterion_4": 0.0}])
+    metrics: Dict[str, Any] = Field(default={"criterion_1":
+                                             {"score": 0.0,
+                                              "comment": "Example comment"},
+                                             "criterion_2":
+                                             {"score": 0.0,
+                                              "comment": "Example comment"},
+                                             "criterion_3":
+                                             {"score": 0.0,
+                                              "comment": "Example comment"},
+                                             "criterion_4":
+                                             {"score": 0.0,
+                                              "comment": "Example comment"}})
 
 
 class Feedback(BaseModel):
@@ -125,17 +128,19 @@ class Feedback(BaseModel):
                          max_length=2048)
     metrics: Dict[str, Any] = Field(
         default={
-            "criterion_1": 0.5,
-            "criterion_2": 0.0,
-            "criterion_3": 0.0,
-            "criterion_4": 0.0
-        },
-        examples=[{
-            "criterion_1": 5,
-            "criterion_2": 4.5,
-            "criterion_3": 3.2,
-            "criterion_4": 0.0
-        }])
+            "criterion_1":
+            {"score": 0.0,
+            "comment": "Example comment"},
+            "criterion_2":
+            {"score": 0.0,
+            "comment": "Example comment"},
+            "criterion_3":
+            {"score": 0.0,
+            "comment": "Example comment"},
+            "criterion_4":
+            {"score": 0.0,
+            "comment": "Example comment"}}
+    )
 
 
 class Message(BaseModel):

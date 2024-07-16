@@ -162,13 +162,19 @@ const App: React.FC = () => {
       const data_2 = await response_2.json();
 
       setFeedback(data_2.comment);
-      setCriteria(new Metrics(data_2.metrics.criterion_1,
-        data_2.metrics.criterion_2,
-        data_2.metrics.criterion_3,
-        data_2.metrics.criterion_4));
+      setCriteria(new Metrics(
+        data_2.metrics.criterion_1.score,
+        data_2.metrics.criterion_1.comment,
+        data_2.metrics.criterion_2.score,
+        data_2.metrics.criterion_2.comment,
+        data_2.metrics.criterion_3.score,
+        data_2.metrics.criterion_3.comment,
+        data_2.metrics.criterion_4.score,
+        data_2.metrics.criterion_4.comment
+      ));
     } else {
       setFeedback('');
-      setCriteria(new Metrics(0, 0, 0, 0));
+      setCriteria(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""));
     }
   };
 

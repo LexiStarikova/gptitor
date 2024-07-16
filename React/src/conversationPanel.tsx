@@ -206,7 +206,16 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             });
             setResponses(prevResponses => [...prevResponses, { id: data.response_id, text: data.response_text }]);
             setFeedback(data.comment);
-            setCriteria(new Metrics(data.metrics.criterion_1, data.metrics.criterion_2, data.metrics.criterion_3, data.metrics.criterion_4));
+            setCriteria(new Metrics(
+                data.metrics.criterion_1.score,
+                data.metrics.criterion_1.comment,
+                data.metrics.criterion_2.score,
+                data.metrics.criterion_2.comment,
+                data.metrics.criterion_3.score,
+                data.metrics.criterion_3.comment,
+                data.metrics.criterion_4.score,
+                data.metrics.criterion_4.comment
+            ));
             setLoading(false);
             setIsSended(true);
 
@@ -229,10 +238,16 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
         });
         const data = await response.json();
         setFeedback(data.comment);
-        setCriteria(new Metrics(data.metrics.criterion_1,
-            data.metrics.criterion_2,
-            data.metrics.criterion_3,
-            data.metrics.criterion_4));
+        setCriteria(new Metrics(
+            data.metrics.criterion_1.score,
+            data.metrics.criterion_1.comment,
+            data.metrics.criterion_2.score,
+            data.metrics.criterion_2.comment,
+            data.metrics.criterion_3.score,
+            data.metrics.criterion_3.comment,
+            data.metrics.criterion_4.score,
+            data.metrics.criterion_4.comment
+        ));
     };
 
     return (

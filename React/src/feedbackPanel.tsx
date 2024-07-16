@@ -70,7 +70,7 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
     };
 
     const resetScore = () => {
-        setCriteria(new Metrics(0.0, 0.0, 0.0, 0.0));
+        setCriteria(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""));
     };
 
     const toggleDescription = () => {

@@ -123,7 +123,6 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
     column-gap: 10px;
 }
 
@@ -385,14 +384,40 @@
     margin-top: 0.5em;
 }
 
+.parent-container {
+    position: relative;
+    /* Adjust this to fit your layout */
+}
+
 .criterion-details {
+    position: absolute;
+    top: 5em;
+    left: 0;
+    right: 0;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
     opacity: 0;
+    z-index: 10;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    padding-top: 0em;
+    border-radius: 0px 0px 10px 10px;
 }
 
 .criterion-details.expanded {
     max-height: 6.25em;
     opacity: 1;
+}
+
+.pdetails {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 14px;
+}
+
+.criteriaT {
+    font-size: 15px;
 }
