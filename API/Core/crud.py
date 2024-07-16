@@ -29,6 +29,9 @@ async def rename_conversation(db: Session,
             .filter_by(conversation_id=conversation_id)
             .first()
         )
+        if not message:
+            raise HTTPException(status_code=404,
+                            detail=f"Messages in conversation with ID {conversation_id} not found.")
         generated_title = await generate_title(query=message.content,
                                                llm_id=1)
         conversation.title = generated_title
