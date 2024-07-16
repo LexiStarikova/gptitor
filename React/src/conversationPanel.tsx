@@ -30,11 +30,12 @@ interface ConversationPanelProps {
     selectedLLM: number | null;
     setSelectedLLM: (llmId: number | null) => void;
     skipEffect: MutableRefObject<boolean>;
+    renameConversation: (conversation_id: number, importText: string) => void;
 }
 
 
 export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, createConversation, isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id, selectedLLM,
-    setSelectedLLM, skipEffect }) => {
+    setSelectedLLM, skipEffect, renameConversation }) => {
     const [text, setText] = useState<string>('');
     const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
     const [loading, setLoading] = useState<boolean>(false);
@@ -170,6 +171,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             setIsSended(false);
             await createConversation();
         }
+
         const newRequest = { id: 0, text: text };
         setRequests(prevRequests => [...prevRequests, newRequest]);
 
@@ -226,6 +228,24 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
         } catch (error) {
             console.error('There was a problem sending the message:', error);
             setLoading(false);
+        }
+
+        if (requests.length === 0){
+            console.log("yeeee");
+            const response = await fetch(`${API_URL}/conversations/${conversation_id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: "ашгршкгркг",
+                    generate: true,
+                })
+            });
+            const data = await response.json();
+            console.log(data.detail);
+            console.log(data.new_title);
+            renameConversation(conversation_id, data.new_title);
         }
     };
     const handleClickFeedback = (query_id: number) => async (event: React.MouseEvent<HTMLDivElement>) => {

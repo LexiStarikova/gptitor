@@ -20,10 +20,11 @@ interface StudyModeProps {
     selectedLLM: number | null;
     setSelectedLLM: (llmId: number | null) => void;
     skipEffect: MutableRefObject<boolean>;
+    renameConversation: (conversation_id: number, importText: string) => void;
 }
 
 
-const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id, selectedLLM, setSelectedLLM, skipEffect }) => {
+const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id, selectedLLM, setSelectedLLM, skipEffect, renameConversation }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [showDescription, setShowDescription] = useState(false);
@@ -77,6 +78,7 @@ const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requ
                     selectedLLM={selectedLLM} 
                     setSelectedLLM={setSelectedLLM}
                     skipEffect={skipEffect}
+                    renameConversation={renameConversation}
                 />
                 <FeedbackPanel isOpenS={isSidebarOpen} close={toggleSidebar} isOpenD={showDescription} closeD={toggleDescription}></FeedbackPanel>
             </div>

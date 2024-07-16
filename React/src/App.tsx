@@ -52,7 +52,7 @@ const App: React.FC = () => {
       data.map(item => ({
         display_id: item.conversation_id,
         stored_id: item.conversation_id,
-        text: `Query ${item.conversation_id}`,
+        text: item.title,
         date: addHoursToDate(new Date(item.created_at.replace(" ", "T")), 3),
         llm_id: item.llm_id,
       })));
@@ -87,6 +87,13 @@ const App: React.FC = () => {
     };
     fetchDialogs();
   }, []);
+
+  const renameConversation = (conversationId : number, importText : string) => {
+      const updatedQueries = queries.map(item =>
+          item.stored_id === conversationId ? { ...item, text: importText } : item
+      );
+      setQueries(updatedQueries);
+  }
 
   const CreateConversation = async () => {
     if (selectedLLM === null) {
@@ -237,6 +244,7 @@ const App: React.FC = () => {
             selectedLLM={selectedLLM}
             setSelectedLLM={setSelectedLLM}
             skipEffect={skipEffect}
+            renameConversation={renameConversation}
           />} />
           <Route path='/profile' element={<Profile />} />
         </Routes>
