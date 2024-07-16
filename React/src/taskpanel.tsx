@@ -103,7 +103,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                         </div>
                         <div className='catName'>
                             <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>{selectedCategory}</h6>
+                            <h6 className='Catn'>{selectedTask.category}</h6>
                         </div>
                     </div>
                     <div className='Divider'></div>
