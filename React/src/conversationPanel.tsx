@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext, MutableRefObject } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import './conversationPanel.css';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
@@ -29,12 +29,11 @@ interface ConversationPanelProps {
 
     selectedLLM: number | null;
     setSelectedLLM: (llmId: number | null) => void;
-    skipEffect: MutableRefObject<boolean>;
 }
 
 
 export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, createConversation, isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id, selectedLLM,
-    setSelectedLLM, skipEffect}) => {
+    setSelectedLLM, }) => {
     const [text, setText] = useState<string>('');
     const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
     const [loading, setLoading] = useState<boolean>(false);
@@ -56,7 +55,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             const maxHeight = parseInt(window.getComputedStyle(inputRef.current).maxHeight);
             const bottomOffset = Math.min(scrollHeight, maxHeight) - 14 * parseFloat(window.getComputedStyle(inputRef.current).borderWidth);
 
-            inputRef.current.style.bottom = `${bottomOffset}px`;
+            inputRef.current.style.bottom = `${bottomOffset-40}px`;
         }
     };
 
@@ -98,7 +97,6 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
 
 
     useEffect(() => {
-        console.log("LLM was selected to " + selectedLLM + ". skip: " + skipEffect.current + ", length: " + 2*requests.length);
         if (selectedLLM !== previousLLM.current && selectedLLM !== null) {
             previousLLM.current = selectedLLM;
 
@@ -110,9 +108,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                 }
             };
 
-            if (!skipEffect.current){
-                createAndSetConversation();
-            }
+            createAndSetConversation();
         }
     }, [selectedLLM, createConversation]);
 

@@ -31,8 +31,7 @@ const App: React.FC = () => {
   const [responses, setResponses] = useState<MessageSimplifyed[]>([]);
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
   const hasMounted = useRef(false);
-  const [selectedLLM, setSelectedLLM] = useState<number | null>(null);
-  const skipEffect = useRef(false);
+  const [selectedLLM, setSelectedLLM] = useState<number | null>(1);
 
   const addHoursToDate = (date: Date, hours: number): Date => {
     const newDate = new Date(date.getTime());
@@ -121,27 +120,13 @@ const App: React.FC = () => {
   };
 
   const openConversation = async (stored_id: number) => {
-
-    skipEffect.current = true;
-
-    const llm_response = await fetch(`${API_URL}/conversations/${stored_id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
-    const llm_data = await llm_response.json();
-    setSelectedLLM(llm_data.llm_id);
-    console.log(llm_data.llm_id);
-
-    console.log('Conversation ' + stored_id + ' is opening... ');
+    console.log('Conversation is opening...');
     const response = await fetch(`${API_URL}/conversations/${stored_id}/messages`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       }
     });
-
     const data = await response.json();
     setConvId(stored_id);
     console.log(`Number of messages: ${data.length}`);
@@ -191,7 +176,6 @@ const App: React.FC = () => {
       setFeedback('');
       setCriteria(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""));
     }
-    skipEffect.current = false;
   };
 
   useEffect(() => {
@@ -210,7 +194,9 @@ const App: React.FC = () => {
     console.log(response.json());
   };
 
+
   return (
+
     <SendContextProvider>
       <Router basename='/gptitor'>
         <NavBar />
@@ -236,7 +222,6 @@ const App: React.FC = () => {
             conversation_id={convId}
             selectedLLM={selectedLLM}
             setSelectedLLM={setSelectedLLM}
-            skipEffect={skipEffect}
           />} />
           <Route path='/profile' element={<Profile />} />
         </Routes>
