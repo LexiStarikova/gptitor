@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import FeedbackContextProvider from './feedbackContextProvider';
-
+import { TaskProvider } from './taskContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <FeedbackContextProvider>
-      <App />
-    </FeedbackContextProvider>
+    <TaskProvider>
+      <FeedbackContextProvider>
+        <App />
+      </FeedbackContextProvider>
+    </TaskProvider>
   </React.StrictMode>,
 )

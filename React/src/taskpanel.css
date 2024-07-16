@@ -14,12 +14,13 @@
     /* width: 100%; */
     display: flex;
     flex-direction: row;
-
+    font-family: "Montserrat", sans-serif;
 }
 
 
 .taskcontainer {
     position: relative;
+    justify-content: space-between;
     /* width: fit-content; */
     /* block-size: fit-content; */
 
@@ -33,6 +34,96 @@
     flex-direction: column;
     background: rgba(0, 96, 174, 0.9);
     border-radius: 0px 0px 0px 20px;
+    color: #fff;
+}
+
+.taskcontainer-upper {
+    margin: 1vw;
+}
+
+.dropdown-container{
+    margin: 0 0 3vw 0;
+    overflow: hidden;
+}
+
+.dropdown-container h4{
+    margin: 0;
+}
+
+.dropdown-container select{
+    width: 100%;
+    max-width: 100%;
+    background-color: #2287DA;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 4px;
+    font-size: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.dropdown-container select::-webkit-scrollbar{
+    width: 20px;
+}
+
+.dropdown-container select::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 10px 10px #2287DA;
+    border: solid 20px transparent;
+}
+
+.dropdown-container select::-webkit-scrollbar-thumb{
+    box-shadow: inset 0 0 10px 10px #0071CE;
+    border: solid 6px transparent;
+    border-radius: 10px;
+}
+
+.dropdown-container select option:hover{
+    background-color: #0071CE;
+    color: #fff;
+}
+
+.dropdown-container select:focus{
+    outline: none;
+}
+
+.taskcontainer-bottom{
+    overflow: hidden;
+    margin: 1vw 1vw 1vw 1vw;
+}
+
+.taskcontainer-bottom h4{
+    margin: 0 0 1vw 0;
+}
+
+.taskcontainer-bottom ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.taskcontainer-bottom ul li {
+    margin: 10px 0; /* Optional *: Add some spacing between list items for better readability */
+}
+
+.taskcontainer-bottom ul li a {
+    color: white; /* Make link text white in any state */
+    text-decoration: none; /* Remove default underline */
+    font-size: 18px; /* Make text bigger */
+    cursor: pointer;
+}
+
+.tutorial-content {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+}
+
+.select-content {
+    width: 80%;
+    height: 80%;
+    margin: auto;
 }
 
 .Tasks {
@@ -41,6 +132,7 @@
     display: flex;
     flex-direction: column;
 }
+
 
 .tasktitle {
     position: relative;

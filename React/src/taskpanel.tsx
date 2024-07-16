@@ -1,99 +1,164 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './taskpanel.css';
-import { FeedbackContext } from './feedbackContext';
 import { Task } from './models/task';
 import API_URL from './config';
+import { useTaskContext } from './taskContext';
 
 interface TaskPanelProps {
     isOpenS: boolean;
     close: () => void;
 }
 
+interface Category {
+    category_id: number;
+    category_name: string;
+    category_description: string;
+}
+
+
 const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
 
-    const { task, setTask } = useContext(FeedbackContext);
-    const [classname, setClassname] = useState(Number);
+    const { selectedCategory, setSelectedCategory, selectedTask, setSelectedTask } = useTaskContext();
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [tasks, setTasks] = useState<Task[]>([]);
+    const [selectedTutorial, setSelectedTutorial] = useState<string | null>(null);
 
-    const handleTaskClick = (taskId: number) => {
-        changeButtonStatus(taskId);
-        fetch(`${API_URL}/tasks/${taskId}`)
+    // Get array of all categories and put them into 'categories'
+    useEffect(() => {
+        fetch(`${API_URL}/categories`)
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setTask(new Task(data.task_id, data.task_name, data.task_category, data.task_description));
+            .then(data => setCategories(data))
+            .catch(error => console.error('Error fetching categories:', error));
+    }, []);
+
+    // Get array of tasks by selected category and put them into 'tasks'
+    useEffect(() => {
+        if (selectedCategory === 'All') {
+            fetch(`${API_URL}/tasks`)
+                .then(response => response.json())
+                .then(data => setTasks(data))
+                .catch(error => console.error('Error fetching tasks:', error));
+        } else if (selectedCategory) {
+            let id = 0;
+            categories.some((category) => {
+                if (category.category_name == selectedCategory) {
+                    id = category.category_id
+                    return
+                }
             })
-            .catch(error => {
-                console.error('Error fetching task:', error);
-            });
+
+            console.log(id);
+
+            fetch(`${API_URL}/categories/${id}`)
+                .then(response => response.json())
+                .then(data => setTasks(data))
+                .catch(error => console.error('Error fetching tasks:', error));
+            console.log(tasks);
+            setSelectedTask(null)
+            setSelectedTutorial(null)
+        }
+    }, [selectedCategory]);
+
+    const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(event.target.value);
     };
 
-    const changeButtonStatus = (taskId: number) => {
-        setClassname(taskId);
+    const handleTaskChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const taskId = Number(event.target.value);
+        if (taskId) {
+            fetch(`${API_URL}/tasks/${taskId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    setSelectedTask(new Task(data.task_id, data.task_name, data.task_category, data.task_description));
+                })
+                .catch(error => console.error('Error fetching task:', error));
+        }
+    };
+
+    const handleTutorialClick = (tutorial: string) => {
+        setSelectedTutorial(tutorial);
+        setSelectedCategory('All');
+        setSelectedTask(null);
+
+        console.log(selectedTutorial);
+        console.log(selectedCategory);
+        console.log(selectedTask?.task_id);
+    };
+
+    const renderTaskDescription = () => {
+        if (selectedTutorial) {
+            return (
+                <div className='tutorial-content'>
+                    {selectedTutorial}
+                </div>
+            );
+        } else if (selectedCategory && selectedTask && selectedTask.task_id > 0) {
+            return (
+                <div className='ndiv'>
+                    <div className='Titles'>
+                        <div className='taskName'>
+                            <h6 className='Taskt'>Task:</h6>
+                            <h6 className='Taskn'>{selectedTask.task_name}</h6>
+                        </div>
+                        <div className='catName'>
+                            <h6 className='Catt'>Category:</h6>
+                            <h6 className='Catn'>{selectedCategory}</h6>
+                        </div>
+                    </div>
+                    <div className='Divider'></div>
+                    <div className='Desc'>
+                        <h6 className='DescT'>Description</h6>
+                        <p className='Descript'>{selectedTask.description}</p>
+                    </div>
+                </div>
+            );
+        } else if (selectedCategory && !selectedTask) {
+            return <h5 className='select-content'>Select a task</h5>;
+        } else {
+            return <h5 className='select-content'>Select a category and task</h5>;
+        }
     };
 
     return (
         <div className={`panel${isOpenS ? 'open' : ''}`}>
             <div className='panelcontainer'>
                 <div className='taskcontainer'>
-                    <div className='Tasks'>
-                        <div className='tasktitle'>
-                            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.2219 14.4888L9.51081 21.5999L18.7553 11.6443L13.7775 8.7999L14.4886 2.3999L5.24414 12.3555L10.2219 14.4888Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            <h6>Suggested</h6>
+                    {/* Left menu */}
+                    <div className="taskcontainer-upper">
+                        <div className="dropdown-container">
+                            <h4>Category</h4>
+                            <label htmlFor="category-selector">Select Category:</label>
+                            <select id="category-selector" value={selectedCategory} onChange={handleCategoryChange}>
+                                <option value="All">All</option>
+                                {categories.map(category => (
+                                    <option key={category.category_id} value={category.category_name}>{category.category_name}</option>
+                                ))}
+                            </select>
                         </div>
+                        <div className="dropdown-container">
+                            <h4>Tasks</h4>
+                            <label htmlFor="task-selector">Select Task:</label>
+                            <select id="task-selector" value={selectedTask?.task_id || ''} onChange={handleTaskChange} disabled={!selectedCategory}>
+                                <option value='' disabled={!!selectedTask}>--Select Task--</option>
+                                {tasks.map(task => (
+                                    <option key={task.task_id} value={task.task_id}>Task {task.task_id}: {task.task_name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="taskcontainer-bottom">
+                        <h4>Tutorial Links</h4>
                         <ul>
-                            <li onClick={() => handleTaskClick(1)}><p className={`${classname==1 ? 'clicked' : 'notclicked'}`}>Task 1</p></li>
-                            <li onClick={() => handleTaskClick(2)}><p className={`${classname==2 ? 'clicked' : 'notclicked'}`}>Task 2</p></li>
-                            <li onClick={() => handleTaskClick(3)}><p className={`${classname==3 ? 'clicked' : 'notclicked'}`}>Task 3</p></li>
+                            <li><a onClick={() => handleTutorialClick('Tutorial 1 content')}>Tutorial 1</a></li>
+                            <li><a onClick={() => handleTutorialClick('Tutorial 2 content')}>Tutorial 2</a></li>
+                            <li><a onClick={() => handleTutorialClick('Tutorial 3 content')}>Tutorial 3</a></li>
                         </ul>
                     </div>
-                    <div className='Categories'>
-                        <div className='CategoriesTitle'>
-                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13.2801 1.3418L14.9844 5.93633L19.59 7.63647L14.9844 9.3366L13.2801 13.9311L11.5759 9.3366L6.97018 7.63647L11.5759 5.93633L13.2801 1.3418Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" />
-                                <path d="M5.3927 11.8329L6.88145 14.0196L9.07349 15.5048L6.88145 16.99L5.3927 19.1767L3.90395 16.99L1.71191 15.5048L3.90395 14.0196L5.3927 11.8329Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" />
-                            </svg>
-                            <h6>Topics</h6>
-                        </div>
-                        <div>
-                            <ul>
-                                <li onClick={() => handleTaskClick(1)}><p className={`${classname==1 ? 'clickedCat' : 'notclickedCat'}`}>Math</p></li>
-                                <li onClick={() => handleTaskClick(2)}><p className={`${classname==2 ? 'clickedCat' : 'notclickedCat'}`}>Physics</p></li>
-                                <li onClick={() => handleTaskClick(3)}><p className={`${classname==3 ? 'clickedCat' : 'notclickedCat'}`}>Computer</p></li>
-                                <li onClick={() => handleTaskClick(4)}><p className={`${classname==4 ? 'clickedCat' : 'notclickedCat'}`}>Entertainment</p></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <ul>
-                                <li>
-                                    {/* <svg className='selectedtask' width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.44211 4.17079L10.3246 8.28494L6.21044 12.1674" stroke="white" stroke-width="1.5"/>
-                                    </svg> */}
-                                    <p></p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-                <div className='taskDes' /*onClick={close}*/>
-                    <div className='ndiv'>
-                        <div className='Titles'>
-                            <div className='taskName'>
-                                <h6 className='Taskt'>Task:</h6>
-                                <h6 className='Taskn'>{task.task_name}</h6>
-                            </div>
-                            <div className='catName'>
-                                <h6 className='Catt'>Category:</h6>
-                                <h6 className='Catn'>{task.category}</h6>
-                            </div>
-                        </div>
-                        <div className='Divider'></div>
-                        <div className='Desc'>
-                            <h6 className='DescT'>Desciption</h6>
-                            <p className='Descript'>{task.description}</p>
-                        </div>
-                    </div>
+                {/* Text container */}
+                <div className='taskDes'>
+                    {renderTaskDescription()}
                     <p className='solvebutton' onClick={close}>Solve Task</p>
                 </div>
             </div>
@@ -103,4 +168,3 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
 };
 
 export default TaskPanel;
-

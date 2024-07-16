@@ -1,9 +1,6 @@
 import './taskdescription.css';
-import React, { useContext } from 'react';
 import './taskpanel.css';
-import { FeedbackContext } from './feedbackContext';
-import { Task } from './models/task';
-import API_URL from './config';
+import { useTaskContext } from './taskContext';
 
 interface TaskDescProps {
     isOpenD: boolean;
@@ -11,20 +8,9 @@ interface TaskDescProps {
     closeD: () => void;
 }
 const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
-    const { task, setTask } = useContext(FeedbackContext);
-    
 
-    const handleTaskClick = (taskId: number) => {
-        fetch(`${API_URL}/tasks/${taskId}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setTask(new Task(data.task_id, data.task_name, data.task_category, data.task_description));
-            })
-            .catch(error => {
-                console.error('Error fetching task:', error);
-            });
-    };
+    const { selectedTask } = useTaskContext();
+    
     return (
         <div className={`DescCont${isOpenD && !isOpenS ? '' : 'hd'}`}>
             <div className='TaskDline'>
@@ -41,11 +27,11 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
                     <div className='Titlesdes'>
                         <div className='taskName'>
                             <h6 className='Taskt'>Task:</h6>
-                            <h6 className='Taskn'>{task.task_name}</h6>
+                            <h6 className='Taskn'>{selectedTask ? selectedTask.task_name : 'Choose a task'}</h6>
                         </div>
                         <div className='catName'>
                             <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>{task.category}</h6>
+                            <h6 className='Catn'>{selectedTask ? selectedTask.category : 'Choose a category'}</h6>
                         </div>
                     </div>
                     
@@ -56,7 +42,7 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
                     
                     <div className='DescD'>
                         <h6 className='DescT'>Desciption</h6>
-                        <p className='Descript'>{task.description}</p>
+                        <p className='Descript'>{selectedTask ? selectedTask.description: 'Choose a task'}</p>
                     </div>
                 </div>
             </div>
