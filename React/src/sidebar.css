@@ -266,14 +266,10 @@
     cursor: pointer;
 }
 
-
-
 .likeicon:hover path {
     fill: #FF4033;
     stroke: #FF4033;
 }
-
-
 
 .likeicon.liked path {
     fill: #FF4033;
@@ -295,6 +291,19 @@
 }
 
 .favicon:hover path {
+    stroke: #FFFFFF;
+}
+
+.favicon.fav-clicked {
+    background-color: #9747FF;
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
+    transition: 0.8s;
+    cursor: pointer;
+}
+
+.favicon.fav-clicked path {
     stroke: #FFFFFF;
 }
 

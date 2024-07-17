@@ -13,7 +13,7 @@ interface MessageSimplifyed {
 }
 
 interface ConversationPanelProps {
-    queries: { display_id: number; stored_id: number; text: string; date: Date }[];
+    queries: { display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[];
     createConversation: () => Promise<void>;
     responses: MessageSimplifyed[];
     setResponses: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;

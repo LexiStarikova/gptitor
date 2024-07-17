@@ -26,13 +26,16 @@ const App: React.FC = () => {
 
   const { setFeedback, criteria, setCriteria } = useContext(FeedbackContext);
   const [convId, setConvId] = useState(1);
-  const [queries, setQueries] = useState<{ display_id: number; stored_id: number; text: string; date: Date }[]>([]);
+  const [queries, setQueries] = useState<{ display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[]>([]);
   const [nextId, setNextId] = useState(1);
   const [responses, setResponses] = useState<MessageSimplifyed[]>([]);
   const [requests, setRequests] = useState<MessageSimplifyed[]>([]);
   const hasMounted = useRef(false);
   const [selectedLLM, setSelectedLLM] = useState<number | null>(null);
   const skipEffect = useRef(false);
+  const isLiked = useRef(false);
+  const needInAddToFavList = useRef(false);
+  const [likedQueries, setLikedQueries] = useState<{ display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[]>([]);
 
   const addHoursToDate = (date: Date, hours: number): Date => {
     const newDate = new Date(date.getTime());
@@ -47,7 +50,34 @@ const App: React.FC = () => {
     }
   }, [queries]);
 
+  const toMark = (stored_id: number) => {
+    const updatedQueries = queries.map(item =>
+        item.stored_id === stored_id ? { ...item, isMarked : !item.isMarked } : item
+    );
+    needInAddToFavList.current = true;
+    setQueries(updatedQueries);
+    isLiked.current = true;
+  };
+
+  useEffect(() => {
+    if (isLiked.current){
+      console.log("убемубе");
+      const savedMarks = queries.reduce<Record<number, boolean>>((acc, item) => {
+        acc[item.stored_id] = item.isMarked || false;
+        return acc;
+      }, {});
+      localStorage.setItem('isMarked', JSON.stringify(savedMarks));
+      isLiked.current = false;
+    }
+  }, [queries]);
+
   const addQueries = (data: any[]) => {
+    const savedMarksJson = localStorage.getItem('isMarked');
+    const savedMarks = savedMarksJson ? JSON.parse(savedMarksJson) : {};
+    if (savedMarksJson){
+      console.log("it's good");
+    }
+    needInAddToFavList.current = true;
     setQueries(
       data.map(item => ({
         display_id: item.conversation_id,
@@ -55,11 +85,19 @@ const App: React.FC = () => {
         text: item.title,
         date: addHoursToDate(new Date(item.created_at.replace(" ", "T")), 3),
         llm_id: item.llm_id,
-      })));
-
+        isMarked: savedMarks[item.conversation_id],
+    })));
     const highestId = Math.max(...data.map(item => item.conversation_id));
     setNextId(highestId + 1);
   };
+
+  useEffect(() => {
+    if (needInAddToFavList.current){
+      const filteredQueries = queries.filter(query => query.isMarked);
+      setLikedQueries(filteredQueries);
+      needInAddToFavList.current = false;
+    }
+  }, [queries]);  
 
   useEffect(() => {
     if (hasMounted.current) return;
@@ -118,7 +156,7 @@ const App: React.FC = () => {
       text: `Query ${nextId}`,
       date: new Date(data.created_at.replace(' ', 'T')),
       llm_id: selectedLLM,
-
+      isMarked: false,
     };
 
     setQueries(prevQueries => [...prevQueries, newQuery]);
@@ -229,6 +267,9 @@ const App: React.FC = () => {
             requests={requests}
             responses={responses}
             queries={queries}
+            toMark={toMark}
+            isLiked={isLiked}
+            likedQueries={likedQueries}
           />
         </div>
         <Routes>
