@@ -10,7 +10,7 @@ interface MessageSimplifyed {
 }
 
 interface StudyModeProps {
-    queries: { display_id: number; stored_id: number; text: string; date: Date }[];
+    queries: { display_id: number; stored_id: number; text: string; date: Date ; isMarked: boolean}[];
     createConversation: () => Promise<void>;
     requests: MessageSimplifyed[];
     setRequests: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;

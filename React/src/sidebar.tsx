@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, MouseEvent, SetStateAction, Dispatch, useContext } from 'react';
+import { useState, useEffect, useRef, MouseEvent, SetStateAction, Dispatch, useContext, MutableRefObject } from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar.css';
 import QueryComponent from './queryComponent';
@@ -15,7 +15,10 @@ interface SidebarProps {
     deleteConversation: (display_id: number, stored_id: number) => void;
     requests: MessageSimplifyed[];
     responses: MessageSimplifyed[];
-    queries: { display_id: number; stored_id: number; text: string; date: Date }[]
+    queries: { display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[];
+    toMark: (stored_id: number) => void;
+    isLiked: MutableRefObject<boolean>;
+    likedQueries: { display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[];
 }
 
 
@@ -25,7 +28,10 @@ const Sidebar: React.FC<SidebarProps> = ({
     deleteConversation,
     requests,
     responses,
-    queries
+    queries,
+    toMark,
+    isLiked,
+    likedQueries
 }) => {
     const [selectedQueryId, setSelectedQueryId] = useState<number | null>(null);
     const handleQuerySelection = (stored_id: number) => {
@@ -35,13 +41,14 @@ const Sidebar: React.FC<SidebarProps> = ({
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const { isSended, setIsSended } = useContext(SendContext);
     const sidebarRef = useRef<HTMLDivElement>(null);
+    const [isFavSelected, setIsFavSelected] = useState<boolean>(false);
 
     const toggleSidebar = () => {
         setSidebarVisible(prev => !prev);
     };
 
     useEffect(() => {
-        if (queries.length > 0 && isSended) {
+        if (queries.length > 0 && isSended && !isLiked.current) {
             setSelectedQueryId(queries[queries.length - 1].stored_id);
             openConversation(queries[queries.length - 1].stored_id);
         }
@@ -70,8 +77,17 @@ const Sidebar: React.FC<SidebarProps> = ({
         return dialogDate.getTime() !== today.getTime();
     });
 
+    const toggleFav = () => {
+        setIsFavSelected(!isFavSelected);
+    };
+
+    const getFavClass = () => {
+        return isFavSelected ? 'fav-clicked' : '';
+    };
+
+    const sortedLikedDialogues = likedQueries.sort((a, b) => a.date.getTime() - b.date.getTime());
     const sortedDialogsToday = dialogsToday.sort((a, b) => a.date.getTime() - b.date.getTime());
-    const sortedDialogsPrevious = dialogsPrevious.sort((a, b) => a.date.getTime() - b.date.getTime());
+    const sortedDialogsPrevious = dialogsPrevious.sort((a, b) => a.date.getDate() - b.date.getDate());;
 
     return (
         <div>
@@ -111,33 +127,76 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 </svg>
                                 <p>Latest</p>
                             </div>
-                            <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg" className='favicon'>
+                            <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg" className={`favicon ${getFavClass()}`} onClick={toggleFav} >
                                 <path d="M21.33 11.8242H8.67004M16.875 14.6395C15.319 14.6395 13.125 14.6395 13.125 14.6395M21.375 12.2008V19.8008C21.375 20.6818 20.6615 21.3961 19.7812 21.3961H10.2188C9.33855 21.3961 8.625 20.6818 8.625 19.8008V12.2008C8.625 11.9531 8.68261 11.7089 8.79326 11.4873L9.88837 9.29495C10.0909 8.8896 10.5047 8.63354 10.9575 8.63354H19.0425C19.4953 8.63354 19.9091 8.8896 20.1116 9.29495L21.2067 11.4873C21.3174 11.7089 21.375 11.9531 21.375 12.2008Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
                         <div className='querylist'>
-                            <div className='dialoguesToday'>
-                                {sortedDialogsToday.length > 0 && <p className='Date'>TODAY</p>}
-                            </div>
-                            <Link className='queryLink' to="/chatpage">
-                                <div className='queries'>
-                                    {sortedDialogsToday.map(query => (
-                                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
-                                            handleSelection={() => handleQuerySelection(query.stored_id)} />
+                            {isFavSelected ? (
+                                <div className='likedDialogues'>
+                                    <p className='Date'>Selected dialogues</p>
+                                    <p></p>
+                                    {sortedLikedDialogues.map(query => (
+                                        <QueryComponent
+                                            key={query.display_id}
+                                            display_id={query.display_id}
+                                            stored_id={query.stored_id}
+                                            queryText={query.text}
+                                            onDelete={deleteConversation}
+                                            onOpen={openConversation}
+                                            isSelected={selectedQueryId === query.stored_id}
+                                            handleSelection={() => handleQuerySelection(query.stored_id)}
+                                            toMark={toMark}
+                                            isMarked={query.isMarked}
+                                        />
                                     ))}
                                 </div>
-                            </Link>
-                            <div className='dialoguesBefore'>
-                                {sortedDialogsPrevious.length > 0 && <p className='Date'>BEFORE</p>}
-                            </div>
-                            <Link className='queryLink' to="/chatpage">
-                                <div className='queries'>
-                                    {sortedDialogsPrevious.map(query => (
-                                        <QueryComponent key={query.display_id} display_id={query.display_id} stored_id={query.stored_id} queryText={query.text} onDelete={deleteConversation} onOpen={openConversation} isSelected={selectedQueryId === query.stored_id}
-                                            handleSelection={() => handleQuerySelection(query.stored_id)} />
-                                    ))}
-                                </div>
-                            </Link>
+                            ) : (
+                                <>
+                                    <div className='dialoguesToday'>
+                                        {sortedDialogsToday.length > 0 && <p className='Date'>TODAY</p>}
+                                        <Link className='queryLink' to="/chatpage">
+                                            <div className='queries'>
+                                                {sortedDialogsToday.map(query => (
+                                                    <QueryComponent
+                                                        key={query.display_id}
+                                                        display_id={query.display_id}
+                                                        stored_id={query.stored_id}
+                                                        queryText={query.text}
+                                                        onDelete={deleteConversation}
+                                                        onOpen={openConversation}
+                                                        isSelected={selectedQueryId === query.stored_id}
+                                                        handleSelection={() => handleQuerySelection(query.stored_id)}
+                                                        toMark={toMark}
+                                                        isMarked={query.isMarked}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className='dialoguesBefore'>
+                                        {sortedDialogsPrevious.length > 0 && <p className='Date'>BEFORE</p>}
+                                        <Link className='queryLink' to="/chatpage">
+                                            <div className='queries'>
+                                                {sortedDialogsPrevious.map(query => (
+                                                    <QueryComponent
+                                                        key={query.display_id}
+                                                        display_id={query.display_id}
+                                                        stored_id={query.stored_id}
+                                                        queryText={query.text}
+                                                        onDelete={deleteConversation}
+                                                        onOpen={openConversation}
+                                                        isSelected={selectedQueryId === query.stored_id}
+                                                        handleSelection={() => handleQuerySelection(query.stored_id)}
+                                                        toMark={toMark}
+                                                        isMarked={query.isMarked}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
 
