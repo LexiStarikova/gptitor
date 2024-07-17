@@ -68,7 +68,7 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, 
           autoFocus
         />
       ) : (
-        <p className='queryname'>
+        <p className='queryname' onClick={() => onOpen(stored_id)}>
           {queryText}
         </p>
       )}
