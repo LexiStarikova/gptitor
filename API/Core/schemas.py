@@ -15,8 +15,8 @@ class Query(BaseModel):
     query_text: str = Field(default="",
                             examples=["Example query"],
                             max_length=2048)
-    task_id: int = Field(default=1,
-                         examples=[1])
+    task_id: int = Field(default=0,
+                         examples=[0])
 
 
 class ConversationTitle(BaseModel):

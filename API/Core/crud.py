@@ -195,7 +195,7 @@ async def send_query(db: Session,
         if not query.task_id:
             task = ""
         else:
-            task = (db.query(models.Task)
+            task = (db.query(models.Task.task_description)
                     .filter_by(task_id=query.task_id)
                     .first())
             if not task:
