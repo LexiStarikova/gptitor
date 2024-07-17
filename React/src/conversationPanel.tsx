@@ -7,6 +7,9 @@ import API_URL from './config';
 import { SendContext } from './sendContext';
 import Tooltip from './tooltip';
 import { useTaskContext } from './taskContext';
+import ReactMarkdown from 'react-markdown';
+// import Remarkable from 'remarkable';
+import remarkGfm from 'remark-gfm';
 
 interface MessageSimplifyed {
     id: number,
@@ -38,12 +41,12 @@ interface ConversationPanelProps {
 export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, createConversation, isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id, selectedLLM,
     setSelectedLLM, skipEffect, renameConversation }) => {
     const [text, setText] = useState<string>('');
-    const { selectedCategory, setSelectedCategory, selectedTask, setSelectedTask } = useTaskContext();
+    const { selectedTask } = useTaskContext();
     const { setFeedback, setCriteria } = useContext(FeedbackContext);
     const [loading, setLoading] = useState<boolean>(false);
-    const { isSended, setIsSended } = useContext(SendContext);
+    const { setIsSended } = useContext(SendContext);
     const previousLLM = useRef<number | null>(null);
-
+    
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         adjustTextareaHeight();
@@ -309,7 +312,20 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                                 </div>
                                                 <div className='respreacts'>
                                                     <div className='resbub'>
-                                                        <p className='restext to-copy'>{responses[index].text}</p>
+                                                        <p className='restext to-copy'>
+                                                        <ReactMarkdown
+                                                            className="markdown-body"
+                                                            remarkPlugins={[remarkGfm]}
+                                                            components={{
+                                                            h1: ({ node, ...props }) => <h1 style={{ color: '#7B61FF' }} {...props} />,
+                                                            code: ({ node, ...props }) => <code style={{ 
+                                                                color: '#7B61FF',
+                                                            }} {...props} />,
+                                                            a: ({ node, ...props }) => <a style={{ color: '#7B61FF' }} {...props} />,
+                                                            }}
+                                                        >
+                                                            {responses[index].text}
+                                                        </ReactMarkdown></p>
                                                         <div className='reactions'>
                                                             <div className='icon-container'>
                                                                 <div className='iconn'>
