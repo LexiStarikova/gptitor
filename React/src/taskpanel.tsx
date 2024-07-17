@@ -73,8 +73,13 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                     setSelectedTask(new Task(data.task_id, data.task_name, data.task_category, data.task_description));
                 })
                 .catch(error => console.error('Error fetching task:', error));
+            setSelectedTutorial(null);
         }
     };
+
+    console.log("Website loaded")
+    console.log("Selected category: "+selectedCategory)
+    console.log("Selected task: "+selectedTask?.task_id)
 
     const handleTutorialClick = (tutorial: string) => {
         setSelectedTutorial(tutorial);
@@ -95,28 +100,29 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
             );
         } else if (selectedCategory && selectedTask && selectedTask.task_id > 0) {
             return (
-                <div className='ndiv'>
-                    <div className='Titles'>
-                        <div className='taskName'>
-                            <h6 className='Taskt'>Task:</h6>
-                            <h6 className='Taskn'>{selectedTask.task_name}</h6>
+                <>
+                    <div className='ndiv'>
+                        <div className='Titles'>
+                            <div className='taskName'>
+                                <h6 className='Taskt'>Task:</h6>
+                                <h6 className='Taskn'>{selectedTask.task_name}</h6>
+                            </div>
+                            <div className='catName'>
+                                <h6 className='Catt'>Category:</h6>
+                                <h6 className='Catn'>{selectedTask.category}</h6>
+                            </div>
                         </div>
-                        <div className='catName'>
-                            <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>{selectedTask.category}</h6>
+                        <div className='Divider'></div>
+                        <div className='Desc'>
+                            <h6 className='DescT'>Description</h6>
+                            <p className='Descript'>{selectedTask.description}</p>
                         </div>
                     </div>
-                    <div className='Divider'></div>
-                    <div className='Desc'>
-                        <h6 className='DescT'>Description</h6>
-                        <p className='Descript'>{selectedTask.description}</p>
-                    </div>
-                </div>
+                    <p className='solvebutton' onClick={close}>Solve Task</p>
+                </>
             );
-        } else if (selectedCategory && !selectedTask) {
-            return <h5 className='select-content'>Select a task</h5>;
         } else {
-            return <h5 className='select-content'>Select a category and task</h5>;
+            return <h5 className='select-content'>Please, select a category or a task.</h5>;
         }
     };
 
@@ -159,7 +165,6 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                 {/* Text container */}
                 <div className='taskDes'>
                     {renderTaskDescription()}
-                    <p className='solvebutton' onClick={close}>Solve Task</p>
                 </div>
             </div>
         </div>
