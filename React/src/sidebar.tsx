@@ -20,6 +20,7 @@ interface SidebarProps {
     isLiked: MutableRefObject<boolean>;
     likedQueries: { display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[];
     renameConversation: (conversation_id: number, importText: string) => void;
+    isRenamed: MutableRefObject<boolean>;
 }
 
 
@@ -33,7 +34,8 @@ const Sidebar: React.FC<SidebarProps> = ({
     toMark,
     isLiked,
     likedQueries,
-    renameConversation
+    renameConversation,
+    isRenamed
 }) => {
     const [selectedQueryId, setSelectedQueryId] = useState<number | null>(null);
     const handleQuerySelection = (stored_id: number) => {
@@ -50,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
     useEffect(() => {
-        if (queries.length > 0 && isSended && !isLiked.current) {
+        if (queries.length > 0 && isSended && !isLiked.current && !isRenamed.current) {
             setSelectedQueryId(queries[queries.length - 1].stored_id);
             openConversation(queries[queries.length - 1].stored_id);
         }

@@ -24,7 +24,8 @@ interface StudyModeProps {
 }
 
 
-const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id, selectedLLM, setSelectedLLM, skipEffect, renameConversation }) => {
+const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id, 
+    selectedLLM, setSelectedLLM, skipEffect, renameConversation }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [showDescription, setShowDescription] = useState(false);

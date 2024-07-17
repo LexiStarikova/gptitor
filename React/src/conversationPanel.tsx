@@ -59,7 +59,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             const maxHeight = parseInt(window.getComputedStyle(inputRef.current).maxHeight);
             const bottomOffset = Math.min(scrollHeight, maxHeight) - 14 * parseFloat(window.getComputedStyle(inputRef.current).borderWidth);
 
-            inputRef.current.style.bottom = `${bottomOffset-40}px`;
+            inputRef.current.style.bottom = `${bottomOffset - 40}px`;
         }
     };
 
@@ -101,7 +101,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
 
 
     useEffect(() => {
-        console.log("LLM was selected to " + selectedLLM + ". skip: " + skipEffect.current + ", length: " + 2*requests.length);
+        console.log("LLM was selected to " + selectedLLM + ". skip: " + skipEffect.current + ", length: " + 2 * requests.length);
         if (selectedLLM !== previousLLM.current && selectedLLM !== null) {
             previousLLM.current = selectedLLM;
 
@@ -113,7 +113,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                 }
             };
 
-            if (!skipEffect.current){
+            if (!skipEffect.current) {
                 createAndSetConversation();
             }
         }
@@ -232,22 +232,26 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
             setLoading(false);
         }
 
-        if (requests.length === 0){
-            console.log("yeeee");
-            const response = await fetch(`${API_URL}/conversations/${conversation_id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    content: "ашгршкгркг",
-                    generate: true,
-                })
-            });
-            const data = await response.json();
-            console.log(data.detail);
-            console.log(data.new_title);
-            renameConversation(conversation_id, data.new_title);
+        if (requests.length === 0) {
+            const foundQuery = queries.find(query => query.stored_id === conversation_id);
+            const regex = /^Query \d+$/;
+            if (foundQuery?.text && regex.test(foundQuery?.text)) {
+                console.log("yeeee");
+                const response = await fetch(`${API_URL}/conversations/${conversation_id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        content: "ашгршкгркг",
+                        generate: true,
+                    })
+                });
+                const data = await response.json();
+                console.log(data.detail);
+                console.log(data.new_title);
+                renameConversation(conversation_id, data.new_title);
+            }
         }
     };
     const handleClickFeedback = (query_id: number) => async (event: React.MouseEvent<HTMLDivElement>) => {

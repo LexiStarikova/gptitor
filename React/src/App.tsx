@@ -34,6 +34,7 @@ const App: React.FC = () => {
   const [selectedLLM, setSelectedLLM] = useState<number | null>(null);
   const skipEffect = useRef(false);
   const isLiked = useRef(false);
+  const isRenamed = useRef(false);
   const needInAddToFavList = useRef(false);
   const [likedQueries, setLikedQueries] = useState<{ display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[]>([]);
 
@@ -130,7 +131,9 @@ const App: React.FC = () => {
       const updatedQueries = queries.map(item =>
           item.stored_id === conversationId ? { ...item, text: importText } : item
       );
+      isRenamed.current = true;
       setQueries(updatedQueries);
+      isRenamed.current = false;
   }
 
   const CreateConversation = async () => {
@@ -272,6 +275,7 @@ const App: React.FC = () => {
             toMark={toMark}
             isLiked={isLiked}
             likedQueries={likedQueries}
+            isRenamed={isRenamed}
           />
         </div>
         <Routes>
