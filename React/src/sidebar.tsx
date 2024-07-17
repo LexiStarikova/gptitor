@@ -148,6 +148,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                                             handleSelection={() => handleQuerySelection(query.stored_id)}
                                             toMark={toMark}
                                             isMarked={query.isMarked}
+                                            onEdit={(stored_id, newQueryText) => {
+                                                console.log(`Editing query with stored_id ${stored_id} to ${newQueryText}`);
+                                            }}
                                         />
                                     ))}
                                 </div>
@@ -169,6 +172,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                                                         handleSelection={() => handleQuerySelection(query.stored_id)}
                                                         toMark={toMark}
                                                         isMarked={query.isMarked}
+                                                        onEdit={(stored_id, newQueryText) => {
+                                                            console.log(`Editing query with stored_id ${stored_id} to ${newQueryText}`);
+                                                        }}
                                                     />
                                                 ))}
                                             </div>
@@ -190,6 +196,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                                                         handleSelection={() => handleQuerySelection(query.stored_id)}
                                                         toMark={toMark}
                                                         isMarked={query.isMarked}
+                                                        onEdit={(stored_id, newQueryText) => {
+                                                            console.log(`Editing query with stored_id ${stored_id} to ${newQueryText}`);
+                                                        }}
                                                     />
                                                 ))}
                                             </div>

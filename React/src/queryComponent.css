@@ -4,6 +4,30 @@
     align-items: center;
     margin-left: 10px;
     cursor: pointer;
+    max-width: 16em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.queryname-input {
+    flex: 1;
+    margin: 0px 25px 0px 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.queryname-input:focus {
+    outline: none;
+    border-color: #3b4168;
 }
 
 .query.selected {
@@ -15,7 +39,11 @@
 }
 
 .queryname {
+    flex: 1;
     margin: 0px 25px 0px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .actions {
