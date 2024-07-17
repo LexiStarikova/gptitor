@@ -262,6 +262,7 @@ const App: React.FC = () => {
         <NavBar />
         <div className='sidebarr'>
           <Sidebar
+            renameConversation={renameConversation}
             CreateConversation={CreateConversation}
             openConversation={openConversation}
             deleteConversation={deleteConversation}

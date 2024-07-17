@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './queryComponent.css'
+import API_URL from './config';
 
 type QueryComponentProps = {
   display_id: number;
@@ -21,6 +22,7 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, 
   };
   const [isEditing, setIsEditing] = useState(false);
   const [newQueryText, setNewQueryText] = useState(queryText);
+
   const handleEdit = () => {
     setIsEditing(true);
     setNewQueryText(queryText);
@@ -30,7 +32,21 @@ const QueryComponent: React.FC<QueryComponentProps> = ({ display_id, stored_id, 
     setNewQueryText(e.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    const response = await fetch(`${API_URL}/conversations/${stored_id}`, {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          content: newQueryText,
+          generate: false,
+      })
+    });
+    const data = await response.json();
+    console.log(data.detail);
+    console.log(data.new_title);
+    
     onEdit(stored_id, newQueryText);
     setIsEditing(false);
   };

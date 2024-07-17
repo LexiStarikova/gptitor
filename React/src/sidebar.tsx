@@ -19,6 +19,7 @@ interface SidebarProps {
     toMark: (stored_id: number) => void;
     isLiked: MutableRefObject<boolean>;
     likedQueries: { display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[];
+    renameConversation: (conversation_id: number, importText: string) => void;
 }
 
 
@@ -31,7 +32,8 @@ const Sidebar: React.FC<SidebarProps> = ({
     queries,
     toMark,
     isLiked,
-    likedQueries
+    likedQueries,
+    renameConversation
 }) => {
     const [selectedQueryId, setSelectedQueryId] = useState<number | null>(null);
     const handleQuerySelection = (stored_id: number) => {
@@ -148,9 +150,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                             handleSelection={() => handleQuerySelection(query.stored_id)}
                                             toMark={toMark}
                                             isMarked={query.isMarked}
-                                            onEdit={(stored_id, newQueryText) => {
-                                                console.log(`Editing query with stored_id ${stored_id} to ${newQueryText}`);
-                                            }}
+                                            onEdit={renameConversation}
                                         />
                                     ))}
                                 </div>
@@ -172,9 +172,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                                         handleSelection={() => handleQuerySelection(query.stored_id)}
                                                         toMark={toMark}
                                                         isMarked={query.isMarked}
-                                                        onEdit={(stored_id, newQueryText) => {
-                                                            console.log(`Editing query with stored_id ${stored_id} to ${newQueryText}`);
-                                                        }}
+                                                        onEdit={renameConversation}
                                                     />
                                                 ))}
                                             </div>
@@ -196,9 +194,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                                         handleSelection={() => handleQuerySelection(query.stored_id)}
                                                         toMark={toMark}
                                                         isMarked={query.isMarked}
-                                                        onEdit={(stored_id, newQueryText) => {
-                                                            console.log(`Editing query with stored_id ${stored_id} to ${newQueryText}`);
-                                                        }}
+                                                        onEdit={renameConversation}
                                                     />
                                                 ))}
                                             </div>
