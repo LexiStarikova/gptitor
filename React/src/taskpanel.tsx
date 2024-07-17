@@ -121,6 +121,8 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                     <p className='solvebutton' onClick={close}>Solve Task</p>
                 </>
             );
+        } else if (selectedCategory && !selectedTask) {
+            return <h5 className='select-content'>Please, select a task.</h5>;
         } else {
             return <h5 className='select-content'>Please, select a category or a task.</h5>;
         }
