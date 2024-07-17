@@ -168,6 +168,7 @@ const App: React.FC = () => {
   const openConversation = async (stored_id: number) => {
 
     skipEffect.current = true;
+    console.log("ett");
 
     const llm_response = await fetch(`${API_URL}/conversations/${stored_id}`, {
       method: 'GET',
