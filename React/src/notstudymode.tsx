@@ -7,9 +7,8 @@ import { useState, useEffect, useContext } from 'react';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 import './feedbackWindow.css'
-import API_URL from './config';
-
-
+import { useTaskContext } from './taskContext';
+import { Task } from './models/task';
 
 interface NotStudyModeProps {
     isOpenF: boolean;
@@ -21,16 +20,11 @@ interface NotStudyModeProps {
 const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, closeF }) => {
 
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { feedback, setFeedback } = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
-    const { task, setTask } = useContext(FeedbackContext);
-    const [initialFetch, setInitialFetch] = useState<boolean>(false);
+    const { setSelectedTask } = useTaskContext();
     const [showDescription, setShowDescription] = useState(false);
     const [isRounded, setIsRounded] = useState(true);
-    const [isRoundedF, setIsRoundedF] = useState(true);
-    const [criterionValue, setCriterionValue] = useState(criteria.criterion_1);
-    const [progressWidth, setProgressWidth] = useState(0);
     const [expandedCriterion, setExpandedCriterion] = useState<string | null>(null);
 
 
@@ -42,16 +36,18 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
         setCriteria(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""));
     };
 
-    const toggleDescription = () => {
-        setShowDescription(!showDescription);
+    const resetTask = () => {
+        setSelectedTask(new Task(0, '', '', ''));
     };
+
     const toggleDetails = (criterion: string) => {
         setExpandedCriterion(prevCriterion => prevCriterion === criterion ? null : criterion);
     };
     useEffect(() => {
         resetFeedback();
         resetScore();
-    }, [setFeedback, setCriteria, setTask]);
+        resetTask();
+    }, [setFeedback, setCriteria, setSelectedTask]);
 
     const returnOverallScore = () => {
         let score = ((criteria.criterion_1
