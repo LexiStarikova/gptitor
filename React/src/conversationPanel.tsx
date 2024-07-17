@@ -317,7 +317,11 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                                             className="markdown-body"
                                                             remarkPlugins={[remarkGfm]}
                                                             components={{
-                                                            h1: ({ node, ...props }) => <h1 style={{ color: '#7B61FF', fontSize: '3.8rem' }} {...props} />,
+                                                            h1: ({ node, ...props }) => <h1 style={{ 
+                                                                color: '#7B61FF', 
+                                                                fontSize: '3rem',
+                                                                lineHeight: '1.2'
+                                                             }} {...props} />,
                                                             h2: ({ node, ...props }) => <h2 style={{ fontSize: '2.3rem' }} {...props} />,
                                                             h3: ({ node, ...props }) => <h3 style={{ fontSize: '1.8rem' }} {...props} />,
                                                             h4: ({ node, ...props }) => <h4 style={{ fontSize: '1.5rem' }} {...props} />,
