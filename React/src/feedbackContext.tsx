@@ -15,6 +15,6 @@ export const FeedbackContext = createContext<{
     setFeedback: () => {},
     criteria: new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""),
     setCriteria: () => {},
-    task: new Task(1, "", "", ""),
+    task: new Task(0, "", "", ""),
     setTask: () => {}
 });

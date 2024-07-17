@@ -34,28 +34,6 @@ const NotStudyMode: React.FC<NotStudyModeProps> = ({ isOpenF, isOpenD, isOpenS, 
     const [expandedCriterion, setExpandedCriterion] = useState<string | null>(null);
 
 
-    useEffect(() => {
-        if (!initialFetch) {
-            fetch(`${API_URL}/tasks/1`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    setTask({
-                        task_id: data.task_id,
-                        task_name: data.task_name,
-                        category: data.task_category,
-                        description: data.task_description,
-                    });
-                    setInitialFetch(true);
-                })
-                .catch(error => {
-                    console.error('Error fetching task:', error);
-                });
-        }
-    }, [initialFetch, task.task_id]);
-
-
-
     const resetFeedback = () => {
         setFeedback('');
     };

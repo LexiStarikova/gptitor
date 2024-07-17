@@ -6,6 +6,7 @@ import ReactLoading from 'react-loading';
 import API_URL from './config';
 import { SendContext } from './sendContext';
 import Tooltip from './tooltip';
+import { useTaskContext } from './taskContext';
 
 interface MessageSimplifyed {
     id: number,
@@ -37,7 +38,8 @@ interface ConversationPanelProps {
 export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, createConversation, isOpenS, close, isOpenD, closeD, responses, setResponses, requests, setRequests, conversation_id, selectedLLM,
     setSelectedLLM, skipEffect, renameConversation }) => {
     const [text, setText] = useState<string>('');
-    const { setFeedback, setCriteria, task } = useContext(FeedbackContext);
+    const { selectedCategory, setSelectedCategory, selectedTask, setSelectedTask } = useTaskContext();
+    const { setFeedback, setCriteria } = useContext(FeedbackContext);
     const [loading, setLoading] = useState<boolean>(false);
     const { isSended, setIsSended } = useContext(SendContext);
     const previousLLM = useRef<number | null>(null);
@@ -174,7 +176,6 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
 
         const newRequest = { id: 0, text: text };
         setRequests(prevRequests => [...prevRequests, newRequest]);
-
         setLoading(true);
 
         if (inputRef.current) {
@@ -182,6 +183,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
         }
 
         try {
+            console.log(`Task ID: ${selectedTask != null ? selectedTask?.task_id : 0}`)
             const response = await fetch(`${API_URL}/conversations/${conversation_id}/messages`, {
                 method: 'POST',
                 headers: {
@@ -189,7 +191,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                 },
                 body: JSON.stringify({
                     query_text: text,
-                    task_id: task.task_id,
+                    task_id: selectedTask != null ? selectedTask?.task_id : 0,
                     llm_id: selectedLLM,
                 })
             });

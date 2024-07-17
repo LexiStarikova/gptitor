@@ -7,7 +7,6 @@ import { Metrics } from './models/metrics';
 import FeedbackWindow from './feedbackWindow';
 import TaskDesc from './taskdescription';
 import NotStudyMode from './notstudymode';
-import API_URL from './config';
 
 interface TaskPanelProps {
     isOpenS: boolean;
@@ -22,37 +21,11 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
 
     // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [isFeedbackOpen, setFeedbackOpen] = useState(true);
-    const { feedback, setFeedback } = useContext(FeedbackContext);
+    const { setFeedback } = useContext(FeedbackContext);
     const { criteria, setCriteria } = useContext(FeedbackContext);
-    const { task, setTask } = useContext(FeedbackContext);
-    const [initialFetch, setInitialFetch] = useState<boolean>(false);
+    const { setTask } = useContext(FeedbackContext);
     // const [showDescription, setShowDescription] = useState(false);
-    const [isRounded, setIsRounded] = useState(true);
-    const [isRoundedF, setIsRoundedF] = useState(true);
-    const [criterionValue, setCriterionValue] = useState(criteria.criterion_1);
-    const [progressWidth, setProgressWidth] = useState(0);
     const [isStudyMode, setIsStudyMode] = useState(true);
-
-
-    useEffect(() => {
-        if (!initialFetch) {
-            fetch(`${API_URL}/tasks/1`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    setTask({
-                        task_id: data.task_id,
-                        task_name: data.task_name,
-                        category: data.task_category,
-                        description: data.task_description,
-                    });
-                    setInitialFetch(true);
-                })
-                .catch(error => {
-                    console.error('Error fetching task:', error);
-                });
-        }
-    }, [initialFetch, task.task_id]);
 
     const toggleStudyMode = () => {
         setIsStudyMode(!isStudyMode);
