@@ -44,7 +44,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
     const [loading, setLoading] = useState<boolean>(false);
     const { setIsSended } = useContext(SendContext);
     const previousLLM = useRef<number | null>(null);
-    
+
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         adjustTextareaHeight();
@@ -311,7 +311,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                                 <div className='respreacts'>
                                                     <div className='resbub'>
                                                         <p className='restext to-copy'>
-                                                        <MarkdownRenderer text={responses[index].text} />
+                                                            <MarkdownRenderer text={responses[index].text} />
                                                         </p>
                                                         <div className='reactions'>
                                                             <div className='icon-container'>
@@ -369,7 +369,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                             <textarea rows={1}
                                 className='chatinput'
                                 ref={inputRef}
-                                placeholder='Write Your Prompt Here.'
+                                placeholder='Send a prompt'
                                 value={text}
                                 onChange={handleTextChange}
                                 onKeyDown={handleKeyPress}
