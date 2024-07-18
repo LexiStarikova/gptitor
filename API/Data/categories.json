@@ -1,154 +1,46 @@
 [
-    {
-        "category_name": "Mathematics",
-        "category_description": "Tasks that involve mathematical concepts, calculations, and problem-solving to challenge and enhance mathematical skills."
-    },
-    {
-        "category_name": "The lyrical task",
-        "category_description": "Creative tasks that involve storytelling, imaginative scenarios, and lyrical narratives to stimulate creativity and artistic expression."
-    },
-    {
-        "category_name": "Puzzle",
-        "category_description": "Tasks that present logical puzzles, riddles, and brainteasers to develop critical thinking and problem-solving abilities."
-    },
-    {
-        "category_name": "Everyday Situations",
-        "category_description": "Tasks that simulate real-life scenarios and require practical solutions to navigate common everyday challenges."
-    },
-    {
-        "category_name": "Social Interactions",
-        "category_description": "Tasks designed to improve social skills, including initiating conversations, engaging others, and maintaining interesting discussions."
-    },
-    {
-        "category_name": "Work and Business",
-        "category_description": "Tasks related to professional development, project management, and effective communication within a business environment."
-    },
-    {
-        "category_name": "Education",
-        "category_description": "Tasks focused on learning, academic planning, and preparing for educational pursuits to enhance knowledge and skills."
-    },
-    {
-        "category_name": "Health",
-        "category_description": "Tasks that promote physical and mental well-being, including symptom tracking, preventive measures, and healthy living plans."
-    },
-    {
-        "category_name": "Travel",
-        "category_description": "Tasks related to planning and enjoying travel experiences, including finding attractions, creating itineraries, and navigating new places."
-    },
-    {
-        "category_name": "Shopping",
-        "category_description": "Tasks that assist with making informed purchasing decisions, comparing products, and finding quality items."
-    },
-    {
-        "category_name": "Technology",
-        "category_description": "Tasks focused on evaluating and choosing technological gadgets, understanding their features, and making informed tech decisions."
-    },
-    {
-        "category_name": "Cars",
-        "category_description": "Tasks related to buying, maintaining, and understanding cars, including checklists and guides for car inspections and purchases."
-    },
-    {
-        "category_name": "Household",
-        "category_description": "Tasks that involve managing and improving the home environment, including renovation planning and household organization."
-    },
-    {
-        "category_name": "Cooking",
-        "category_description": "Tasks focused on culinary skills, including finding recipes, preparing dishes, and creating cooking plans and videos."
-    },
-    {
-        "category_name": "Lifestyle",
-        "category_description": "Tasks aimed at improving overall lifestyle, including health plans, fitness routines, and adopting new habits for a better life."
-    },
-    {
-        "category_name": "Finance",
-        "category_description": "Tasks related to financial management, including budgeting, saving, and making informed investment decisions."
-    },
-    {
-        "category_name": "Entertainment",
-        "category_description": "Tasks focused on planning and organizing entertaining events, including parties, games, and creative activities."
-    },
-    {
-        "category_name": "Sports",
-        "category_description": "Tasks related to developing and following a sports training program, tracking progress, and maintaining physical fitness."
-    },
-    {
-        "category_name": "Family",
-        "category_description": "Tasks aimed at enhancing family life, including parenting methods, educational activities, and family bonding plans."
-    },
-    {
-        "category_name": "Psychology",
-        "category_description": "Tasks that promote mental health, including stress management techniques, mindfulness practices, and psychological well-being."
-    },
-    {
-        "category_name": "Animals",
-        "category_description": "Tasks related to pet care, including creating diet and care diaries, and ensuring the health and happiness of pets."
-    },
-    {
-        "category_name": "Leisure",
-        "category_description": "Tasks focused on discovering and engaging in hobbies and leisure activities that bring joy and satisfaction."
-    },
-    {
-        "category_name": "DIY",
-        "category_description": "Tasks related to do-it-yourself projects, including tool selection, project planning, and step-by-step guides for home improvements."
-    },
-    {
-        "category_name": "Self-development",
-        "category_description": "Tasks aimed at personal growth, including learning new skills, setting goals, and developing effective self-improvement plans."
-    },
-    {
-        "category_name": "Relationships",
-        "category_description": "Tasks designed to enhance interpersonal relationships, including communication strategies and joint activities with a partner."
-    },
-    {
-        "category_name": "Career",
-        "category_description": "Tasks focused on career development, including creating career plans, setting professional goals, and identifying skill-building opportunities."
-    },
-    {
-        "category_name": "Investments",
-        "category_description": "Tasks related to financial investments, including risk analysis, asset allocation, and creating detailed investment plans."
-    },
-    {
-        "category_name": "Tourism",
-        "category_description": "Tasks focused on planning and organizing travel routes, including analyzing attractions and cultural events for an enriching experience."
-    },
-    {
-        "category_name": "Family Planning",
-        "category_description": "Tasks related to preparing for parenthood, including financial, medical, and emotional preparations for having children."
-    },
-    {
-        "category_name": "Real Estate",
-        "category_description": "Tasks focused on real estate transactions, including creating checklists for property inspections and understanding legal aspects."
-    },
-    {
-        "category_name": "Time Management",
-        "category_description": "Tasks designed to enhance productivity, including creating daily planners, time management techniques, and prioritization strategies."
-    },
-    {
-        "category_name": "Art",
-        "category_description": "Tasks related to creative expression, including developing art projects, choosing materials, and executing artistic ideas."
-    },
-    {
-        "category_name": "Relocation",
-        "category_description": "Tasks focused on moving to a new country, including visa requirements, cultural adaptation, and logistical planning."
-    },
-    {
-        "category_name": "Social Media",
-        "category_description": "Tasks related to enhancing social media presence, including content planning, audience engagement, and building online influence."
-    },
-    {
-        "category_name": "Culture",
-        "category_description": "Tasks focused on exploring and understanding cultural traditions, including research projects on customs and practices of different countries."
-    },
-    {
-        "category_name": "Ecology",
-        "category_description": "Tasks aimed at reducing environmental impact, including adopting eco-friendly practices and creating sustainable living plans."
-    },
-    {
-        "category_name": "Automobiles",
-        "category_description": "Tasks related to the operation and maintenance of electric cars, including creating user guides and tips for effective use."
-    },
-    {
-        "category_name": "Key Skills",
-        "category_description": "Tasks focused on developing essential skills, including leadership, communication, and other competencies for personal and professional growth."
-    }
+  {
+    "category_name": "Mathematics and Logic",
+    "category_description": "Tasks that involve mathematical concepts, calculations, and problem-solving to challenge and enhance mathematical skills."
+  },
+  {
+    "category_name": "Education and Skills Development",
+    "category_description": "Tasks focused on learning, academic pursuits, and the development of essential skills for personal and professional growth."
+  },
+  {
+    "category_name": "Health and Well-being",
+    "category_description": "Tasks that promote physical and mental health, well-being, and healthy living practices."
+  },
+  {
+    "category_name": "Home and Lifestyle Management",
+    "category_description": "Tasks related to managing and improving home environments, lifestyle choices, and everyday activities."
+  },
+  {
+    "category_name": "Financial Management and Planning",
+    "category_description": "Tasks that involve financial planning, budgeting, investments, and real estate transactions."
+  },
+  {
+    "category_name": "Travel and Leisure",
+    "category_description": "Tasks focused on planning and enjoying travel experiences, discovering hobbies, and engaging in leisure activities."
+  },
+  {
+    "category_name": "Work and Professional Development",
+    "category_description": "Tasks aimed at professional growth, effective communication, and project management within a business environment."
+  },
+  {
+    "category_name": "Technology and Innovation",
+    "category_description": "Tasks related to evaluating, choosing, and understanding technological gadgets and innovations."
+  },
+  {
+    "category_name": "Creative and Artistic Expression",
+    "category_description": "Tasks that stimulate creativity and artistic skills through various forms of art and imaginative projects."
+  },
+  {
+    "category_name": "Environmental Awareness",
+    "category_description": "Tasks aimed at promoting eco-friendly practices and reducing environmental impact."
+  },
+  {
+    "category_name": "Relationships and Social Life",
+    "category_description": "Tasks designed to enhance interpersonal relationships, social interactions, and family life."
+  }
 ]
