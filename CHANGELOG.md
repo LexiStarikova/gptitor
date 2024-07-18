@@ -1,13 +1,13 @@
+## [2.11.1] - 2024-07-18
+- Added tutorials content.
+- Changes task categories.
+- Fixed Markdown code display.
+
 ## [2.11.0] - 2024-07-17
 - Added Markdown support
 - Added manual renaming of conversations.
 - Added marking conversations.
 - Fixed LLM interaction in non-study mode.
-
-## [2.10.1] - 2024-07-16
-- Added tutorials content.
-- Changes task categories.
-- Fixed Markdown code display.
 
 ## [2.10.0] - 2024-07-16
 - Added task and category selection.
