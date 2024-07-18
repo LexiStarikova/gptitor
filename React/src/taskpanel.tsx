@@ -23,7 +23,8 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     const { selectedCategory, setSelectedCategory, selectedTask, setSelectedTask } = useTaskContext();
     const [categories, setCategories] = useState<Category[]>([]);
     const [tasks, setTasks] = useState<Task[]>([]);
-    const { criteria, setCriteria } = useContext(FeedbackContext);
+    const { setCriteria } = useContext(FeedbackContext);
+    const { setFeedback } = useContext(FeedbackContext);
     const [selectedTutorial, setSelectedTutorial] = useState<string | null>(null);
 
     // Get array of all categories and put them into 'categories'
@@ -65,9 +66,13 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     const resetScore = () => {
         setCriteria(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""));
     };
+    const resetFeedback = () => {
+        setFeedback('');
+    };
 
     const handleSolveButtonChange = () => {
         resetScore()
+        resetFeedback()
         close()
     }
 
