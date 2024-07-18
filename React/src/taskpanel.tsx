@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { FeedbackContext } from './feedbackContext';
+import { Metrics } from './models/metrics';
 import './taskpanel.css';
 import { Task } from './models/task';
 import API_URL from './config';
@@ -21,6 +23,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     const { selectedCategory, setSelectedCategory, selectedTask, setSelectedTask } = useTaskContext();
     const [categories, setCategories] = useState<Category[]>([]);
     const [tasks, setTasks] = useState<Task[]>([]);
+    const { criteria, setCriteria } = useContext(FeedbackContext);
     const [selectedTutorial, setSelectedTutorial] = useState<string | null>(null);
 
     // Get array of all categories and put them into 'categories'
@@ -58,6 +61,15 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
             setSelectedTutorial(null)
         }
     }, [selectedCategory]);
+
+    const resetScore = () => {
+        setCriteria(new Metrics(0.0, "", 0.0, "", 0.0, "", 0.0, ""));
+    };
+
+    const handleSolveButtonChange = () => {
+        resetScore()
+        close()
+    }
 
     const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedCategory(event.target.value);
@@ -175,7 +187,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                             <p className='Descript'>{selectedTask.description}</p>
                         </div>
                     </div>
-                    <p className='solvebutton' onClick={close}>Solve Task</p>
+                    <p className='solvebutton' onClick={handleSolveButtonChange}>Solve Task</p>
                 </>
             );
         } else if (selectedCategory && !selectedTask) {
