@@ -7,9 +7,7 @@ import API_URL from './config';
 import { SendContext } from './sendContext';
 import Tooltip from './tooltip';
 import { useTaskContext } from './taskContext';
-import ReactMarkdown from 'react-markdown';
 import MarkdownRenderer from "./markdownRenderer";
-import remarkGfm from 'remark-gfm';
 
 interface MessageSimplifyed {
     id: number,
