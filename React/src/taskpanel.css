@@ -125,6 +125,8 @@
     width: 80%;
     height: 80%;
     margin: auto;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .select-content {
