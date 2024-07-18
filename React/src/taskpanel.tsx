@@ -213,7 +213,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                         </div>
                     </div>
                     <div className="taskcontainer-bottom">
-                        <h4>Tutorial Links</h4>
+                        <h4>Tutorials</h4>
                         <ul>
                             <li><a onClick={() => handleTutorialClick('Tutorial_1')}>Basic Principles</a></li>
                             <li><a onClick={() => handleTutorialClick('Tutorial_2')}>Advanced Techniques</a></li>
