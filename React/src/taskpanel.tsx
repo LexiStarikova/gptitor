@@ -78,11 +78,69 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     };
 
     console.log("Website loaded")
-    console.log("Selected category: "+selectedCategory)
-    console.log("Selected task: "+selectedTask?.task_id)
+    console.log("Selected category: " + selectedCategory)
+    console.log("Selected task: " + selectedTask?.task_id)
 
     const handleTutorialClick = (tutorial: string) => {
-        setSelectedTutorial(tutorial);
+        switch (tutorial) {
+            case 'Tutorial_1':
+                setSelectedTutorial(`
+                <p>Be clear and specific. <br>
+                Specificity helps the AI understand exactly what you're asking for. <br>
+                Example: Less Effective: "Tell me about Python." <br>
+                More Effective: "Explain the basics of Python programming, including variables, data types, and loops." <br>
+                Define the context. <br>
+                Providing context ensures the AI knows the background of your query. <br>
+                Example: Less Effective: "What is a loop?" <br>
+                More Effective: "In the context of programming, what is a loop and how is it used in Python?" <br>
+                Use simple and direct language. <br>
+                Avoid complex wording or ambiguous terminology. <br>
+                Example: Less Effective: "Can you expound on the nuances of algorithmic structures?" <br>
+                More Effective: "Can you explain what algorithms are and how they work?" <br>
+                Ask open-ended questions when needed. <br>
+                For more detailed responses, opt for open-ended questions. <br>
+                Example: Less Effective: "Is Python a good programming language?" <br>
+                More Effective: "Why is Python considered a good programming language for beginners and experts alike?" <br>
+                Break down complex queries. <br>
+                If the topic is complex, break it into smaller, manageable parts. <br>
+                Example: Less Effective: "Explain machine learning." <br>
+                More Effective: "Can you explain the basic concepts of machine learning? <br>
+                Start with what it is, how it works, and give an example."</p>
+                `)
+                break;
+            case 'Tutorial_2':
+                setSelectedTutorial(`
+                <p> Provide examples. <br>
+                Providing examples helps the AI understand the format and type of response you expect. <br>
+                Example: Less Effective: "How do I write a good prompt?" <br>
+                More Effective: "Can you give me an example of a well-crafted prompt for writing an essay introduction?" <br>
+                Specify the desired output format. <br>
+                Specify if you need the response in a particular format, such as a list, bullet points, or paragraphs. <br>
+                Example: Less Effective: "Tell me about agile methodologies." <br>
+                More Effective: "Can you explain agile methodologies in bullet points?" Iterate and refine the prompt. <br>
+                Start with a basic prompt and refine it based on the responses you get. <br>
+                Initial Prompt: "Tell me about the solar system." <br>
+                Refined Prompt: "Describe the solar system, listing each planet and their unique characteristics." <br>
+                Use constraints when needed. Constraining the response can help keep the answer concise and focused. <br>
+                Example: Less Effective: "Tell me about renewable energy." <br>
+                More Effective: "Describe three key advantages of renewable energy in no more than two sentences each." </p>   
+                `)
+                break;
+            case 'Tutorial_3':
+                setSelectedTutorial(`
+                <p> Example 1: Writing an Essay Introduction. <br>
+                Prompt: "I am writing an essay on the importance of cybersecurity. Can you provide an engaging and informative introduction paragraph?" <br>
+                Example 2: Coding Explanation. <br>
+                Prompt: "I am learning Python and I am confused about list comprehensions. Can you explain what they are and provide a simple example?" <br>
+                Example 3: Historical Event Summary. <br>
+                Prompt: "Summarize the causes and consequences of the French Revolution in a short paragraph." </p>
+                `)
+                break;
+            default:
+                setSelectedTutorial(tutorial);
+                break;
+        }
+
         setSelectedCategory('All');
         setSelectedTask(null);
 
@@ -94,8 +152,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     const renderTaskDescription = () => {
         if (selectedTutorial) {
             return (
-                <div className='tutorial-content'>
-                    {selectedTutorial}
+                <div className='tutorial-content' dangerouslySetInnerHTML={{ __html: selectedTutorial }}>
                 </div>
             );
         } else if (selectedCategory && selectedTask && selectedTask.task_id > 0) {
@@ -158,9 +215,9 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                     <div className="taskcontainer-bottom">
                         <h4>Tutorial Links</h4>
                         <ul>
-                            <li><a onClick={() => handleTutorialClick('Tutorial 1 content')}>Tutorial 1</a></li>
-                            <li><a onClick={() => handleTutorialClick('Tutorial 2 content')}>Tutorial 2</a></li>
-                            <li><a onClick={() => handleTutorialClick('Tutorial 3 content')}>Tutorial 3</a></li>
+                            <li><a onClick={() => handleTutorialClick('Tutorial_1')}>Basic Principles</a></li>
+                            <li><a onClick={() => handleTutorialClick('Tutorial_2')}>Advanced Techniques</a></li>
+                            <li><a onClick={() => handleTutorialClick('Tutorial_3')}>Advanced Techniques</a></li>
                         </ul>
                     </div>
                 </div>
