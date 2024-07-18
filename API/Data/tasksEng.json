@@ -1,206 +1,206 @@
 [
     {
-      "task_category": "Mathematics",
+      "task_category": "Mathematics and Logic",
       "task_name": "Car travel",
       "task_description": "Imagine you are on a road trip with your partner. The length of the route is 2300 kilometers. You travel at an average speed of 80 kilometers per hour between destinations. Daytime stops take from two to eight hours. You also make sure to go to sleep at night to avoid the risk of being involved in an accident. You've been on the road for two days and you're curious about how much of the route you've traveled. Your partner is wondering how many days this trip will last in total. Calculate the probability that your answer to your partner's question is correct. Get the answers to these three questions using the correct query to the language model."
     },
     {
-      "task_category": "The lyrical task",
+      "task_category": "Creative and Artistic Expression",
       "task_name": "An ancient village",
       "task_description": "Imagine that you have traveled to the distant past of a parallel universe. You are lucky enough to find yourself in an ancient village where they know your language. The villagers recognize you as a stranger, but you don't want to be conspicuous from the crowd to avoid troubles. You introduce yourself as a traveler named Hongo, and as proof, you decide to tell them about the sunniest weather you have ever experienced in the state of Miuo. To prevent your lie from being discovered, your speech should contain only the simplest and most understandable vocabulary inherent in the colloquial style. And the story should be detailed and interesting, so that the inhabitants are imbued with your story and forget about their suspicions. Get this description with a proper query to the language model."
     },
     {
-      "task_category": "Puzzle",
+      "task_category": "Mathematics and Logic",
       "task_name": "Logical sweets",
       "task_description": "The boy Kyo is only five years old and is crazy about chocolate cakes and marzipan. His older sister Koyto is already in high school and has a passion for math. One day the girl comes home from school and treats her little brother to a single candy. The next day Koito treats the boy to another candy. Kyo was very happy, but did not even realize the reason for the treats. On the following days, Koyto treated the bral with two, three, and then five candies. The boy was happy, but he began to suspect his sister of something wrong. The next day his sister brought eight candies. Why so many sweets? On what principle does Koyto choose the number of candies? How many sweets will the girl bring the next day? Get the answer to this question by using the correct query to the language model."
     },
     {
-      "task_category": "Everyday Situations",
+      "task_category": "Home and Lifestyle Management",
       "task_name": "Finding Your Way in a New City",
       "task_description": "You find yourself in a new city and have no idea where you are. Your goal is to find the nearest bus stop and safely get to your destination. Write a social media post asking for help locating it. You need to use the right keywords and hashtags to get maximum engagement. Draft a post that will attract the attention of locals and make them want to help you. Include clear details such as your current location and specific questions. Use an appropriate language model query to prepare the text for the post."
     },
     {
-      "task_category": "Social Interactions",
+      "task_category": "Education and Skills Development",
       "task_name": "Meeting a New Person",
       "task_description": "At a party, you randomly met a new person, and you want to start a conversation that will be interesting and relaxed. Think of original conversation topics that will engage your new acquaintance. Create several conversation topics related to their interests or current events. Prepare some engaging questions to keep the conversation going. Get ideas and advice on leading the conversation using an appropriate language model query."
     },
     {
-      "task_category": "Work and Business",
+      "task_category": "Work and Professional Development",
       "task_name": "Project Discussion",
       "task_description": "At a work meeting, you need to present a new project. It is important not only to convey your idea to your colleagues but also to inspire them to actively participate in the discussion. Develop a creative presentation in the form of an engaging story or case study illustrating the effectiveness of your project. Include detailed descriptions of goals and expected outcomes, as well as compelling arguments on why this project is important for the company. Use an appropriate language model query to get ideas for the presentation."
     },
     {
-      "task_category": "Education",
+      "task_category": "Education and Skills Development",
       "task_name": "Choosing a Course",
       "task_description": "You are about to choose a university course and want to be prepared in advance. Study the content and structure of the course to make an informed decision. Develop a self-study plan on the subject before the classes start, including online courses, books, and scientific articles. Create a list of questions for professors and senior students to get insights about the course beyond the official description. Prepare a plan using tips and recommendations received through an appropriate language model query."
     },
     {
-      "task_category": "Health",
+      "task_category": "Health and Well-being",
       "task_name": "Doctor's Consultation",
       "task_description": "You are visiting a doctor with specific symptoms and want to receive an accurate diagnosis. To do this, start keeping a detailed diary of your symptoms and sensations. Note the exact time, duration, and intensity of each symptom, as well as the conditions under which they occur. Create an example of such a diary to help your doctor better understand your condition. Use an appropriate language model query to obtain a diary template."
     },
     {
-      "task_category": "Travel",
+      "task_category": "Travel and Leisure",
       "task_name": "Searching for Attractions",
       "task_description": "While in a new city, you want to know about local attractions that are not always mentioned in tourist brochures. Organize your online search and create an unusual itinerary based on your interests and preferences. Include lesser-known but interesting places such as unique cafes, parks, or cultural landmarks. Prepare a detailed plan using an appropriate language model query for ideas and recommendations."
     },
     {
-      "task_category": "Shopping",
+      "task_category": "Home and Lifestyle Management",
       "task_name": "Choosing a Product",
       "task_description": "You have several similar products in front of you, and you need to make the right choice. Conduct your own research by studying reviews, ratings on different platforms, and quality tests. Create a comparative table to help you make an informed decision. List all the pros and cons of each product, along with price and functionality. Obtain data for the table and advice using an appropriate language model query."
     },
     {
-      "task_category": "Technology",
+      "task_category": "Technology and Innovation",
       "task_name": "Choosing a Gadget",
       "task_description": "You are about to purchase a new smartphone and want to make an informed choice. Based on the features and user reviews, write a comprehensive review of the device. It should include the pros and cons of the model, comparison with competitors, and usage recommendations. Develop recommendations for different types of users, such as those who actively use the camera or prefer long battery life. Prepare the review text using an appropriate language model query."
     },
     {
-      "task_category": "Cars",
+      "task_category": "Technology and Innovation",
       "task_name": "Buying a Car",
       "task_description": "Planning to buy a used car requires attention to its condition and history. Create a detailed checklist of aspects to check when inspecting a car. Include items like technical features, body condition, accident history, maintenance records, and legal documents. Draft an example checklist using recommendations obtained through an appropriate language model query."
     },
     {
-      "task_category": "Household",
+      "task_category": "Home and Lifestyle Management",
       "task_name": "Home Renovation",
       "task_description": "You have planned a home renovation but don't know where to start. You need to develop a detailed plan of the renovation work, including material selection, tool purchasing, and project budgeting. Include all stages of work: from demolition, surface preparation, painting, or floor covering. Create a work schedule and a procurement schedule. Get help in creating such a plan and budget using an appropriate language model query."
     },
     {
-      "task_category": "Cooking",
+      "task_category": "Home and Lifestyle Management",
       "task_name": "Preparing a New Dish",
       "task_description": "You decided to cook a new and unusual dish to surprise your loved ones. Find unique recipes and shoot a short video of the cooking process. Write a script for the video, including all stages of cooking, from ingredient preparation to serving. Also, provide tips and tricks to simplify and enhance the process. Use an appropriate language model query to prepare the script and description."
     },
     {
-      "task_category": "Lifestyle",
+      "task_category": "Health and Well-being",
       "task_name": "Healthy Living",
       "task_description": "You decided to switch to a healthy lifestyle and need to carefully plan it. Develop a detailed nutrition and workout plan for a month, including various aspects: what, when, and how much to eat, what exercises to do, and how often. Prepare an approximate schedule and menu based on your goals and current fitness level. Get recommendations on creating such a plan using tips received through an appropriate language model query."
     },
     {
-      "task_category": "Finance",
+      "task_category": "Financial Management and Planning",
       "task_name": "Managing Finances",
       "task_description": "You want to improve your financial situation by developing a rational budget. Create a detailed monthly budget, including all income and expenses. Also, develop a savings and potential investment plan to manage your resources effectively. Include recommendations on cutting unnecessary expenses and increasing income. Create a budget table using information obtained through an appropriate language model query."
     },
     {
-      "task_category": "Entertainment",
+      "task_category": "Creative and Artistic Expression",
       "task_name": "Party Planning",
       "task_description": "You are planning a party and want it to be fun and unforgettable. Develop a detailed event scenario, including games, contests, and entertainment programs. Think about the best way to allocate time and what materials or props will be needed for the entertainment. Write a complete party script, including all stages and activities, using an appropriate language model query for ideas and advice."
     },
     {
-      "task_category": "Sports",
+      "task_category": "Health and Well-being",
       "task_name": "Training",
       "task_description": "You decided to seriously engage in sports and want to start by developing an effective training program. Create a workout diary and an example training plan that considers your goals and current fitness level. Include various exercises for all muscle groups and a schedule for consistent progress. Prepare such a plan using recommendations received through an appropriate language model query."
     },
     {
-      "task_category": "Family",
+      "task_category": "Relationships and Social Life",
       "task_name": "Raising Children",
       "task_description": "You want to improve your parenting methods by following modern approaches. Develop a plan of educational activities and lessons for a month that promote their development and well-being. Include educational games, joint projects, and exercises aimed at different aspects of development. Prepare such a plan using tips and recommendations through an appropriate language model query."
     },
     {
-      "task_category": "Psychology",
+      "task_category": "Health and Well-being",
       "task_name": "Stress Management",
       "task_description": "You are experiencing stress and looking for ways to overcome it. Explore several stress management techniques that you can integrate into everyday life. Describe and test various methods of stress relief, such as meditation, breathing exercises, or physical activity. Prepare descriptions and a plan for integrating these techniques using information obtained through an appropriate language model query."
     },
     {
-      "task_category": "Animals",
+      "task_category": "Relationships and Social Life",
       "task_name": "Pet Care",
       "task_description": "Your pet deserves the best care. Create a detailed diary of your pet's diet and care to monitor its health and well-being. Include all important aspects in the diary: feeding times, type of food, physical activity, and veterinary visits. Use information obtained through an appropriate language model query to compile such a diary."
     },
     {
-      "task_category": "Education",
+      "task_category": "Education and Skills Development",
       "task_name": "Choosing an Educational Institution",
       "task_description": "You are considering several educational institutions for admission and want to make an informed decision. Create a comparison table by key parameters such as program, reputation, study conditions, and campus life. Additionally, conduct surveys among students and graduates to get their opinions on the quality of education. Prepare such a table using data obtained through an appropriate language model query."
     },
     {
-      "task_category": "Leisure",
+      "task_category": "Travel and Leisure",
       "task_name": "Finding a New Hobby",
       "task_description": "You are looking for a new hobby that will bring joy and satisfaction in your free time. Make a list of possible hobbies, provide a brief review of each, and analyze which one suits your interests and lifestyle best. Write an article with recommendations for others facing the choice of a hobby. Get ideas and information for your review using an appropriate language model query."
     },
     {
-      "task_category": "Shopping",
+      "task_category": "Home and Lifestyle Management",
       "task_name": "Finding Quality Clothing",
       "task_description": "You are looking for quality and stylish clothing and want to understand the brands and stores. Conduct a study by examining various brands and stores, their offerings, pricing policies, and customer reviews. Create a detailed list with characteristics and features of each brand. Write a comprehensive review, including the pros and cons of each option, using data obtained through an appropriate language model query."
     },
     {
-      "task_category": "DIY",
+      "task_category": "Home and Lifestyle Management",
       "task_name": "Choosing Tools",
       "task_description": "You are planning to do some DIY home renovation and don't know where to start. Create a list of necessary tools and materials for your project, considering all stages of work: from surface preparation to final finishing. Prepare a list with the main characteristics and recommendations for choosing each tool. Use information obtained through an appropriate language model query to compile the list."
     },
     {
-      "task_category": "Self-development",
+      "task_category": "Education and Skills Development",
       "task_name": "Learning a New Language",
       "task_description": "You want to learn a new language and are looking for the most effective methods and resources. Develop a detailed language learning plan that includes courses, books, apps, and practical tasks for daily use. Additionally, create a schedule to help you systematically progress in learning the new language. Prepare such a plan using tips and recommendations obtained through an appropriate language model query."
     },
     {
-      "task_category": "Relationships",
+      "task_category": "Relationships and Social Life",
       "task_name": "Improving Relationship with a Partner",
       "task_description": "You want to strengthen your relationship with your partner by improving mutual understanding and communication. Develop a plan for joint activities and events including romantic dinners, hobbies, and trips that help you spend more time together and understand each other better. Prepare such a plan using ideas and recommendations obtained through an appropriate language model query."
     },
     {
-      "task_category": "Career",
+      "task_category": "Work and Professional Development",
       "task_name": "Career Planning",
       "task_description": "You plan to build a successful career and want to think through your steps. Create a career plan for the next few years, including personal goals, necessary skills, and steps to achieve them. Add courses and training that will help you reach your career goals faster. Prepare a comprehensive plan using tips and recommendations through an appropriate language model query."
     },
     {
-      "task_category": "Investments",
+      "task_category": "Financial Management and Planning",
       "task_name": "Buying Stocks",
       "task_description": "You decided to start investing in stocks and want to do it wisely. Create a detailed investment plan that includes risk analysis, goal setting, and asset allocation strategy. Identify which stocks will be most promising for your investments. Prepare such a plan using data and advice obtained through an appropriate language model query."
     },
     {
-      "task_category": "Tourism",
+      "task_category": "Travel and Leisure",
       "task_name": "Choosing a Tourist Route",
       "task_description": "You are planning an exciting trip and want to design the perfect itinerary. Analyze the key attractions, the best places to stay, and cultural leisure options. Create a detailed itinerary considering local cultural events and festivals. Plan the route using information obtained through an appropriate language model query."
     },
     {
-      "task_category": "Family Planning",
+      "task_category": "Financial Management and Planning",
       "task_name": "Deciding to Have Children",
       "task_description": "You decided to have children and want to prepare thoroughly for this important event. Create a preparation plan that includes financial, medical, and emotional aspects, as well as preparing the home and creating comfortable conditions for the future child. Conduct your own research and record tips using data obtained through an appropriate language model query."
     },
     {
-      "task_category": "Real Estate",
+      "task_category": "Financial Management and Planning",
       "task_name": "Buying Real Estate",
       "task_description": "You plan to buy real estate and want to do it safely and competently. Create a detailed checklist for checking the property before purchase, including technical condition, legal documents, and property history. Include all important aspects to eliminate potential risks. Create such a checklist using data obtained through an appropriate language model query."
     },
     {
-      "task_category": "Time Management",
+      "task_category": "Work and Professional Development",
       "task_name": "Increasing Productivity",
       "task_description": "You want to use your time effectively and increase your productivity. Create a detailed daily task planner, including time management methods, prioritization, and time blocks for rest and work. Experiment with various methods like Pomodoro and GTD (Getting Things Done) to find what works best for you. Prepare a daily planner using tips and recommendations through an appropriate language model query."
     },
     {
-      "task_category": "Art",
+      "task_category": "Creative and Artistic Expression",
       "task_name": "Creating an Artwork",
       "task_description": "You feel a surge of creative energy and want to create a work of art. Develop a detailed plan that includes inspiration, idea development, and execution stages. Consider the choice of materials, execution technique, and conditions in which you will work. Prepare a detailed plan using information and ideas obtained through an appropriate language model query."
     },
     {
-      "task_category": "Health",
+      "task_category": "Health and Well-being",
       "task_name": "Disease Prevention",
       "task_description": "You are thinking about maintaining your health and preventing diseases. Develop a plan for preventive measures, including proper nutrition, regular exercise, and medical check-ups. Include recommendations to improve your diet and lifestyle. Prepare a detailed plan using tips and recommendations obtained through an appropriate language model query."
     },
     {
-      "task_category": "Relocation",
+      "task_category": "Travel and Leisure",
       "task_name": "Moving to Another Country",
       "task_description": "You are planning to move to another country and want to do it as comfortably as possible. Create a detailed relocation plan, including visa requirements, finding housing, moving your belongings, and integrating into society. Consider differences in culture, language, and laws. Prepare such a plan using advice and information obtained through an appropriate language model query."
     },
     {
-      "task_category": "Social Media",
+      "task_category": "Technology and Innovation",
       "task_name": "Increasing Social Media Influence",
       "task_description": "You want to enhance your presence on social media and build authority among your followers. Develop a content plan for your accounts, including post types, posting frequency, and audience engagement methods. Prepare such a plan using strategies and recommendations obtained through an appropriate language model query."
     },
+      {
+        "task_category": "Creative and Artistic Expression",
+        "task_name": "Studying Cultural Traditions",
+        "task_description": "You are interested in the cultural traditions of other countries and want to learn more about them. Prepare a research project that includes the main aspects of culture, traditions, and customs of the chosen country. Create such a project using information obtained through an appropriate language model query."
+      },
+      {
+        "task_category": "Ecology",
+        "task_name": "Reducing Environmental Footprint",
+        "task_description": "You care about the environment and want to reduce your negative impact. Develop a plan for an eco-friendly lifestyle, including recycling, resource conservation, and the use of eco-friendly products. Prepare such a plan using tips and recommendations obtained through an appropriate language model query."
+      },
     {
-      "task_category": "Culture",
-      "task_name": "Studying Cultural Traditions",
-      "task_description": "You are interested in the cultural traditions of other countries and want to learn more about them. Prepare a research project that includes the main aspects of culture, traditions, and customs of the chosen country. Create such a project using information obtained through an appropriate language model query."
-    },
-    {
-      "task_category": "Ecology",
-      "task_name": "Reducing Environmental Footprint",
-      "task_description": "You care about the environment and want to reduce your negative impact. Develop a plan for an eco-friendly lifestyle, including recycling, resource conservation, and the use of eco-friendly products. Prepare such a plan using tips and recommendations obtained through an appropriate language model query."
-    },
-    {
-      "task_category": "Automobiles",
+      "task_category": "Technology and Innovation",
       "task_name": "Operating an Electric Car",
       "task_description": "You are considering switching to an electric car and want to know what to expect. Create a user's guide that includes tips for effective operation and maintenance of such a vehicle. Prepare a comprehensive guide using information obtained through an appropriate language model query."
     },
     {
-      "task_category": "Key Skills",
+      "task_category": "Work and Professional Development",
       "task_name": "Developing Leadership Qualities",
       "task_description": "You want to develop your leadership qualities and manage your team more effectively. Create a plan for developing leadership skills, including training, reading specialized literature, and attending courses. Prepare a detailed plan using recommendations and advice obtained through an appropriate language model query."
     }
