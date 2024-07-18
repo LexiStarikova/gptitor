@@ -1,5 +1,25 @@
+## [2.11.0] - 2024-07-17
+- Added Markdown support
+- Added manual renaming of conversations.
+- Added marking conversations.
+- Fixed LLM interaction in non-study mode.
+
+## [2.10.1] - 2024-07-16
+- Added tutorials content.
+- Changes task categories.
+- Fixed Markdown code display.
+
+## [2.10.0] - 2024-07-16
+- Added task and category selection.
+- Added AI-generated renaming of conversations.
+- Fixed LLM selection display.
+
+## [2.9.0] - 2024-07-15
+- Added LLM comments on criteria.
+
 ## [2.8.1] - 2024-07-14
 - Added criteria details window.
+- Added copy button.
 - Fixed conversation initialization.
 
 ## [2.8.0] - 2024-07-13
