@@ -8,7 +8,7 @@ import { SendContext } from './sendContext';
 import Tooltip from './tooltip';
 import { useTaskContext } from './taskContext';
 import ReactMarkdown from 'react-markdown';
-import stringWidth from 'string-width'
+import MarkdownRenderer from "./markdownRenderer";
 import remarkGfm from 'remark-gfm';
 
 interface MessageSimplifyed {
@@ -313,40 +313,8 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                                 <div className='respreacts'>
                                                     <div className='resbub'>
                                                         <p className='restext to-copy'>
-                                                        <ReactMarkdown
-                                                            className="markdown-body"
-                                                            remarkPlugins={[remarkGfm]}
-                                                            components={{
-                                                            h1: ({ node, ...props }) => <h1 style={{ 
-                                                                color: '#7B61FF', 
-                                                                fontSize: '3rem',
-                                                                lineHeight: '1.2',
-                                                                
-                                                             }} {...props} />,
-                                                            h2: ({ node, ...props }) => <h2 style={{ fontSize: '2.3rem', lineHeight: '1.2' }} {...props} />,
-                                                            h3: ({ node, ...props }) => <h3 style={{ fontSize: '1.8rem', lineHeight: '1.2' }} {...props} />,
-                                                            h4: ({ node, ...props }) => <h4 style={{ fontSize: '1.5rem', lineHeight: '1.2' }} {...props} />,
-                                                            code: ({ node, ...props }) => <code style={{ 
-                                                                color: '#7B61FF',
-                                                                overflowWrap: 'break-word',  // Ensure long words break
-                                                                wordWrap: 'break-word',     // Same as overflowWrap for older browsers
-                                                                whiteSpace: 'pre-wrap',   
-                                                            }} {...props} />,
-                                                            a: ({ node, ...props }) => <a style={{ 
-                                                                color: '#7B61FF', 
-                                                                overflowWrap: 'break-word',  // Ensure long words break
-                                                                wordWrap: 'break-word',     // Same as overflowWrap for older browsers
-                                                                whiteSpace: 'pre-wrap',  
-                                                            }} {...props} />,
-                                                            p: ({ node, ...props }) => <p style={{ 
-                                                                overflowWrap: 'break-word',  // Ensure long words break
-                                                                wordWrap: 'break-word',     // Same as overflowWrap for older browsers
-                                                                whiteSpace: 'pre-wrap',  
-                                                            }} {...props} />,
-                                                        }}
-                                                        >
-                                                            {responses[index].text}
-                                                        </ReactMarkdown></p>
+                                                        <MarkdownRenderer text={responses[index].text} />
+                                                        </p>
                                                         <div className='reactions'>
                                                             <div className='icon-container'>
                                                                 <div className='iconn'>
