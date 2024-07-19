@@ -190,7 +190,16 @@
 
     /* background: #2287DA; */
     border-radius: 10px 20px 10px 10px;
+}
 
+.title-container, .data-container {
+    display: flex;
+    align-items: center;
+}
+
+.title-container {
+    background-color: #D3EBFF;
+    border-radius: 10px 0 0 0px;
 }
 
 .CategoriesTitle {

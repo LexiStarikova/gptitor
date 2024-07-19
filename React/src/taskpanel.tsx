@@ -128,7 +128,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
         if (selectedTutorial) {
             return (
                 <div className='tutorial-content'>
-                    <MarkdownRenderer text={selectedTutorial}/>
+                    <MarkdownRenderer text={selectedTutorial} />
                 </div>
             );
         } else if (selectedCategory && selectedTask && selectedTask.task_id > 0) {
@@ -137,12 +137,20 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
                     <div className='ndiv'>
                         <div className='Titles'>
                             <div className='taskName'>
-                                <h6 className='Taskt'>Task:</h6>
-                                <h6 className='Taskn'>{selectedTask.task_name}</h6>
+                                <div className='title-container'>
+                                    <h6 className='Taskt'>Task:</h6>
+                                </div>
+                                <div className='data-container'>
+                                    <h6 className='Taskn'>{selectedTask.task_name}</h6>
+                                </div>
                             </div>
                             <div className='catName'>
-                                <h6 className='Catt'>Category:</h6>
-                                <h6 className='Catn'>{selectedTask.category}</h6>
+                                <div className='title-container'>
+                                    <h6 className='Catt'>Category:</h6>
+                                </div>
+                                <div className='data-container'>
+                                    <h6 className='Catn'>{selectedTask.category}</h6>
+                                </div>
                             </div>
                         </div>
                         <div className='Divider'></div>

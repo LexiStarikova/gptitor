@@ -77,6 +77,7 @@
     margin-top: 0px;
     row-gap: 1vh;
     align-items: center;
+    align-items: flex-start;
 }
 
 .Dividers {
@@ -102,6 +103,16 @@
     display: flex;
     flex-direction: column;
     width: 80%;
+}
+
+.title-container, .data-container {
+    display: flex;
+    align-items: center;
+}
+
+.title-container {
+    background-color: #D3EBFF;
+    border-radius: 10px 0 0 0px;
 }
 
 /* .DescCont {

@@ -27,23 +27,31 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
                 <div className='sec'>
                     <div className='Titlesdes'>
                         <div className='taskName'>
-                            <h6 className='Taskt'>Task:</h6>
-                            <h6 className='Taskn'>{selectedTask?.task_id ? selectedTask.task_name : 'Choose a task'}</h6>
+                            <div className='title-container'>
+                                <h6 className='Taskt'>Task:</h6>
+                            </div>
+                            <div className='data-container'>
+                                <h6 className='Taskn'>{selectedTask?.task_id ? selectedTask.task_name : 'Choose a task'}</h6>
+                            </div>
                         </div>
                         <div className='catName'>
-                            <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>{selectedTask?.task_id ? selectedTask.category : 'Choose a category'}</h6>
+                            <div className='title-container'>
+                                <h6 className='Catt'>Category:</h6>
+                            </div>
+                            <div className='data-container'>
+                                <h6 className='Catn'>{selectedTask?.task_id ? selectedTask.category : 'Choose a category'}</h6>
+                            </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div className='Dividers'></div>
                 <div className='TaskD'>
 
-                    
+
                     <div className='DescD'>
-                        <h6 className='DescT'>{selectedTask?.task_id ?  'Desciption' : ''}</h6>
-                        <p className='Descript'>{selectedTask?.task_id ? selectedTask.description: ''}</p>
+                        <h6 className='DescT'>{selectedTask?.task_id ? 'Desciption' : ''}</h6>
+                        <p className='Descript'>{selectedTask?.task_id ? selectedTask.description : ''}</p>
                     </div>
                 </div>
             </div>
