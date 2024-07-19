@@ -1,12 +1,22 @@
 [
     {
       "llm_id": 1,
-      "name": "Qwen2",
+      "name": "Qwen2-mini",
       "url": "http://10.100.30.240:1222/generate"
     },
     {
       "llm_id": 2,
-      "name": "Llama3",
+      "name": "Llama3-mini",
       "url": "http://10.100.30.240:1223/generate"
+    },
+    {
+      "llm_id": 3,
+      "name": "Qwen2-large",
+      "url": "http://10.100.30.240:1224/generate"
+    },
+    {
+      "llm_id": 4,
+      "name": "Llama3-large",
+      "url": "http://10.100.30.239:1225/generate"
     }
   ]
