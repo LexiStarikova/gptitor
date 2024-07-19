@@ -17,7 +17,7 @@ interface TaskPanelProps {
 }
 
 // const FeedbackPanel = () => {
-const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, closeD  }) => {
+const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, closeD }) => {
 
     // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [isFeedbackOpen, setFeedbackOpen] = useState(true);
@@ -29,9 +29,9 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
 
     const toggleStudyMode = () => {
         setIsStudyMode(!isStudyMode);
-        if(isOpenS)
+        if (isOpenS)
             close();
-        if(isOpenD)
+        if (isOpenD)
             closeD();
     };
     const toggleSidebar = () => {

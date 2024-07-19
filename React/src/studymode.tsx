@@ -10,7 +10,7 @@ interface MessageSimplifyed {
 }
 
 interface StudyModeProps {
-    queries: { display_id: number; stored_id: number; text: string; date: Date ; isMarked: boolean}[];
+    queries: { display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[];
     createConversation: () => Promise<void>;
     requests: MessageSimplifyed[];
     setRequests: React.Dispatch<React.SetStateAction<MessageSimplifyed[]>>;
@@ -24,7 +24,7 @@ interface StudyModeProps {
 }
 
 
-const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id, 
+const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requests, responses, setRequests, setResponses, conversation_id,
     selectedLLM, setSelectedLLM, skipEffect, renameConversation }) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -64,19 +64,19 @@ const StudyMode: React.FC<StudyModeProps> = ({ queries, createConversation, requ
                 </defs>
             </svg>
             <div className='panels'>
-                <ConversationPanel 
-                    queries={queries} 
-                    createConversation={createConversation} 
-                    isOpenS={isSidebarOpen} 
-                    close={toggleSidebar} 
-                    requests={requests} 
-                    setRequests={setRequests} 
-                    isOpenD={showDescription} 
-                    closeD={toggleDescription} 
-                    setResponses={setResponses} 
-                    responses={responses} 
-                    conversation_id={conversation_id} 
-                    selectedLLM={selectedLLM} 
+                <ConversationPanel
+                    queries={queries}
+                    createConversation={createConversation}
+                    isOpenS={isSidebarOpen}
+                    close={toggleSidebar}
+                    requests={requests}
+                    setRequests={setRequests}
+                    isOpenD={showDescription}
+                    closeD={toggleDescription}
+                    setResponses={setResponses}
+                    responses={responses}
+                    conversation_id={conversation_id}
+                    selectedLLM={selectedLLM}
                     setSelectedLLM={setSelectedLLM}
                     skipEffect={skipEffect}
                     renameConversation={renameConversation}

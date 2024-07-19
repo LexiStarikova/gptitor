@@ -9,6 +9,7 @@ import Profile from './profile';
 import { Metrics } from './models/metrics';
 import API_URL from './config';
 import SendContextProvider from './sendContextProvider';
+import Tutorial from './Tutorial';
 
 interface Message {
   id: number;
@@ -53,7 +54,7 @@ const App: React.FC = () => {
 
   const toMark = (stored_id: number) => {
     const updatedQueries = queries.map(item =>
-        item.stored_id === stored_id ? { ...item, isMarked : !item.isMarked } : item
+      item.stored_id === stored_id ? { ...item, isMarked: !item.isMarked } : item
     );
     needInAddToFavList.current = true;
     setQueries(updatedQueries);
@@ -61,7 +62,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isLiked.current){
+    if (isLiked.current) {
       console.log("убемубе");
       const savedMarks = queries.reduce<Record<number, boolean>>((acc, item) => {
         acc[item.stored_id] = item.isMarked || false;
@@ -75,7 +76,7 @@ const App: React.FC = () => {
   const addQueries = (data: any[]) => {
     const savedMarksJson = localStorage.getItem('isMarked');
     const savedMarks = savedMarksJson ? JSON.parse(savedMarksJson) : {};
-    if (savedMarksJson){
+    if (savedMarksJson) {
       console.log("it's good");
     }
     needInAddToFavList.current = true;
@@ -87,18 +88,18 @@ const App: React.FC = () => {
         date: addHoursToDate(new Date(item.created_at.replace(" ", "T")), 3),
         llm_id: item.llm_id,
         isMarked: savedMarks[item.conversation_id],
-    })));
+      })));
     const highestId = Math.max(...data.map(item => item.conversation_id));
     setNextId(highestId + 1);
   };
 
   useEffect(() => {
-    if (needInAddToFavList.current){
+    if (needInAddToFavList.current) {
       const filteredQueries = queries.filter(query => query.isMarked);
       setLikedQueries(filteredQueries);
       needInAddToFavList.current = false;
     }
-  }, [queries]);  
+  }, [queries]);
 
   useEffect(() => {
     if (hasMounted.current) return;
@@ -127,13 +128,13 @@ const App: React.FC = () => {
     fetchDialogs();
   }, []);
 
-  const renameConversation = (conversationId : number, importText : string) => {
-      const updatedQueries = queries.map(item =>
-          item.stored_id === conversationId ? { ...item, text: importText } : item
-      );
-      isRenamed.current = true;
-      setQueries(updatedQueries);
-      isRenamed.current = false;
+  const renameConversation = (conversationId: number, importText: string) => {
+    const updatedQueries = queries.map(item =>
+      item.stored_id === conversationId ? { ...item, text: importText } : item
+    );
+    isRenamed.current = true;
+    setQueries(updatedQueries);
+    isRenamed.current = false;
   }
 
   const CreateConversation = async () => {

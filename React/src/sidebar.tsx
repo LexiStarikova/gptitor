@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './sidebar.css';
 import QueryComponent from './queryComponent';
 import { SendContext } from './sendContext';
+import Tutorial from './Tutorial';
 
 interface MessageSimplifyed {
     id: number,
@@ -41,7 +42,14 @@ const Sidebar: React.FC<SidebarProps> = ({
     const handleQuerySelection = (stored_id: number) => {
         setSelectedQueryId(stored_id);
     };
-
+    const [runTutorial, setRunTutorial] = useState(false);
+    const handleInfoIconClick = () => {
+        setSidebarVisible(false);
+        setRunTutorial(true);
+    };
+    const handleCloseTutorial = () => {
+        setRunTutorial(false);
+    };
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const { isSended, setIsSended } = useContext(SendContext);
     const sidebarRef = useRef<HTMLDivElement>(null);
@@ -63,7 +71,9 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
     const handleMouseLeave = () => {
-        setSidebarVisible(false);
+        if (!runTutorial) {
+            setSidebarVisible(false);
+        }
     };
 
     const today = new Date();
@@ -95,7 +105,8 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     return (
         <div>
-            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} onMouseLeave={handleMouseLeave}>
+            {runTutorial && <Tutorial onClose={handleCloseTutorial} />}
+            <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} onMouseLeave={handleMouseLeave} >
                 <div className='sideindex'>
                     <div className='sidetitle'>
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden' onClick={toggleSidebar}>
@@ -218,7 +229,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             </div>
                         </Link>
                         <div className='info'>
-                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden'>
+                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden' onClick={handleInfoIconClick}>
                                 <path d="M12.9996 13.0001L12.9996 18.2001M12.9996 9.1458V9.1001M2.59961 13.0001C2.59961 7.25633 7.25585 2.6001 12.9996 2.6001C18.7434 2.6001 23.3996 7.25634 23.3996 13.0001C23.3996 18.7439 18.7434 23.4001 12.9996 23.4001C7.25585 23.4001 2.59961 18.7439 2.59961 13.0001Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <p>Help</p>
@@ -240,7 +251,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
             <div className={`sidebarhidden${sidebarVisible ? 'hd' : ''}`} >
                 <div className='iconshidden'>
-                    <svg onClick={toggleSidebar} width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden'>
+                    <svg onClick={toggleSidebar} width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='menuiconhidden tutomenuiconhidden'>
                         <path d="M23.3996 20.8H2.59961M23.3996 13H2.59961M23.3996 5.19995H2.59961" stroke="#3B4168" strokeWidth="3" strokeLinecap="round" />
                     </svg>
                     <Link className='gpttitle' to="/chatpage">
@@ -263,7 +274,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             <path d="M6.52539 23.1999C7.08264 22.5758 9.69249 19.7038 10.4573 19.7038H18.544C19.6523 19.7038 21.9147 22.0845 22.4754 22.9237M26.1004 14.4999C26.1004 20.9064 20.9069 26.0999 14.5004 26.0999C8.09389 26.0999 2.90039 20.9064 2.90039 14.4999C2.90039 8.0934 8.09389 2.8999 14.5004 2.8999C20.9069 2.8999 26.1004 8.0934 26.1004 14.4999ZM18.6557 10.5462C18.6557 8.33311 16.7874 6.5249 14.5007 6.5249C12.2141 6.5249 10.3458 8.33311 10.3458 10.5462C10.3458 12.7593 12.2141 14.5675 14.5007 14.5675C16.7874 14.5675 18.6557 12.7593 18.6557 10.5462Z" stroke="#3B4168" strokeWidth="2" />
                         </svg>
                     </Link>
-                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden'>
+                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className='infoiconhidden' onClick={handleInfoIconClick}>
                         <path d="M12.9996 13.0001L12.9996 18.2001M12.9996 9.1458V9.1001M2.59961 13.0001C2.59961 7.25633 7.25585 2.6001 12.9996 2.6001C18.7434 2.6001 23.3996 7.25634 23.3996 13.0001C23.3996 18.7439 18.7434 23.4001 12.9996 23.4001C7.25585 23.4001 2.59961 18.7439 2.59961 13.0001Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
 
