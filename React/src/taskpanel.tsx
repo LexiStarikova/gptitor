@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef, MutableRefObject, RefObject } from 'react';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 import './taskpanel.css';
@@ -10,6 +10,7 @@ import MarkdownRenderer from './markdownRenderer';
 interface TaskPanelProps {
     isOpenS: boolean;
     close: () => void;
+    excludeRef: RefObject<HTMLDivElement | null>;
 }
 
 interface Category {
@@ -19,7 +20,7 @@ interface Category {
 }
 
 
-const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
+const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, excludeRef }) => {
 
     const { selectedCategory, setSelectedCategory, selectedTask, setSelectedTask } = useTaskContext();
     const [categories, setCategories] = useState<Category[]>([]);
@@ -31,7 +32,9 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
 
     const handleClickOutside = (event: MouseEvent) => {
         console.log('Click is detected');
-        if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+        const target = event.target as Node;
+        if (panelRef.current && !panelRef.current.contains(event.target as Node) && excludeRef.current &&
+        !excludeRef.current.contains(target)) {
             if (isOpenS) {
                 console.log('Should close taskPanel');
                 close();

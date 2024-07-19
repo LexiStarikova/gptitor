@@ -1,6 +1,6 @@
 
 import './feedbackPanel.css';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import TaskPanel from './taskpanel';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
@@ -26,8 +26,7 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
     const { setTask } = useContext(FeedbackContext);
     // const [showDescription, setShowDescription] = useState(false);
     const [isStudyMode, setIsStudyMode] = useState(true);
-
-
+    const excludeRef = useRef<HTMLDivElement>(null);
 
     const toggleStudyMode = () => {
         setIsStudyMode(!isStudyMode);
@@ -36,6 +35,7 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
         if (isOpenD)
             closeD();
     };
+
     const toggleSidebar = () => {
         close();
     };
@@ -60,7 +60,7 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
 
     return (
         <div className='feedbackbigcontainter'>
-            <div className='optioncontainer'>
+            <div className='optioncontainer'  ref={excludeRef}>
                 <div className='have_a_GOOD_DAY'>
                     {isStudyMode ? (
                         <div className='optionS' onClick={toggleSidebar}>
@@ -85,7 +85,7 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
                 <div className='rightpanel'>
 
 
-                    <TaskPanel isOpenS={isOpenS} close={toggleSidebar} />
+                    <TaskPanel isOpenS={isOpenS} close={toggleSidebar} excludeRef={excludeRef} />
                     {isStudyMode ? (
                         <FeedbackWindow isOpenS={isOpenS} isOpenF={isFeedbackOpen} isOpenD={isOpenD} closeF={toggleDescription} />
                     ) : (
