@@ -156,7 +156,7 @@ const App: React.FC = () => {
     const newQuery = {
       display_id: nextId,
       stored_id: data.conversation_id,
-      text: `Query ${nextId}`,
+      text: `Untitled`,
       date: new Date(data.created_at.replace(' ', 'T')),
       llm_id: selectedLLM,
       isMarked: false,
