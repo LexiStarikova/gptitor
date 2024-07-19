@@ -27,6 +27,8 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
     // const [showDescription, setShowDescription] = useState(false);
     const [isStudyMode, setIsStudyMode] = useState(true);
 
+
+
     const toggleStudyMode = () => {
         setIsStudyMode(!isStudyMode);
         if (isOpenS)

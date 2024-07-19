@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { FeedbackContext } from './feedbackContext';
 import { Metrics } from './models/metrics';
 import './taskpanel.css';
@@ -27,6 +27,28 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     const { setCriteria } = useContext(FeedbackContext);
     const { setFeedback } = useContext(FeedbackContext);
     const [selectedTutorial, setSelectedTutorial] = useState<string | null>(null);
+    const panelRef = useRef<HTMLDivElement>(null);
+
+    const handleClickOutside = (event: MouseEvent) => {
+        console.log('Click is detected');
+        if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+            if (isOpenS) {
+                console.log('Should close taskPanel');
+                close();
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (isOpenS) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpenS]);
 
     // Get array of all categories and put them into 'categories'
     useEffect(() => {
@@ -170,7 +192,7 @@ const TaskPanel: React.FC<TaskPanelProps> = ({ isOpenS, close }) => {
     };
 
     return (
-        <div className={`panel${isOpenS ? 'open' : ''}`}>
+        <div  ref={panelRef} className={`panel${isOpenS ? 'open' : ''}`}>
             <div className='panelcontainer'>
                 <div className='taskcontainer'>
                     {/* Left menu */}
