@@ -235,7 +235,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
 
         if (requests.length === 0) {
             const foundQuery = queries.find(query => query.stored_id === conversation_id);
-            const regex = /^Query \d+$/;
+            const regex = /^Untitled \d+$/;
             if (foundQuery?.text && regex.test(foundQuery?.text)) {
                 console.log("yeeee");
                 const response = await fetch(`${API_URL}/conversations/${conversation_id}`, {

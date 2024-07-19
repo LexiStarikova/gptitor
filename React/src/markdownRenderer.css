@@ -6,6 +6,11 @@
     margin-top: 1.5rem; /* Adjust the margin to reduce the space */
     margin-bottom: 0.5rem; /* Adjust the margin to reduce the space */
 }
+
+.markdown-body h1 {
+    width: 100%;         /* Ensure it takes full width of its container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
 p {
     margin-top: 0.5rem; /* Adjust the top margin to decrease space before the paragraph */
     margin-bottom: 0.5rem; /* Adjust the bottom margin to decrease space after the paragraph */
