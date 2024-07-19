@@ -62,6 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     useEffect(() => {
         if (queries.length > 0 && isSended && !isLiked.current && !isRenamed.current) {
+            console.log("lf");
             setSelectedQueryId(queries[queries.length - 1].stored_id);
             openConversation(queries[queries.length - 1].stored_id);
         }
