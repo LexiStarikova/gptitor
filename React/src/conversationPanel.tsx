@@ -311,7 +311,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                                 <div className='respreacts'>
                                                     <div className='resbub'>
                                                         <p className='restext to-copy'>
-                                                            <MarkdownRenderer text={responses[index].text} />
+                                                            <MarkdownRenderer text={responses[index].text} containerColor='white'/>
                                                         </p>
                                                         <div className='reactions'>
                                                             <div className='icon-container'>
