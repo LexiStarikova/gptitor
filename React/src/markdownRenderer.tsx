@@ -29,12 +29,11 @@ const MarkdownRenderer = memo(({ text, containerColor } : MarkdownRendererProps)
         const codeColor = containerColor === '#2287DA' ? 'white' : '#7B61FF';
         const fontWeight = containerColor === '#2287DA' ? 'bold' : 'normal';
        
+        // Check if the code block is multiline based on the presence of newline characters
         const checkMultiline = () => {
-            if (codeRef.current) {
-                const lineHeight = parseInt(getComputedStyle(codeRef.current).lineHeight, 10);
-                const codeHeight = codeRef.current.offsetHeight;
-                setIsMultiline(codeHeight > lineHeight);
-            }
+            // Check if `children` contains newline characters
+            const codeContent = typeof children === 'string' ? children : (children as React.ReactElement).props.children;
+            setIsMultiline(codeContent.includes('\n'));
         };
 
         const checkIsolated = () => {
