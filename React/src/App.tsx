@@ -35,6 +35,7 @@ const App: React.FC = () => {
   const skipEffect = useRef(false);
   const isLiked = useRef(false);
   const isRenamed = useRef(false);
+  const moveForbidden = useRef(false);
   const needInAddToFavList = useRef(false);
   const [likedQueries, setLikedQueries] = useState<{ display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[]>([]);
 
@@ -118,6 +119,7 @@ const App: React.FC = () => {
           CreateConversation();
         }
         else {
+          moveForbidden.current = true;
           addQueries(data);
         }
       } catch (error) {
@@ -173,6 +175,7 @@ const App: React.FC = () => {
 
   const openConversation = async (stored_id: number) => {
 
+    localStorage.setItem('lastOpenedDialogId', stored_id.toString());
     skipEffect.current = true;
     console.log("ett");
 
@@ -279,6 +282,7 @@ const App: React.FC = () => {
             isLiked={isLiked}
             likedQueries={likedQueries}
             isRenamed={isRenamed}
+            moveForbidden={moveForbidden}
           />
         </div>
         <Routes>

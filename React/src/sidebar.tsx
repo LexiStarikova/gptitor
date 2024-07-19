@@ -22,6 +22,7 @@ interface SidebarProps {
     likedQueries: { display_id: number; stored_id: number; text: string; date: Date; isMarked: boolean }[];
     renameConversation: (conversation_id: number, importText: string) => void;
     isRenamed: MutableRefObject<boolean>;
+    moveForbidden: MutableRefObject<boolean>; 
 }
 
 
@@ -36,7 +37,8 @@ const Sidebar: React.FC<SidebarProps> = ({
     isLiked,
     likedQueries,
     renameConversation,
-    isRenamed
+    isRenamed,
+    moveForbidden
 }) => {
     const [selectedQueryId, setSelectedQueryId] = useState<number | null>(null);
 
@@ -62,10 +64,20 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     useEffect(() => {
         if (queries.length > 0 && isSended && !isLiked.current && !isRenamed.current) {
-            console.log("lf");
-            setSelectedQueryId(queries[queries.length - 1].stored_id);
-            openConversation(queries[queries.length - 1].stored_id);
+            if (moveForbidden.current){
+                console.log("yes");
+                const savedId = localStorage.getItem('lastOpenedDialogId');
+                if (savedId!== null){
+                    setSelectedQueryId(parseInt(savedId, 10));
+                    openConversation(parseInt(savedId, 10));
+                }
+            } else {
+                console.log("no");
+                setSelectedQueryId(queries[queries.length - 1].stored_id);
+                openConversation(queries[queries.length - 1].stored_id);
+            }
         }
+        moveForbidden.current = false;
     }, [queries]);
 
     const handleCreateConversation = () => {
