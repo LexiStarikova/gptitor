@@ -39,6 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     isRenamed
 }) => {
     const [selectedQueryId, setSelectedQueryId] = useState<number | null>(null);
+
     const handleQuerySelection = (stored_id: number) => {
         setSelectedQueryId(stored_id);
     };
@@ -105,7 +106,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     return (
         <div>
-            {runTutorial && <Tutorial onClose={handleCloseTutorial} />}
+            {runTutorial && <Tutorial runTutorial={runTutorial} onClose={handleCloseTutorial} />}
             <div className={`sidebar${sidebarVisible ? '' : 'hd'} sidebarshown`} onMouseLeave={handleMouseLeave} >
                 <div className='sideindex'>
                     <div className='sidetitle'>
