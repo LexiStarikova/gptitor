@@ -132,8 +132,11 @@ const App: React.FC = () => {
       item.stored_id === conversationId ? { ...item, text: importText } : item
     );
     isRenamed.current = true;
+    console.log(isRenamed.current);
     setQueries(updatedQueries);
-    isRenamed.current = false;
+    setTimeout(() => {
+      isRenamed.current = false;
+    }, 1000); 
   }
 
   const CreateConversation = async () => {
@@ -157,7 +160,7 @@ const App: React.FC = () => {
       display_id: nextId,
       stored_id: data.conversation_id,
       text: `Untitled`,
-      date: new Date(data.created_at.replace(' ', 'T')),
+      date: addHoursToDate(new Date(data.created_at.replace(' ', 'T')), 3),
       llm_id: selectedLLM,
       isMarked: false,
     };
