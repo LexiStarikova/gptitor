@@ -61,6 +61,7 @@
     flex-direction: column;
     margin-top: auto;
     margin-bottom: auto;
+    width: 100%;
     /* justify-content: space-around; */
     /* margin-top: auto;
     margin-bottom: auto; */
@@ -73,11 +74,9 @@
     margin-right: auto;
     margin-left: auto;
     flex-direction: column;
-    /* margin-right: auto;
-    margin-left: auto; */
     margin-top: 0px;
     row-gap: 1vh;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .Dividers {
@@ -102,14 +101,12 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 80%;
 }
-
-
 
 /* .DescCont {
     position: relative;
-    width: 717px;
+   
     height: 750px;
     border-radius: 0 25px 25px 25px;
     background-color: #FFFFFF;

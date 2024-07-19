@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, memo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import './markdownRenderer.css';
 
 
 interface CodeProps {
@@ -72,6 +73,11 @@ const MarkdownRenderer = memo(({ text }: { text: string }) => {
                     fontSize: '1.5rem',
                     lineHeight: '1.2'
                 }} {...props} />,
+                h5: ({ node, ...props }) => <h5 style={{
+                    color: '#0060AE', 
+                    fontSize: '1.2rem',
+                    lineHeight: '1.2'
+                }} {...props} />,
                 code: CodeBlock,
                 a: ({ node, ...props }) => <a style={{ 
                     color: '#7B61FF', 
@@ -79,6 +85,10 @@ const MarkdownRenderer = memo(({ text }: { text: string }) => {
                     wordWrap: 'break-word',     // Same as overflowWrap for older browsers
                     whiteSpace: 'pre-wrap',  
                 }} {...props} />,
+                li: ({ node, ...props }) => <li style={{
+                    fontSize: '0.9rem',
+                    lineHeight: '1.5'
+                }} {...props} />
             }}
         >
             {text}

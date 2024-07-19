@@ -1,5 +1,6 @@
-import './taskdescription.css';
 import './taskpanel.css';
+import './taskdescription.css';
+
 import { useTaskContext } from './taskContext';
 
 interface TaskDescProps {
@@ -10,7 +11,7 @@ interface TaskDescProps {
 const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
 
     const { selectedTask } = useTaskContext();
-    
+
     return (
         <div className={`DescCont${isOpenD && !isOpenS ? '' : 'hd'}`}>
             <div className='TaskDline'>
@@ -27,11 +28,11 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
                     <div className='Titlesdes'>
                         <div className='taskName'>
                             <h6 className='Taskt'>Task:</h6>
-                            <h6 className='Taskn'>{selectedTask ? selectedTask.task_name : 'Choose a task'}</h6>
+                            <h6 className='Taskn'>{selectedTask?.task_id ? selectedTask.task_name : 'Choose a task'}</h6>
                         </div>
                         <div className='catName'>
                             <h6 className='Catt'>Category:</h6>
-                            <h6 className='Catn'>{selectedTask ? selectedTask.category : 'Choose a category'}</h6>
+                            <h6 className='Catn'>{selectedTask?.task_id ? selectedTask.category : 'Choose a category'}</h6>
                         </div>
                     </div>
                     
@@ -41,8 +42,8 @@ const TaskDesc: React.FC<TaskDescProps> = ({ isOpenS, isOpenD, closeD }) => {
 
                     
                     <div className='DescD'>
-                        <h6 className='DescT'>Desciption</h6>
-                        <p className='Descript'>{selectedTask ? selectedTask.description: 'Choose a task'}</p>
+                        <h6 className='DescT'>{selectedTask?.task_id ?  'Desciption' : ''}</h6>
+                        <p className='Descript'>{selectedTask?.task_id ? selectedTask.description: ''}</p>
                     </div>
                 </div>
             </div>

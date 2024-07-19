@@ -48,11 +48,6 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
 
     const toggleDescription = () => {
         closeD();
-        // setFeedbackOpen(!isFeedbackOpen);
-    };
-
-    const toggleFeedback = () => {
-        setFeedbackOpen(!isFeedbackOpen);
     };
 
     useEffect(() => {
@@ -60,19 +55,6 @@ const FeedbackPanel: React.FC<TaskPanelProps> = ({ isOpenS, close, isOpenD, clos
         resetScore();
     }, [setFeedback, setCriteria, setTask]);
 
-    const returnOverallScore = () => {
-        let score = ((criteria.criterion_1
-            + criteria.criterion_2
-            + criteria.criterion_3
-            + criteria.criterion_4) / 20 * 5)
-        if (score % 1 === 0) return score.toFixed(0)
-        else return score.toFixed(1)
-    }
-
-    const returnFloatOrNum = (criterion: number) => {
-        if (criterion % 1 === 0) return criterion.toFixed(0)
-        else return criterion.toFixed(1)
-    }
 
     return (
         <div className='feedbackbigcontainter'>

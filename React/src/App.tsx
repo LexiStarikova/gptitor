@@ -9,7 +9,6 @@ import Profile from './profile';
 import { Metrics } from './models/metrics';
 import API_URL from './config';
 import SendContextProvider from './sendContextProvider';
-import Tutorial from './Tutorial';
 
 interface Message {
   id: number;

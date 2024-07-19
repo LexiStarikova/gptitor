@@ -418,8 +418,8 @@
 
 .Taskt {
     width: auto;
-    padding: 5px 10px 0px 10px;
-    height: 34.34px;
+    padding: 5px 10px 2px 10px;
+    /* height: 34.34px; */
     background: #D3EBFF;
     border-radius: 10px 0px 0px 0px;
 }
@@ -440,7 +440,8 @@
     display: flex;
     height: auto;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
+    align-items: stretch;
     /* column-gap: 10px; */
 }
 
@@ -452,7 +453,8 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
+    align-items: stretch;
 }
 
 .catName>h6 {
@@ -461,21 +463,23 @@
 
 .Catt {
     width: auto;
-    padding: 5px 10px 0px 10px;
-    height: 34.34px;
+    justify-content: center;
+    align-items: center; /* Vertically centers text */
+    padding: 5px 10px 2px 10px;
+    /* height: 34.34px; */
     background: #D3EBFF;
     border-radius: 10px 0px 0px 0px;
 }
 
 .Catn {
     width: auto;
-    height: 31.31px;
+    height: auto;
     padding: 5px 10px 0px 10px;
     border-width: 0px 1px 2px 0px;
     border-style: solid;
     border-color: #D3EBFF;
     border-radius: 0px 20px 20px 0px;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 .Divider {
