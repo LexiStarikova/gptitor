@@ -26,10 +26,9 @@ const MarkdownRenderer = memo(({ text, containerColor } : MarkdownRendererProps)
         const [isIsolated, setIsIsolated] = useState(false);
         const codeRef = useRef<HTMLDivElement>(null);
 
-        const codeColor = containerColor === '#2287DA' ? '#2287DA' : '#7B61FF';
-        // Set larger font size if background is #2287DA
-        const fontSize = containerColor === '#2287DA' ? '1.15em' : '1em'; 
-
+        const codeColor = containerColor === '#2287DA' ? 'white' : '#7B61FF';
+        const fontWeight = containerColor === '#2287DA' ? 'bold' : 'normal';
+       
         const checkMultiline = () => {
             if (codeRef.current) {
                 const lineHeight = parseInt(getComputedStyle(codeRef.current).lineHeight, 10);
@@ -61,24 +60,33 @@ const MarkdownRenderer = memo(({ text, containerColor } : MarkdownRendererProps)
         }, [text]); // Trigger checks when text changes
 
 
-        const shouldHighlight = isMultiline || isIsolated;
+        const backgroundColor = (isMultiline && containerColor !== '#2287DA') ? 'rgba(255, 255, 255, 0.8)' : 'transparent';
+        const border = (isMultiline && containerColor !== '#2287DA') ? '1px solid #ccc' : 'none';
+        const borderRadius = isMultiline ? '3px' : '0';
+        const width = isMultiline ? '100%' : 'fit-content';
+        const boxSizing = isMultiline ? 'border-box' : 'content-box';
+        const margin = (isMultiline || isIsolated) ? '0 5px' : '0'; // Add margin for spacing
+        const display = isIsolated && !inline ? 'block' : 'inline';
 
         return (
             <div style={{
-                backgroundColor: shouldHighlight ? 'rgba(255, 255, 255, 0.9)' : 'transparent', // White background only if multiline
-                border: shouldHighlight ? '1px solid #ccc' : 'none',       // Border only if multiline
-                padding: shouldHighlight ? '5px' : '0',                   // Padding only if multiline
-                borderRadius: shouldHighlight ? '3px' : '0',                // Rounded corners only if multiline
-                width: '100%',                                          // Make the div cover full width
-                boxSizing: 'border-box'                                 // Ensure padding is included in the width
+                backgroundColor: backgroundColor, // White background only if multiline
+                border: border,       // Border only if multiline
+                padding: isMultiline ? '3px' : '0',                   // Padding only if multiline
+                borderRadius: borderRadius,                // Rounded corners only if multiline
+                width: width,                                          // Make the div cover full width
+                boxSizing: boxSizing,                                 // Ensure padding is included in the width
+                overflow: 'auto',
+                display: display
             }}>
                 <code ref={codeRef} style={{ 
                     color: codeColor, // Use dynamic color here
-                    fontWeight: 'normal', 
-                    fontSize: fontSize,
+                    fontWeight: fontWeight, 
+                    fontSize: '1em',
                     overflowWrap: 'break-word',  // Ensure long words break
                     wordWrap: 'break-word',     // Same as overflowWrap for older browsers
                     whiteSpace: 'pre-wrap', 
+                    margin: margin,
                 }} {...props}>
                     {children}
                 </code>
