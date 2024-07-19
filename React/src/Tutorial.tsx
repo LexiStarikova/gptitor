@@ -1,4 +1,3 @@
-// src/components/Tutorial.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import Joyride, { Step, CallBackProps, STATUS } from 'react-joyride';
 import './Tutorial.css';
@@ -7,18 +6,6 @@ const steps: Step[] = [
         target: '.mode',
         content: 'You can switch between study mode and non-study mode through this switch.',
         title: "MODE SWITCH",
-        disableBeacon: true,
-    },
-    {
-        target: '.panelcontainer',
-        content: 'You can choose a task through this task panel, the tasks are sorted according to their categories.',
-        title: "TASK PANEL",
-        disableBeacon: true,
-    },
-    {
-        target: '.optionS',
-        content: 'Click on this button to hide/show the task panel, let us practice it now, click it to hide the the task panel (PLEASE CLICK IT SO THE TUTORIAL PROCEED).',
-        title: "SEARCH TASK",
         disableBeacon: true,
     },
     {
@@ -37,6 +24,18 @@ const steps: Step[] = [
         target: '.TaskDlinex',
         content: 'Click on view task to open the description to the selected task.',
         title: "DESCRIPTION",
+        disableBeacon: true,
+    },
+    {
+        target: '.optionS',
+        content: 'Click on this button to hide/show the task panel, let us practice it now, click it to hide the the task panel (PLEASE CLICK IT SO THE TUTORIAL PROCEED).',
+        title: "SEARCH TASK",
+        disableBeacon: true,
+    },
+    {
+        target: '.panelcontainer',
+        content: 'You can choose a task through this task panel, the tasks are sorted according to their categories.',
+        title: "TASK PANEL",
         disableBeacon: true,
     },
     {
@@ -63,12 +62,6 @@ const steps: Step[] = [
         disableBeacon: true,
     },
     {
-        target: '.sidebar',
-        content: 'This is the sidebar in full glory.',
-        title: "SIDEBAR",
-        disableBeacon: true,
-    },
-    {
         target: '.chaticonhidden',
         content: 'Click on the chat icon to create a new conversation.',
         title: "NEW CHAT",
@@ -81,21 +74,9 @@ const steps: Step[] = [
         disableBeacon: true,
     },
     {
-        target: '.deleteicon',
-        content: 'Click on this icon to delete this query from your history.',
-        title: "DELETION",
-        disableBeacon: true,
-    },
-    {
-        target: '.editicon',
-        content: 'Our LLM will assign a title to your query, if you do not like it you can change through clicking on this icon.',
-        title: "TITLE EDIT",
-        disableBeacon: true,
-    },
-    {
-        target: '.likeicon',
-        content: 'If you like a query and want to save it click on this icon.',
-        title: "LIKE A QUERY",
+        target: '.actions',
+        content: 'These are the actions that you can perform on a certain query, you can delete a query from your history, you can edit its title, or mark it through the like button.',
+        title: "ACTIONS",
         disableBeacon: true,
     },
     {
@@ -106,7 +87,7 @@ const steps: Step[] = [
     },
     {
         target: '.inputField',
-        content: 'Now you are familiar with our product,NOW LETS GET BETTER AT PROMPTING.',
+        content: 'Now you are familiar with our product,Now lets get better at prompting.',
         title: "START",
         disableBeacon: true,
     },
@@ -144,11 +125,13 @@ const Tutorial: React.FC<TutorialProps> = ({ runTutorial, onClose }) => {
             showProgress
             callback={handleJoyrideCallback}
             spotlightClicks={true}
+            disableOverlayClose={true}
             styles={{
                 options: {
                     arrowColor: "#2287DA",
                     primaryColor: "#7B61FF",
                 },
+
             }}
         />
     );

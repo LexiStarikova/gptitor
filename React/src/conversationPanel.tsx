@@ -287,10 +287,16 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                 <div className='area'>
                     <div className='optionContainer'>
                         <div className={`option ${selectedLLM === 1 ? 'selected' : ''}`} onClick={() => handleLLMSelect(1)}>
-                            <p>Qwen2</p>
+                            <p>Qwen2-mini</p>
                         </div>
                         <div className={`option ${selectedLLM === 2 ? 'selected' : ''}`} onClick={() => handleLLMSelect(2)}>
-                            <p>Llama3</p>
+                            <p>Llama3-mini</p>
+                        </div>
+                        <div className={`option ${selectedLLM === 3 ? 'selected' : ''}`} onClick={() => handleLLMSelect(3)}>
+                            <p>Qwen2-large</p>
+                        </div>
+                        <div className={`option ${selectedLLM === 4 ? 'selected' : ''}`} onClick={() => handleLLMSelect(4)}>
+                            <p>Llama3-large</p>
                         </div>
                     </div>
                     <div className='conversationcontainer'>
@@ -311,7 +317,7 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({ queries, c
                                                 <div className='respreacts'>
                                                     <div className='resbub'>
                                                         <p className='restext to-copy'>
-                                                            <MarkdownRenderer text={responses[index].text} containerColor='white'/>
+                                                            <MarkdownRenderer text={responses[index].text} containerColor='white' />
                                                         </p>
                                                         <div className='reactions'>
                                                             <div className='icon-container'>
