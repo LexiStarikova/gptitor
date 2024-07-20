@@ -6,7 +6,7 @@ import API_URL from './config';
 
 const Profile: React.FC = () => {
     const [statistics, setStatistics] = useState({
-        daily_activity: [{date: '0', number_of_queries: 0}],
+        daily_activity: [{ date: '0', number_of_queries: 0 }],
         metrics: { criterion_1: 0, criterion_2: 0, criterion_3: 0, criterion_4: 0 },
         total_activity: { total_queries: 0, total_conversations: 0, tasks_solved: 0 },
         average_grade: 0
@@ -50,14 +50,14 @@ const Profile: React.FC = () => {
         return await (data.metrics.criterion_1
             + data.metrics.criterion_2
             + data.metrics.criterion_3
-            + data.metrics.criterion_4)/4
+            + data.metrics.criterion_4) / 4
     };
 
     const animateProgressBar = async (grade: number) => {
         const progressbar = await document.querySelector('.progressbar-rounded-base-circle') as HTMLElement;
-        
+
         console.log(grade)
-        progressbar.style.setProperty('--calculated-value', `${(grade/5*100).toFixed(1)}`);
+        progressbar.style.setProperty('--calculated-value', `${(grade / 5 * 100).toFixed(1)}`);
         progressbar.style.animation = "progress 1.5s forwards";
     }
 
@@ -67,22 +67,22 @@ const Profile: React.FC = () => {
         const dates = statistics.daily_activity.map(activity => activity.date.split('-'));
         const activity = statistics.daily_activity.map(activity => activity.number_of_queries);
         const myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                  labels: dates.map(date => `${date[1]}-${date[2]}`),
-                  datasets: [{
+            type: 'line',
+            data: {
+                labels: dates.map(date => `${date[1]}-${date[2]}`),
+                datasets: [{
                     label: '# of Queries',
                     data: activity,
                     borderWidth: 1,
                     borderColor: '#0060AE',
                     backgroundColor: '#0060AE',
-                  }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                }
-              });
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
     }
 
     useEffect(() => {
@@ -128,9 +128,9 @@ const Profile: React.FC = () => {
                         <div className='progress'>
                             <h2 className='Ptitle'>Progress:</h2>
                             <div className='avgactivity'>
-                            <div>
-                                <canvas id="progressChart"></canvas>
-                            </div>
+                                <div>
+                                    <canvas id="progressChart"></canvas>
+                                </div>
                                 <div className='progressbar-rounded'>
                                     <div className='progressbar-rounded-base-circle'>
                                         <h6 className='progressbar-rounded-text'>Average Grade</h6>
@@ -191,7 +191,7 @@ const Profile: React.FC = () => {
                             <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18.4144 18.4877L18.4144 25.8047M18.4144 13.0642V12.9999M3.78027 18.4877C3.78027 10.4054 10.3322 3.85351 18.4144 3.85352C26.4966 3.85352 33.0486 10.4054 33.0486 18.4877C33.0486 26.5699 26.4966 33.1218 18.4144 33.1218C10.3322 33.1218 3.78027 26.5699 3.78027 18.4877Z" stroke="#12152A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p className='crittooltip'>Ah Yes, Criteria Description.</p>
+                            <p className='crittooltip'>The prompt should be concise and focused on a specific topic or question. Long, convoluted prompts can confuse the LLM and result in less coherent answers.</p>
                         </div>
                         <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                             <rect y="0.975586" width="40" height="40" rx="20" fill="#2287DA" />
@@ -204,7 +204,7 @@ const Profile: React.FC = () => {
                                 <h6>Conciseness & Focus</h6>
                             </div>
                             <div className='progbar'>
-                                <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_1/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_1 / 5 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                             </div>
                         </div>
                     </div>
@@ -214,7 +214,7 @@ const Profile: React.FC = () => {
                                 <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.4144 18.4877L18.4144 25.8047M18.4144 13.0642V12.9999M3.78027 18.4877C3.78027 10.4054 10.3322 3.85351 18.4144 3.85352C26.4966 3.85352 33.0486 10.4054 33.0486 18.4877C33.0486 26.5699 26.4966 33.1218 18.4144 33.1218C10.3322 33.1218 3.78027 26.5699 3.78027 18.4877Z" stroke="#12152A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <p className='crittooltip'>Ah Yes, Criteria Description.</p>
+                                <p className='crittooltip'>The prompt should be clear and specific, leaving little room for ambiguity. Vague or broad prompts can lead to off-target or generalized responses.</p>
                             </div>
                             <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                                 <rect x="1" y="1.71948" width="38" height="38" rx="19" fill="white" />
@@ -228,11 +228,8 @@ const Profile: React.FC = () => {
                                     <h6>Clarity & Specificity</h6>
                                 </div>
                                 <div className='progbar'>
-                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_2/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_2 / 5 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                 </div>
-                            </div>
-                            <div className='details'>
-                                <p className='p2'>More Detais &lt;</p>
                             </div>
                         </div>
                     </div>
@@ -242,7 +239,7 @@ const Profile: React.FC = () => {
                                 <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.4144 18.4877L18.4144 25.8047M18.4144 13.0642V12.9999M3.78027 18.4877C3.78027 10.4054 10.3322 3.85351 18.4144 3.85352C26.4966 3.85352 33.0486 10.4054 33.0486 18.4877C33.0486 26.5699 26.4966 33.1218 18.4144 33.1218C10.3322 33.1218 3.78027 26.5699 3.78027 18.4877Z" stroke="#12152A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <p className='crittooltip'>Ah Yes, Criteria Description.</p>
+                                <p className='crittooltip'>The prompt should include relevant context to guide the LLM. Providing necessary background information can help the model generate a more accurate and pertinent response.</p>
                             </div>
                             <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                                 <rect y="0.804932" width="40" height="40" rx="20" fill="#2287DA" />
@@ -256,11 +253,8 @@ const Profile: React.FC = () => {
                                     <h6>Relevance & Context</h6>
                                 </div>
                                 <div className='progbar'>
-                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_3/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_3 / 5 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                 </div>
-                            </div>
-                            <div className='details'>
-                                <p className='p2'>More Detais &lt;</p>
                             </div>
                         </div>
                     </div>
@@ -270,7 +264,7 @@ const Profile: React.FC = () => {
                                 <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.4144 18.4877L18.4144 25.8047M18.4144 13.0642V12.9999M3.78027 18.4877C3.78027 10.4054 10.3322 3.85351 18.4144 3.85352C26.4966 3.85352 33.0486 10.4054 33.0486 18.4877C33.0486 26.5699 26.4966 33.1218 18.4144 33.1218C10.3322 33.1218 3.78027 26.5699 3.78027 18.4877Z" stroke="#12152A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <p className='crittooltip'>Ah Yes, Criteria Description.</p>
+                                <p className='crittooltip'>The prompt should clearly state the desired output or purpose of the response. This helps the LLM understand the expected format and detail level.</p>
                             </div>
                             <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='criteriaicon'>
                                 <rect y="0.890137" width="40" height="40" rx="20" fill="#2287DA" />
@@ -283,11 +277,8 @@ const Profile: React.FC = () => {
                                     <h6>Purpose & Output</h6>
                                 </div>
                                 <div className='progbar'>
-                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_4/5*100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
+                                    <div className='progressbar-internals' style={{ width: `${(statistics.metrics.criterion_4 / 5 * 100)}%`, backgroundColor: '#0060AE', height: '100%', borderRadius: '64px' }}></div>
                                 </div>
-                            </div>
-                            <div className='details'>
-                                <p className='p2'>More Detais &lt;</p>
                             </div>
                         </div>
                     </div>
