@@ -117,6 +117,17 @@ const Sidebar: React.FC<SidebarProps> = ({
     const sortedDialogsToday = dialogsToday.sort((a, b) => a.date.getTime() - b.date.getTime());
     const sortedDialogsPrevious = dialogsPrevious.sort((a, b) => a.date.getDate() - b.date.getDate());;
 
+    const [findValue, setFindValue] = useState('');
+    const [filteredQueries, setFilteredQueries] = useState(queries);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newFindValue = event.target.value;
+        setFindValue(newFindValue);
+        const newFilteredDialogs = queries.filter(query => query.text.toLowerCase().includes(newFindValue.toLowerCase()));
+        setFilteredQueries(newFilteredDialogs);
+        console.log("'''");
+    };
+
     return (
         <div>
             {runTutorial && <Tutorial runTutorial={runTutorial} onClose={handleCloseTutorial} />}
@@ -147,7 +158,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" className='searchicon'>
                                 <path d="M14.1057 15.077L17 17.877M9.5 6.87695C11.1569 6.87695 12.5 8.2201 12.5 9.87695M16.0667 10.4103C16.0667 14.0185 13.1416 16.9436 9.53333 16.9436C5.92507 16.9436 3 14.0185 3 10.4103C3 6.80203 5.92507 3.87695 9.53333 3.87695C13.1416 3.87695 16.0667 6.80203 16.0667 10.4103Z" stroke="#3B4168" strokeWidth="2" strokeLinecap="round" />
                             </svg>
-                            <input type="text" placeholder='History' className='historyinpt' />
+                            <input type="text" placeholder='History' className='historyinpt' value={findValue} onChange={handleInputChange} />
                         </div>
                         <div className='fav'>
                             <div className='latest'>
@@ -184,10 +195,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                             ) : (
                                 <>
                                     <div className='dialoguesToday'>
-                                        {sortedDialogsToday.length > 0 && <p className='Date'>TODAY</p>}
+                                        {findValue === '' && sortedDialogsToday.length > 0 && <p className='Date'>TODAY</p>}
                                         <Link className='queryLink' to="/chatpage">
                                             <div className='queries'>
-                                                {sortedDialogsToday.map(query => (
+                                                {(findValue === '' ? sortedDialogsToday : filteredQueries).map(query => (
                                                     <QueryComponent
                                                         key={query.display_id}
                                                         display_id={query.display_id}
@@ -206,10 +217,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                                         </Link>
                                     </div>
                                     <div className='dialoguesBefore'>
-                                        {sortedDialogsPrevious.length > 0 && <p className='Date'>BEFORE</p>}
+                                        {findValue === '' && sortedDialogsPrevious.length > 0 && <p className='Date'>BEFORE</p>}
                                         <Link className='queryLink' to="/chatpage">
                                             <div className='queries'>
-                                                {sortedDialogsPrevious.map(query => (
+                                                {(findValue === '' ? sortedDialogsPrevious : []).map(query => (
                                                     <QueryComponent
                                                         key={query.display_id}
                                                         display_id={query.display_id}
@@ -229,6 +240,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                                     </div>
                                 </>
                             )}
+                            {findValue !== '' && (
+                            <p className='dialogCount' style={{ textAlign: 'center' }}>Found {filteredQueries.length} dialogue(s)</p>)}
                         </div>
                     </div>
 
