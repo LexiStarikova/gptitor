@@ -21,6 +21,8 @@ interface CodeProps {
 }
 
 const MarkdownRenderer = memo(({ text, containerColor } : MarkdownRendererProps) => {
+    
+
     const CodeBlock = ({ node, inline = false, className, children, ...props }: CodeProps) => {
         const [isMultiline, setIsMultiline] = useState(false);
         const [isIsolated, setIsIsolated] = useState(false);
@@ -36,36 +38,36 @@ const MarkdownRenderer = memo(({ text, containerColor } : MarkdownRendererProps)
             setIsMultiline(codeContent.includes('\n'));
         };
 
-        const checkIsolated = () => {
-            if (codeRef.current) {
-                const parent = codeRef.current.parentNode;
-                if (parent) {
-                    const previousSibling = codeRef.current.previousSibling;
-                    const nextSibling = codeRef.current.nextSibling;
-
-                    const previousText = previousSibling?.textContent || '';
-                    const nextText = nextSibling?.textContent || '';
-
-                    const isStartingFromNewLine = !previousSibling || previousText.endsWith('\n');
-                    const isFollowedByNewLine = !nextSibling || nextText.startsWith('\n');
-                    setIsIsolated(isStartingFromNewLine && isFollowedByNewLine);
-                }
-            }
-        };
-
         useEffect(() => {
             checkMultiline();
-            checkIsolated();
         }, [text]); // Trigger checks when text changes
 
+        if (inline) {
+            return (
+                <code
+                    ref={codeRef}
+                    style={{
+                        color: codeColor,
+                        fontWeight: fontWeight,
+                        fontSize: '1em',
+                        overflowWrap: 'break-word',
+                        wordWrap: 'break-word',
+                        whiteSpace: 'pre-wrap',
+                    }}
+                    {...props}
+                >
+                    {children}
+                </code>
+            );
+        }
 
         const backgroundColor = (isMultiline && containerColor !== '#2287DA') ? 'rgba(255, 255, 255, 0.8)' : 'transparent';
         const border = (isMultiline && containerColor !== '#2287DA') ? '1px solid #ccc' : 'none';
         const borderRadius = isMultiline ? '3px' : '0';
         const width = isMultiline ? '100%' : 'fit-content';
         const boxSizing = isMultiline ? 'border-box' : 'content-box';
-        const margin = (isMultiline || isIsolated) ? '0 5px' : '0'; // Add margin for spacing
-        const display = isIsolated && !inline ? 'block' : 'inline';
+        const margin = isMultiline ? '0 5px' : '0'; // Add margin for spacing
+        const display = isMultiline ? 'block' : 'inline';
 
         return (
             <div style={{
@@ -136,7 +138,7 @@ const MarkdownRenderer = memo(({ text, containerColor } : MarkdownRendererProps)
                 li: ({ node, ...props }) => <li style={{
                     fontSize: '0.9rem',
                     lineHeight: '1.5'
-                }} {...props} />
+                }} {...props} />   
             }}
         >
             {text}
